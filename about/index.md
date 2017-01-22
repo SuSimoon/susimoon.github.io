@@ -17,13 +17,13 @@ comments: false
 搜索Jekyll Theme，选择一个喜欢的模板，下载或者Fork都可以，然后部署到自己的电脑里。  
 
 * **修改配置文件**  
-找到_config.yml文件，按照自己的需求修改相应的参数，作为自己的博客。 
+找到_config.yml文件，按照自己的需求修改相应的参数，以此作为自己的博客。 
 
 * **编辑博文**    
-在_posts文件夹里创建博文，文件的命名格式应为`yyyy-mm-dd-artical-title.md`或`yyyy-mm-dd-artical-title.html`这样的形式。
+在_posts文件夹里创建博文，文件的命名格式应为：  
+`yyyy-mm-dd-artical-title.md`或`yyyy-mm-dd-artical-title.html`这样的形式。
 
 * **提交Git仓库**  
-
 在终端输入如下命令提交  
 
 ```
@@ -33,7 +33,7 @@ git push -u origin master
 ```
 
 * **访问博客**  
-访问`https://username.github.io`就可以看到自己搭建的博客了。
+访问`https://username.github.io`，就可以看到自己搭建的博客了。
 
 
 ## 博客预览
