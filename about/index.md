@@ -25,11 +25,11 @@ comments: false
 
 * **提交Git仓库**  
 在终端输入如下命令提交    
- 
-
-git add .{: .notice}  
-git commit -m "××××"{: .notice}  
-git push -u origin master{: .notice}  
+{% highlight html %}
+git add . 
+git commit -m "××××"
+git push -u origin master
+{% endhighlight %}
 
 
 * **访问博客**  
