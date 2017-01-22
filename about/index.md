@@ -26,11 +26,11 @@ comments: false
 * **提交Git仓库**  
 在终端输入如下命令提交    
  
-```
-git add .
-git commit -m "××××"
-git push -u origin master
-```
+
+git add .{: .notice}
+git commit -m "××××"{: .notice}
+git push -u origin master{: .notice}
+
 
 * **访问博客**  
 访问`https://username.github.io`，就可以看到自己搭建的博客了。
