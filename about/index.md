@@ -27,9 +27,9 @@ comments: false
 在终端输入如下命令提交    
  
 
-git add .{: .notice}
-git commit -m "××××"{: .notice}
-git push -u origin master{: .notice}
+git add .{: .notice}  
+git commit -m "××××"{: .notice}  
+git push -u origin master{: .notice}  
 
 
 * **访问博客**  
