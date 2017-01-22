@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About the Blog
+title: About this Blog
 tags: [about, Jekyll]
 date: 2017-01-22
 comments: false
@@ -9,18 +9,18 @@ comments: false
 
 ## 我是如何搭建这个博客的
 
-* 创建GitHub Pages   
-首先你要有一个github账户，再使用GitHub Pages建立博客。 
-[GitHub Pages](https://pages.github.com){: .btn}  
+* **创建GitHub Pages**    
+首先你要有一个github账户，再使用GitHub Pages建立博客。   
+请参考[GitHub Pages](https://pages.github.com) 
 
-* 选择一个博客模板  
+* **选择一个博客模板**  
 Google->Jekyll Theme，选择一个喜欢的模板，下载或者Fork都可以，然后部署到自己的电脑里。  
 
 * 修改配置文件  
 找到_config.yml文件，按照自己的需求修改相应的参数，作为自己的博客。  
 
 * 访问博客  
-访问_https://sesimoon.github.io_就可以看到自己搭建的博客了。
+访问`https://username.github.io`就可以看到自己搭建的博客了。
 
 
 
