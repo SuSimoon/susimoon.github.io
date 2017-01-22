@@ -25,7 +25,7 @@ comments: false
 
 * **提交Git仓库**  
 在终端输入如下命令提交 
-   
+
 {% highlight html %}
 git add . 
 git commit -m "××××"
@@ -48,6 +48,6 @@ git push -u origin master
 
 ## 模板参考
 
-To learn how to install and use this theme check out the [Setup Guide](http://taylantatli.me/Moon/moon-theme/) for more information.
+想要学习如何安装和使用这个模板，请前往[Setup Guide](http://taylantatli.me/Moon/moon-theme/) 获得更多信息。
       
 [Install Moon](https://github.com/TaylanTatli/Moon){: .btn}
