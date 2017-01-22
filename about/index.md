@@ -24,7 +24,8 @@ comments: false
 `yyyy-mm-dd-artical-title.md`或`yyyy-mm-dd-artical-title.html`这样的形式。
 
 * **提交Git仓库**  
-在终端输入如下命令提交    
+在终端输入如下命令提交 
+   
 {% highlight html %}
 git add . 
 git commit -m "××××"
