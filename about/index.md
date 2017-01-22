@@ -9,10 +9,23 @@ comments: false
 
 ## 我是如何搭建这个博客的
 
-* 创建GitHub Pages  
-[GitHub Pages](https://pages.github.com){: .btn}
+* 创建GitHub Pages   
+首先你要有一个github账户，再使用GitHub Pages建立博客。 
+[GitHub Pages](https://pages.github.com){: .btn}  
 
-## Preview
+* 选择一个博客模板  
+Google->Jekyll Theme，选择一个喜欢的模板，下载或者Fork都可以，然后部署到自己的电脑里。  
+
+* 修改配置文件  
+找到_config.yml文件，按照自己的需求修改相应的参数，作为自己的博客。  
+
+* 访问博客  
+访问_https://sesimoon.github.io_就可以看到自己搭建的博客了。
+
+
+
+
+## 博客预览
 
 {% capture images %}
     https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png
@@ -22,7 +35,7 @@ comments: false
 
 See a [live version of Moon](http://taylantatli.github.io/Moon) hosted on GitHub.
 
-## Getting Started
+## 模板参考
 
 To learn how to install and use this theme check out the [Setup Guide](http://taylantatli.me/Moon/moon-theme/) for more information.
       
