@@ -11,7 +11,7 @@ comments: false
 
 * **创建GitHub Pages**    
 首先你要有一个github账户，再使用GitHub Pages建立博客。   
-请参考[GitHub Pages](https://pages.github.com) 
+详细步骤请参考[GitHub Pages](https://pages.github.com) 
 
 * **选择一个博客模板**  
 搜索Jekyll Theme，选择一个喜欢的模板，下载或者Fork都可以，然后部署到自己的电脑里。  
