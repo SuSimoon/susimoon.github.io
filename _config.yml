@@ -1,14 +1,14 @@
 # Site
 title:              Simoon
-description:        "Improving Java Skills"
+description:        Improving Java Skills
 reading_time:       true
 words_per_minute:   200
 logo:               'assets/img/logo.png'
 background:         'assets/img/placeholder-big.jpg'
 tiled_bg:           false   # Set this true if you want to tile your background image, otherwise it will be covered
 locale:             en_US
-#url:                https://sesimoon.github.io
-url:                http://127.0.0.1:4000/
+url:                https://sesimoon.github.io
+#url:                http://127.0.0.1:4000/
 
 # Jekyll
 permalink:          /:title/
@@ -41,7 +41,7 @@ email: sesimoon@163.com
 #twitter:            username
 facebook:           /profile.php?id=100009049525926
 github-url:         sesimoon
-#stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
+#stackoverflow:     123456/username   from a http://stackoverflow.com/users/123456/username link
 #linkedin:          username
 #xing:              username
 #instagram:          username
@@ -74,3 +74,4 @@ jekyll-mentions:
 
 # Exclude list
 exclude: [README.md, Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor, CNAME, LICENSE, Rakefile]
+
