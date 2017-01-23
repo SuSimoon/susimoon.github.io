@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://127.0.0.1:4000//Struts2/</loc>
-<lastmod>2017-01-22T00:00:00+09:00</lastmod>
+<loc>http://127.0.0.1:4000//Struts%E9%85%8D%E7%BD%AE/</loc>
+<lastmod>2017-01-23T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://127.0.0.1:4000//Struts2%E6%90%AD%E5%BB%BA/</loc>
+<lastmod>2017-01-21T00:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>http://127.0.0.1:4000//moon-theme/</loc>
