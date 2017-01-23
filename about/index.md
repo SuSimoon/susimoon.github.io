@@ -38,6 +38,8 @@ comments: false
 安装后在库的根目录使用命令`jekyll serve`，访问`http://localhost:4000`可以看到自己编辑的博客网站。  
 详细步骤请参考[Pages 中使用 Jekyll](http://wiki.jikexueyuan.com/project/github-pages-basics/jekyll-page.html)
 
+* **编写shell脚本**  
+如果你觉得在终端里时常敲重复命令很麻烦，可以编写几个shell脚本，直接拖入terminal中运行即可。
 
 ## 博客预览
 
