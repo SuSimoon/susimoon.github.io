@@ -13,7 +13,7 @@ comments: false
 首先你要有一个github账户，再使用GitHub Pages建立博客。   
 详细步骤请参考[GitHub Pages](https://pages.github.com) 
 
-* **选择一个博客模板**  
+* **选择Jekyll模板**  
 搜索Jekyll Theme，选择一个喜欢的模板，下载或者Fork都可以，然后部署到自己的电脑里。  
 
 * **修改配置文件**  
@@ -25,7 +25,6 @@ comments: false
 
 * **提交Git仓库**  
 在终端输入如下命令提交： 
-
 	`git add .`  
 	`git commit -m "××××"`  
 	`git push -u origin master`  

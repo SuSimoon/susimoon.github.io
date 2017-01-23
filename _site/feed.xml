@@ -1,6 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-01-23T10:43:38+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">IO</title><link href="http://127.0.0.1:4000//IO/" rel="alternate" type="text/html" title="IO" /><published>2017-01-22T00:00:00+09:00</published><updated>2017-01-22T00:00:00+09:00</updated><id>http://127.0.0.1:4000//IO</id><content type="html" xml:base="http://127.0.0.1:4000//IO/">&lt;h2 id=&quot;html-elements&quot;&gt;HTML Elements&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-01-23T20:04:18+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Struts2</title><link href="http://127.0.0.1:4000//Struts2/" rel="alternate" type="text/html" title="Struts2" /><published>2017-01-22T00:00:00+09:00</published><updated>2017-01-22T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts2</id><content type="html" xml:base="http://127.0.0.1:4000//Struts2/">&lt;h1 id=&quot;centerstruts2center&quot;&gt;&lt;center&gt;搭建Struts2开发环境&lt;/center&gt;&lt;/h1&gt;
 
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;Watch out!&lt;/strong&gt; You can also add notices by appending &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.notice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; to a paragraph.&lt;/p&gt;</content><category term="Java" /><category term="IO" /><summary type="html">Just about everything you'll need to style in the theme: headings, paragraphs, blockquotes, tables, code blocks, and more.</summary></entry><entry><title type="html">Moon Jekyll Theme</title><link href="http://127.0.0.1:4000//moon-theme/" rel="alternate" type="text/html" title="Moon Jekyll Theme" /><published>2016-04-06T00:00:00+09:00</published><updated>2016-04-06T00:00:00+09:00</updated><id>http://127.0.0.1:4000//moon-theme</id><content type="html" xml:base="http://127.0.0.1:4000//moon-theme/">&lt;p&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png&quot; alt=&quot;Moon Homepage&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;步骤：&lt;br /&gt;
+1.下载jar包&lt;br /&gt;
+2.编写Sturts2配置文件&lt;br /&gt;
+3.在web.xml中配置&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;struts2jar&quot;&gt;1.下载开发Struts2应用所依赖的jar包&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;开发Struts2程序最少需要的jar包：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;struts2-core-2.x.x.jar:    	 	Struts2框架的核心类库
+xwork-2.x.x.jar:			XWork类库，Struts2在其上构建
+ognl-2.6.x.jar:				对象图导航语言，Struts2框架通过其读写对象的属性
+freemarker-2.3.x.jar:			Struts2的UI标签的模板使用FreeMarker编写
+commons-logging-1.1.x.jar:		Struts2框架使用这个日志包来支持Log4J和JDK 1.4+的日志记录
+commons-fileupload-1.2.1.jar: 		文件上传组件，2.1.6版本后需要加入此文件  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;ps:&lt;/strong&gt;在Struts2开发中，一般情况下最少导入的jar包，是去apps下的struts2-blank示例程序中copy。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;struts2的目录结构：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;apps: 例子程序
+docs: 文档
+lib:  struts2框架所应用的jar包以及插件包				
+src:  源代码  
+     core  	  它是struts2的源代码
+     xwork-core  struts2底层使用了xwork，即xwork的源代码&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;sturts2&quot;&gt;2.编写Sturts2配置文件&lt;/h2&gt;
+
+&lt;p&gt;Struts2默认的配置文件为struts.xml。&lt;br /&gt;
+可以copy示例程序中的该文件，放置于src下(此后该文件会自动部署到classes下) 。&lt;/p&gt;
+
+&lt;h2 id=&quot;webxml&quot;&gt;3.在web.xml中配置&lt;/h2&gt;
+
+&lt;p&gt;在web.xml配置的目的是为了让struts2框架可以运行。&lt;br /&gt;
+同样可以copy示例程序中的web.xml配置。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;centerstruts2center-1&quot;&gt;&lt;center&gt;struts2的配置&lt;/center&gt;&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.配置文件的加载顺序&lt;br /&gt;
+2.Action的配置&lt;br /&gt;
+3.常量配置&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;1.配置文件的加载顺序&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://wx3.sinaimg.cn/large/83e1667dgy1fc0p1vpbwsj216u0jqwk3.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;在开发中，后加载文件中的配置会将先加载文件中的配置覆盖。
+(简易顺序)
+default.properties
+struts-default.xml
+struts.xml&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;action&quot;&gt;2.Action的配置&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;extends=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;struts-default&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.itcast.action.HelloAction&quot;&lt;/span&gt;
+		&lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;say&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;good&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;/hello.jsp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/result&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/action&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/package&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;notice&quot;&gt;1.&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;package&amp;gt;&lt;/code&gt;&lt;/strong&gt;  &lt;br /&gt;
+　　用于声明一个包，管理action。&lt;br /&gt;
+　　1.name       它用于声明一个包名，包名不能重复，也就是它是唯一的。 &lt;br /&gt;
+　　2.namespace  它与action标签的name属性合并确定了一个唯一访问action的路径。&lt;br /&gt;
+　　3.extends    它代表继承的包名。&lt;br /&gt;
+　　4.abstract   它可以取值为true/false，如果为true，代表这个包是用于被继承的。&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;2.&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;action&amp;gt;&lt;/code&gt;&lt;/strong&gt;  &lt;br /&gt;
+　　用于声明一个action。&lt;br /&gt;
+　　1.name    action的名称，它是唯一的(在同包内)，它与package中的namespace确定了访问action的路径。&lt;br /&gt;
+　　2.class   Action类的全名。&lt;br /&gt;
+　　3.method  要访问的Action类中的方法的名称，方法无参数，返回值为String。&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;3.&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;result&amp;gt;&lt;/code&gt;&lt;/strong&gt; &lt;br /&gt;
+　　用于确定返回结果类型。  &lt;br /&gt;
+　　1.name  它与action中的方法返回值做对比，确定跳转路径。&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;4.&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;struts-default&quot;&lt;/code&gt;&lt;/strong&gt;  &lt;br /&gt;
+　　该包是在struts2-core-2.x.x.jar文件中的struts-default.xml中定义的。&lt;br /&gt;
+　　通常每个包都应该继承struts-default包。&lt;br /&gt;
+　　它定义了Struts2内部的众多拦截器和Result类型，Struts2很多核心的功能都是通过这些内置的拦截器实现的。&lt;/p&gt;</content><category term="Java" /><category term="Struts" /><category term="SSH框架" /><summary type="html">本篇介绍了Struts2的相关知识概述</summary></entry><entry><title type="html">Moon Jekyll Theme</title><link href="http://127.0.0.1:4000//moon-theme/" rel="alternate" type="text/html" title="Moon Jekyll Theme" /><published>2016-04-06T00:00:00+09:00</published><updated>2016-04-06T00:00:00+09:00</updated><id>http://127.0.0.1:4000//moon-theme</id><content type="html" xml:base="http://127.0.0.1:4000//moon-theme/">&lt;p&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png&quot; alt=&quot;Moon Homepage&quot; /&gt;&lt;/p&gt;
 
 &lt;center&gt;&lt;b&gt;Moon&lt;/b&gt; is a minimal, one column jekyll theme.&lt;/center&gt;
 
