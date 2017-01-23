@@ -26,18 +26,16 @@ comments: false
 * **提交Git仓库**  
 在终端输入如下命令提交： 
 
-{% highlight html %}
-git add . 
-git commit -m "××××"
-git push -u origin master
-{% endhighlight %}
+	`git add .`  
+	`git commit -m "××××"`  
+	`git push -u origin master`  
 
 * **访问博客**  
 访问`https://username.github.io`，就可以看到自己搭建的博客了。
 
 * **安装Jekyll本地编译环境**  
-在本地安装Jekyll编译环境可以在编辑博客后预览效果，以此避免频繁提交到Git的繁琐步骤。
-安装后在库的根目录使用命令`jekyll serve`，访问`http://localhost:4000`可以看到自己编辑的博客网站。
+在本地安装Jekyll编译环境可以在编辑博客后预览效果，以此避免频繁提交到Git的繁琐步骤。  
+安装后在库的根目录使用命令`jekyll serve`，访问`http://localhost:4000`可以看到自己编辑的博客网站。  
 详细步骤请参考[Pages 中使用 Jekyll](http://wiki.jikexueyuan.com/project/github-pages-basics/jekyll-page.html)
 
 
