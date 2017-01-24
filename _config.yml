@@ -7,7 +7,7 @@ logo:               'assets/img/logo.png'
 background:         'assets/img/placeholder-big.jpg'
 tiled_bg:           false   # Set this true if you want to tile your background image, otherwise it will be covered
 locale:             en_US
-url:                https://sesimoon.github.io
+url:                https://susimoon.github.io
 #url:                http://127.0.0.1:4000/
 
 # Jekyll
@@ -37,10 +37,10 @@ disqus_shortname:   taylantatli
   #ad-client:
   #ad-slot:
 #bing-verify:
-email: sesimoon@163.com
+email: susimoon@163.com
 #twitter:            username
 facebook:           /profile.php?id=100009049525926
-github-url:         sesimoon
+github-url:         susimoon
 #stackoverflow:     123456/username   from a http://stackoverflow.com/users/123456/username link
 #linkedin:          username
 #xing:              username
