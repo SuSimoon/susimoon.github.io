@@ -8,6 +8,7 @@ tag:
 - Struts2
 - OGNL
 - SSH框架
+feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
 
