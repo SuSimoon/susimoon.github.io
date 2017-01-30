@@ -124,7 +124,7 @@
 </code></pre></div> <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"new cn.xsw.test.User('tom')"</span><span class="nt">/&gt;</span>  
 
 result:User [username=tom]
-</code></pre></div> <hr> <h3 id="section-3">访问集合</h3> <p><strong>List</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">cn</span><span class="o">.</span><span class="na">xsw</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
+</code></pre></div> <hr> <h3 id="section-3">访问集合</h3> <p><strong>1.List</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">cn</span><span class="o">.</span><span class="na">xsw</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span>
@@ -173,7 +173,7 @@ result:[a, b, c](User类一定要有get方法，否则无法访问)
 4.访问List中元素某个集合的特定值<span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"users[0].username"</span><span class="nt">/&gt;</span>|
 <span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"users.{username}[0]"</span><span class="nt">/&gt;</span>
 result:[a]
-</code></pre></div> <p><strong>Set</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</code></pre></div> <p><strong>2.Set</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span>
 	
 	<span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>
@@ -218,7 +218,7 @@ result:[User [username=a], User [username=c], User [username=b]]
 
 2.访问Set中某个元素:<span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"users[0]"</span><span class="nt">/&gt;</span>
 result:set无序，取不到该元素
-</code></pre></div> <p><strong>Map</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</code></pre></div> <p><strong>3.Map</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span>
 	
 	<span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>

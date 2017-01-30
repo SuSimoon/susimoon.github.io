@@ -228,7 +228,7 @@ result:User [username=tom]
 
 ### 访问集合  
 
-**List**  
+**1.List**  
 
 ```java
 package cn.xsw.test;
@@ -290,7 +290,7 @@ result:[a]
 ```
 
 
-**Set** 
+**2.Set** 
 
 ```java
 public class User {
@@ -348,7 +348,7 @@ result:set无序，取不到该元素
 ```
 
 
-**Map**  
+**3.Map**  
 
 ```java
 public class User {

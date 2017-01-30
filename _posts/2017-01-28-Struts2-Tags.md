@@ -47,7 +47,7 @@ escape默认是false，会解析成html。
 
 ## <center>set</center> 
 
-该标签的id和那么属性都已经废弃。  
+该标签的id和name属性都已经废弃。  
 scope的默认值为action，即request 和 ActionContext。  
 可以取的值有application、session、request、page和action。
 {: .notice}
