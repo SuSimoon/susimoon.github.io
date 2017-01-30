@@ -1,4 +1,161 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-01-30T14:39:38+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">J2EE-String</title><link href="http://127.0.0.1:4000//J2EE-String/" rel="alternate" type="text/html" title="J2EE-String" /><published>2017-01-28T00:00:00+09:00</published><updated>2017-01-28T00:00:00+09:00</updated><id>http://127.0.0.1:4000//J2EE-String</id><content type="html" xml:base="http://127.0.0.1:4000//J2EE-String/">&lt;h2 id=&quot;centerstringcenter&quot;&gt;&lt;center&gt;String类的特点&lt;/center&gt;&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-01-30T21:06:35+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Struts2-类型转换</title><link href="http://127.0.0.1:4000//Struts-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="alternate" type="text/html" title="Struts2-类型转换" /><published>2017-01-30T00:00:00+09:00</published><updated>2017-01-30T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts-类型转换</id><content type="html" xml:base="http://127.0.0.1:4000//Struts-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></content><category term="Java" /><category term="Struts2" /><category term="类型转换" /><category term="SSH框架" /><summary type="html">本篇介绍了Struts2中</summary></entry><entry><title type="html">Struts2-Interceptor</title><link href="http://127.0.0.1:4000//Struts2-Interceptor/" rel="alternate" type="text/html" title="Struts2-Interceptor" /><published>2017-01-30T00:00:00+09:00</published><updated>2017-01-30T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts2-Interceptor</id><content type="html" xml:base="http://127.0.0.1:4000//Struts2-Interceptor/">&lt;blockquote&gt;
+  &lt;p&gt;拦截器的介绍
+自定义拦截器
+拦截器原理
+Interceptor与Filter区别&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;拦截器的介绍&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;1.Struts2拦截器使用的是AOP思想。&lt;br /&gt;
+2.AOP的底层实现就是动态代理。&lt;br /&gt;
+3.拦截器采用责任链模式: &lt;br /&gt;
+* 在责任链模式里，很多对象由每一个对象对其下家的引用而连接起来形成一条链。
+* 责任链每一个节点，都可以继续调用下一个节点，也可以阻止流程继续执行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/83e1667djw1f8wspav7yyj21ik0qak6h.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;4.Struts2中在struts-default.xml文件中声明了所有的拦截器。&lt;br /&gt;
+5.Struts2框架默认使用的是defaultStack这个拦截器栈。  &lt;br /&gt;
+6.在这个拦截器栈中使用了18个拦截器。简单说，Struts2框架在默认情况下，加载了18个拦截器。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;自定义拦截器&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;通过使用拦截器可以控制action的访问。例如，权限操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;步骤：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.创建一个Interceptor，可以自定义一个类实现Interceptor接口&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;在这个接口中有三个方法：init、destory、intercept，intercept方法是真正拦截的方法。  &lt;br /&gt;
+在intercept方法中如果要向下继续执行，通过其参数ActionInvocation调用它的invoke()方法就可以。&lt;br /&gt;
+(也可继承MethodFilterInterceptor，重写doIntercept方法)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.在struts.xml文件中声明一个Interceptor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;按照struts-default.xml文件中声明的方式：&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptors&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/interceptors&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;3.在(struts.xml的)action中指定使用哪些拦截器&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注意:只要显示声明使用了一个拦截器，那么默认的拦截器就不在加载。&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;示例程序：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyIntercepter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Interceptor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my intercptor destroy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my intercptor init&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;intercept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ActionInvocation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ai&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my interceptor works&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//return ai.invoke(); // 放行&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;LOGIN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//&quot;login&quot;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;struts&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;extends=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;struts-default&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptors&amp;gt;&lt;/span&gt;
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;myIntercepter&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.test.MyIntercepter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/interceptor&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/interceptors&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.test.Test&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;  
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&amp;gt;&lt;/span&gt;/index.jsp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/result&amp;gt;&lt;/span&gt; 
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOGIN&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;/login.jsp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/result&amp;gt;&lt;/span&gt; 
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;myIntercepter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;defaultStack&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/action&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/package&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/struts&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;拦截器栈：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;struts&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;extends=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;struts-default&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptors&amp;gt;&lt;/span&gt;	
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.test.MyIntercepter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-stack&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;myStack&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--拦截器栈--&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;defaultStack&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/interceptor-stack&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/interceptors&amp;gt;&lt;/span&gt;	
+
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.test.Test&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;  
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&amp;gt;&lt;/span&gt;/index.jsp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/result&amp;gt;&lt;/span&gt; 
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOGIN&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;/login.jsp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/result&amp;gt;&lt;/span&gt; 
+        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;interceptor-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;myStack&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--引用拦截器栈--&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/action&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/package&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/struts&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;拦截器原理&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;源代码执行流程:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1.在StrutsPrepareAndExecuteFilter中查找，在doFilter方法内有：&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;execute.executeAction (request, response, mapping)&lt;/code&gt; 执行Action操作。&lt;/p&gt;
+
+&lt;p&gt;2.在executeAction执行过程中会访问Dispatcher类中的serviceAction，在这个方法中会创建Action的代理对象。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ActionProxy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getContainer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ActionProxyFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createActionProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;extraContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;3.查看ActionInvocation，查看其实现类 DefaultActionInvocation。在其invoke方法中：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interceptors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//判断是否有下一个拦截器&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;InterceptorMapping&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interceptor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interceptors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//得到一个拦截器&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interceptorMsg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;interceptor: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interceptor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;UtilTimerStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interceptorMsg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;resultCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interceptor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInterceptor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;intercept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DefaultActionInvocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+			&lt;span class=&quot;c1&quot;&gt;//调用得到的拦截器的拦截方法.将本类对象传递到了拦截器中。&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;UtilTimerStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interceptorMsg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;通过源代码分析，发现在DefaultActionInvocation中就是通过递归完成所有的拦截调用操作。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centerinterceptorfiltercenter&quot;&gt;&lt;center&gt;Interceptor与Filter区别&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;1.Interceptor是基于Java反射机制的，而Filter是基于函数回调的。&lt;br /&gt;
+2.Filter依赖于Servlet容器，而Interceptor不依赖于Servlet容器。&lt;br /&gt;
+3.Interceptor只能对Action请求起作用，而Filter则可以对几乎所有请求起作用。&lt;br /&gt;
+4.Interceptor可以访问Action上下文、值栈里的对象，而Filter不能。&lt;br /&gt;
+5.在Action的生命周期中，Interceptor可以多次调用，而Filter只能在容器初始化时被调用一次。&lt;/p&gt;</content><category term="Java" /><category term="Struts2" /><category term="Interceptor" /><category term="SSH框架" /><summary type="html">本篇介绍了Struts2中拦截器的概念、如何自定义拦截器、拦截器的原理以及它与过滤器的区别</summary></entry><entry><title type="html">J2EE-String</title><link href="http://127.0.0.1:4000//J2EE-String/" rel="alternate" type="text/html" title="J2EE-String" /><published>2017-01-28T00:00:00+09:00</published><updated>2017-01-28T00:00:00+09:00</updated><id>http://127.0.0.1:4000//J2EE-String</id><content type="html" xml:base="http://127.0.0.1:4000//J2EE-String/">&lt;h2 id=&quot;centerstringcenter&quot;&gt;&lt;center&gt;String类的特点&lt;/center&gt;&lt;/h2&gt;
 
 &lt;p class=&quot;notice&quot;&gt;1.字符串是一个特殊的对象。  &lt;br /&gt;
 2.字符串一旦初始化就不可以被改变（不是不能被重新赋值）&lt;br /&gt;
@@ -124,7 +281,7 @@ StringBuilder是可变的字符序列，可以避免这样的问题。&lt;/p&gt;
 
 &lt;p&gt;JDK 1.5以后出现了StringBuilder和StringBuffer用法一样。&lt;br /&gt;
 StringBuffer效率稍有些低，是线程同步的，允许采用多线程方式执行添加或删除字符的操作。&lt;br /&gt;
-StringBuilder是不同步的，适用于单线程，一般建议选择速度更快的StringBuilder。&lt;/p&gt;</content><category term="Java" /><category term="J2EE" /><category term="String" /><summary type="html">本篇介绍了String类、StringBuilder类以及其前身StringBuffer类</summary></entry><entry><title type="html">Struts2-Interceptor</title><link href="http://127.0.0.1:4000//Struts2-Interceptor/" rel="alternate" type="text/html" title="Struts2-Interceptor" /><published>2017-01-28T00:00:00+09:00</published><updated>2017-01-28T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts2-Interceptor</id><content type="html" xml:base="http://127.0.0.1:4000//Struts2-Interceptor/"></content><category term="Java" /><category term="Struts2" /><category term="Interceptor" /><category term="SSH框架" /><summary type="html">本篇介绍了Struts2中</summary></entry><entry><title type="html">Struts2-Exception</title><link href="http://127.0.0.1:4000//Struts2-Exception/" rel="alternate" type="text/html" title="Struts2-Exception" /><published>2017-01-28T00:00:00+09:00</published><updated>2017-01-28T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts2-Exception</id><content type="html" xml:base="http://127.0.0.1:4000//Struts2-Exception/">&lt;p&gt;对于action中的操作，出现问题，直接抛出自定义异常。&lt;/p&gt;
+StringBuilder是不同步的，适用于单线程，一般建议选择速度更快的StringBuilder。&lt;/p&gt;</content><category term="Java" /><category term="J2EE" /><category term="String" /><summary type="html">本篇介绍了String类、StringBuilder类以及其前身StringBuffer类</summary></entry><entry><title type="html">Struts2-Exception</title><link href="http://127.0.0.1:4000//Struts2-Exception/" rel="alternate" type="text/html" title="Struts2-Exception" /><published>2017-01-28T00:00:00+09:00</published><updated>2017-01-28T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts2-Exception</id><content type="html" xml:base="http://127.0.0.1:4000//Struts2-Exception/">&lt;p&gt;对于action中的操作，出现问题，直接抛出自定义异常。&lt;/p&gt;
 
 &lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;方式&lt;/center&gt;&lt;/h2&gt;
 
@@ -1027,6 +1184,15 @@ n + 중이다
 사업 事业  목적 目的  수준 水准  높이다 提高
 
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;-을\를 통하다&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;n 을\를 통하다 通过 
+
+- 을\를 통한 + n
+- 을\를 통해서, 통해, 통하여 
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;</content></entry><entry><title type="html">Struts2-Action</title><link href="http://127.0.0.1:4000//Struts2-Action/" rel="alternate" type="text/html" title="Struts2-Action" /><published>2017-01-24T00:00:00+09:00</published><updated>2017-01-24T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Struts2-Action</id><content type="html" xml:base="http://127.0.0.1:4000//Struts2-Action/">&lt;blockquote&gt;
   &lt;p&gt;1.Action类的创建方式  &lt;br /&gt;
 2.Action的访问方式 &lt;br /&gt;
@@ -1785,153 +1951,4 @@ src:  源代码
 &lt;h2 id=&quot;webxml&quot;&gt;3.在web.xml中配置&lt;/h2&gt;
 
 &lt;p&gt;在web.xml配置的目的是为了让struts2框架可以运行。&lt;br /&gt;
-同样可以copy示例程序中的web.xml配置。&lt;/p&gt;</content><category term="Java" /><category term="Struts" /><category term="SSH框架" /><summary type="html">本篇介绍了Struts2的概念以及如何搭建Struts2的开发环境</summary></entry><entry><title type="html">Moon Jekyll Theme</title><link href="http://127.0.0.1:4000//moon-theme/" rel="alternate" type="text/html" title="Moon Jekyll Theme" /><published>2016-04-06T00:00:00+09:00</published><updated>2016-04-06T00:00:00+09:00</updated><id>http://127.0.0.1:4000//moon-theme</id><content type="html" xml:base="http://127.0.0.1:4000//moon-theme/">&lt;p&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png&quot; alt=&quot;Moon Homepage&quot; /&gt;&lt;/p&gt;
-
-&lt;center&gt;&lt;b&gt;Moon&lt;/b&gt; is a minimal, one column jekyll theme.&lt;/center&gt;
-
-&lt;p&gt;I’m not a developer or designer. And I don’t add footer to show who did this theme. If you like this theme or using it, please give a &lt;strong&gt;star&lt;/strong&gt; for motivation, It makes me happy.&lt;/p&gt;
-
-&lt;iframe src=&quot;https://ghbtns.com/github-btn.html?user=TaylanTatli&amp;amp;repo=Moon&amp;amp;type=star&amp;amp;count=true&amp;amp;size=large&quot; frameborder=&quot;0&quot; scrolling=&quot;0&quot; width=&quot;160px&quot; height=&quot;30px&quot;&gt;&lt;/iframe&gt;
-
-&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Fork the &lt;a href=&quot;https://github.com/TaylanTatli/Moon/fork&quot;&gt;Moon repo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file.&lt;/li&gt;
-  &lt;li&gt;Remove sample posts from &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; folder and add yours.&lt;/li&gt;
-  &lt;li&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;index.md&lt;/code&gt; file in &lt;code class=&quot;highlighter-rouge&quot;&gt;about&lt;/code&gt; folder.&lt;/li&gt;
-  &lt;li&gt;Change repo name to &lt;code class=&quot;highlighter-rouge&quot;&gt;YourUserName.github.io&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That’s all.&lt;/p&gt;
-
-&lt;h2 id=&quot;preview&quot;&gt;Preview&lt;/h2&gt;
-
-&lt;figure class=&quot;third&quot;&gt;
-    
-    &lt;a href=&quot;https://cloud.githubusercontent.com/assets/754514/14509716/61ac6c8e-01d6-11e6-879f-8308883de790.png&quot;&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509716/61ac6c8e-01d6-11e6-879f-8308883de790.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-    
-    &lt;a href=&quot;https://cloud.githubusercontent.com/assets/754514/14509717/61ad05ae-01d6-11e6-85ae-5a817dd8763b.png&quot;&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509717/61ad05ae-01d6-11e6-85ae-5a817dd8763b.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-    
-    &lt;a href=&quot;https://cloud.githubusercontent.com/assets/754514/14509714/61a89708-01d6-11e6-8fcd-74b002a060df.png&quot;&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509714/61a89708-01d6-11e6-8fcd-74b002a060df.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-    
-    &lt;figcaption&gt;Screenshots of Moon Theme&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;hr /&gt;
-
-&lt;figure class=&quot;half&quot;&gt;
-    
-    &lt;a href=&quot;https://cloud.githubusercontent.com/assets/754514/14509718/61b09a20-01d6-11e6-8da1-4202ae4d83cd.png&quot;&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509718/61b09a20-01d6-11e6-8da1-4202ae4d83cd.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-    
-    &lt;a href=&quot;https://cloud.githubusercontent.com/assets/754514/14509715/61aa9d00-01d6-11e6-81a6-c6837edf2e84.png&quot;&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509715/61aa9d00-01d6-11e6-81a6-c6837edf2e84.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-    
-    &lt;figcaption&gt;Moon Theme on Small Screen Size&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;See a &lt;a href=&quot;http://taylantatli.github.io/Moon&quot;&gt;live version of Moon&lt;/a&gt; hosted on GitHub.&lt;/p&gt;
-
-&lt;h2 id=&quot;site-setup&quot;&gt;Site Setup&lt;/h2&gt;
-&lt;p&gt;A quick checklist of the files you’ll want to edit to get up and running.&lt;/p&gt;
-
-&lt;h3 id=&quot;site-wide-configuration&quot;&gt;Site Wide Configuration&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; is your friend. Open it up and personalize it. Most variables are self explanatory but here’s an explanation of each if needed:&lt;/p&gt;
-
-&lt;h4 id=&quot;title&quot;&gt;title&lt;/h4&gt;
-
-&lt;p&gt;The title of your site… shocker!&lt;/p&gt;
-
-&lt;p&gt;Example &lt;code class=&quot;highlighter-rouge&quot;&gt;title: My Awesome Site&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;bio&quot;&gt;bio&lt;/h4&gt;
-
-&lt;p&gt;The description to show on your homepage.&lt;/p&gt;
-
-&lt;h4 id=&quot;description&quot;&gt;description&lt;/h4&gt;
-
-&lt;p&gt;The description to use for meta tags and navigation menu.&lt;/p&gt;
-
-&lt;h4 id=&quot;url&quot;&gt;url&lt;/h4&gt;
-
-&lt;p&gt;Used to generate absolute urls in &lt;code class=&quot;highlighter-rouge&quot;&gt;sitemap.xml&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;feed.xml&lt;/code&gt;, and for generating canonical URLs in &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt;. When developing locally either comment this out or use something like &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4000&lt;/code&gt; so all assets load properly. &lt;em&gt;Don’t include a trailing &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://taylantatli.me/Moon&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://localhost:4000&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;//cooldude.github.io&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;readingtime&quot;&gt;reading_time&lt;/h4&gt;
-
-&lt;p&gt;Set true to show reading time for posts. And set &lt;code class=&quot;highlighter-rouge&quot;&gt;words_per_minute&lt;/code&gt;, default is 200.&lt;/p&gt;
-
-&lt;h4 id=&quot;logo&quot;&gt;logo&lt;/h4&gt;
-&lt;p&gt;Your site’s logo. It will show on homepage and navigation menu. Also used for twitter meta tags.&lt;/p&gt;
-
-&lt;h4 id=&quot;background&quot;&gt;background&lt;/h4&gt;
-&lt;p&gt;Image for background. If you don’t set it, color will be used as a background.&lt;/p&gt;
-
-&lt;h4 id=&quot;google-analytics-and-webmaster-tools&quot;&gt;Google Analytics and Webmaster Tools&lt;/h4&gt;
-
-&lt;p&gt;Google Analytics UA and Webmaster Tool verification tags can be entered in &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;. For more information on obtaining these meta tags check &lt;a href=&quot;http://support.google.com/webmasters/bin/answer.py?hl=en&amp;amp;answer=35179&quot;&gt;Google Webmaster Tools&lt;/a&gt; and &lt;a href=&quot;https://ssl.bing.com/webmaster/configure/verify/ownership&quot;&gt;Bing Webmaster Tools&lt;/a&gt; support.&lt;/p&gt;
-
-&lt;h4 id=&quot;mathjax&quot;&gt;MathJax&lt;/h4&gt;
-&lt;p&gt;It’s enabled. But if you don’t want to use it. Set it false in  &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;disqus-comments&quot;&gt;Disqus Comments&lt;/h4&gt;
-&lt;p&gt;Set your disqus shortname in &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; to use comments.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;navigation-links&quot;&gt;Navigation Links&lt;/h3&gt;
-
-&lt;p&gt;To set what links appear in the top navigation edit &lt;code class=&quot;highlighter-rouge&quot;&gt;_data/navigation.yml&lt;/code&gt;. Use the following format to set the URL and title for as many links as you’d like. &lt;em&gt;External links will open in a new window.&lt;/em&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Home&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt;
-
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Blog&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/blog/&lt;/span&gt;
-
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Projects&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/projects/&lt;/span&gt;
-
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;About&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/about/&lt;/span&gt;
-
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Moon&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://taylantatli.me/Moon&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;layouts-and-content&quot;&gt;Layouts and Content&lt;/h2&gt;
-
-&lt;p&gt;Moon Theme use &lt;a href=&quot;https://github.com/penibelst/jekyll-compress-html&quot;&gt;Jekyll Compress&lt;/a&gt; to compress html output. But it can cause errors if you use “linenos” (line numbers). I suggest don’t use line numbers for codes, because it won’t look good with this theme, also i didn’t give a proper style for them. If you insist to use line numbers, just remove &lt;code class=&quot;highlighter-rouge&quot;&gt;layout: compress&lt;/code&gt; string from layouts. It will disable compressing.&lt;/p&gt;
-
-&lt;h3 id=&quot;feature-image&quot;&gt;Feature Image&lt;/h3&gt;
-
-&lt;p&gt;You can set feature image per post. Just add &lt;code class=&quot;highlighter-rouge&quot;&gt;feature: some link&lt;/code&gt; to your post’s front matter.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;feature: /assets/img/some-image.png
-or
-feaure: http://example.com/some-image.png
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;This also will be used for twitter card:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/754514/14509719/61c5751c-01d6-11e6-8c29-ce8ccad149bf.png&quot; alt=&quot;Moon Twitter Card&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;comments&quot;&gt;Comments&lt;/h3&gt;
-&lt;p&gt;To show disqus comments for your post add &lt;code class=&quot;highlighter-rouge&quot;&gt;comments: true&lt;/code&gt; to your post’s front matter.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;questions&quot;&gt;Questions?&lt;/h2&gt;
-
-&lt;p&gt;Found a bug or aren’t quite sure how something works? By all means &lt;a href=&quot;https://github.com/TaylanTatli/Moon/issues/new&quot;&gt;file a GitHub Issue&lt;/a&gt;. And if you make something cool with this theme feel free to let me know.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;license&quot;&gt;License&lt;/h2&gt;
-
-&lt;p&gt;This theme is free and open source software, distributed under the MIT License. So feel free to use this Jekyll theme on your site without linking back to me or including a disclaimer.&lt;/p&gt;</content><category term="jekyll" /><category term="moon" /><category term="blog" /><category term="about" /><category term="theme" /><summary type="html">Minimal, one column Jekyll theme for your blog.</summary></entry></feed>
+同样可以copy示例程序中的web.xml配置。&lt;/p&gt;</content><category term="Java" /><category term="Struts" /><category term="SSH框架" /><summary type="html">本篇介绍了Struts2的概念以及如何搭建Struts2的开发环境</summary></entry></feed>

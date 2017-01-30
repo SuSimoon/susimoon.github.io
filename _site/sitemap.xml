@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://127.0.0.1:4000//J2EE-String/</loc>
-<lastmod>2017-01-28T00:00:00+09:00</lastmod>
+<loc>http://127.0.0.1:4000//Struts-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</loc>
+<lastmod>2017-01-30T00:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>http://127.0.0.1:4000//Struts2-Interceptor/</loc>
+<lastmod>2017-01-30T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://127.0.0.1:4000//J2EE-String/</loc>
 <lastmod>2017-01-28T00:00:00+09:00</lastmod>
 </url>
 <url>
