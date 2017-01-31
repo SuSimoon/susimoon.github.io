@@ -15,7 +15,7 @@ comments: false
 
 >1.Action类的创建方式    
 >2.Action的访问方式   
->3.Action处理请求参数
+>3.Action处理请求参数  
 >4.获取Servlet API      
 
 ***
