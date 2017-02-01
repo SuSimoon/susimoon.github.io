@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://127.0.0.1:4000//Struts2-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/</loc>
+<lastmod>2017-02-01T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://127.0.0.1:4000//Struts2-%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/</loc>
+<lastmod>2017-02-01T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>http://127.0.0.1:4000//Struts2-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</loc>
 <lastmod>2017-01-30T00:00:00+09:00</lastmod>
 </url>
