@@ -39,7 +39,7 @@
 	<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"printUsername()"</span><span class="nt">/&gt;</span>
-</code></pre></div> <hr> <h3 id="getset">访问值栈中对象的普通属性(get、set方法)</h3> <p><code class="highlighter-rouge">例子程序：</code></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</code></pre></div> <hr> <h3 id="getset">访问值栈中对象的普通属性(get、set方法)</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"tom"</span><span class="o">;</span>
 	
 	<span class="kd">public</span> <span class="nf">User</span><span class="o">()</span> <span class="o">{</span>
@@ -93,7 +93,7 @@
 	<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div> <p class="notice">结论：想初始化domain model，可以自己new也可以传参数值，但需要有空的构造方法。</p> <h3 id="section">访问值栈中对象的普通方法和属性</h3> <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"user.username.length()"</span><span class="nt">/&gt;</span>
-</code></pre></div> <hr> <h3 id="section-1">访问静态方法和属性</h3> <p>访问静态方法：@类名@方法名<br> 访问静态方法：@类名@属性名</p> <p>需要在struts.xml中设置才可以访问静态方法</p> <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+</code></pre></div> <hr> <h3 id="section-1">访问静态方法和属性</h3> <p>访问静态方法：@类名@方法名<br> 访问静态方法：@类名@属性名</p> <p>需要在struts.xml中设置才可以访问静态方法 <code class="highlighter-rouge">&lt;constant name="struts.ognl.allowStaticMethodAccess" value="true"&gt;&lt;/constant&gt;</code></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
 	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">STR</span> <span class="o">=</span> <span class="s">"STATIC STRING"</span><span class="o">;</span>
 	
 	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">out</span><span class="o">()</span> <span class="o">{</span>
@@ -124,9 +124,7 @@
 </code></pre></div> <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"new cn.xsw.test.User('tom')"</span><span class="nt">/&gt;</span>  
 
 result:User [username=tom]
-</code></pre></div> <hr> <h3 id="section-3">访问集合</h3> <p><strong>1.List</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">cn</span><span class="o">.</span><span class="na">xsw</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</code></pre></div> <hr> <h3 id="section-3">访问集合</h3> <p><strong>1.List</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span>
 
 	<span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>

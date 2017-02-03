@@ -76,7 +76,6 @@ public class Test extends ActionSupport {
 
 ### 访问值栈中对象的普通属性(get、set方法)  
 
-`例子程序：`
 
 ```java
 public class User {
@@ -172,7 +171,7 @@ public class User {
 访问静态方法：@类名@属性名
 
 需要在struts.xml中设置才可以访问静态方法
-<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+`<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>`
 
 
 ```java
@@ -231,8 +230,6 @@ result:User [username=tom]
 **1.List**  
 
 ```java
-package cn.xsw.test;
-
 public class User {
 	private String username;
 
