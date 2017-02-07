@@ -16,10 +16,10 @@ comments: false
 *** 
 
 
->valueStack
->valueStack的应用
->OGNL的访问方式
->OGNL表达式常见使用方式($ % #)
+>valueStack  
+>valueStack的应用  
+>OGNL的访问方式  
+><a href="#4">OGNL表达式常见使用方式($ % #)</a>
 
 
  
@@ -819,6 +819,8 @@ $# 结尾
 
 
 ***  
+
+<a name="4"></a>
 
 ## <center>OGNL表达式常见使用方式($ % #)</center>
 

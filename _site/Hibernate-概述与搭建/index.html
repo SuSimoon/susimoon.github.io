@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
+<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>Hibernate-概述与搭建 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Java, Hibernate, SSH框架"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="Hibernate-概述与搭建"> <meta name="twitter:description" content="本篇介绍了Hibernate框架的概述与环境搭建，以及Hibernate中使用的日志记录"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Hibernate-概述与搭建"> <meta property="og:description" content="本篇介绍了Hibernate框架的概述与环境搭建，以及Hibernate中使用的日志记录"> <meta property="og:url" content="http://127.0.0.1:4000//Hibernate-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//Hibernate-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
+<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>Hibernate-概述与搭建</h1> <h4>06 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~2 minutes </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">Hibernate概述</a><br> <a href="#2">Hibernate环境搭建</a><br> <a href="#3">Hibernate日志记录</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerhibernatecenter"><center>Hibernate概述</center></h2> <p>Hibernate是一个开放源代码的对象关系映射框架。<br> 它对JDBC进行了非常轻量级的对象封装，使得Java程序员可以使用<strong>对象</strong>编程思维来操纵数据库。</p> <h3 id="orm">持久层的ORM的框架</h3> <p>ORM:Object Relational Mapping 对象关系映射<br> Hibernate就是一个持久层的ORM的框架。</p> <p class="notice">常见的持久层框架: <br> 　　* Hibernate<br> 　　* JPA(只有接口规范) <br> 　　* MyBatis: 前身是Ibatis<br> 　　* DbUtils</p> <h3 id="hibernate">Hibernate的优点</h3> <p class="notice">1.Hibernate可以在应用EJB的J2EE架构中取代CMP，完成数据持久化的重任。 <br> 2.Hibernate对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。<br> 3.Hibernate是一个基于JDBC的主流持久化框架，是优秀的ORM实现，很大程度的简化了dao层编码工作。<br> 4.Hibernate使用Java的反射机制，而不是字节码增强程序类实现透明性。<br> 5.Hibernate的性能非常好，因为它是一个轻量级框架。映射的灵活性很出色，它支持很多关系型数据库，从一对一到多对多的各种复杂关系。</p> <h3 id="hibernate-1">Hibernate版本</h3> <p>Hibernate3.x版本和Hibernate4.x（企业中常用的还是Hibernate3.x）</p> <hr> <p><a name="2"></a></p> <h2 id="centerhibernatecenter-1"><center>Hibernate环境搭建</center></h2> <h3 id="hibernate-2">1.下载Hibernate的开发包</h3> <p>Hibernate框架目录结构：</p> <p><img src="http://wx1.sinaimg.cn/large/83e1667dgy1fcgr9trd0xj214o0l878r.jpg" alt=""></p> <p class="notice">注：Hibernate的开发包下载地址为<a href="http://sourceforge.net/projects/hibernate/files/hibernate3">http://sourceforge.net/projects/hibernate/files/hibernate3</a></p> <h3 id="jar">2.导入相应jar包</h3> <table> <thead> <tr> <th> </th> <th> </th> </tr> </thead> <tbody> <tr> <td>核心jar包</td> <td>hibernate3.jar</td> </tr> </tbody> <tbody> <tr> <td>必要的jar包</td> <td>home/lib/required/*.jar</td> </tr> </tbody> <tbody> <tr> <td>jpa规范</td> <td>home/lib/jpa:hibernate-jpa-2.0-api-1.0.1.Final.jar</td> </tr> </tbody> <tbody> <tr> <td>日志记录</td> <td>log4j-1.2.16.jar、slf4j-log4j12-1.7.2.jar</td> </tr> </tbody> <tbody> <tr> <td>数据库驱动</td> <td>mysql-connector-java-5.0.4-bin.jar</td> </tr> </tbody> </table> <p class="notice">注：<br> 1.导入jar包时，要在Java工程中新建文件夹lib。<br> 2.Java工程中要把lib中的所有jar包右键Build Path -&gt; add Build Path(Web工程不需要)<br> 3.将(日志文件夹中的)log4j.properties文件复制到src下。</p> <h3 id="hibernate-3">3.创建Hibernate的核心配置文件</h3> <p>• 引入约束:</p> <p class="notice">在src下创建hibernate.cfg.xml，引入dtd约束hibernate-confguration-3.0.dtd <br> (或去project的etc里复制hibernate.cfg.xml)</p> <p>• 数据库属性:</p> <p class="notice">在etc下找到hibernate.properties去查找(mysql)数据库属性。</p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;hibernate-configuration&gt;</span>
+<span class="nt">&lt;session-factory&gt;</span>
+	<span class="c">&lt;!-- 1.必须去配置的属性 --&gt;</span>
+	
+	<span class="c">&lt;!-- 配置数据库连接的基本信息: --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.connection.driver_class"</span><span class="nt">&gt;</span>com.mysql.jdbc.Driver<span class="nt">&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.connection.url"</span><span class="nt">&gt;</span>jdbc:mysql:///hibernate3<span class="nt">&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.connection.username"</span><span class="nt">&gt;</span>root<span class="nt">&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.connection.password"</span><span class="nt">&gt;</span>123<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- Hibernate的方言 --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.dialect"</span><span class="nt">&gt;</span>org.hibernate.dialect.MySQLDialect<span class="nt">&lt;/property&gt;</span>
+
+	<span class="c">&lt;!-- 2.可选的属性 --&gt;</span>
+	
+	<span class="c">&lt;!-- 显示SQL --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.show_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 格式化SQL --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.format_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- hbm2ddl:映射 to DDL:自动生成表 --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="nt">&gt;</span>update<span class="nt">&lt;/property&gt;</span>
+
+	<span class="c">&lt;!-- 3.通知Hibernate加载那些映射文件 --&gt;</span>
+	(或可直接拖到configuration中的mappings中) 
+	<span class="nt">&lt;mapping</span> <span class="na">resource=</span><span class="s">"cn/xsw/hibernate3/demo/Customer.hbm.xml"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/session-factory&gt;</span>
+<span class="nt">&lt;/hibernate-configuration&gt;</span>
+</code></pre></div> <h3 id="section">4.创建表(关系型数据库)</h3> <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">create</span> <span class="k">database</span> <span class="n">hibernate3</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">hibernate3</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">customer</span><span class="p">(</span>
+	<span class="n">id</span> <span class="n">int</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">auto_increment</span><span class="p">,</span>
+	<span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">age</span> <span class="n">int</span>
+<span class="p">);</span>
+</code></pre></div> <h3 id="section-1">5.创建一个实体类(面向对象)</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div> <h3 id="orm-1">6.创建ORM的映射</h3> <p class="notice">映射文件只要是一个XML格式文件就可以，名字任意。<br> 通常情况下名称规范: <code class="highlighter-rouge">实体类名称.hbm.xml</code> (hbm-&gt;hibernate mapping)</p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!--Customer.hbm.xml--&gt;</span> 
+<span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span>
+
+<span class="nt">&lt;hibernate-mapping&gt;</span>
+	<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"cn.xsw.test.Customer"</span> <span class="na">table=</span><span class="s">"customer"</span><span class="nt">&gt;</span>	
+		<span class="c">&lt;!-- 1.唯一标识 --&gt;</span>
+		<span class="nt">&lt;id</span> <span class="na">name=</span><span class="s">"id"</span> <span class="na">column=</span><span class="s">"id"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;generator</span> <span class="na">class=</span><span class="s">"native"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;/id&gt;</span>
+		
+		<span class="c">&lt;!-- 2.普通属性 --&gt;</span>
+		<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">column=</span><span class="s">"name"</span> <span class="na">type=</span><span class="s">"string"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"age"</span> <span class="na">column=</span><span class="s">"age"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/hibernate-mapping&gt;</span>
+<span class="c">&lt;!-- 注：table不区分大小写，class区分 --&gt;</span>
+</code></pre></div> <h3 id="section-2">7.编写测试</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="c1">// 向数据库中插入一条记录</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">(){</span>
+	<span class="c1">// 1.Hiberante框架加载核心配置文件(解析)</span>
+	<span class="n">Configuration</span> <span class="n">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Configuration</span><span class="o">().</span><span class="na">configure</span><span class="o">();</span>
+	<span class="c1">// 2.创建一个SessionFactory(获得Session--相当于连接对象)</span>
+	<span class="n">SessionFactory</span> <span class="n">sessionFactory</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="na">buildSessionFactory</span><span class="o">();</span>
+	<span class="c1">// 3.由SessionFactory获得Session对象</span>
+	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">sessionFactory</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
+	<span class="c1">// 4.默认的情况下，事务是不自动提交(开始一个事务)</span>
+	<span class="n">Transaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+	<span class="c1">// 5.业务逻辑操作-向数据库中插入一条记录:</span>
+	<span class="n">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Customer</span><span class="o">();</span>
+	<span class="n">customer</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"tom"</span><span class="o">);</span>
+	<span class="n">customer</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="mi">28</span><span class="o">);</span>
+	
+	<span class="n">session</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>
+	
+	<span class="c1">// 6.事务提交</span>
+	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+	<span class="c1">// 7.释放资源</span>
+	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="n">sessionFactory</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div> <hr> <p><a name="3"></a></p> <h2 id="centerhibernatecenter-2"><center>Hibernate日志记录</center></h2> <p>Hibernate中的日志记录使用的是slf4j技术。</p> <h3 id="slf4j">SLF4J</h3> <p>SLF4J，即简单日志门面（Simple Logging Facade for Java）<br> 不是具体的日志解决方案，它只服务于各种各样的日志系统，用于整合其他日志系统。</p> <h3 id="log4j">Log4J</h3> <p>在企业中常用的日志记录:log4j，是具体的日志记录方案。</p> <p><strong>Log4J的日志级别</strong></p> <p>fatal(致命的)、error(普通错误)、warn(警告)、info(信息)、debug(调试)、trace(堆栈信息)</p> <p><strong>用法</strong></p> <p><code class="highlighter-rouge">Logger.error(“错误信息”);</code> <br> 通过配置文件的形式，显示错误信息，假如配置的级别是info，则比info级别高的信息都会显示。</p> <p><strong>Log4J的三个组件</strong></p> <p>1.记录器（Loggers）</p> <ul class="notice"> <li>格式:记录器 = 级别, 输出源1,输出源2</li> <li>log4j.rootLogger=info, stdout</li> </ul> <p>2.输出源（Appenders）</p> <ul class="notice"> <li>log4j.appender.stdout=org.apache.log4j.ConsoleAppender: 控制台进行输出</li> <li>log4j.appender.file=org.apache.log4j.FileAppender: 向文件进行输出</li> </ul> <p>3.布局（Layouts）</p> <ul class="notice"> <li>log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</li> <li>log4j.appender.stdout.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n</li> </ul> <div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c">### direct log messages to stdout ###
+</span><span class="py">log4j.appender.stdout</span><span class="p">=</span><span class="s">org.apache.log4j.ConsoleAppender</span>
+<span class="py">log4j.appender.stdout.Target</span><span class="p">=</span><span class="s">System.err</span>
+<span class="py">log4j.appender.stdout.layout</span><span class="p">=</span><span class="s">org.apache.log4j.PatternLayout</span>
+<span class="py">log4j.appender.stdout.layout.ConversionPattern</span><span class="p">=</span><span class="s">%d{ABSOLUTE} %5p %c{1}:%L - %m%n</span>
+
+<span class="c">### direct messages to file mylog.log ###
+</span><span class="py">log4j.appender.file</span><span class="p">=</span><span class="s">org.apache.log4j.FileAppender</span>
+<span class="py">log4j.appender.file.File</span><span class="p">=</span><span class="s">/Users/SOoCoO/Documents/JavaWebFile/test/mylog.log</span>
+<span class="py">log4j.appender.file.layout</span><span class="p">=</span><span class="s">org.apache.log4j.PatternLayout</span>
+<span class="py">log4j.appender.file.layout.ConversionPattern</span><span class="p">=</span><span class="s">%d{ABSOLUTE} %5p %c{1}:%L - %m%n</span>
+
+<span class="c">### set log levels - for more verbose logging change 'info' to 'debug' ###
+</span>
+<span class="py">log4j.rootLogger</span><span class="p">=</span><span class="s">info, stdout,file</span>
+
+</code></pre></div> <div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">log4j.rootLogger</span><span class="p">=</span><span class="s">off, stdout</span>
+<span class="c"># 1.off表示控制台的输出无任何日志信息
+# 2.若写成info，则表示info及比它级别高的信息会输出到控制台中
+</span>
+<span class="py">log4j.appender.file.File</span><span class="p">=</span><span class="s">/Users/SOoCoO/Documents/JavaWebFile/test/mylog.log</span>
+<span class="py">log4j.rootLogger</span><span class="p">=</span><span class="s">info, stdout,file</span>
+<span class="c"># 会在相应路径下生成mylog.log日志
+</span></code></pre></div> <p><strong>测试</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Log4JTest</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">Log4JTest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">(){</span>
+		<span class="n">logger</span><span class="o">.</span><span class="na">fatal</span><span class="o">(</span><span class="s">"致命错误"</span><span class="o">);</span>
+		<span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"普通错误"</span><span class="o">);</span>
+		<span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"警告信息"</span><span class="o">);</span>
+		<span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"普通信息"</span><span class="o">);</span>
+		<span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"调试信息"</span><span class="o">);</span>
+		<span class="n">logger</span><span class="o">.</span><span class="na">trace</span><span class="o">(</span><span class="s">"堆栈信息"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Java" title="Pages tagged Java" class="tag"><span class="term">Java</span></a><a href="http://127.0.0.1:4000//tags/#Hibernate" title="Pages tagged Hibernate" class="tag"><span class="term">Hibernate</span></a><a href="http://127.0.0.1:4000//tags/#SSH%E6%A1%86%E6%9E%B6" title="Pages tagged SSH框架" class="tag"><span class="term">SSH框架</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//Hibernate-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//Hibernate-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//Hibernate-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>
