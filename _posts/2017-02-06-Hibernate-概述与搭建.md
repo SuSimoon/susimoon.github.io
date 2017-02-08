@@ -71,8 +71,7 @@ Hibernate框架目录结构：
 
 ### 2.导入相应jar包 
 
-|  |  | 
-|----
+
 | 核心jar包 | hibernate3.jar | 
 |----
 | 必要的jar包 | home/lib/required/*.jar  |
@@ -82,7 +81,7 @@ Hibernate框架目录结构：
 | 日志记录 | log4j-1.2.16.jar、slf4j-log4j12-1.7.2.jar |
 |----
 | 数据库驱动 |mysql-connector-java-5.0.4-bin.jar|
-
+{: rules="groups"}
 
 注：  
 1.导入jar包时，要在Java工程中新建文件夹lib。  

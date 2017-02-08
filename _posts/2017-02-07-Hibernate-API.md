@@ -2,7 +2,7 @@
 layout: post
 title:  "Hibernate-API"
 date:   2017-02-06
-excerpt: "本篇介绍了Hibernate"
+excerpt: "本篇介绍了Hibernate的API，包括Configuration、SessionFactory、Session、Transaction、Query、Criteria"
 tag:
 - Java 
 - Hibernate
@@ -188,14 +188,15 @@ rollback();	 :撤销事务操作
 wasCommitted();	 :检查事务是否提交
 ```
 
-注1：如果没有开启事务，那么每个Session的操作，都相当于一个独立的事务。比如：
-Serializable id = session.save(customer);
-session.get(Customer.class, id);
-这两个操作是在两个不同的事务中。
+注1：如果没有开启事务，那么每个Session的操作，都相当于一个独立的事务。比如：  
+Serializable id = session.save(customer);  
+session.get(Customer.class, id);  
+这两个操作是在两个不同的事务中。  
 (默认回滚，没有提交，数据库中没有发生变化。)
+{: .notice}
 
 注2：如果在配置中开启了默认提交:  
-`<propertiy name="hibernate.connection.autocommit">true</propertiy>` 
+`<propertiy name="hibernate.connection.autocommit">true</propertiy>`   
 则即使不写Transaction tx = session.beginTransaction();和tx.commit();  
 也会提交数据库，但执行的语句是独立的，若还有session的其它操作，则它们并不在一个事务里。  
 所以一般配置文件中都设置自动提交为false。
@@ -259,8 +260,9 @@ public void demo(){
 
 ## <center>Criteria</center>
 
-Criteria是Hibernate提供的用于条件查询接口。(HQL符合数据库的操作形式，而Criteria符合面向对象方式)
-Criteria criteria = session.createCriteria(Customer.class);
+Criteria是Hibernate提供的用于条件查询接口。
+HQL符合数据库的操作形式，而Criteria符合面向对象方式。  
+即HQL语句类似SQL，QBC语句更类似对象操作。   
 
 ### 使用Criteria对象步骤
 
