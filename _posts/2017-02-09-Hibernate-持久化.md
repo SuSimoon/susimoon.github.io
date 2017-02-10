@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Hibernate-持久化类"
-date:   2017-02-07
-excerpt: "本篇介绍了Hibernate中持久化类的编写规则"
+title:  "Hibernate-持久化"
+date:   2017-02-08
+excerpt: "本篇介绍了Hibernate中持久化类的编写规则、主键生成策略以及持久化对象的三种状态"
 tag:
 - Java 
 - Hibernate
-- 持久化类
+- 持久化
 - SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
@@ -15,6 +15,8 @@ comments: false
 ><a href="#1">持久化类编写规则</a>    
 ><a href="#2">自然主键和代理主键</a>  
 ><a href="#3">主键生成策略</a>  
+><a href="#4">持久化对象的三种状态</a>  
+
 
 ***
 
@@ -156,3 +158,126 @@ public void demo(){
 {: rules="groups"}
 {: .notice}
 
+***
+
+<a name="4"></a>
+
+## <center>持久化对象的三种状态</center>
+
+| 状态 |特点|
+|:--------:|:-------:|
+| **Transient瞬时态** | 持久化对象没有唯一标识OID，没有纳入Session的管理 |
+|:----|:----|  
+| **Persistent持久态** | 持久化对象有唯一标识OID，已经纳入到Session的管理 |
+|:----|:----|
+| **Detached脱管态** | 持久化对象有唯一标识OID，没有纳入到Session管理 |
+|:--------|:-------|
+{: rules="groups"}
+{: .notice}
+
+
+
+### 区分三种持久化对象的状态
+
+![](http://wx3.sinaimg.cn/large/83e1667dgy1fcjzp40szwj21hm0pygqd.jpg)
+
+```java
+@Test
+// 区分持久化对象的三种状态:
+public void demo(){
+	// 1.创建Session
+	Session session = HibernateUtils.openSession();
+	// 2.开启事务
+	Transaction tx = session.beginTransaction();
+	
+	// 向数据库中保存一本图书:
+	Book book = new Book();	// 1.瞬时态:没有唯一标识OID，没有与session关联
+	book.setName("Hiernate开发");
+	
+	session.save(book); // 2.持久态:有唯一标识OID，与session关联
+	
+	// 3.事务提交
+	tx.commit();
+	// 4.释放资源
+	session.close();
+	
+	book.setName("Struts2开发"); // 3.脱管态:有唯一的标识，session已经关闭，没有与session关联 
+}
+```
+
+
+### 三种状态对象转换
+
+* **瞬时态**
+
+```
+获得:
+	Book book = new Book();
+
+瞬时-->持久:
+	* save(book);
+	* save()/saveOrUpdate();
+
+瞬时-->脱管:
+	* book.setId(1);
+```
+
+* **持久态**
+
+```
+获得:
+	Book book = (Book)session.get(Book.class,1);
+	(1->唯一标识，session->session关联)
+	* get()/load()/find()/iterate();
+
+持久-->瞬时:
+	* delete(book);
+	* 特殊状态:删除态(被删除的对象，不建议去使用)
+
+持久-->脱管:
+	* session.close();
+	* close()/clear()/evict(obj);
+```
+
+* **脱管态**
+
+```
+获得:
+	Book book = new Book();
+	book.setId(1);
+
+脱管-->持久:
+	* session.update();
+	* update()/saveOrUpdate()/lock()
+
+脱管-->瞬时:
+	* book.setId(null);
+```
+
+![](http://wx2.sinaimg.cn/large/83e1667dgy1fcjzs3aujyj20ym0mogrh.jpg)
+
+
+### 持久态对象有自动更新数据库的能力
+
+```java
+@Test
+// 测试持久态的对象自动更新数据库
+public void demo2(){
+	// 1.创建Session
+	Session session = HibernateUtils.openSession();
+	// 2.开启事务
+	Transaction tx = session.beginTransaction();
+	
+	// 获得一个持久态的对象.
+	Book book = (Book) session.get(Book.class, 1);
+	book.setName("Struts2开发");
+	
+	// session.update(book); <---不需要
+	
+	// 3.提交事务
+	tx.commit();
+	// 4.关闭资源
+	session.close();
+}
+//自动更新数据库的能力依赖了Hibernate的一级缓存
+```

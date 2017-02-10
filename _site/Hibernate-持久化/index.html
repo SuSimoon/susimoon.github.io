@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
+<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>Hibernate-持久化 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Java, Hibernate, 持久化, SSH框架"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="Hibernate-持久化"> <meta name="twitter:description" content="本篇介绍了Hibernate中持久化类的编写规则、主键生成策略以及持久化对象的三种状态"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Hibernate-持久化"> <meta property="og:description" content="本篇介绍了Hibernate中持久化类的编写规则、主键生成策略以及持久化对象的三种状态"> <meta property="og:url" content="http://127.0.0.1:4000//Hibernate-%E6%8C%81%E4%B9%85%E5%8C%96/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//Hibernate-%E6%8C%81%E4%B9%85%E5%8C%96/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
+<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>Hibernate-持久化</h1> <h4>08 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~1 minute </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">持久化类编写规则</a> <br> <a href="#2">自然主键和代理主键</a><br> <a href="#3">主键生成策略</a><br> <a href="#4">持久化对象的三种状态</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centercenter"><center>持久化类编写规则</center></h2> <p>Hibernate采用普通、传统的Java对象（POJO），作为持久化类，与数据表进行映射。<br> 持久化类: 实体类 + 映射文件</p> <p><strong>1.提供一个无参数、public访问控制符的构造器</strong></p> <p class="notice">因为用到了反射</p> <p><strong>2.提供一个标识属性，映射数据表主键字段</strong></p> <ul class="notice"> <li>Java区分两个对象是否是同一个:使用地址</li> <li>数据库区分两条记录是否一致:使用主键</li> <li>Hibernate区分持久化对象是否是同一个:根据唯一标识OID<br> (对象的OID和数据库的表的主键对应。为保证OID的唯一性，应该让Hibernate来为OID赋值)</li> </ul> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="c1">// 演示关于标识错误:会抛出异常</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">(){</span>
+	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
+	<span class="n">Transaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+	
+	<span class="n">Customer</span> <span class="n">customer1</span> <span class="o">=</span> <span class="o">(</span><span class="n">Customer</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Customer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+	
+	<span class="n">Customer</span> <span class="n">customer2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Customer</span><span class="o">();</span>
+	<span class="n">customer</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+	<span class="n">customer</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"tom"</span><span class="o">);</span>
+	<span class="n">session</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">customer2</span><span class="o">);</span>
+	
+	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div> <p><strong>3.所有属性提供public访问控制符的set、get方法</strong></p> <p class="notice">框架中存值和取值的时候使用</p> <p><strong>4.标识属性应尽量使用基本数据类型的包装类型</strong></p> <p>使用基本数据类型的例子: <br> 基本数据类型会将成绩初始化为0，不能确定是没考试还是0分，用包装类型则初始化为null。</p> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: left">成绩表：</th> <th style="text-align: left"> </th> <th style="text-align: left"> </th> </tr> </thead> <tbody> <tr> <td style="text-align: left">学号</td> <td style="text-align: left">姓名</td> <td style="text-align: left">成绩</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left">１</td> <td style="text-align: left">tom</td> <td style="text-align: left">0-&gt;null</td> </tr> </tbody> </table> <p><strong>5. 持久化类尽量不要使用final进行修饰</strong></p> <p class="notice">用final修饰的类是不能被继承，无法生成代理对象进行优化。<br> (延迟加载的时候返回的是代理对象，延迟加载会失效)</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Customer</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">...</span>
+
+<span class="o">}</span>
+</code></pre></div> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="c1">// 演示持久化类为final情况:debu时测试时，延迟加载失败，生成的是真实对象而非代理对象customer</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">(){</span>
+	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
+	<span class="n">Transaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+	
+	<span class="n">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="o">(</span><span class="n">Customer</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">Customer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+	
+	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div> <hr> <p><a name="2"></a></p> <h2 id="centercenter-1"><center>自然主键和代理主键</center></h2> <h3 id="section">自然主键:</h3> <p class="notice">创建人员表时某条记录唯一确定，比如人都有身份证号，我们可以使用身份证号作为主键。<br> (身份证号本身就是人员的一个属性，作为主键)</p> <h3 id="section-1">代理主键:(多用)</h3> <p class="notice">创建人员表时某条记录唯一确定，但是没有使用身份证号作为主键，而是新建字段。 (用新建的字段作为主键，只是一个标识作用)</p> <hr> <p><a name="3"></a></p> <h2 id="centercenter-2"><center>主键生成策略</center></h2> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: left">主键生成策略：</th> <th style="text-align: left"> </th> </tr> </thead> <tbody> <tr> <td style="text-align: left"><strong>increment</strong></td> <td style="text-align: left">自动增长，适合short、int、long…类型</td> </tr> <tr> <td style="text-align: left"> </td> <td style="text-align: left">不是使用数据库的自动增长机制，而是Hibernate框架提供的自动增长方式</td> </tr> <tr> <td style="text-align: left"> </td> <td style="text-align: left">方式:先查询表的最大值select max(id) from 表;在最大值的基础上+1</td> </tr> <tr> <td style="text-align: left"> </td> <td style="text-align: left">问题:有多线程的问题，在集群下不要使用</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>identity</strong></td> <td style="text-align: left">自动增长，适合short、int、long…类型</td> </tr> <tr> <td style="text-align: left"> </td> <td style="text-align: left">采用数据库的自动增长机制，但不适合于Oracle数据库(无自动增长)</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>sequence</strong></td> <td style="text-align: left">序列，适用于short、int、long …类型</td> </tr> <tr> <td style="text-align: left"> </td> <td style="text-align: left">应用在Oracle上(mysql不支持序列)</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>uuid</strong></td> <td style="text-align: left">适用于字符串类型的主键，采用随机的字符串作为主键</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>native</strong></td> <td style="text-align: left">本地策略，根据底层数据库不同，自动选择适用identity还是sequence</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>assigned</strong></td> <td style="text-align: left">Hibernate框架不维护主键，主键由程序自动生成(手动完成)</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>foreign</strong></td> <td style="text-align: left">主键的外来的(应用在多表一对一的关系)</td> </tr> </tbody> </table> <hr> <p><a name="4"></a></p> <h2 id="centercenter-3"><center>持久化对象的三种状态</center></h2> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: center">状态</th> <th style="text-align: center">特点</th> </tr> </thead> <tbody> <tr> <td style="text-align: center"><strong>Transient瞬时态</strong></td> <td style="text-align: center">持久化对象没有唯一标识OID，没有纳入Session的管理</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center"><strong>Persistent持久态</strong></td> <td style="text-align: center">持久化对象有唯一标识OID，已经纳入到Session的管理</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center"><strong>Detached脱管态</strong></td> <td style="text-align: center">持久化对象有唯一标识OID，没有纳入到Session管理</td> </tr> </tbody> </table> <h3 id="section-2">区分三种持久化对象的状态</h3> <p><img src="http://wx3.sinaimg.cn/large/83e1667dgy1fcjzp40szwj21hm0pygqd.jpg" alt=""></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="c1">// 区分持久化对象的三种状态:</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">(){</span>
+	<span class="c1">// 1.创建Session</span>
+	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
+	<span class="c1">// 2.开启事务</span>
+	<span class="n">Transaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+	
+	<span class="c1">// 向数据库中保存一本图书:</span>
+	<span class="n">Book</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">();</span>	<span class="c1">// 1.瞬时态:没有唯一标识OID，没有与session关联</span>
+	<span class="n">book</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Hiernate开发"</span><span class="o">);</span>
+	
+	<span class="n">session</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">book</span><span class="o">);</span> <span class="c1">// 2.持久态:有唯一标识OID，与session关联</span>
+	
+	<span class="c1">// 3.事务提交</span>
+	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+	<span class="c1">// 4.释放资源</span>
+	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	
+	<span class="n">book</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Struts2开发"</span><span class="o">);</span> <span class="c1">// 3.脱管态:有唯一的标识，session已经关闭，没有与session关联 </span>
+<span class="o">}</span>
+</code></pre></div> <h3 id="section-3">三种状态对象转换</h3> <ul> <li><strong>瞬时态</strong></li> </ul> <div class="highlighter-rouge"><pre class="highlight"><code>获得:
+	Book book = new Book();
+
+瞬时--&gt;持久:
+	* save(book);
+	* save()/saveOrUpdate();
+
+瞬时--&gt;脱管:
+	* book.setId(1);
+</code></pre></div> <ul> <li><strong>持久态</strong></li> </ul> <div class="highlighter-rouge"><pre class="highlight"><code>获得:
+	Book book = (Book)session.get(Book.class,1);
+	(1-&gt;唯一标识，session-&gt;session关联)
+	* get()/load()/find()/iterate();
+
+持久--&gt;瞬时:
+	* delete(book);
+	* 特殊状态:删除态(被删除的对象，不建议去使用)
+
+持久--&gt;脱管:
+	* session.close();
+	* close()/clear()/evict(obj);
+</code></pre></div> <ul> <li><strong>脱管态</strong></li> </ul> <div class="highlighter-rouge"><pre class="highlight"><code>获得:
+	Book book = new Book();
+	book.setId(1);
+
+脱管--&gt;持久:
+	* session.update();
+	* update()/saveOrUpdate()/lock()
+
+脱管--&gt;瞬时:
+	* book.setId(null);
+</code></pre></div> <p><img src="http://wx2.sinaimg.cn/large/83e1667dgy1fcjzs3aujyj20ym0mogrh.jpg" alt=""></p> <h3 id="section-4">持久态对象有自动更新数据库的能力</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="c1">// 测试持久态的对象自动更新数据库</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo2</span><span class="o">(){</span>
+	<span class="c1">// 1.创建Session</span>
+	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
+	<span class="c1">// 2.开启事务</span>
+	<span class="n">Transaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+	
+	<span class="c1">// 获得一个持久态的对象.</span>
+	<span class="n">Book</span> <span class="n">book</span> <span class="o">=</span> <span class="o">(</span><span class="n">Book</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Book</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+	<span class="n">book</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Struts2开发"</span><span class="o">);</span>
+	
+	<span class="c1">// session.update(book); &lt;---不需要</span>
+	
+	<span class="c1">// 3.提交事务</span>
+	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+	<span class="c1">// 4.关闭资源</span>
+	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="c1">//自动更新数据库的能力依赖了Hibernate的一级缓存</span>
+</code></pre></div> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Java" title="Pages tagged Java" class="tag"><span class="term">Java</span></a><a href="http://127.0.0.1:4000//tags/#Hibernate" title="Pages tagged Hibernate" class="tag"><span class="term">Hibernate</span></a><a href="http://127.0.0.1:4000//tags/#%E6%8C%81%E4%B9%85%E5%8C%96" title="Pages tagged 持久化" class="tag"><span class="term">持久化</span></a><a href="http://127.0.0.1:4000//tags/#SSH%E6%A1%86%E6%9E%B6" title="Pages tagged SSH框架" class="tag"><span class="term">SSH框架</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//Hibernate-%E6%8C%81%E4%B9%85%E5%8C%96/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//Hibernate-%E6%8C%81%E4%B9%85%E5%8C%96/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//Hibernate-%E6%8C%81%E4%B9%85%E5%8C%96/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>

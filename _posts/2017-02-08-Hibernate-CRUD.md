@@ -203,16 +203,16 @@ public void demo(){
 删除记录的两种方式:  
 
 1.手动创建对象的方式  
-2.先查询再删除的方式(可以级联删除-删掉用户同时删掉其订单)
+2.先查询再删除的方式(可以级联删除：删掉用户同时删掉其订单)
 {: .notice}
 
 ```java
 // 1.手动创建对象的方式
-	Customer customer = new Customer();
-	customer.setId(2);
-	session.delete(customer);
+Customer customer = new Customer();
+customer.setId(2);
+session.delete(customer);
 
 // 2.先查询再删除的方式
-	Customer customer = (Customer)session.get(Customer.class, 1);
-	session.delete(customer);
+Customer customer = (Customer)session.get(Customer.class, 1);
+session.delete(customer);
 ```
