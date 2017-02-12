@@ -148,7 +148,7 @@ for (Customer customer : list) {
 }
 ```
 
-注：具体讲解看API章节。
+注：具体讲解看Hibernate-检索方式章节。
 {: .notice}
 
 ***

@@ -12,8 +12,8 @@ feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
 
-><a href="#1">持久化类编写规则</a>    
-><a href="#2">自然主键和代理主键</a>  
+><a href="#1">一级缓存概述</a>    
+><a href="#2">证明Hibernate一级缓存的存在</a>  
 ><a href="#3">主键生成策略</a>  
 ><a href="#4">持久化对象的三种状态</a>  
 
@@ -75,7 +75,7 @@ public void demo(){
 ```
 
 
-* 深入理解一级缓存中快照区
+### 深入理解一级缓存中快照区
 
 ```java
 @Test
@@ -107,7 +107,7 @@ public void demo4(){
 ![](http://ww4.sinaimg.cn/large/83e1667djw1f9cc8hoh6zj21sa0okaip.jpg)
 
 
-* Hibernate管理一级缓存
+### Hibernate管理一级缓存
 
 ```
 一级缓存是与session的生命周期相关的，session生命周期结束，一级缓存销毁了。
@@ -159,7 +159,7 @@ public void demo6(){
 	Book book = (Book) session.get(Book.class, 1);
 	book.setName("Hibernate3开发");
 	
-	session.flush();// 发出update语句
+	session.flush();// 发出update语句 默认commit时发送update，但数据库中还没有更新，需要commit
 	
 	// 3.提交事务
 	tx.commit();
@@ -189,7 +189,7 @@ public void demo7(){
 }
 ```
 
-* Hibernate一级缓存的刷出时机(了解)
+### Hibernate一级缓存的刷出时机(了解)
 
 ```
 FlushMode:
@@ -203,4 +203,18 @@ FlushMode:
 
 session.setFlushMode(FlushMode.MANUAL);
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
