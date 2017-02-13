@@ -2,7 +2,7 @@
 layout: post
 title:  "Hibernate-事务处理"
 date:   2017-02-12
-excerpt: "本篇介绍了Hibernate中"
+excerpt: "本篇介绍了Hibernate中事务的处理，解决丢失更新的悲观锁与乐观锁，以及当前线程中的session"
 tag:
 - Java 
 - Hibernate
@@ -15,10 +15,7 @@ comments: false
 ><a href="#1">Hibernate中的事务</a>    
 ><a href="#2">丢失更新</a>  
 ><a href="#3">丢失更新的解决(悲观锁与乐观锁)</a>  
-><a href="#4">Hibernate的检索(抓取)策略</a>  
-><a href="#5">set集合上的检索策略(在一方对多方配置)</a>   
-><a href="#6">many-to-one上的检索策略(在多方对一方配置)</a>   
-><a href="#7">批量抓取 </a> 
+><a href="#4">当前线程中的session</a>  
 
 
 ***
@@ -191,22 +188,28 @@ customer.setCname("ann");
 
 ***
 
-* 当前线程中的session
+<a name="4"></a>
 
-```
-线程绑定的session:
-	* 在Hibernate.cfg.xml中配置一个:
-		<property name="hibernate.current_session_context_class">thread</property>
-	* 使用SessionFactory中的getCurrentSession();方法。
-		* 底层就是ThreadLocal
+## <center>当前线程中的session</center> 
 
-**** 当前线程中的session不需要进行关闭，线程结束后自动关闭。(写session.close()会报错)
-```
+通常事务在Service层会开启，假设Service层要调用Dao1和Dao2的方法，  
+为使两个方法在同一事务里，需要绑定相同的session。
 
-![](http://ww2.sinaimg.cn/large/83e1667djw1f9g4vooebdj218q0o4448.jpg)
+
+
+### 线程绑定的session
+
+• 在Hibernate.cfg.xml中配置:  
+`<property name="hibernate.current_session_context_class">thread</property>`  
+
+• 使用SessionFactory中的getCurrentSession();方法。(底层就是ThreadLocal)  
+
+注：当前线程中的session不需要进行关闭，线程结束后自动关闭。(写session.close();会报错)
+{: .notice}
+
 
 ```xml
-在核心配置文件中配置，session对象的生命周期与本地线程绑定
+<!-- 在核心配置文件中配置，session对象的生命周期与本地线程绑定 -->
 <!-- 使用当前线程中的session -->
 <property name="hibernate.current_session_context_class">thread</property>
 ```
@@ -225,7 +228,7 @@ public class HibernateUtils {
 		return sessionFactory.openSession();
 	}
 	
-	public static Session getCurrentSession(){ <-------
+	public static Session getCurrentSession(){ // <-------
 		return sessionFactory.getCurrentSession();
 	}
 	
@@ -238,11 +241,7 @@ public class HibernateUtils {
 
 ```java
 @Test
-/*
- * 事务通常在service层开启.session在DAO层
- * 	* 事务开启由session开启
- */
-public void demo7(){
+public void demo(){
 	Session session1 = HibernateUtils.openSession(); 
 	Session session2 = HibernateUtils.openSession();
 	System.out.println(session1 == session2); // false

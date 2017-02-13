@@ -328,3 +328,6 @@ public class Log4JTest {
 	}
 }
 ```
+***
+
+![](http://wx2.sinaimg.cn/large/83e1667dgy1fcoup014icj217e0p6djb.jpg)
