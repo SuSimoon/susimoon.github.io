@@ -5,6 +5,7 @@ date:   2017-02-06
 excerpt: "本篇介绍了Hibernate框架的概述与环境搭建，以及Hibernate中使用的日志记录"
 tag:
 - Java 
+- 概述与搭建
 - Hibernate
 - SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png

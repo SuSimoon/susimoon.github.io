@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-02-14T20:53:08+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Spring-概述与搭建</title><link href="http://127.0.0.1:4000//Spring-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="Spring-概述与搭建" /><published>2017-02-14T00:00:00+09:00</published><updated>2017-02-14T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Spring-概述与搭建</id><content type="html" xml:base="http://127.0.0.1:4000//Spring-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-02-14T21:10:46+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Spring-概述与搭建</title><link href="http://127.0.0.1:4000//Spring-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="Spring-概述与搭建" /><published>2017-02-14T00:00:00+09:00</published><updated>2017-02-14T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Spring-概述与搭建</id><content type="html" xml:base="http://127.0.0.1:4000//Spring-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;Spring框架的概述&lt;/a&gt;  &lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;Spring的环境搭建&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -116,7 +116,7 @@ Spring4需要整合hibernate4&lt;/p&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="Spring" /><category term="概述与搭建" /><category term="SSH框架" /><summary type="html">本篇介绍了Spring中</summary></entry><entry><title type="html">Hibernate-二级缓存</title><link href="http://127.0.0.1:4000//Hibernate-%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" rel="alternate" type="text/html" title="Hibernate-二级缓存" /><published>2017-02-12T00:00:00+09:00</published><updated>2017-02-12T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Hibernate-二级缓存</id><content type="html" xml:base="http://127.0.0.1:4000//Hibernate-%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">&lt;hr /&gt;
+&lt;/div&gt;</content><category term="Java" /><category term="Spring" /><category term="概述与搭建" /><category term="SSH框架" /><summary type="html">本篇介绍了Spring的概述与环境的搭建</summary></entry><entry><title type="html">Hibernate-二级缓存</title><link href="http://127.0.0.1:4000//Hibernate-%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" rel="alternate" type="text/html" title="Hibernate-二级缓存" /><published>2017-02-12T00:00:00+09:00</published><updated>2017-02-12T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Hibernate-二级缓存</id><content type="html" xml:base="http://127.0.0.1:4000//Hibernate-%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;centerhibernatecenter&quot;&gt;&lt;center&gt;Hibernate中的二级缓存&lt;/center&gt;&lt;/h2&gt;
 
@@ -251,7 +251,12 @@ Spring4需要整合hibernate4&lt;/p&gt;
 &lt;p class=&quot;notice&quot;&gt;类缓存区存储的是散装的数据(cid对其它属性有引用，当需要对象时会把数据重装成对象)&lt;br /&gt;
 第一个是true(相同的地址)，第二个是false(不同的对象)。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://wx1.sinaimg.cn/large/83e1667dgy1fcp1d19vbyj21qi0m844d.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;figure&gt;
+    
+    &lt;a href=&quot;http://wx1.sinaimg.cn/large/83e1667dgy1fcp1d19vbyj21qi0m844d.jpg&quot;&gt;&lt;img src=&quot;http://wx1.sinaimg.cn/large/83e1667dgy1fcp1d19vbyj21qi0m844d.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;hr /&gt;
 
@@ -263,7 +268,12 @@ Spring4需要整合hibernate4&lt;/p&gt;
 如果在配置中没有配置订单的类，即没有&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;class-cache class=&quot;cn.xsw.Order&quot; usage=&quot;read-write&quot;/&amp;gt;&lt;/code&gt;&lt;br /&gt;
 则在查询订单时会发送多条搜索订单的SQL语句。所以也需要设置订单类。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://wx3.sinaimg.cn/large/83e1667dgy1fcp280y79aj21p40hu0xs.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;figure&gt;
+    
+    &lt;a href=&quot;http://wx3.sinaimg.cn/large/83e1667dgy1fcp280y79aj21p40hu0xs.jpg&quot;&gt;&lt;img src=&quot;http://wx3.sinaimg.cn/large/83e1667dgy1fcp280y79aj21p40hu0xs.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;hr /&gt;
 
@@ -378,7 +388,12 @@ Spring4需要整合hibernate4&lt;/p&gt;
 
 &lt;h3 id=&quot;centercenter-8&quot;&gt;&lt;center&gt;更新时间戳区域&lt;/center&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><category term="Java" /><category term="Hibernate" /><category term="二级缓存" /><category term="SSH框架" /><summary type="html">本篇介绍了Hibernate中的二级缓存相关内容</summary></entry><entry><title type="html">Hibernate-一级缓存</title><link href="http://127.0.0.1:4000//Hibernate-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/" rel="alternate" type="text/html" title="Hibernate-一级缓存" /><published>2017-02-12T00:00:00+09:00</published><updated>2017-02-12T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Hibernate-一级缓存</id><content type="html" xml:base="http://127.0.0.1:4000//Hibernate-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/">&lt;hr /&gt;
+&lt;figure&gt;
+    
+    &lt;a href=&quot;http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg&quot;&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;</content><category term="Java" /><category term="Hibernate" /><category term="二级缓存" /><category term="SSH框架" /><summary type="html">本篇介绍了Hibernate中的二级缓存相关内容</summary></entry><entry><title type="html">Hibernate-一级缓存</title><link href="http://127.0.0.1:4000//Hibernate-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/" rel="alternate" type="text/html" title="Hibernate-一级缓存" /><published>2017-02-12T00:00:00+09:00</published><updated>2017-02-12T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Hibernate-一级缓存</id><content type="html" xml:base="http://127.0.0.1:4000//Hibernate-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;centerhibernatecenter&quot;&gt;&lt;center&gt;Hibernate的一级缓存&lt;/center&gt;&lt;/h2&gt;
 

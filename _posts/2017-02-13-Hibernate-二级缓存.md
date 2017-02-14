@@ -162,7 +162,11 @@ public void demo() {
 第一个是true(相同的地址)，第二个是false(不同的对象)。
 {: .notice}
 
-![](http://wx1.sinaimg.cn/large/83e1667dgy1fcp1d19vbyj21qi0m844d.jpg)
+{% capture images %}
+	http://wx1.sinaimg.cn/large/83e1667dgy1fcp1d19vbyj21qi0m844d.jpg
+{% endcapture %}
+{% include gallery images=images cols=1 %}
+
 
 ***
 
@@ -176,7 +180,11 @@ public void demo() {
 则在查询订单时会发送多条搜索订单的SQL语句。所以也需要设置订单类。
 {: .notice}
 
-![](http://wx3.sinaimg.cn/large/83e1667dgy1fcp280y79aj21p40hu0xs.jpg)
+{% capture images %}
+	http://wx3.sinaimg.cn/large/83e1667dgy1fcp280y79aj21p40hu0xs.jpg
+{% endcapture %}
+{% include gallery images=images cols=1 %}
+
 
 ***
 
@@ -297,5 +305,7 @@ public void demo6(){
 
 ### <center>更新时间戳区域</center>
 
-![](http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg)
-
+{% capture images %}
+	http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg
+{% endcapture %}
+{% include gallery images=images cols=1 %}
