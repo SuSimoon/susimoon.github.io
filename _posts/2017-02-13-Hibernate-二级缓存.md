@@ -1,34 +1,28 @@
 ---
 layout: post
-title:  "Hibernate-缓存"
+title:  "Hibernate-二级缓存"
 date:   2017-02-12
-excerpt: "本篇介绍了Hibernate中的一级缓存与二级缓存"
+excerpt: "本篇介绍了Hibernate中的二级缓存相关内容"
 tag:
 - Java 
 - Hibernate
-- 事务
+- 二级缓存
 - SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
 
-><a href="#1">Hibernate中的事务</a>    
-><a href="#2">丢失更新</a>  
-><a href="#3">丢失更新的解决(悲观锁与乐观锁)</a>  
-><a href="#4">当前线程中的session</a>  
-
 
 ***
 
-<a name="1"></a>
 
 ## <center>Hibernate中的二级缓存</center> 
 
+<a name="1"></a>
 
+### <center>概念</center>
 
 ![](http://wx4.sinaimg.cn/large/83e1667dgy1fcoum5f98rj21bi0noq4n.jpg)
-
-### 概念
 
 Hibernate中提供了两个级别的缓存:  
 
@@ -45,14 +39,19 @@ Hibernate的缓存可以分为两类:
 {: .notice}
 
 
+***
+<a name="2"></a>
 
-### 二级缓存的结构
+### <center>二级缓存的结构</center>
 
 类缓存区、集合缓存区、更新时间戳、查询缓冲区  
 
 ![](http://ww4.sinaimg.cn/large/83e1667djw1f9mqm0km07j21c00pewlo.jpg)
 
-### 缓存中存放的数据
+***
+<a name="3"></a>
+
+### <center>二级缓存中的数据特点</center>
 
 
 适合放入二级缓存中的数据:  
@@ -68,9 +67,10 @@ Hibernate的缓存可以分为两类:
 与其他应用数据共享的数据
 {: .notice}
 
+***
+<a name="4"></a>
 
-
-### 二级缓存的配置(配置EHCache缓存)
+### <center>二级缓存的配置(配置EHCache缓存)</center>
 
 **1.导入jar包：**
 
@@ -122,7 +122,9 @@ Hibernate的缓存可以分为两类:
 
 ***
 
-### 程序示例  
+<a name="5"></a>
+
+### <center>程序示例</center>  
 
 当没有配置二级缓存时，两个不同的session查询相同的数据时会发送两条SQL。  
 当配置二级缓存后，则只发一条SQL。     
@@ -150,8 +152,10 @@ public void demo() {
 }
 ```
 
+***
+<a name="6"></a>
 
-### 二级缓存中类缓存区的特点
+### <center>二级缓存中类缓存区的特点</center>
 
 
 类缓存区存储的是散装的数据(cid对其它属性有引用，当需要对象时会把数据重装成对象)  
@@ -160,9 +164,11 @@ public void demo() {
 
 ![](http://wx1.sinaimg.cn/large/83e1667dgy1fcp1d19vbyj21qi0m844d.jpg)
 
+***
 
+<a name="7"></a>
 
-### 集合缓存区的特点
+### <center>集合缓存区的特点</center>
 
 
 缓存的是对象的id，通过id去查询，所以需要依赖类缓冲区的配置。  
@@ -172,34 +178,31 @@ public void demo() {
 
 ![](http://wx3.sinaimg.cn/large/83e1667dgy1fcp280y79aj21p40hu0xs.jpg)
 
-* 二级缓存数据到硬盘
+***
 
-```
-<diskStore path="c:/ehcache"/> 数据存放临时目录
-maxElementsInMemory="5"  缓存中只能放5个对象
-```
+<a name="8"></a>
 
-* 更新时间戳区域
+### <center>查询缓存</center>
 
-![](http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg)
+查询缓存比二级缓存功能更加强大，但需要依赖于二级缓存。  
 
+测试类级别的二级缓存只适用于get和load获取数据。  
+对query接口可以将查询的数据放置到二级缓存中，但不能使用list方法从缓存中获取数据。  
+若配置了查询缓存，则可以使用缓存中的数据。   
+{: .notice}
 
-* 查询缓存
+二级缓存与查询缓存的区别：  
 
-```
-比二级缓存功能更加强大，而且查询缓存必须依赖二级缓存。
-
-二级缓存:对类/对象的缓存。
+二级缓存:只能是对类/对象的缓存。  
 查询缓存:针对类中属性的缓存。
+{: .notice}
 
-查询缓存的配置:
-	* 配置查询缓存:
-		* 前提是二级缓存已经配置完毕。
-		* 在核心配置文件中:
-			<!-- 配置查询缓存 -->
-			<property name="hibernate.cache.use_query_cache">true</property>
-	* 编写代码的时候:
-```
+
+配置：`<property name="cache.use_query_cache">true</property>`  
+设定：`query.setCacheble(true);`
+{: .notice}
+
+
 
 ```java
 @Test
@@ -227,18 +230,72 @@ public void demo9(){
 ```
 
 ***
-重新组装
-缓存的是对象的散装数据
 
+<a name="9"></a>
 
+### <center>iterate()方法</center>
 
+iterate()方法也同list()方法一样可以查询所有信息。  
+不同的是，iterate方法会发送N+1条SQL查询语句，先查询id，再查询N个对象。  
+当开启二级缓存时，iterate会使用二级缓存的数据，而query则需要配置才能使用。  
 
-
-****
-
-
-* Hibernate的反向工程
-
+```java
+public void demo(){
+	Session session = HibernateUtils.getCurrentSession();
+	Transaction tx = session.beginTransaction();
+	
+	Iterator<Customer> iterator = session.createQuery("from Customer").iterate();
+	while(iterator.hasNext()){
+		Customer customer = iterator.next();
+		System.out.println(customer);
+	}
+	
+	tx.commit();
+	
+	session = HibernateUtils.getCurrentSession();
+	tx = session.beginTransaction();
+	
+	iterator = session.createQuery("from Customer").iterate(); //不发SQL
+	while(iterator.hasNext()){
+		Customer customer = iterator.next();
+		System.out.println(customer);
+	}
+	
+	tx.commit();
+}
 ```
-自动生成模板(视频介绍，整合会有问题)
+
+***
+
+<a name="10"></a>
+
+### <center>一级缓存更新数据会同步到二级缓存</center>
+
+```java
+public void demo6(){
+	Session session = HibernateUtils.getCurrentSession();
+	Transaction tx = session.beginTransaction();
+	
+	Customer customer = (Customer) session.get(Customer.class, 1);
+	customer.setCname("ann"); // 修改名字
+	
+	tx.commit();
+	
+	session = HibernateUtils.getCurrentSession();
+	tx = session.beginTransaction();
+	
+	Customer customer2 = (Customer) session.get(Customer.class, 1);
+	System.out.println(customer2.getCname()); // 获得更新后的名字ann
+	
+	tx.commit();
+}
 ```
+
+***
+
+<a name="11"></a>
+
+### <center>更新时间戳区域</center>
+
+![](http://ww1.sinaimg.cn/large/83e1667djw1f9msjwts2gj21te0tin4f.jpg)
+

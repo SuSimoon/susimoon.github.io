@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Hibernate-一级缓存"
-date:   2017-02-09
-excerpt: "本篇介绍了Hibernate"
+date:   2017-02-12
+excerpt: "本篇介绍了Hibernate中的一级缓存相关内容"
 tag:
 - Java 
 - Hibernate
@@ -11,11 +11,6 @@ tag:
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
-
-><a href="#1">一级缓存概述</a>    
-><a href="#2">证明Hibernate一级缓存的存在</a>  
-><a href="#3">主键生成策略</a>  
-><a href="#4">持久化对象的三种状态</a>  
 
 
 ***
@@ -97,26 +92,24 @@ public void demo4(){
 }
 ```
 
-```
-结论:
-向一级缓存存入数据的时候，放入一级缓存区和一级缓存快照区。
-当更新了一级缓存的数据的时候，事务一旦提交，比对一级缓存和快照区。
+结论:  
+向一级缓存存入数据的时候，放入一级缓存区和一级缓存快照区。  
+当更新了一级缓存的数据的时候，事务一旦提交，比对一级缓存和快照区。  
 如果数据一致，不更新，如果数据不一致，自动更新数据库。
-```
+{: .notice}
 
 ![](http://ww4.sinaimg.cn/large/83e1667djw1f9cc8hoh6zj21sa0okaip.jpg)
 
 
 ### Hibernate管理一级缓存
 
-```
 一级缓存是与session的生命周期相关的，session生命周期结束，一级缓存销毁了。
 
-clear()/evict()/flush()/refresh()管理一级缓存
-	* clear()			  清空一级缓存中所有的对象
-	* evict(Object obj)	  清空一级缓存中某个对象
-	* flush()			  刷出缓存
-	* refresh(Object obj) 将快照区的数据重新覆盖一级缓存的数据
+```
+clear()			  清空一级缓存中所有的对象
+evict(Object obj)	  清空一级缓存中某个对象
+flush()			  刷出缓存
+refresh(Object obj)       将快照区的数据重新覆盖一级缓存的数据
 ```
 
 ```java
@@ -203,18 +196,4 @@ FlushMode:
 
 session.setFlushMode(FlushMode.MANUAL);
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
