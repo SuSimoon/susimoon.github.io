@@ -2,7 +2,7 @@
 layout: post
 title:  "Spring-Bean(Annotation)"
 date:   2017-02-16
-excerpt: "本篇介绍了Spring中基于XML配置方式的Bean，包括Bean实例化的方式、属性配置、属性注入以及Bean的生命周期"
+excerpt: "本篇介绍了Spring中基于注解配置方式的Bean"
 tag:
 - Java 
 - Spring
@@ -15,7 +15,7 @@ comments: false
 ><a href="#1">Spring的注解装配Bean</a>  
 ><a href="#2">Bean的属性注入</a>   
 ><a href="#3">Bean其它的属性配置</a>  
-><a href="#4">Bean的生命周期</a>   
+><a href="#4">实际开发中使用XML还是注解</a>   
    
 
 ***
@@ -78,7 +78,7 @@ public void demo() {
 
 ## <center>Bean的属性注入</center> 
 
-属性注入时不需要提供set方法。  
+属性注入时不需要提供set方法。（也可以注解在set方法上）  
 
 ### 1.普通属性
 
@@ -126,6 +126,8 @@ public class UserDao {
 	
 }
 ```
+
+
 
 **程序示例：按名称注入**
 
@@ -179,106 +181,17 @@ public void destroy() {
 
 ***
 
-<a name="2"></a>
+<a name="4"></a>
 
-## <center>Bean的属性注入</center>
+## <center>实际开发中使用XML还是注解</center>
 
-* Spring3.0提供使用Java类定义Bean信息的方法
 
-```java
-//类结构特别复杂时可以使用这种方式
+**XML:** bean管理(bean的注册)  
+**注解:** 注入属性的时候比较方便(不用提供set方法)  
+**两种方式结合:** 一般使用XML注册Bean，使用注解进行属性的注入。  
 
-@Configuration //代表这个类是配置类
-public class BeanConfig {
+注：配置文件中要有`<context:annotation-config/>` -- 注解生效
+{: .notice}
 
-	@Bean(name="car")
-	public Car showCar(){
-		Car car = new Car();
-		car.setName("长安");
-		car.setPrice(40000d);
-		return car;
-	}
-	
-	@Bean(name="product")
-	public Product initProduct(){
-		Product product = new Product();
-		product.setName("空调");
-		product.setPrice(3000d);
-		return product;
-	}
-}
-```
 
-```java
-package cn.itcast.spring3.demo2;
 
-import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-public class SprintTest {
-	
-	@Test
-	public void demo1(){
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
-		
-		Car car = (Car) applicationContext.getBean("car");
-		Product product = (Product) applicationContext.getBean("product");
-		System.out.println(car);
-		System.out.println(product);
-	}
-}
-```
-
-```java
-package cn.itcast.spring3.demo2;
-
-public class Car {
-	private String name;
-	private Double price;
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	@Override
-	public String toString() {
-		return "Car [name=" + name + ", price=" + price + "]";
-	}
-}
-```
-
-```java
-package cn.itcast.spring3.demo2;
-
-public class Product {
-	private String name;
-	private Double price;
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	@Override
-	public String toString() {
-		return "Product [name=" + name + ", price=" + price + "]";
-	}	
-}
-```
-
-* 实际开发中使用XML还是注解
-
-```
-* XML:
-	bean管理(bean的注册)
-
-* 注解:
-	注入属性的时候比较方便(不用提供set方法)
-
-* 两种方式结合:
-	一般使用XML注册Bean，使用注解进行属性的注入。
-
-配置文件中要有<context:annotation-config/> -- 注解生效
-```
