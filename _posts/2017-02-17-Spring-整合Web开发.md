@@ -31,9 +31,7 @@ ServletContextListener:用于监听ServletContext对象的创建和销毁的。
 
 ### 步骤
 
-1.**导入jar包:**  
-
-`spring-web-3.2.0.RELEASE.jar`
+1.**导入jar包:**`spring-web-3.2.0.RELEASE.jar`
 
 
 2.**在web.xml中配置:**

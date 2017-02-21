@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
+<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>SSH-Spring与Hibernate的整合 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Java, SSH框架, 整合"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="SSH-Spring与Hibernate的整合"> <meta name="twitter:description" content="本篇介绍了SSH框架中Spring与Hibernate整合的两种方式，HibernateTemplate的API以及在Web层开启事务"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="SSH-Spring与Hibernate的整合"> <meta property="og:description" content="本篇介绍了SSH框架中Spring与Hibernate整合的两种方式，HibernateTemplate的API以及在Web层开启事务"> <meta property="og:url" content="http://127.0.0.1:4000//SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
+<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>SSH-Spring与Hibernate的整合</h1> <h4>21 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~1 minute </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">方式一：零障碍整合</a><br> <a href="#2">方式二：没有Hibernate配置文件的整合</a> <br> <a href="#3">HibernateTemplate的API</a> <br> <a href="#4">Web层开启事务-OpenSessionInView</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centercenter"><center>方式一：零障碍整合</center></h2> <p>可以在Spring中引入Hibernate的配置文件。</p> <p><strong>1.通过LocalSessionFactoryBean在Spring中直接引用hibernate配置文件</strong> (注意版本是hibernate3)</p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 零障碍整合:在Spring配置文件中引入hibernate的配置文件 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sessionFactory"</span> <span class="na">class=</span><span class="s">"org.springframework.orm.hibernate3.LocalSessionFactoryBean"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"configLocation"</span> <span class="na">value=</span><span class="s">"classpath:hibernate.cfg.xml"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div> <p><strong>2.Spring提供了Hibernate的模板，只需将HibernateTemplate模板注入给DAO</strong></p> <p>注入连接池对象，可以自动获得模板。</p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- DAO的配置 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"bookDao"</span> <span class="na">class=</span><span class="s">"cn.xsw.dao.BookDao"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"sessionFactory"</span> <span class="na">ref=</span><span class="s">"sessionFactory"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div> <p><strong>3.改写DAO:继承HibernateDaoSupport类</strong></p> <p>HibernateDaoSupport内部创建了hibernate模板。</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookDao</span> <span class="kd">extends</span> <span class="n">HibernateDaoSupport</span><span class="o">{</span>  
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="o">(</span><span class="n">Book</span> <span class="n">book</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">getHibernateTemplate</span><span class="o">().</span><span class="na">save</span><span class="o">(</span><span class="n">book</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div> <p><strong>4.事务管理:</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 事务管理 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"transactionManager"</span> <span class="na">class=</span><span class="s">"org.springframework.orm.hibernate3.HibernateTransactionManager"</span><span class="nt">&gt;</span>
+	<span class="c">&lt;!-- 连接池 --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"sessionFactory"</span> <span class="na">ref=</span><span class="s">"sessionFactory"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="c">&lt;!-- 注解开启事务 --&gt;</span>
+<span class="nt">&lt;tx:annotation-driven</span> <span class="na">transaction-manager=</span><span class="s">"transactionManager"</span><span class="nt">/&gt;</span>
+</code></pre></div> <hr> <p><a name="2"></a></p> <h2 id="centerhibernatecenter"><center>方式二：没有Hibernate配置文件的整合</center></h2> <p>不需要Hibernate配置文件的方式，将Hibernate配置文件的信息直接配置到Spring中。</p> <p class="notice">Hibernate配置文件中的信息有:<br> * 连接数据库基本参数<br> * Hibernate常用属性<br> * 连接池<br> * 映射</p> <p><strong>1.连接池:</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 引入外部属性文件 --&gt;</span>
+<span class="nt">&lt;context:property-placeholder</span> <span class="na">location=</span><span class="s">"classpath:jdbc.properties"</span><span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- 配置c3p0连接池 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">class=</span><span class="s">"com.mchange.v2.c3p0.ComboPooledDataSource"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"driverClass"</span> <span class="na">value=</span><span class="s">"${jdbc.driver}"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"jdbcUrl"</span> <span class="na">value=</span><span class="s">"${jdbc.url}"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"user"</span> <span class="na">value=</span><span class="s">"${jdbc.user}"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">"${jdbc.password}"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div> <p><strong>2.Hibernate常用属性:</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 配置Hibernate的属性 --&gt;</span>
+<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernateProperties"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;props&gt;</span>
+		<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.dialect"</span><span class="nt">&gt;</span>org.hibernate.dialect.MySQLDialect<span class="nt">&lt;/prop&gt;</span>
+		<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.show_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>
+		<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.format_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>
+		<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="nt">&gt;</span>update<span class="nt">&lt;/prop&gt;</span>
+		<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.connection.autocommit"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/prop&gt;</span>
+	<span class="nt">&lt;/props&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</code></pre></div> <p><strong>3.映射:</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"mappingResources"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;list&gt;</span>
+	<span class="nt">&lt;value&gt;</span>cn/xsw/vo/Book.hbm.xml<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/list&gt;</span>
+<span class="nt">&lt;/property&gt;</span> 
+
+<span class="c">&lt;!--或:(可以直接写映射文件所在的文件夹)--&gt;</span>
+<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"mappingDirectoryLocations"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;list&gt;</span>
+		<span class="nt">&lt;value&gt;</span>classpath:cn/xsw/vo<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/list&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</code></pre></div> <h3 id="hibernate">程序示例：没有Hibernate配置文件</h3> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 连接池信息 --&gt;</span>
+<span class="c">&lt;!-- 引入外部属性文件 --&gt;</span>
+<span class="nt">&lt;context:property-placeholder</span> <span class="na">location=</span><span class="s">"classpath:jdbc.properties"</span><span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- 配置c3p0连接池 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">class=</span><span class="s">"com.mchange.v2.c3p0.ComboPooledDataSource"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"driverClass"</span> <span class="na">value=</span><span class="s">"${jdbc.driver}"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"jdbcUrl"</span> <span class="na">value=</span><span class="s">"${jdbc.url}"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"user"</span> <span class="na">value=</span><span class="s">"${jdbc.user}"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">"${jdbc.password}"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sessionFactory"</span> <span class="na">class=</span><span class="s">"org.springframework.orm.hibernate3.LocalSessionFactoryBean"</span><span class="nt">&gt;</span>
+	<span class="c">&lt;!-- 管理连接池 --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>
+	<span class="c">&lt;!-- 配置Hibernate的属性 --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernateProperties"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;props&gt;</span>
+			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.dialect"</span><span class="nt">&gt;</span>org.hibernate.dialect.MySQLDialect<span class="nt">&lt;/prop&gt;</span>
+			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.show_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>
+			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.format_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>
+			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="nt">&gt;</span>update<span class="nt">&lt;/prop&gt;</span>
+			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.connection.autocommit"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/prop&gt;</span>
+		<span class="nt">&lt;/props&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	
+	<span class="c">&lt;!-- 加载映射 --&gt;</span>
+	<span class="c">&lt;!-- &lt;property name="mappingResources"&gt;
+		&lt;list&gt;
+			&lt;value&gt;cn/xsw/vo/Book.hbm.xml&lt;/value&gt;
+		&lt;/list&gt;
+	&lt;/property&gt; --&gt;</span>
+
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"mappingDirectoryLocations"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;list&gt;</span>
+			<span class="nt">&lt;value&gt;</span>classpath:cn/xsw/vo<span class="nt">&lt;/value&gt;</span>
+		<span class="nt">&lt;/list&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div> <hr> <p><a name="3"></a></p> <h2 id="centerhibernatetemplateapicenter"><center>HibernateTemplate的API</center></h2> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Serializable</span> <span class="nf">save</span><span class="o">(</span><span class="n">Object</span> <span class="n">entity</span><span class="o">)</span>    			<span class="c1">//保存数据</span>
+<span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="n">Object</span> <span class="n">entity</span><span class="o">)</span> 				<span class="c1">//修改数据</span>
+<span class="kt">void</span> <span class="nf">delete</span><span class="o">(</span><span class="n">Object</span> <span class="n">entity</span><span class="o">)</span> 				<span class="c1">//删除数据</span>
+<span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">get</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">entityClass</span><span class="o">,</span> <span class="n">Serializable</span> <span class="n">id</span><span class="o">)</span> 	<span class="c1">//根据ID进行检索，立即检索</span>
+<span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">load</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">entityClass</span><span class="o">,</span> <span class="n">Serializable</span> <span class="n">id</span><span class="o">)</span> 	<span class="c1">//根据ID进行检索，延迟检索</span>
+
+<span class="n">List</span> <span class="nf">find</span><span class="o">(</span><span class="n">String</span> <span class="n">queryString</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">values</span><span class="o">)</span> 	<span class="c1">//支持HQL查询，直接返回List集合</span>
+<span class="n">List</span> <span class="nf">findByCriteria</span><span class="o">(</span><span class="n">DetachedCriteria</span> <span class="n">criteria</span><span class="o">)</span>  	<span class="c1">//离线条件查询</span>
+<span class="n">List</span> <span class="nf">findByNamedQuery</span><span class="o">(</span><span class="n">String</span> <span class="n">queryName</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">values</span><span class="o">)</span><span class="c1">//命名查询的方式</span>
+</code></pre></div> <hr> <p><a name="4"></a></p> <h2 id="centerweb-opensessioninviewcenter"><center>Web层开启事务-OpenSessionInView</center></h2> <p class="notice">如下程序访问action时会出现异常，原因是事务开启在业务层，<br> 当web层使用book对象时事务已经关闭，因此book对象成了脱管对象。<br> 解决办法:在web.xml中配置OpenSessionInView，会在web层开启事务。</p> <figure> <a href="http://ww4.sinaimg.cn/large/83e1667djw1f9yt5zyh7tj21rc0hs41e.jpg"><img src="http://ww4.sinaimg.cn/large/83e1667djw1f9yt5zyh7tj21rc0hs41e.jpg" alt=""></a> <figcaption></figcaption> </figure> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//Dao</span>
+<span class="kd">public</span> <span class="n">Book</span> <span class="nf">findByIdLazy</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">){</span> <span class="c1">//延迟加载</span>
+	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getHibernateTemplate</span><span class="o">().</span><span class="na">load</span><span class="o">(</span><span class="n">Book</span><span class="o">.</span><span class="na">class</span><span class="o">,</span><span class="n">id</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">//Service</span>
+<span class="kd">public</span> <span class="n">Book</span> <span class="nf">findByIdLazy</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">){</span>
+	<span class="k">return</span> <span class="n">bookDao</span><span class="o">.</span><span class="na">findByIdLazy</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">//Action</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">findByIdLazy</span><span class="o">(){</span>
+	<span class="n">Book</span> <span class="n">book</span> <span class="o">=</span> <span class="n">bookService</span><span class="o">.</span><span class="na">findByIdLazy</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">book</span><span class="o">);</span>
+	<span class="k">return</span> <span class="n">NONE</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></div> <p><strong>解决办法:</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
+	<span class="nt">&lt;filter-name&gt;</span>OpenSessionInViewFilter<span class="nt">&lt;/filter-name&gt;</span>
+	<span class="nt">&lt;filter-class&gt;</span>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter<span class="nt">&lt;/filter-class&gt;</span>
+<span class="nt">&lt;/filter&gt;</span>
+
+<span class="nt">&lt;filter-mapping&gt;</span>
+	<span class="nt">&lt;filter-name&gt;</span>OpenSessionInViewFilter<span class="nt">&lt;/filter-name&gt;</span>
+	<span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/filter-mapping&gt;</span>
+</code></pre></div> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Java" title="Pages tagged Java" class="tag"><span class="term">Java</span></a><a href="http://127.0.0.1:4000//tags/#SSH%E6%A1%86%E6%9E%B6" title="Pages tagged SSH框架" class="tag"><span class="term">SSH框架</span></a><a href="http://127.0.0.1:4000//tags/#%E6%95%B4%E5%90%88" title="Pages tagged 整合" class="tag"><span class="term">整合</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>
