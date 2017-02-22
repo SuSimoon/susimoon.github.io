@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
+<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>MyBatis-概述与搭建 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Java, MyBatis, 概述与搭建, SSI框架"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="MyBatis-概述与搭建"> <meta name="twitter:description" content="MyBatis"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="MyBatis-概述与搭建"> <meta property="og:description" content="MyBatis"> <meta property="og:url" content="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
+<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>MyBatis-概述与搭建</h1> <h4>21 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~2 minutes </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">JDBC编程中的问题</a><br> <a href="#2">Mybatis概述</a> <br> <a href="#2">Mybatis架构</a><br> <a href="#3">Mybatis搭建</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerjdbccenter"><center>JDBC编程中的问题</center></h2> <h3 id="jdbc">JDBC程序示例：</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Connection</span> <span class="n">connection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> 
+<span class="n">PreparedStatement</span> <span class="n">preparedStatement</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="n">ResultSet</span> <span class="n">resultSet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+<span class="k">try</span> <span class="o">{</span>
+	<span class="c1">//加载数据库驱动</span>
+	<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
+	<span class="c1">//通过驱动管理类获取数据库链接</span>
+	<span class="n">connection</span> <span class="o">=</span>  <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span> 
+	<span class="o">(</span><span class="s">"jdbc:mysql:///mybatis?characterEncoding=utf-8"</span><span class="o">,</span> <span class="s">"root"</span><span class="o">,</span> <span class="s">"mysql"</span><span class="o">);</span> <span class="err">问题</span><span class="mi">1</span> <span class="o">&lt;-----</span>
+	<span class="c1">//定义sql语句 </span>
+	<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"select * from user where username = ?"</span> <span class="o">;</span> <span class="err">问题</span><span class="mi">2</span> <span class="o">&lt;-----</span>
+	<span class="c1">//获取预处理statement</span>
+	<span class="n">preparedStatement</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+	<span class="c1">//设置参数</span>
+	<span class="n">preparedStatement</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"tom"</span><span class="o">);</span> <span class="err">问题</span><span class="mi">3</span> <span class="o">&lt;-----</span>
+	<span class="c1">//向数据库发出sql执行查询，查询出结果集</span>
+	<span class="n">resultSet</span> <span class="o">=</span>  <span class="n">preparedStatement</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+	<span class="c1">//遍历查询结果集</span>
+	<span class="k">while</span><span class="o">(</span><span class="n">resultSet</span><span class="o">.</span><span class="na">next</span><span class="o">()){</span> <span class="err">问题</span><span class="mi">4</span> <span class="o">&lt;-----</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">resultSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"id"</span><span class="o">)+</span><span class="s">"  "</span><span class="o">+</span><span class="n">resultSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"username"</span><span class="o">));</span>
+	<span class="o">}</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span><span class="k">finally</span><span class="o">{</span>
+	<span class="c1">//释放资源</span>
+	<span class="k">if</span><span class="o">(</span><span class="n">resultSet</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">resultSet</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="k">if</span><span class="o">(</span><span class="n">preparedStatement</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">preparedStatement</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="k">if</span><span class="o">(</span><span class="n">connection</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">connection</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div> <h3 id="jdbc-1">JDBC编程中的问题：</h3> <p class="notice">问题1：数据库连接频繁的创建和关闭，浪费数据库的资源，影响操作效率。<br> 解决方法：使用数据库连接池。</p> <p class="notice">问题2：sql语句是硬编码，如果需求变更则需要修改sql，即需要修改java代码以及重新编译，使系统不易维护。<br> 解决方法：将sql语句 统一配置在文件中，修改sql不需要修改java代码。</p> <p class="notice">问题3：通过preparedStatement向占位符设置参数，存在硬编码（参数位置，参数）问题，使系统不易维护。<br> 解决方法：将sql中的占位符及对应的参数类型配置在配置文件中，能其够自动输入映射。</p> <p class="notice">问题4：遍历查询结果集存在硬编码（列名）。<br> 解决方法：自动进行sql查询结果向java对象的映射（输出映射）。</p> <hr> <p><a name="2"></a></p> <h2 id="centermybatiscenter"><center>Mybatis概述</center></h2> <p class="notice">MyBatis本是apache的一个开源项目iBatis。<br> 后由apache software foundation迁移到了google code，并且改名为MyBatis。<br> 实质上是Mybatis对ibatis进行了一些改进。<br> 目前mybatis在github上托管。</p> <p class="notice">MyBatis是一个优秀的持久层框架，它对JDBC操作数据库的过程进行封装，使开发者只需要关注<strong>SQL 本身</strong>，<br> 而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。<br> Mybatis通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，<br> 并通过java对象和statement中的sql进行映射生成最终执行的sql语句，最后由MyBatis框架执行sql并将结果映射成java对象并返回。</p> <hr> <p><a name="3"></a></p> <h2 id="centermybatiscenter-1"><center>Mybatis架构</center></h2> <figure> <a href="http://wx2.sinaimg.cn/large/83e1667dgy1fcyet9om6dj20oz0ky40r.jpg"><img src="http://wx2.sinaimg.cn/large/83e1667dgy1fcyet9om6dj20oz0ky40r.jpg" alt=""></a> <figcaption></figcaption> </figure> <hr> <p><a name="4"></a></p> <h2 id="centermybatiscenter-2"><center>Mybatis搭建</center></h2> <p>Mybaits官网：<a href="https://github.com/mybatis/mybatis-3/releases">https://github.com/mybatis/mybatis-3/releases</a></p> <h3 id="jar">1.导入jar包：</h3> <p class="notice">核心jar包：mybatis-3.2.7.jar<br> 依赖的jar包：lib下全部 <br> 数据库驱动</p> <h3 id="log4jproperties">2.log4j.properties：</h3> <p>开发环境中建议使用debug，即：<code class="highlighter-rouge">log4j.rootLogger=DEBUG, stdout</code></p> <h3 id="sqlmapconfigxml">3.SqlMapConfig.xml：</h3> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+	<span class="c">&lt;!-- 和spring整合后 environments配置将废除--&gt;</span>
+	<span class="nt">&lt;environments</span> <span class="na">default=</span><span class="s">"development"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;environment</span> <span class="na">id=</span><span class="s">"development"</span><span class="nt">&gt;</span>
+			<span class="c">&lt;!-- 使用jdbc事务管理--&gt;</span>
+			<span class="nt">&lt;transactionManager</span> <span class="na">type=</span><span class="s">"JDBC"</span> <span class="nt">/&gt;</span>
+			<span class="c">&lt;!-- 数据库连接池--&gt;</span>
+			<span class="c">&lt;!-- 数据库连接池--&gt;</span>
+			<span class="nt">&lt;dataSource</span> <span class="na">type=</span><span class="s">"POOLED"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"driver"</span> <span class="na">value=</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"url"</span> <span class="na">value=</span><span class="s">"jdbc:mysql:///mybatis"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">value=</span><span class="s">"root"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">"091821"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;/dataSource&gt;</span>
+		<span class="nt">&lt;/environment&gt;</span>
+	<span class="nt">&lt;/environments&gt;</span>
+	
+	<span class="c">&lt;!--加载mapper映射 --&gt;</span>
+	<span class="nt">&lt;mappers&gt;</span>
+		<span class="c">&lt;!-- 通过resource引用mapper的映射文件 --&gt;</span>
+		<span class="nt">&lt;mapper</span> <span class="na">resource=</span><span class="s">"sqlmap/User.xml"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/mappers&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div> <h3 id="mapperxml">4.mapper.xml</h3> <p class="notice">早期ibatis命名规则：表名.xml<br> 建议命名规则：表名+mapper.xml</p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span>
+<span class="c">&lt;!-- namespace:命名空间，对sql语句进行隔离，方便管理 --&gt;</span>
+<span class="nt">&lt;mapper</span> <span class="na">namespace=</span><span class="s">"test"</span><span class="nt">&gt;</span>
+<span class="c">&lt;!-- 
+	在mapper.xml文件中配置很多的sql语句，
+	执行每个sql语句时，都封装为一个MappedStatement对象
+	mapper.xml以statement为单位管理sql语句
+--&gt;</span>
+	<span class="c">&lt;!-- 根据id查询用户信息 --&gt;</span>
+	<span class="c">&lt;!-- 
+		id： 唯一标识 一个statement
+		#{}：表示一个占位符，如果#{}中传入简单类型的参数，#{}中的名称随意
+		parameterType：输入参数的类型，通过#{}接收parameterType输入的参数
+		resultType：输出结果类型，不管返回是多条还是单条，指定单条记录映射的pojo类型
+	 --&gt;</span>
+	<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"findUserById"</span> <span class="na">parameterType=</span><span class="s">"int"</span> <span class="na">resultType=</span><span class="s">"cn.xsw.mybatis.po.User"</span><span class="nt">&gt;</span>
+		SELECT * FROM USER WHERE id= #{id}
+	<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;/mapper&gt;</span>
+</code></pre></div> <h3 id="pojo">POJO类</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">"User [id="</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">", name="</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"]"</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div> <h3 id="section">程序：</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestMybaits</span> <span class="o">{</span>
+	<span class="c1">// 会话工厂</span>
+	<span class="kd">private</span> <span class="n">SqlSessionFactory</span> <span class="n">sqlSessionFactory</span><span class="o">;</span>
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+		<span class="c1">// 配置文件SqlMapConfig.xml</span>
+		<span class="n">String</span> <span class="n">resource</span> <span class="o">=</span> <span class="s">"SqlMapConfig.xml"</span><span class="o">;</span> <span class="c1">// resource是classpath路径</span>
+		<span class="c1">// 加载配置文件到输入流</span>
+		<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="n">Resources</span><span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+		<span class="c1">// 创建会话工厂</span>
+		<span class="n">sqlSessionFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SqlSessionFactoryBuilder</span><span class="o">().</span><span class="na">build</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="nd">@Test</span>
+	<span class="c1">// 测试根据id查询用户(得到单条记录)</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// 通过sqlSessionFactory创建sqlSession</span>
+		<span class="n">SqlSession</span> <span class="n">sqlSession</span> <span class="o">=</span> <span class="n">sqlSessionFactory</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
+		
+		<span class="c1">// 通过sqlSession操作数据库</span>
+		<span class="c1">// 第一个参数：statement的位置，等于namespace+statement的id</span>
+		<span class="c1">// 第二个参数：传入的参数</span>
+		<span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">user</span> <span class="o">=</span> <span class="n">sqlSession</span><span class="o">.</span><span class="na">selectOne</span><span class="o">(</span><span class="s">"test.findUserById"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="c1">// 关闭sqlSession</span>
+			<span class="n">sqlSession</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div> <p class="notice">注： 当在Javaproject中为配置文件创建了config文件夹时，<br> 需要config 右键-&gt;Build Path-&gt;Use as Source Folder</p> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Java" title="Pages tagged Java" class="tag"><span class="term">Java</span></a><a href="http://127.0.0.1:4000//tags/#MyBatis" title="Pages tagged MyBatis" class="tag"><span class="term">MyBatis</span></a><a href="http://127.0.0.1:4000//tags/#%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA" title="Pages tagged 概述与搭建" class="tag"><span class="term">概述与搭建</span></a><a href="http://127.0.0.1:4000//tags/#SSI%E6%A1%86%E6%9E%B6" title="Pages tagged SSI框架" class="tag"><span class="term">SSI框架</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://127.0.0.1:4000//SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/</loc>
+<loc>http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/</loc>
 <lastmod>2017-02-21T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>http://127.0.0.1:4000//SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/</loc>
+<loc>http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/</loc>
+<lastmod>2017-02-21T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://127.0.0.1:4000//1SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/</loc>
 <lastmod>2017-02-21T00:00:00+09:00</lastmod>
 </url>
 <url>
