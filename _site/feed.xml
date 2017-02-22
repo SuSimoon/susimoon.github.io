@@ -1,4 +1,160 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-02-22T16:26:51+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">MyBatis-概述与搭建</title><link href="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="MyBatis-概述与搭建" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//3mybatis-概述与搭建</id><content type="html" xml:base="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-02-22T23:04:54+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">MyBatis-CRUD</title><link href="http://127.0.0.1:4000//MyBatis-CRUD/" rel="alternate" type="text/html" title="MyBatis-CRUD" /><published>2017-02-22T00:00:00+09:00</published><updated>2017-02-22T00:00:00+09:00</updated><id>http://127.0.0.1:4000//MyBatis-CRUD</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-CRUD/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;R:用户查询&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;C:用户添加&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;U:用户修改&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;D:用户删除&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;用户查询&lt;/center&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;id&quot;&gt;根据id查询：&lt;/h3&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findUserById&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.User&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		select * from user where id= #{id}
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mapper&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;selectOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.findUserById&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;#{}&lt;/code&gt;：表示一个占位符，向占位符输入参数时，Mybaits自动进行java类型和jdbc类型的转换。&lt;br /&gt;
+程序员不需要考虑参数的类型。比如：传入的是字符串，Mybaits最终将拼接好的参数两边加上单引号。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;根据名称模糊查询：&lt;/h3&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findUserByName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.User&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	select * from user where name like '%${value}%'
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mapper&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;selectList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.findUserByName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;${}&lt;/code&gt;：表示sql的拼接，接受参数时将参数内容不加任何修饰的拼接在sql中。&lt;br /&gt;
+缺点：不能防止sql注入。&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注：使用&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from user where name like '#{value}'&lt;/code&gt;的方式也可以进行模糊查询， &lt;br /&gt;
+但是需要用户输入参数时加上%，这是不可取的。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;用户添加&lt;/center&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 添加用户
+	parameterType：输入参数的类型，User对象包括name,address
+	#{}接收pojo数据，可以使用OGNL解析出pojo的属性值
+	#{name}表示从parameterType中获取pojo的属性值
+--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;insertUser&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.User&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	insert into user(name, address) values(#{name},#{address}) 
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kate&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Beijing&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.insertUser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;commit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//需要提交事务才能添加&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;主键返回 - 自增形式的主键&lt;/h3&gt;
+
+&lt;p&gt;需求：user对象插入到数据库后，新记录的主键要通过user对象返回，通过user获取主键值。&lt;br /&gt;
+解决思路：通过&lt;code class=&quot;highlighter-rouge&quot;&gt;LAST_INSERT_ID()&lt;/code&gt;获取刚插入记录的自增主键值，在insert语句后执行，就可以获取自增主键。&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 主键返回
+selectKey：用于进行主键返回，定义了获取主键值的sql
+order：设置selectKey中sql执行的顺序，相对于insert语句来说
+keyProperty：将主键值设置到哪个属性
+resultType：select LAST_INSERT_ID()的结果类型
+--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;insertUser&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.User&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;selectKey&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;order=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AFTER&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;keyProperty=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		select LAST_INSERT_ID()
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/selectKey&amp;gt;&lt;/span&gt;
+	insert into user(name, address) values(#{name},#{address}) 
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/insert&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//不配置则返回的是0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;uuid&quot;&gt;主键返回 - uuid形式的主键&lt;/h3&gt;
+
+&lt;p&gt;需求：使用mysql的uuid机制生成主键的好处是不考虑数据库移植后主键冲突问题。
+实现思路：先查询uuid得到主键，将主键设置到user对象中，再将user对象插入数据库。&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- mysql的uuid生成主键 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;insertUser&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.User&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;selectKey&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;keyProperty=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;order=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;BEFORE&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		select uuid()
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/selectKey&amp;gt;&lt;/span&gt;
+	insert into user(uuid, name, address) values(#{uuid},#{name},#{address})
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/insert&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注：此时需要插入uuid。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;用户修改&lt;/center&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;update&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;updateUser&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.User&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	update user set name=#{name}, address=#{address} where id=#{id}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/update&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ann&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Nanjing&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.updateUser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;用户删除&lt;/center&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;delete&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;deleteUser&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	delete from user where id=#{id}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/delete&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.deleteUser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注：对于sqlSession的CRUD操作，传入Parameter时，若是单个数据，则传入该数据；若是多个数据，则直接传入对象。&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="CRUD" /><category term="SSI框架" /><summary type="html">本篇介绍了MyBatis的增删改查操作</summary></entry><entry><title type="html">MyBatis-概述与搭建</title><link href="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="MyBatis-概述与搭建" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//3mybatis-概述与搭建</id><content type="html" xml:base="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;JDBC编程中的问题&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;Mybatis概述&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;Mybatis架构&lt;/a&gt;&lt;br /&gt;
@@ -69,13 +225,24 @@
 &lt;p class=&quot;notice&quot;&gt;问题1：数据库连接频繁的创建和关闭，浪费数据库的资源，影响操作效率。&lt;br /&gt;
 解决方法：使用数据库连接池。&lt;/p&gt;
 
-&lt;p class=&quot;notice&quot;&gt;问题2：sql语句是硬编码，如果需求变更则需要修改sql，即需要修改java代码以及重新编译，使系统不易维护。&lt;br /&gt;
+&lt;p class=&quot;notice&quot;&gt;问题2：sql语句是硬编码，如果需求变更则需要修改sql，即修改java代码以及重新编译，使系统不易维护。&lt;br /&gt;
 解决方法：将sql语句 统一配置在文件中，修改sql不需要修改java代码。&lt;/p&gt;
 
 &lt;p class=&quot;notice&quot;&gt;问题3：通过preparedStatement向占位符设置参数，存在硬编码（参数位置，参数）问题，使系统不易维护。&lt;br /&gt;
 解决方法：将sql中的占位符及对应的参数类型配置在配置文件中，能其够自动输入映射。&lt;/p&gt;
 &lt;p class=&quot;notice&quot;&gt;问题4：遍历查询结果集存在硬编码（列名）。&lt;br /&gt;
 解决方法：自动进行sql查询结果向java对象的映射（输出映射）。&lt;/p&gt;
+
+&lt;h3 id=&quot;mybatisjdbc&quot;&gt;Mybatis解决jdbc编程的问题:&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;1.数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。&lt;br /&gt;
+解决：在SqlMapConfig.xml中配置数据链接池，使用连接池管理数据库链接。&lt;br /&gt;
+2.Sql语句写在代码中造成代码不易维护，实际应用sql变化的可能较大，sql变动需要改变java代码。&lt;br /&gt;
+解决：将Sql语句配置在XXXXmapper.xml文件中与java代码分离。&lt;br /&gt;
+3.向sql语句传参数麻烦，因为sql语句的where条件不一定，可能多也可能少，占位符需要和参数一一对应。&lt;br /&gt;
+解决：Mybatis自动将java对象映射至sql语句，通过statement中的parameterType定义输入参数的类型。&lt;br /&gt;
+4.对结果集解析麻烦，sql变化导致解析代码变化，且解析前需要遍历，如果能将数据库记录封装成pojo对象解析比较方便。&lt;br /&gt;
+解决：Mybatis自动将sql执行结果映射至java对象，通过statement中的resultType定义输出结果的类型。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -90,7 +257,7 @@
 
 &lt;p class=&quot;notice&quot;&gt;MyBatis是一个优秀的持久层框架，它对JDBC操作数据库的过程进行封装，使开发者只需要关注&lt;strong&gt;SQL 本身&lt;/strong&gt;，&lt;br /&gt;
 而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。&lt;br /&gt;
-Mybatis通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，&lt;br /&gt;
+Mybatis通过xml或注解的方式将要执行的各种statement(statement、preparedStatemnt、CallableStatement)配置起来，&lt;br /&gt;
 并通过java对象和statement中的sql进行映射生成最终执行的sql语句，最后由MyBatis框架执行sql并将结果映射成java对象并返回。&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -99,12 +266,7 @@ Mybatis通过xml或注解的方式将要执行的各种statement（statement、p
 
 &lt;h2 id=&quot;centermybatiscenter-1&quot;&gt;&lt;center&gt;Mybatis架构&lt;/center&gt;&lt;/h2&gt;
 
-&lt;figure&gt;
-    
-    &lt;a href=&quot;http://wx2.sinaimg.cn/large/83e1667dgy1fcyet9om6dj20oz0ky40r.jpg&quot;&gt;&lt;img src=&quot;http://wx2.sinaimg.cn/large/83e1667dgy1fcyet9om6dj20oz0ky40r.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-    
-    &lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;http://wx2.sinaimg.cn/large/83e1667dgy1fcyet9om6dj20oz0ky40r.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -246,7 +408,7 @@ Mybatis通过xml或注解的方式将要执行的各种statement（statement、p
 
 &lt;p class=&quot;notice&quot;&gt;注：
 当在Javaproject中为配置文件创建了config文件夹时，&lt;br /&gt;
-需要config 右键-&amp;gt;Build Path-&amp;gt;Use as Source Folder&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="概述与搭建" /><category term="SSI框架" /><summary type="html">MyBatis</summary></entry><entry><title type="html">SSH-注解整合</title><link href="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-注解整合" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//2SSH-注解整合</id><content type="html" xml:base="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/">&lt;hr /&gt;
+需要config 右键-&amp;gt;Build Path-&amp;gt;Use as Source Folder&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="概述与搭建" /><category term="SSI框架" /><summary type="html">本篇介绍了MyBatis的概述、结构以及搭建</summary></entry><entry><title type="html">SSH-注解整合</title><link href="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-注解整合" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//2SSH-注解整合</id><content type="html" xml:base="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;centersshcenter&quot;&gt;&lt;center&gt;基于注解的方式整合SSH&lt;/center&gt;&lt;/h2&gt;
 
@@ -2151,40 +2313,4 @@ CGLIB生成代理机制:生成了一个真实对象的子类。&lt;br /&gt;
 
 &lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;结论:&lt;/strong&gt;&lt;br /&gt;
 在Spring框架中，如果类实现了接口，就使用JDK的动态代理生成代理对象；&lt;br /&gt;
-如果这个类没有实现任何接口，使用CGLIB生成代理对象。&lt;/p&gt;</content><category term="Java" /><category term="Spring" /><category term="AOP" /><category term="SSH框架" /><summary type="html">本篇介绍了Spring中AOP的概述以及其底层的实现</summary></entry><entry><title type="html">Spring-集成JUnit测试</title><link href="http://127.0.0.1:4000//Spring-%E9%9B%86%E6%88%90JUnit%E6%B5%8B%E8%AF%95/" rel="alternate" type="text/html" title="Spring-集成JUnit测试" /><published>2017-02-17T00:00:00+09:00</published><updated>2017-02-17T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Spring-集成JUnit测试</id><content type="html" xml:base="http://127.0.0.1:4000//Spring-%E9%9B%86%E6%88%90JUnit%E6%B5%8B%E8%AF%95/">&lt;hr /&gt;
-
-&lt;h2 id=&quot;centerspringjunitcenter&quot;&gt;&lt;center&gt;Spring集成JUnit测试&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;1.程序中要有JUnit环境&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.导入spring与JUnit整合jar包:&lt;/strong&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;spring-test-3.2.0.RELEASE.jar&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.测试代码:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RunWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SpringJUnit4ClassRunner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@ContextConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:applicationContext.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	
-	&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-		&lt;span class=&quot;c1&quot;&gt;//不需要写加载的文件了&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//以往的方式：&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;ApplicationContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationContext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;applicationContext.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="Spring" /><category term="JUnit" /><category term="SSH框架" /><summary type="html">本篇介绍了Spring如何集成JUnit测试</summary></entry></feed>
+如果这个类没有实现任何接口，使用CGLIB生成代理对象。&lt;/p&gt;</content><category term="Java" /><category term="Spring" /><category term="AOP" /><category term="SSH框架" /><summary type="html">本篇介绍了Spring中AOP的概述以及其底层的实现</summary></entry></feed>
