@@ -7,7 +7,7 @@ tag:
 - Java 
 - MyBatis
 - CRUD
-- SSI框架
+- SSM框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
