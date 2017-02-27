@@ -60,7 +60,7 @@ list = sqlSession.selectList("test.findUserByName", "a");
 System.out.println(Arrays.toString(list.toArray()));
 ```
 
-`${}`：表示sql的拼接，接受参数时将参数内容不加任何修饰的拼接在sql中。  
+`${}`：表示sql的拼接，接收参数时将参数内容不加任何修饰的拼接在sql中。  
 缺点：不能防止sql注入。 
 
 
@@ -77,7 +77,7 @@ System.out.println(Arrays.toString(list.toArray()));
 
 ```xml
 <!-- 添加用户
-	parameterType：输入参数的类型，User对象包括name,address
+	parameterType：输入参数的类型，User对象包含name,address属性
 	#{}接收pojo数据，可以使用OGNL解析出pojo的属性值
 	#{name}表示从parameterType中获取pojo的属性值
 -->
