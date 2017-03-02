@@ -68,8 +68,9 @@
 	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">"${jdbc.password}"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/bean&gt;</span>
 
+<span class="c">&lt;!-- 配置连接池的信息 --&gt;</span>
 <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sessionFactory"</span> <span class="na">class=</span><span class="s">"org.springframework.orm.hibernate3.LocalSessionFactoryBean"</span><span class="nt">&gt;</span>
-	<span class="c">&lt;!-- 管理连接池 --&gt;</span>
+	<span class="c">&lt;!-- 注入连接池 --&gt;</span>
 	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>
 	<span class="c">&lt;!-- 配置Hibernate的属性 --&gt;</span>
 	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernateProperties"</span><span class="nt">&gt;</span>

@@ -13,12 +13,14 @@ comments: false
 
 
 
->1.Action类的创建方式    
->2.Action的访问方式   
->3.Action处理请求参数  
->4.获取Servlet API      
+><a href="#1">Action类的创建方式</a>     
+><a href="#2">Action的访问方式</a>     
+><a href="#3">Action处理请求参数</a>     
+><a href="#4">获取Servlet API</a>          
 
 ***
+
+<a name="1"></a>
 
 ## <center>Action类的创建方式</center> 
 
@@ -45,11 +47,12 @@ comments: false
 ### 3.继承ActionSupport类
 
 ActionSupport类实现了Action接口，是Action的一个实现类。  
-优点:表单校验、错误信息设置、读取国际化信息，这三个功能都支持(在开发中应用的比较多)
+优点:表单校验、错误信息设置、读取国际化信息，这三个功能都支持(在开发中应用的比较多)  
 缺点:耦合度高  
 
 ***  
 
+<a name="2"></a>
 
 ## <center>2.Action的访问方式</center>  
 
@@ -95,6 +98,8 @@ ActionSupport类实现了Action接口，是Action的一个实现类。
 {: .notice}
 
 ***
+
+<a name="3"></a>
 
 ## <center>3.Action处理请求参数</center> 
 
@@ -193,6 +198,8 @@ public class Test extends ActionSupport implements ModelDriven<User>{
 
 
 *** 
+
+<a name="4"></a>
 
 ## <center>获取Servlet API(访问Web元素)</center>
 

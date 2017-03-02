@@ -18,8 +18,8 @@
 </code></pre></div> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 <span class="n">list</span> <span class="o">=</span> <span class="n">sqlSession</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="s">"test.findUserByName"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">toArray</span><span class="o">()));</span>
-</code></pre></div> <p><code class="highlighter-rouge">${}</code>：表示sql的拼接，接受参数时将参数内容不加任何修饰的拼接在sql中。<br> 缺点：不能防止sql注入。</p> <p class="notice">注：使用<code class="highlighter-rouge">select * from user where name like '#{value}'</code>的方式也可以进行模糊查询， <br> 但是需要用户输入参数时加上%，这是不可取的。</p> <hr> <p><a name="2"></a></p> <h2 id="centercenter-1"><center>用户添加</center></h2> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 添加用户
-	parameterType：输入参数的类型，User对象包括name,address
+</code></pre></div> <p><code class="highlighter-rouge">${}</code>：表示sql的拼接，接收参数时将参数内容不加任何修饰的拼接在sql中。<br> 缺点：不能防止sql注入。</p> <p class="notice">注：使用<code class="highlighter-rouge">select * from user where name like '#{value}'</code>的方式也可以进行模糊查询， <br> 但是需要用户输入参数时加上%，这是不可取的。</p> <hr> <p><a name="2"></a></p> <h2 id="centercenter-1"><center>用户添加</center></h2> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 添加用户
+	parameterType：输入参数的类型，User对象包含name,address属性
 	#{}接收pojo数据，可以使用OGNL解析出pojo的属性值
 	#{name}表示从parameterType中获取pojo的属性值
 --&gt;</span>

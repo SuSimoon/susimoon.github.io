@@ -154,8 +154,9 @@ Hibernate配置文件中的信息有:
 	<property name="password" value="${jdbc.password}"/>
 </bean>
 
+<!-- 配置连接池的信息 -->
 <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-	<!-- 管理连接池 -->
+	<!-- 注入连接池 -->
 	<property name="dataSource" ref="dataSource"/>
 	<!-- 配置Hibernate的属性 -->
 	<property name="hibernateProperties">

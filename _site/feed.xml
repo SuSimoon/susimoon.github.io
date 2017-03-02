@@ -1,4 +1,234 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-02-25T10:44:36+09:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">MyBatis-动态sql</title><link href="http://127.0.0.1:4000//yBatis-%E5%8A%A8%E6%80%81sql/" rel="alternate" type="text/html" title="MyBatis-动态sql" /><published>2017-02-24T00:00:00+09:00</published><updated>2017-02-24T00:00:00+09:00</updated><id>http://127.0.0.1:4000//yBatis-动态sql</id><content type="html" xml:base="http://127.0.0.1:4000//yBatis-%E5%8A%A8%E6%80%81sql/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-02T10:30:08+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">MyBatis-一对多查询</title><link href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" rel="alternate" type="text/html" title="MyBatis-一对多查询" /><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-一对多查询</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;resultMap实现一对多查询&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;resultMap实现一对多复杂查询&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerresultmapcenter&quot;&gt;&lt;center&gt;resultMap实现一对多查询&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Orders：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Orders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;c1&quot;&gt;//关联用户信息&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;c1&quot;&gt;//关联订单明细&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Orderdetail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderdetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// &amp;lt;------&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//get、set方法 ...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;map.xml：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;resultMap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orders&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ordersUserResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;createtime&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;createtime&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;note&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;note&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;association&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;javaType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/association&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resultMap&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;resultMap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orders&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderAndOrderDetails&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;extends=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ordersUserResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--继承ordersUserResultMap--&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;collection&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderdetails&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ofType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderdetail&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderdetail_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;items_num&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;items_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsNum&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/collection&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resultMap&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;map.java：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Orders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findOrderAndOrderDetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerresultmapcenter-1&quot;&gt;&lt;center&gt;resultMap实现一对多复杂查询&lt;/center&gt;&lt;/h2&gt;</content><category term="Java" /><category term="MyBatis" /><category term="一对一" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中resultMap实现一对多查询的方式</summary></entry><entry><title type="html">MyBatis-一对一查询</title><link href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2/" rel="alternate" type="text/html" title="MyBatis-一对一查询" /><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-一对一查询</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;resultType实现一对一查询&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;resultMap实现一对一查询&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerresulttypecenter&quot;&gt;&lt;center&gt;resultType实现一对一查询&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;User：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 用户姓名&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 性别&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;birthday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 生日&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 地址&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//多个订单&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Orders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderlist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;//get、set方法 ...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Orders：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Orders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+   
+    &lt;span class=&quot;c1&quot;&gt;//get、set方法 ...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;需求：查询订单信息关联查询用户信息&lt;/p&gt;
+
+&lt;p&gt;由于该statement的返回值既有user的属性，也有order的属性，所以需要创建扩展类。&lt;br /&gt;
+即OrderCustom作为自定义pojo类，让它继承sql查询列较多的pojo类，也就是orders类。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderCustom&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Orders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setSex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;OrderCustom [username=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, sex=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, address=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;]&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;map.xml：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findOrderUserList&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderCustom&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	select orders.*, user.username, user.address from orders,user where orders.user_id = user.id
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;map.java：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrdersMapperCustom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OrderCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findOrderUserList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerresultmapcenter&quot;&gt;&lt;center&gt;resultMap实现一对一查询&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;resultMap提供一对一关联查询的映射和一对多关联查询映射。&lt;br /&gt;
+一对一映射思路：将关联查询的信息映射到pojo中，如：&lt;br /&gt;
+在Orders类中创建一个User属性，将关联查询的信息映射到User属性中。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Orders：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Orders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+   
+    &lt;span class=&quot;c1&quot;&gt;//关联用户信息&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// &amp;lt;------&lt;/span&gt;
+   
+    &lt;span class=&quot;c1&quot;&gt;//get、set方法 ...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;map.xml：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;resultMap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orders&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ordersUserResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 订单信息的映射配置： 
+	id：订单关联用户查询的唯一标识  --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;createtime&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;createtime&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;note&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;note&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 关联信息的映射：
+	association：用于对关联信息映射到单个pojo
+	property：要将关联信息映射到orders的哪个属性中
+	javaType：关联信息映射到orders的属性的类型，是user的类型
+	 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;association&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;javaType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- id：关联信息的唯 一标识  --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- property： 要映射到user的哪个属性中--&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- result就是普通列的映射 --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/association&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resultMap&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;map.java：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Orders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findOrderUserListResultMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;两种方式的比较&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;resultType：&lt;/strong&gt; 要自定义pojo，保证sql查询列和pojo的属性对应，这种方法相对较简单，所以应用广泛。&lt;br /&gt;
+&lt;strong&gt;resultMap：&lt;/strong&gt; 使用association完成一对一映射需要配置一个resultMap，过程相对复杂。&lt;br /&gt;
+如果要实现延迟加载就只能用resultMap实现 ，如果为了方便对关联信息进行解析，也可以用association将关联信息映射到pojo中方便解析。&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="一对一" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中一对一查询的两种方式</summary></entry><entry><title type="html">MyBatis-动态sql</title><link href="http://127.0.0.1:4000//MyBatis-%E5%8A%A8%E6%80%81sql/" rel="alternate" type="text/html" title="MyBatis-动态sql" /><published>2017-02-24T00:00:00+08:00</published><updated>2017-02-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-动态sql</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E5%8A%A8%E6%80%81sql/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;原始dao开发方式&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;创建mapper代理的方式&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;mapper接口返回单个对象和集合对象&lt;/a&gt;&lt;/p&gt;
@@ -134,15 +364,16 @@
 	&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="MyBatis" /><category term="动态sql" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中的</summary></entry><entry><title type="html">MyBatis-配置</title><link href="http://127.0.0.1:4000//MyBatis-%E9%85%8D%E7%BD%AE/" rel="alternate" type="text/html" title="MyBatis-配置" /><published>2017-02-24T00:00:00+09:00</published><updated>2017-02-24T00:00:00+09:00</updated><id>http://127.0.0.1:4000//MyBatis-配置</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E9%85%8D%E7%BD%AE/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;原始dao开发方式&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;创建mapper代理的方式&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;mapper接口返回单个对象和集合对象&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</content><category term="Java" /><category term="MyBatis" /><category term="动态sql" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中的</summary></entry><entry><title type="html">MyBatis-配置</title><link href="http://127.0.0.1:4000//MyBatis-%E9%85%8D%E7%BD%AE/" rel="alternate" type="text/html" title="MyBatis-配置" /><published>2017-02-24T00:00:00+08:00</published><updated>2017-02-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-配置</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E9%85%8D%E7%BD%AE/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;properties:属性定义&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;settings:全局参数配置&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;typeAliases:类型别名&lt;/a&gt;  &lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;mappers:映射器&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#5&quot;&gt;resultType&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#6&quot;&gt;resultMap&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;centersqlmpaconfigxmlcenter&quot;&gt;&lt;center&gt;sqlMpaConfig.xml配置&lt;/center&gt;&lt;/h2&gt;
 
@@ -162,7 +393,8 @@ mappers（映射器）&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;centerpropertiescenter&quot;&gt;&lt;center&gt;properties:属性定义&lt;/center&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;
+### &lt;center&gt;properties:属性定义&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;可以把一些通用的属性值配置在属性文件中，加载到mybatis运行环境内。
 比如：创建db.properties配置数据库连接参数。&lt;/p&gt;
@@ -203,7 +435,8 @@ mappers（映射器）&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;centersettingscenter&quot;&gt;&lt;center&gt;settings:全局参数配置&lt;/center&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;
+### &lt;center&gt;settings:全局参数配置&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;mybatis运行时可以调整一些全局参数，参考：mybatis-settings.xlsx根据使用需求进行参数配置。&lt;/p&gt;
 
@@ -213,7 +446,8 @@ mybatis没有这些性能参数，由mybatis自动调节。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;centertypealiasescenter&quot;&gt;&lt;center&gt;typeAliases:类型别名&lt;/center&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;
+### &lt;center&gt;typeAliases:类型别名&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;可以将parameterType、resultType中指定的类型通过别名引用。&lt;/p&gt;
 
@@ -230,9 +464,9 @@ mybatis没有这些性能参数，由mybatis自动调节。&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;typeAliases&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 批量别名定义:
-	指定包路径，自动扫描包下边的pojo，定义别名，别名默认为类名（首字母小写或大写）--&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 批量别名定义:--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;typeAliases&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 指定包路径，自动扫描包下边的pojo，定义别名，别名默认为类名（首字母小写或大写）--&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.po&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/typeAliases&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -247,7 +481,8 @@ mybatis没有这些性能参数，由mybatis自动调节。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;centermapperscenter&quot;&gt;&lt;center&gt;mappers:映射器&lt;/center&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;
+### &lt;center&gt;mappers:映射器&lt;/center&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;1.resource方式：&lt;/strong&gt;&lt;/p&gt;
 
@@ -263,7 +498,7 @@ mybatis没有这些性能参数，由mybatis自动调节。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;2.class方式：&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;通过class引用mapper接口 &lt;br /&gt;
-class：配置mapper接口全限定名
+class：配置mapper接口全限定名&lt;br /&gt;
 要求：mapper.xml和mapper.java同名并且在一包下&lt;/p&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mappers&amp;gt;&lt;/span&gt;
@@ -274,7 +509,7 @@ class：配置mapper接口全限定名
 
 &lt;p&gt;&lt;strong&gt;3.package方式：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;批量mapper配置，通过package进行自动扫描包下边的mapper接口
+&lt;p&gt;批量mapper配置，通过package进行自动扫描包下边的mapper接口&lt;br /&gt;
 要求：mapper.xml和mapper.java同名并且在一包下&lt;/p&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mappers&amp;gt;&lt;/span&gt;
@@ -285,9 +520,9 @@ class：配置mapper接口全限定名
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;centermapperxmlcenter&quot;&gt;&lt;center&gt;Mapper.xml配置&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;a name=&quot;5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;centerparametertypecenter&quot;&gt;&lt;center&gt;parameterType传递包装类型&lt;/center&gt;&lt;/h3&gt;
 
@@ -389,13 +624,15 @@ class：配置mapper接口全限定名
 
 &lt;hr /&gt;
 
+&lt;p&gt;&lt;a name=&quot;6&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;h3 id=&quot;centerresultmapcenter&quot;&gt;&lt;center&gt;resultMap&lt;/center&gt;&lt;/h3&gt;
 
 &lt;p&gt;resultMap与resultType的区别：&lt;/p&gt;
 
 &lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;resultType：&lt;/strong&gt;指定输出结果的类型，将sql查询结果映射为java对象。&lt;br /&gt;
 使用resultType要注意：sql查询的列名要和resultType指定pojo的属性名相同，指定相同属性方可映射成功。&lt;br /&gt;
-如果sql查询的列名要和resultType指定pojo的属性名全部不相同，list中无法创建pojo对象的。&lt;br /&gt;
+如果sql查询的列名要和resultType指定pojo的属性名全部不相同，list中无法创建pojo对象。&lt;br /&gt;
 &lt;strong&gt;resultMap：&lt;/strong&gt;将sql查询结果映射为java对象。&lt;br /&gt;
 如果sql查询列名和最终要映射的pojo的属性名不一致，可使用resultMap将列名和pojo的属性名做一个对应关系(列名和属性名映射配置)。&lt;/p&gt;
 
@@ -447,7 +684,7 @@ class：配置mapper接口全限定名
 	&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="MyBatis" /><category term="配置" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中的sqlMapConfig.xml与map.xml配置的补充</summary></entry><entry><title type="html">MyBatis-mapper</title><link href="http://127.0.0.1:4000//MyBatis-mapper/" rel="alternate" type="text/html" title="MyBatis-mapper" /><published>2017-02-24T00:00:00+09:00</published><updated>2017-02-24T00:00:00+09:00</updated><id>http://127.0.0.1:4000//MyBatis-mapper</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-mapper/">&lt;blockquote&gt;
+&lt;/div&gt;</content><category term="Java" /><category term="MyBatis" /><category term="配置" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中的sqlMapConfig.xml与map.xml配置的补充</summary></entry><entry><title type="html">MyBatis-mapper</title><link href="http://127.0.0.1:4000//MyBatis-mapper/" rel="alternate" type="text/html" title="MyBatis-mapper" /><published>2017-02-24T00:00:00+08:00</published><updated>2017-02-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-mapper</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-mapper/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;原始dao开发方式&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;创建mapper代理的方式&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;mapper接口返回单个对象和集合对象&lt;/a&gt;&lt;/p&gt;
@@ -614,7 +851,7 @@ mapper接口方法返回值如果是集合对象，生成的代理对象内部�
 	select * from user where name like '%${userCustomer.name}%'
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="MyBatis" /><category term="mapper" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中的mapper接口</summary></entry><entry><title type="html">MyBatis-CRUD</title><link href="http://127.0.0.1:4000//MyBatis-CRUD/" rel="alternate" type="text/html" title="MyBatis-CRUD" /><published>2017-02-22T00:00:00+09:00</published><updated>2017-02-22T00:00:00+09:00</updated><id>http://127.0.0.1:4000//MyBatis-CRUD</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-CRUD/">&lt;blockquote&gt;
+&lt;/div&gt;</content><category term="Java" /><category term="MyBatis" /><category term="mapper" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis中的mapper接口</summary></entry><entry><title type="html">MyBatis-CRUD</title><link href="http://127.0.0.1:4000//MyBatis-CRUD/" rel="alternate" type="text/html" title="MyBatis-CRUD" /><published>2017-02-22T00:00:00+08:00</published><updated>2017-02-22T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-CRUD</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-CRUD/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;R:用户查询&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;C:用户添加&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;U:用户修改&lt;/a&gt;&lt;br /&gt;
@@ -661,7 +898,7 @@ mapper接口方法返回值如果是集合对象，生成的代理对象内部�
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;${}&lt;/code&gt;：表示sql的拼接，接受参数时将参数内容不加任何修饰的拼接在sql中。&lt;br /&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;${}&lt;/code&gt;：表示sql的拼接，接收参数时将参数内容不加任何修饰的拼接在sql中。&lt;br /&gt;
 缺点：不能防止sql注入。&lt;/p&gt;
 
 &lt;p class=&quot;notice&quot;&gt;注：使用&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from user where name like '#{value}'&lt;/code&gt;的方式也可以进行模糊查询， &lt;br /&gt;
@@ -674,7 +911,7 @@ mapper接口方法返回值如果是集合对象，生成的代理对象内部�
 &lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;用户添加&lt;/center&gt;&lt;/h2&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 添加用户
-	parameterType：输入参数的类型，User对象包括name,address
+	parameterType：输入参数的类型，User对象包含name,address属性
 	#{}接收pojo数据，可以使用OGNL解析出pojo的属性值
 	#{name}表示从parameterType中获取pojo的属性值
 --&amp;gt;&lt;/span&gt;
@@ -770,7 +1007,7 @@ resultType：select LAST_INSERT_ID()的结果类型
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p class=&quot;notice&quot;&gt;注：对于sqlSession的CRUD操作，传入Parameter时，若是单个数据，则传入该数据；若是多个数据，则直接传入对象。&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="CRUD" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis的增删改查操作</summary></entry><entry><title type="html">MyBatis-概述与搭建</title><link href="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="MyBatis-概述与搭建" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//3mybatis-概述与搭建</id><content type="html" xml:base="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/">&lt;blockquote&gt;
+&lt;p class=&quot;notice&quot;&gt;注：对于sqlSession的CRUD操作，传入Parameter时，若是单个数据，则传入该数据；若是多个数据，则直接传入对象。&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="CRUD" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis的增删改查操作</summary></entry><entry><title type="html">MyBatis-概述与搭建</title><link href="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="MyBatis-概述与搭建" /><published>2017-02-21T00:00:00+08:00</published><updated>2017-02-21T00:00:00+08:00</updated><id>http://127.0.0.1:4000//3mybatis-概述与搭建</id><content type="html" xml:base="http://127.0.0.1:4000//3mybatis-%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%90%AD%E5%BB%BA/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;JDBC编程中的问题&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;Mybatis概述&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;Mybatis架构&lt;/a&gt;&lt;br /&gt;
@@ -912,7 +1149,6 @@ Mybatis通过xml或注解的方式将要执行的各种statement(statement、pre
 			&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用jdbc事务管理--&amp;gt;&lt;/span&gt;
 			&lt;span class=&quot;nt&quot;&gt;&amp;lt;transactionManager&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JDBC&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 			&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 数据库连接池--&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 数据库连接池--&amp;gt;&lt;/span&gt;
 			&lt;span class=&quot;nt&quot;&gt;&amp;lt;dataSource&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POOLED&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 				&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;driver&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.mysql.jdbc.Driver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 				&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql:///mybatis&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
@@ -1025,7 +1261,7 @@ Mybatis通过xml或注解的方式将要执行的各种statement(statement、pre
 &lt;p class=&quot;notice&quot;&gt;注：
 当在Javaproject中为配置文件创建了config文件夹时，&lt;br /&gt;
 需要config 右键-&amp;gt;Build Path-&amp;gt;Use as Source Folder&lt;br /&gt;
-或直接以source folder形式创建config文件夹。&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="概述与搭建" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis的概述、结构以及搭建</summary></entry><entry><title type="html">SSH-注解整合</title><link href="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-注解整合" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//2SSH-注解整合</id><content type="html" xml:base="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/">&lt;hr /&gt;
+或直接以source folder形式创建config文件夹。&lt;/p&gt;</content><category term="Java" /><category term="MyBatis" /><category term="概述与搭建" /><category term="SSM框架" /><summary type="html">本篇介绍了MyBatis的概述、结构以及搭建</summary></entry><entry><title type="html">SSH-注解整合</title><link href="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-注解整合" /><published>2017-02-21T00:00:00+08:00</published><updated>2017-02-21T00:00:00+08:00</updated><id>http://127.0.0.1:4000//2SSH-注解整合</id><content type="html" xml:base="http://127.0.0.1:4000//2SSH-%E6%B3%A8%E8%A7%A3%E6%95%B4%E5%90%88/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;centersshcenter&quot;&gt;&lt;center&gt;基于注解的方式整合SSH&lt;/center&gt;&lt;/h2&gt;
 
@@ -1218,7 +1454,7 @@ Dao中: &lt;code class=&quot;highlighter-rouge&quot;&gt;@Repository&lt;/code&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sessionFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sessionFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="整合" /><category term="注解" /><summary type="html">本篇介绍了SSH框架基于注解的方式整合SSH</summary></entry><entry><title type="html">SSH-Spring与Hibernate的整合</title><link href="http://127.0.0.1:4000//1SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-Spring与Hibernate的整合" /><published>2017-02-21T00:00:00+09:00</published><updated>2017-02-21T00:00:00+09:00</updated><id>http://127.0.0.1:4000//1SSH-Spring与Hibernate的整合</id><content type="html" xml:base="http://127.0.0.1:4000//1SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/">&lt;blockquote&gt;
+&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="整合" /><category term="注解" /><summary type="html">本篇介绍了SSH框架基于注解的方式整合SSH</summary></entry><entry><title type="html">SSH-Spring与Hibernate的整合</title><link href="http://127.0.0.1:4000//1SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-Spring与Hibernate的整合" /><published>2017-02-21T00:00:00+08:00</published><updated>2017-02-21T00:00:00+08:00</updated><id>http://127.0.0.1:4000//1SSH-Spring与Hibernate的整合</id><content type="html" xml:base="http://127.0.0.1:4000//1SSH-Spring%E4%B8%8EHibernate%E7%9A%84%E6%95%B4%E5%90%88/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;方式一：零障碍整合&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;方式二：没有Hibernate配置文件的整合&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;HibernateTemplate的API&lt;/a&gt; &lt;br /&gt;
@@ -1354,8 +1590,9 @@ Dao中: &lt;code class=&quot;highlighter-rouge&quot;&gt;@Repository&lt;/code&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.password}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
 
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置连接池的信息 --&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sessionFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.hibernate3.LocalSessionFactoryBean&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 管理连接池 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 注入连接池 --&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置Hibernate的属性 --&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernateProperties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -1451,7 +1688,7 @@ Dao中: &lt;code class=&quot;highlighter-rouge&quot;&gt;@Repository&lt;/code&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;url-pattern&amp;gt;&lt;/span&gt;/*&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url-pattern&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/filter-mapping&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="整合" /><summary type="html">本篇介绍了SSH框架中Spring与Hibernate整合的两种方式，HibernateTemplate的API以及在Web层开启事务</summary></entry><entry><title type="html">SSH-Spring与Struts的整合</title><link href="http://127.0.0.1:4000//SSH-2Struts%E4%B8%8ESpring%E7%9A%84%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-Spring与Struts的整合" /><published>2017-02-20T00:00:00+09:00</published><updated>2017-02-20T00:00:00+09:00</updated><id>http://127.0.0.1:4000//SSH-2Struts与Spring的整合</id><content type="html" xml:base="http://127.0.0.1:4000//SSH-2Struts%E4%B8%8ESpring%E7%9A%84%E6%95%B4%E5%90%88/">&lt;hr /&gt;
+&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="整合" /><summary type="html">本篇介绍了SSH框架中Spring与Hibernate整合的两种方式，HibernateTemplate的API以及在Web层开启事务</summary></entry><entry><title type="html">SSH-Spring与Struts的整合</title><link href="http://127.0.0.1:4000//SSH-2Struts%E4%B8%8ESpring%E7%9A%84%E6%95%B4%E5%90%88/" rel="alternate" type="text/html" title="SSH-Spring与Struts的整合" /><published>2017-02-20T00:00:00+08:00</published><updated>2017-02-20T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SSH-2Struts与Spring的整合</id><content type="html" xml:base="http://127.0.0.1:4000//SSH-2Struts%E4%B8%8ESpring%E7%9A%84%E6%95%B4%E5%90%88/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;centerstruts2actioncenter&quot;&gt;&lt;center&gt;方式一：Struts2自己管理Action&lt;/center&gt;&lt;/h2&gt;
 
@@ -1516,552 +1753,4 @@ Struts中是多例模式，而Spring中默认是单例模式，会出现并发�
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="整合" /><summary type="html">本篇介绍了SSH框架中Struts与Spring整合的两种方式</summary></entry><entry><title type="html">SSH-环境搭建</title><link href="http://127.0.0.1:4000//SSH-1%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="SSH-环境搭建" /><published>2017-02-20T00:00:00+09:00</published><updated>2017-02-20T00:00:00+09:00</updated><id>http://127.0.0.1:4000//SSH-1环境搭建</id><content type="html" xml:base="http://127.0.0.1:4000//SSH-1%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">&lt;hr /&gt;
-
-&lt;h2 id=&quot;centersshcenter&quot;&gt;&lt;center&gt;SSH导包和配置&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;struts2&quot;&gt;Struts2&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;1.示例程序下的jar包：&lt;br /&gt;
-* struts2/apps/struts2-blank.war/WEB-INF/lib/*.jar&lt;br /&gt;
-2.导入与spring整合的jar包：
-* struts2/lib/struts2-spring-plugin-2.3.15.3.jar		– 整合Spring框架(整合必须导入)&lt;br /&gt;
-* struts2/lib/struts2-json-plugin-2.3.15.3.jar			– 整合AJAX&lt;br /&gt;
-* struts2/lib/struts2-convention-plugin-2.3.15.3.jar	– 使用Struts2注解开发&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;• web.xml&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;过滤器的配置，blank中&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter-name&amp;gt;&lt;/span&gt;struts2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/filter-name&amp;gt;&lt;/span&gt; 
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter-class&amp;gt;&lt;/span&gt;org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter&lt;span class=&quot;nt&quot;&gt;&amp;lt;/filter-class&amp;gt;&lt;/span&gt; 
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/filter&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;filter-mapping&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter-name&amp;gt;&lt;/span&gt;struts2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/filter-name&amp;gt;&lt;/span&gt; 
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;url-pattern&amp;gt;&lt;/span&gt;/*&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url-pattern&amp;gt;&lt;/span&gt; 
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/filter-mapping&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;• struts.xml&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE struts PUBLIC
-&quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;
-&quot;http://struts.apache.org/dtds/struts-2.3.dtd&quot;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;struts&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;constant&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;struts.devMode&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;c&quot;&gt;&amp;lt;!--提供详细报错页面，修改struts.xml后不需要重启服务器 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;extends=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;struts-default&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; 	
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/package&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/struts&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;hibernate&quot;&gt;Hibernate&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;Hibernate的jar包导入:&lt;br /&gt;
-* 核心包:hibernate3.jar&lt;br /&gt;
-* lib/required/&lt;em&gt;.jar&lt;br /&gt;
-* lib/jpa/&lt;/em&gt;.jar&lt;br /&gt;
-* hibernate整合日志系统的jar包&lt;br /&gt;
-* 数据连接池:optional\c3p0 - c3p0-0.9.1.jar&lt;br /&gt;
-* 数据库驱动&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;二级缓存:(可选的)&lt;br /&gt;
-* backport-util-concurrent.jar&lt;br /&gt;
-* commons-logging.jar&lt;br /&gt;
-* ehcache-1.5.0.jar&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;• hibernate.cfg.xml&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;• 映射:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;1.Spring3.2开发最基本jar包：&lt;br /&gt;
-* spring-beans-3.2.0.RELEASE.jar&lt;br /&gt;
-* spring-context-3.2.0.RELEASE.jar&lt;br /&gt;
-* spring-core-3.2.0.RELEASE.jar&lt;br /&gt;
-* spring-expression-3.2.0.RELEASE.jar&lt;br /&gt;
-* com.springsource.org.apache.commons.logging-1.1.1.jar&lt;br /&gt;
-* com.springsource.org.apache.log4j-1.2.15.jar&lt;br /&gt;
-2.AOP开发：&lt;br /&gt;
-* spring-aop-3.2.0.RELEASE.jar&lt;br /&gt;
-* spring-aspects-3.2.0.RELEASE.jar&lt;br /&gt;
-* com.springsource.org.aopalliance-1.0.0.jar&lt;br /&gt;
-* com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar&lt;br /&gt;
-3.Spring Jdbc开发：&lt;br /&gt;
-* spring-jdbc-3.2.0.RELEASE.jar&lt;br /&gt;
-* spring-tx-3.2.0.RELEASE.jar&lt;br /&gt;
-4.Spring事务管理：&lt;br /&gt;
-* spring-tx-3.2.0.RELEASE.jar&lt;br /&gt;
-5.Spring整合其他ORM框架：&lt;br /&gt;
-* spring-orm-3.2.0.RELEASE.jar&lt;br /&gt;
-6.Spring在web中使用：&lt;br /&gt;
-* spring-web-3.2.0.RELEASE.jar&lt;br /&gt;
-7.Spring整合Junit测试：&lt;br /&gt;
-* spring-test-3.2.0.RELEASE.jar&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;• applicationContext.xml&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;• Log4j.properties&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;• 在web.xml中配置监听器&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置Spring的监听器 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;listener&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 监听器默认加载的是WEB-INF/applicationContext.xml，所以需要制定spring框架配置的位置 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;listener-class&amp;gt;&lt;/span&gt;org.springframework.web.context.ContextLoaderListener&lt;span class=&quot;nt&quot;&gt;&amp;lt;/listener-class&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/listener&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 指定Spring框架的配置文件所在的位置(全局初始化参数) --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;context-param&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;param-name&amp;gt;&lt;/span&gt;contextConfigLocation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-name&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;param-value&amp;gt;&lt;/span&gt;classpath:applicationContext.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-value&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/context-param&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="环境搭建" /><category term="整合" /><summary type="html">本篇介绍了SSH框架的环境配置，即导包与配置</summary></entry><entry><title type="html">Spring-事务管理</title><link href="http://127.0.0.1:4000//Spring-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/" rel="alternate" type="text/html" title="Spring-事务管理" /><published>2017-02-19T00:00:00+09:00</published><updated>2017-02-19T00:00:00+09:00</updated><id>http://127.0.0.1:4000//Spring-事务管理</id><content type="html" xml:base="http://127.0.0.1:4000//Spring-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;Spring事务管理的API&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;声明式事务-基于注解&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;声明式事务-基于切面自动代理&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerspringapicenter&quot;&gt;&lt;center&gt;Spring事务管理的API&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;三个接口：&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;1.PlatformTransactionManager:平台事务管理器&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;commit(TransactionStatus status) &lt;br /&gt;
-getTransaction(TransactionDefinition definition) &lt;br /&gt;
-rollback(TransactionStatus status)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.TransactionDefinition:事务定义&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;ISOLation_XXX:事务隔离级别&lt;br /&gt;
-PROPAGATION_XXX:事务的传播行为&lt;br /&gt;
-TimeOUT_DEFAULT:过期时间&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.TransactionStatus:事务状态&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;是否有保存点&lt;br /&gt;
-是否一个新的事务&lt;br /&gt;
-事务是否已经提交&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;三个接口的关系:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;PlatformTransactionManager通过TransactionDefinition设置事务相关信息管理事务，  管理事务过程中，产生一些事务状态:状态由TransactionStatus记录。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;centerapicenter&quot;&gt;&lt;center&gt;API详解&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;platformtransactionmanager&quot;&gt;PlatformTransactionManager:&lt;/h3&gt;
-
-&lt;p&gt;Spring为不同的持久化框架提供了不同PlatformTransactionManager接口实现。&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;接口实现&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;JDBC或iBatis进行持久化&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;org.springframework.jdbc.datasource.DataSourceTransactionManager&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Hibernate3.0版本进行持久化&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;org.springframework.orm.hibernate3.HibernateTransactionManager&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;JPA进行持久化&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;org.springframework.orm.jpa.JpaTransactionManager&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;持久化机制是Jdo时&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;org.springframework.transaction.jta.JtaTransactionManager&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;transactiondefinition&quot;&gt;TransactionDefinition:&lt;/h3&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;事务隔离级别&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ISOLATION_DEFAULT&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;默认级别 Mysql:repeatable_read oracle:read_commited&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ISOLATION_READ_UNCOMMITTED&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;未提交读&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ISOLATION_REPEATABLE_READ&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;可重复读:避免脏读，不可重复读，但是虚读有可能发生。&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ISOLATION_SERIALIZABLE&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;串行&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;事务的传播行为&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-      &lt;th&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;PROPAGATION_REQUIRED&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;支持当前事务，不存在则新建一个&lt;/td&gt;
-      &lt;td&gt;A有事务，B使用A的事务；A没有事务，B就开启一个新的事务(A,B在一个事务中)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;PROPAGATION_SUPPORTS&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;支持当前事务，不存在则不使用事务&lt;/td&gt;
-      &lt;td&gt;A有事务，B使用A的事务；A没有事务，B就不使用事务&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;PROPAGATION_MANDATORY&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;支持当前事务，不存在则抛出异常&lt;/td&gt;
-      &lt;td&gt;A有事务，B使用A的事务；A没有事务，抛出异常&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;PROPAGATION_REQUIRES_NEW&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;如果有事务存在，挂起当前事务，创建一个新的事务&lt;/td&gt;
-      &lt;td&gt;A有事务，B将A的事务挂起，重新创建一个新的事务(A,B不在一个事务中，互不影响)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;PROPAGATION_NOT_SUPPORTED&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;以非事务方式运行，如果有事务存在，挂起当前事务&lt;/td&gt;
-      &lt;td&gt;非事务的方式运行，A有事务，就会挂起当前的事务&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;PROPAGATION_NEVER&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;以非事务方式运行，如果有事务存在，抛出异常&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;PROPAGATION_NESTED&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;如果当前事务存在，则嵌套事务执行&lt;/td&gt;
-      &lt;td&gt;A有事务，A执行之后，将A事务执行之后的内容保存到SavePoint。B事务有异常的话，用户需要自己设置事务提交还是回滚&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p class=&quot;notice&quot;&gt;注：
-传播行为指解决业务层之间的调用的事务的关系。&lt;br /&gt;
-事务的传播行为不是JDBC事务管理，是用来解决实际开发的问题。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;center-center&quot;&gt;&lt;center&gt;声明式事务-基于注解&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;spring&quot;&gt;Spring的事务管理分成两类：&lt;/h3&gt;
-
-&lt;p&gt;1.编程式事务管理:手动编写代码完成事务管理&lt;br /&gt;
-2.声明式事务管理:不需要手动编写代码，需要配置&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;步骤：&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;1.配置事务管理器，注入dataSource。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 事务管理器 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;2.开启注解的事务管理。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 开启注解的事务管理 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:annotation-driven&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transaction-manager=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;3.在Service上使用注解&lt;code class=&quot;highlighter-rouge&quot;&gt;@Transactional&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;注解中可配置属性值:&lt;br /&gt;
-* isolation&lt;br /&gt;
-* propagation&lt;br /&gt;
-* readOnly&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;程序示例：&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;创建数据库account表：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`account`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;`id`&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;`name`&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;`money`&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`id`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENGINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InnoDB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CHARSET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`account`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'aaa'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1000'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`account`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'bbb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1000'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;数据库中account表的内容如下：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;id&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;name&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;money&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;aaa&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1000&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;bbb&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1000&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;applicationContext.xml：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- c3p0连接池 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;driverClass&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.mysql.jdbc.Driver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbcUrl&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql:///Spring&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;root&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;091821&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 业务层类 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accountService&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.spring.AccountServiceImpl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accountDao&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accountDao&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 持久层类 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accountDao&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.spring.AccountDaoImpl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 注入连接池的对象，通过连接池对象创建模板 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 事务管理器 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 开启注解的事务管理 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:annotation-driven&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transaction-manager=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;业务层：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;transfer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Transactional&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountServiceImpl&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccountService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccountDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accountDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setAccountDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AccountDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accountDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accountDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accountDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;transfer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;accountDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//异常&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;accountDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;持久化层：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountDaoImpl&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JdbcDaoSupport&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccountDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;update account set money = money - ? where name  = ?&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getJdbcTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;update account set money = money + ? where name  = ?&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getJdbcTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;money&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;测试：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RunWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SpringJUnit4ClassRunner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@ContextConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:applicationContext.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccountService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accountService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;accountService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;transfer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aaa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bbb&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;结果：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;若不在service上加注解，则异常出现时，表中的结果会出现错误：&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;id&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;name&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;money&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;aaa&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;900&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;bbb&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1000&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;center-center-1&quot;&gt;&lt;center&gt;声明式事务-基于切面自动代理&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;步骤：&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;1.导入相应jar包：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;AspectJ(两个)&lt;br /&gt;
-数据库驱动&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.引入相应约束&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;aop、tx约束&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.注册事务管理器，并注入dataSource&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 事务管理器 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;4.定义增强(事务管理)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 定义一个增强 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:advice&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;txAdvice&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transaction-manager=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 增强(事务)的属性的配置 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:attributes&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 
-			isolation:DEFAULT	:事务的隔离级别
-			propagation			:事务的传播行为
-			read-only			:false 不是只读
-			timeout				:-1
-			no-rollback-for		:发生哪些异常不回滚
-			rollback-for		:发生哪些异常回滚事务
-		 --&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transfer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/tx:attributes&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/tx:advice&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;5.定义aop的配置(切点和通知的组合)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- aop配置定义切面和切点的信息 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;aop:config&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 定义切点:哪些类的哪些方法应用增强 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;aop:pointcut&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expression=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution(* cn.xsw.spring.AccountService+.*(..))&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mypointcut&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 定义切面: --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;aop:advisor&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;advice-ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;txAdvice&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pointcut-ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mypointcut&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/aop:config&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p class=&quot;notice&quot;&gt;注：
-测试类中注入的是Service对象，不需要注入代理对象。&lt;br /&gt;
-生成这个类的时候，已经是代理对象了。&lt;/p&gt;</content><category term="Java" /><category term="Spring" /><category term="事务" /><category term="SSH框架" /><summary type="html">本篇介绍了Spring中的声明式事务的管理，包括语句注解与基于切面自动代理的两种方式</summary></entry></feed>
+&lt;/div&gt;</content><category term="Java" /><category term="SSH框架" /><category term="整合" /><summary type="html">本篇介绍了SSH框架中Struts与Spring整合的两种方式</summary></entry></feed>

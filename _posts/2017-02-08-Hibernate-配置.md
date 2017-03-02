@@ -172,7 +172,7 @@ table:表的名称
 ### 映射文加载方式
 
 1.在核心配置文件中加载映射文件:  
-`<mapping resource="cn/itcast/hibernate3/demo1/Customer.hbm.xml" />`  
+`<mapping resource="cn/xsw/hibernate/Customer.hbm.xml" />`  
 
 2.使用手动编码的方式进行加载  
 参考API章节。
