@@ -4,10 +4,7 @@ title:  "Hibernate-持久化"
 date:   2017-02-08
 excerpt: "本篇介绍了Hibernate中持久化类的编写规则、主键生成策略以及持久化对象的三种状态"
 tag:
-- Java 
 - Hibernate
-- 持久化
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

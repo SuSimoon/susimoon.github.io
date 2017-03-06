@@ -4,10 +4,7 @@ title:  "Spring-Bean(XML)"
 date:   2017-02-15
 excerpt: "本篇介绍了Spring中基于XML配置方式的Bean，包括Bean实例化的方式、属性配置、属性注入以及Bean的生命周期"
 tag:
-- Java 
 - Spring
-- Bean
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

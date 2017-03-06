@@ -1,13 +1,10 @@
----
+- Hibernate---
 layout: post
 title:  "Hibernate-关联关系映射"
 date:   2017-02-10
 excerpt: "本篇介绍了Hibernate中一对多和多对多关系的配置"
 tag:
-- Java 
 - Hibernate
-- 关联关系映射
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

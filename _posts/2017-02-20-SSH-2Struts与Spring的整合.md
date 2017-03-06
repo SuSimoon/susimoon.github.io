@@ -4,9 +4,7 @@ title:  "SSH-Spring与Struts的整合"
 date:   2017-02-20
 excerpt: "本篇介绍了SSH框架中Struts与Spring整合的两种方式"
 tag:
-- Java 
 - SSH框架
-- 整合
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

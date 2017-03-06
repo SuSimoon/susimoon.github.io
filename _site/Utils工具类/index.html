@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
+<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>Utils工具类 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content=""> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <meta name="twitter:title" content="Utils工具类"> <meta name="twitter:description" content=""> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Utils工具类"> <meta property="og:description" content=""> <meta property="og:url" content="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
+<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title "> <h1>Utils工具类</h1> <h4>03 Mar 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~1 minute </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//projects/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">UUIDUtils</a><br> <a href="#2">MD5Utils</a> <br> <a href="#3">MailUtils</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="uuidutils">UUIDUtils</h2> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UUIDUtils</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getUUID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">replace</span><span class="o">(</span><span class="s">"-"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+	<span class="o">}</span>
+	 
+<span class="o">}</span>
+</code></pre></div> <hr> <p><a name="2"></a></p> <h2 id="md5utils">MD5Utils</h2> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">cn</span><span class="o">.</span><span class="na">takeout</span><span class="o">.</span><span class="na">utils</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.MessageDigest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.NoSuchAlgorithmException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MD5Utils</span> <span class="o">{</span>
+	<span class="cm">/**
+	 * 使用md5的算法进行加密
+	 */</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">md5</span><span class="o">(</span><span class="n">String</span> <span class="n">plainText</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">byte</span><span class="o">[]</span> <span class="n">secretBytes</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">secretBytes</span> <span class="o">=</span> <span class="n">MessageDigest</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"md5"</span><span class="o">).</span><span class="na">digest</span><span class="o">(</span>
+					<span class="n">plainText</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchAlgorithmException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"没有md5这个算法！"</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="n">String</span> <span class="n">md5code</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigInteger</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">secretBytes</span><span class="o">).</span><span class="na">toString</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span><span class="c1">// 16进制数字</span>
+		<span class="c1">// 如果生成数字未满32位，需要前面补0</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span> <span class="o">-</span> <span class="n">md5code</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">md5code</span> <span class="o">=</span> <span class="s">"0"</span> <span class="o">+</span> <span class="n">md5code</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">md5code</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div> <hr> <p><a name="3"></a></p> <h2 id="mailutils">MailUtils</h2> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Properties</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.mail.Authenticator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.Message</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.MessagingException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.PasswordAuthentication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.Session</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.Transport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.internet.AddressException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.internet.InternetAddress</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.internet.MimeMessage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.internet.MimeMessage.RecipientType</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailUtils</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sendMail</span><span class="o">(</span><span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">code</span><span class="o">)</span>
+			<span class="kd">throws</span> <span class="n">AddressException</span><span class="o">,</span> <span class="n">MessagingException</span> <span class="o">{</span>
+		<span class="c1">// 1.创建一个程序与邮件服务器会话对象Session</span>
+
+		<span class="n">Properties</span> <span class="n">props</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
+		<span class="n">props</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"mail.transport.protocol"</span><span class="o">,</span> <span class="s">"SMTP"</span><span class="o">);</span> <span class="c1">//发送协议</span>
+		<span class="n">props</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"mail.host"</span><span class="o">,</span> <span class="s">"smtp.163.com"</span><span class="o">);</span> <span class="c1">//发送的服务器</span>
+		<span class="n">props</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"mail.smtp.auth"</span><span class="o">,</span> <span class="s">"true"</span><span class="o">);</span> <span class="c1">//指定验证为true</span>
+
+		<span class="c1">// 创建验证器</span>
+		<span class="n">Authenticator</span> <span class="n">auth</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Authenticator</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="n">PasswordAuthentication</span> <span class="nf">getPasswordAuthentication</span><span class="o">()</span> <span class="o">{</span>
+				<span class="k">return</span> <span class="k">new</span> <span class="nf">PasswordAuthentication</span><span class="o">(</span><span class="s">"javawebtestsimmon"</span><span class="o">,</span> <span class="s">"***"</span><span class="o">);</span> <span class="c1">// 用户名密码</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+
+		<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">props</span><span class="o">,</span> <span class="n">auth</span><span class="o">);</span>
+
+		<span class="c1">// 2.创建一个Message，它相当于是邮件内容</span>
+		<span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MimeMessage</span><span class="o">(</span><span class="n">session</span><span class="o">);</span>
+
+		<span class="n">message</span><span class="o">.</span><span class="na">setFrom</span><span class="o">(</span><span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="s">"javawebtestsimmon@163.com"</span><span class="o">));</span> <span class="c1">// 设置发送者</span>
+
+		<span class="n">message</span><span class="o">.</span><span class="na">setRecipient</span><span class="o">(</span><span class="n">RecipientType</span><span class="o">.</span><span class="na">TO</span><span class="o">,</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">to</span><span class="o">));</span> <span class="c1">// 设置发送方式与接收者</span>
+
+		<span class="n">message</span><span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="s">"来自Takeout激活邮件"</span><span class="o">);</span>
+
+		<span class="n">message</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="s">"&lt;h1&gt;来自Takeout的官网激活邮件&lt;/h1&gt;&lt;h3&gt;&lt;a href='http://10.103.14.81:8080/Takeout/customer_active.action?code="</span><span class="o">+</span><span class="n">code</span><span class="o">+</span><span class="s">"'&gt;http://10.103.14.81:8080/Takeout/customer_active.action?code="</span><span class="o">+</span><span class="n">code</span><span class="o">+</span><span class="s">"&lt;/a&gt;&lt;/h3&gt;"</span><span class="o">,</span> <span class="s">"text/html;charset=UTF-8"</span><span class="o">);</span> 
+		<span class="c1">// 3.创建 Transport用于将邮件发送</span>
+
+		<span class="n">Transport</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div> <div class="entry-meta"> <br> <hr> <span class="entry-tags"></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>

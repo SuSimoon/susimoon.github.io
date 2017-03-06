@@ -3,11 +3,8 @@ layout: post
 title:  "MyBatis-动态sql"
 date:   2017-02-24
 excerpt: "本篇介绍了MyBatis中的"
-tag:
-- Java 
+tag: 
 - MyBatis
-- 动态sql
-- SSM框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

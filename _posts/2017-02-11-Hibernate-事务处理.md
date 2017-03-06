@@ -1,13 +1,10 @@
----
+- Hibernate---
 layout: post
 title:  "Hibernate-事务处理"
 date:   2017-02-11
 excerpt: "本篇介绍了Hibernate中事务的处理，解决丢失更新的悲观锁与乐观锁，以及当前线程中的session"
 tag:
-- Java 
 - Hibernate
-- 事务
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

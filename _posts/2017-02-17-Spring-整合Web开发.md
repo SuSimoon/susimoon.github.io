@@ -4,10 +4,7 @@ title:  "Spring-整合Web开发"
 date:   2017-02-17
 excerpt: "本篇介绍了Spring如何整合web开发"
 tag:
-- Java 
 - Spring
-- Web
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

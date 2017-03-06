@@ -4,10 +4,7 @@ title:  "Struts2-Exception"
 date:   2017-01-28
 excerpt: "本篇介绍了Struts2中提供的异常处理"
 tag:
-- Java 
 - Struts2
-- Exception
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 --- 

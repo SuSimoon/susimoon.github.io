@@ -4,9 +4,7 @@ title:  "SSH-Spring与Hibernate的整合"
 date:   2017-02-21
 excerpt: "本篇介绍了SSH框架中Spring与Hibernate整合的两种方式，HibernateTemplate的API以及在Web层开启事务"
 tag:
-- Java 
 - SSH框架
-- 整合
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

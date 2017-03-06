@@ -4,10 +4,9 @@ title:  "MyBatis-mapper"
 date:   2017-02-24
 excerpt: "本篇介绍了MyBatis中的mapper接口"
 tag:
-- Java 
+
 - MyBatis
-- mapper
-- SSM框架
+
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

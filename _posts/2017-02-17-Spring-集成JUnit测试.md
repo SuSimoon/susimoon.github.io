@@ -4,10 +4,7 @@ title:  "Spring-集成JUnit测试"
 date:   2017-02-17
 excerpt: "本篇介绍了Spring如何集成JUnit测试"
 tag:
-- Java 
 - Spring
-- JUnit
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

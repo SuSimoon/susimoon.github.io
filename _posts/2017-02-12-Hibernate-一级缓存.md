@@ -4,10 +4,7 @@ title:  "Hibernate-一级缓存"
 date:   2017-02-12
 excerpt: "本篇介绍了Hibernate中的一级缓存相关内容"
 tag:
-- Java 
 - Hibernate
-- 一级缓存
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

@@ -4,10 +4,7 @@ title:  "Hibernate-API"
 date:   2017-02-06
 excerpt: "本篇介绍了Hibernate的API，包括Configuration、SessionFactory、Session、Transaction、Query、Criteria"
 tag:
-- Java 
 - Hibernate
-- API
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---   

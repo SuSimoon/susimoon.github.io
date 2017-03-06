@@ -4,9 +4,7 @@ title:  "Struts2-Action"
 date:   2017-01-24
 excerpt: "本篇介绍了Struts2中Action类的创建方式、访问方式、处理请求参数的方式以及如何获取Servlet API"
 tag:
-- Java 
 - Struts2
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---

@@ -4,11 +4,7 @@ title:  "Spring-AspectJ"
 date:   2017-02-18
 excerpt: "本篇介绍了Spring中的AspectJ，以及基于注解和XML配置切面的方式"
 tag:
-- Java 
 - Spring
-- AOP
-- AspectJ
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

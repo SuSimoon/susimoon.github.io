@@ -4,10 +4,7 @@ title:  "Hibernate-检索方式"
 date:   2017-02-10
 excerpt: "本篇介绍了Hibernate中的检索方式与检索策略"
 tag:
-- Java 
 - Hibernate
-- 检索
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

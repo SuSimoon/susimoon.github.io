@@ -4,10 +4,7 @@ title:  "Spring-JdbcTemplate"
 date:   2017-02-18
 excerpt: "本篇介绍了Spring中JdbcTemplate的应用"
 tag:
-- Java 
 - Spring
-- JdbcTemplate
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

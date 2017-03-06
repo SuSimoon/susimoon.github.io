@@ -4,11 +4,9 @@ title:  "Struts2-valueStack&OGNL"
 date:   2017-02-05
 excerpt: "本篇介绍了Struts2中的valueStack及其应用、OGNL的访问方式以及表达式常见的使用方式($ % #)"
 tag:
-- Java 
+
 - Struts2
-- valueStack
-- OGNL
-- SSH框架
+
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

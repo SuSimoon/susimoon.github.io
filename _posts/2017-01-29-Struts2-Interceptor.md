@@ -4,10 +4,10 @@ title:  "Struts2-Interceptor"
 date:   2017-01-30
 excerpt: "本篇介绍了Struts2中拦截器的概念、如何自定义拦截器、拦截器的原理以及它与过滤器的区别"
 tag:
-- Java 
+
 - Struts2
-- Interceptor
-- SSH框架
+
+
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---   

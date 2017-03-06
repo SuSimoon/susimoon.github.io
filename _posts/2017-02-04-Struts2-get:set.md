@@ -4,10 +4,9 @@ title:  "Struts2-get/set"
 date:   2017-02-04
 excerpt: "本篇介绍了Struts2中的get、set方法的作用"
 tag:
-- Java 
+ 
 - Struts2
-- get/set
-- SSH框架
+
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---   

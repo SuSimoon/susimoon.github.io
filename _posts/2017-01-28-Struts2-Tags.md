@@ -5,9 +5,7 @@ date:   2017-01-28
 excerpt: "本篇介绍了Struts2中标签的使用方式，包括property、set、bean、include、fielderror
 、iterator、ui"
 tag:
-- Java 
 - Struts2
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---   
@@ -334,7 +332,7 @@ template文件夹-simple文件夹-fielderror.ftl用来覆盖struts2中自己的t
 <constant name="struts.ui.theme" value="mytheme"></constant>
 ```
 
-以在src下建立mytheme文件夹-simple文件夹-fielderror.ftl，ielderror.ftl同上。
+以在src下建立mytheme文件夹-simple文件夹-fielderror.ftl，fielderror.ftl同上。
 
 
 

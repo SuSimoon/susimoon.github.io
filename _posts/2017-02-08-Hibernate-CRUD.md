@@ -4,10 +4,7 @@ title:  "Hibernate-CRUD"
 date:   2017-02-07
 excerpt: "本篇介绍了Hibernate的增删改查操作"
 tag:
-- Java 
 - Hibernate
-- CRUD
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---   

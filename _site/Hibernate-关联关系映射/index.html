@@ -1,9 +1,61 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
-<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>Hibernate-关联关系映射 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Java, Hibernate, 关联关系映射, SSH框架"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="Hibernate-关联关系映射"> <meta name="twitter:description" content="本篇介绍了Hibernate中一对多和多对多关系的配置"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Hibernate-关联关系映射"> <meta property="og:description" content="本篇介绍了Hibernate中一对多和多对多关系的配置"> <meta property="og:url" content="http://127.0.0.1:4000//Hibernate-%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//Hibernate-%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
-<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
-<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>Hibernate-关联关系映射</h1> <h4>10 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~4 minutes </p>
-<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">实体之间的关系</a> <br> <a href="#2">一对多的配置</a><br> <a href="#3">Hibernate中的级联取值</a><br> <a href="#4">一对多中双向维护产生多余的SQL</a> <br> <a href="#5">多对多的配置</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centercenter"><center>实体之间的关系</center></h2> <p><strong>一对多：</strong></p> <p class="notice">例：一个用户，生成多个订单，每一个订单只能属于一个用户。<br> 建表原则：在多的一方创建一个字段，作为外键，指向一的一方的主键。</p> <p><strong>多对多：</strong></p> <p class="notice">例：一个学生可以选择多门课程，一个课程可以被多个学生选择。<br> 建表原则:创建第三张表，中间表至少有两个字段，分别作为外键指向多对多双方主键。</p> <p><strong>一对一：(很少用)</strong></p> <p class="notice">例：一个公司只能有一个注册地址，一个注册地址，只能被一个公司使用(可将两个表建到一个表)<br> 建表原则：1.唯一外键：一对一的双方，假设一方是多的关系。需要在多的一方创建一个字段，作为外键，指向一的一方的主键，但是在外键添加一个unique。2.主键对应：一对一的双方，通过主键进行关联。</p> <hr> <p><a name="2"></a></p> <h2 id="centercenter-1"><center>一对多的配置</center></h2> <h3 id="section">步骤</h3> <p class="notice">第一步:创建两个实体<br> 第二步:建立映射<br> 第三步:将映射放到核心配置文件中</p> <h3 id="section-1">示例</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//客户实体:</span>
+<ul>
+  <li>Hibernate—
+layout: post
+title:  “Hibernate-关联关系映射”
+date:   2017-02-10
+excerpt: “本篇介绍了Hibernate中一对多和多对多关系的配置”
+tag:</li>
+  <li>Hibernate
+feature: http://i.imgur.com/Ds6S7lJ.png
+comments: false
+—</li>
+</ul>
+
+<blockquote>
+  <p><a href="#1">实体之间的关系</a>  <br>
+<a href="#2">一对多的配置</a><br>
+<a href="#3">Hibernate中的级联取值</a><br>
+<a href="#4">一对多中双向维护产生多余的SQL</a> <br>
+<a href="#5">多对多的配置</a></p>
+</blockquote>
+
+<hr>
+
+<p><a name="1"></a></p>
+
+<h2 id="centercenter"><center>实体之间的关系</center></h2>
+
+<p><strong>一对多：</strong></p>
+
+<p class="notice">例：一个用户，生成多个订单，每一个订单只能属于一个用户。<br>
+建表原则：在多的一方创建一个字段，作为外键，指向一的一方的主键。</p>
+
+<p><strong>多对多：</strong></p>
+
+<p class="notice">例：一个学生可以选择多门课程，一个课程可以被多个学生选择。<br>
+建表原则:创建第三张表，中间表至少有两个字段，分别作为外键指向多对多双方主键。</p>
+
+<p><strong>一对一：(很少用)</strong></p>
+
+<p class="notice">例：一个公司只能有一个注册地址，一个注册地址，只能被一个公司使用(可将两个表建到一个表)<br>
+建表原则：1.唯一外键：一对一的双方，假设一方是多的关系。需要在多的一方创建一个字段，作为外键，指向一的一方的主键，但是在外键添加一个unique。2.主键对应：一对一的双方，通过主键进行关联。</p>
+
+<hr>
+
+<p><a name="2"></a></p>
+
+<h2 id="centercenter-1"><center>一对多的配置</center></h2>
+
+<h3 id="section">步骤</h3>
+
+<p class="notice">第一步:创建两个实体<br>
+第二步:建立映射<br>
+第三步:将映射放到核心配置文件中</p>
+
+<h3 id="section-1">示例</h3>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="c1">//客户实体:</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">cid</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">cname</span><span class="o">;</span>	
@@ -29,7 +81,11 @@
 		<span class="k">this</span><span class="o">.</span><span class="na">orders</span> <span class="o">=</span> <span class="n">orders</span><span class="o">;</span>
 	<span class="o">}</span>	
 <span class="o">}</span>
-</code></pre></div> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//订单实体:</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="c1">//订单实体:</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">oid</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">addr</span><span class="o">;</span>	
@@ -55,7 +111,11 @@
 		<span class="k">this</span><span class="o">.</span><span class="na">customer</span> <span class="o">=</span> <span class="n">customer</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div> <div class="language-xml highlighter-rouge"><pre class="highlight"><code>//Customer.hbm.xml
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge">
+<pre class="highlight"><code>//Customer.hbm.xml
 <span class="nt">&lt;hibernate-mapping&gt;</span>
 	<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"cn.xsw.hibernate.Customer"</span> <span class="na">table=</span><span class="s">"customer"</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;id</span> <span class="na">name=</span><span class="s">"cid"</span> <span class="na">column=</span><span class="s">"cid"</span><span class="nt">&gt;</span>
@@ -70,7 +130,11 @@
 		<span class="nt">&lt;/set&gt;</span>
 	<span class="nt">&lt;/class&gt;</span>
 <span class="nt">&lt;/hibernate-mapping&gt;</span>
-</code></pre></div> <div class="language-xml highlighter-rouge"><pre class="highlight"><code>//Order.hbm.xml
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge">
+<pre class="highlight"><code>//Order.hbm.xml
 <span class="nt">&lt;hibernate-mapping&gt;</span>
 	<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"cn.xsw.hibernate.Order"</span> <span class="na">table=</span><span class="s">"orders"</span><span class="nt">&gt;</span><span class="c">&lt;!-- 写order会出现错误，是关键字  --&gt;</span>
 		<span class="nt">&lt;id</span> <span class="na">name=</span><span class="s">"oid"</span> <span class="na">column=</span><span class="s">"oid"</span><span class="nt">&gt;</span>
@@ -88,7 +152,23 @@
 		<span class="nt">&lt;many-to-one</span> <span class="na">name=</span><span class="s">"customer"</span> <span class="na">column=</span><span class="s">"cno"</span> <span class="na">class=</span><span class="s">"cn.xsw.hibernate.Customer"</span><span class="nt">/&gt;</span>
 	<span class="nt">&lt;/class&gt;</span>
 <span class="nt">&lt;/hibernate-mapping&gt;</span>
-</code></pre></div> <p class="notice">映射配置总结： 在配置映射部分时，无论是一方还是多方，都按照：<br> 类中关联对象名-数据库表中外键名称-关联对象类全路径<br> 这样的方式来配置。其中要注意一和多的两方外键要相同。</p> <h3 id="section-2">一对多中的级联保存</h3> <p class="notice">级联配置：<code class="highlighter-rouge">cascade=”save-update”</code><br> 级联方向性：1.保存客户的时候，选择级联订单。2.保存订单的时候，选择级联客户。</p> <p>• <strong>若不配置cascade，则需要双方都进行保存：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<p class="notice">映射配置总结：
+在配置映射部分时，无论是一方还是多方，都按照：<br>
+类中关联对象名-数据库表中外键名称-关联对象类全路径<br>
+这样的方式来配置。其中要注意一和多的两方外键要相同。</p>
+
+<h3 id="section-2">一对多中的级联保存</h3>
+
+<p class="notice">级联配置：<code class="highlighter-rouge">cascade=”save-update”</code><br>
+级联方向性：1.保存客户的时候，选择级联订单。2.保存订单的时候，选择级联客户。</p>
+
+<p>• <strong>若不配置cascade，则需要双方都进行保存：</strong></p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 向客户表插入一个客户，在订单表中插入两个订单</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo1</span><span class="o">(){</span>
 	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
@@ -120,7 +200,15 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <p class="notice">保存的时候只保存一方，且不配置casecade则会报异常:一个持久态对象关联一个瞬时的对象。</p> <p>• <strong>保存客户级联订单</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<p class="notice">保存的时候只保存一方，且不配置casecade则会报异常:一个持久态对象关联一个瞬时的对象。</p>
+
+<p>• <strong>保存客户级联订单</strong></p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// &lt;set&gt;集合是客户的关联订单对象的集合</span>
 <span class="c1">//所以在&lt;set&gt;上配置一个属性:cascade="save-update"</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo3</span><span class="o">(){</span>
@@ -144,7 +232,13 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <p>• <strong>保存订单级联客户</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<p>• <strong>保存订单级联客户</strong></p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 在Order.hbm.xml中&lt;many-to-one&gt;配置cascade属性:级联保存</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo4</span><span class="o">(){</span>
 	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
@@ -167,18 +261,172 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <ul> <li><strong>对象导航问题</strong></li> </ul> <p><img src="http://wx4.sinaimg.cn/large/83e1667dgy1fcl917jk5sj212q0qyn1d.jpg" alt=""></p> <h3 id="section-3">一对多中的级联删除</h3> <p>级联配置：<code class="highlighter-rouge">cascade=”delete”</code>(与前面的save-update用”,”隔开)</p> <p>在JDBC情况下只删除一方会报错；<br> 在Hibernate中删除时默认的情况下不会报错，会删除数据记录，并将级联的一方外键置为null。</p> <p>• 删除客户的时候级联删除订单</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// 在Customer.hbm.xml的&lt;set&gt;标签上配置cascade="delete"</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>对象导航问题</strong></li>
+</ul>
+
+<p><img src="http://wx4.sinaimg.cn/large/83e1667dgy1fcl917jk5sj212q0qyn1d.jpg" alt=""></p>
+
+<h3 id="section-3">一对多中的级联删除</h3>
+
+<p>级联配置：<code class="highlighter-rouge">cascade=”delete”</code>(与前面的save-update用”,”隔开)</p>
+
+<p>在JDBC情况下只删除一方会报错；<br>
+在Hibernate中删除时默认的情况下不会报错，会删除数据记录，并将级联的一方外键置为null。</p>
+
+<p>• 删除客户的时候级联删除订单</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="c1">// 在Customer.hbm.xml的&lt;set&gt;标签上配置cascade="delete"</span>
 <span class="n">Customer</span> <span class="n">custoemr</span> <span class="o">=</span> <span class="o">(</span><span class="n">Customer</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Customer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
 <span class="n">session</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">custoemr</span><span class="o">);</span>
 <span class="c1">//此时order中的cno置为null</span>
-</code></pre></div> <p>• 删除订单的时候，级联删除客户</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="o">(</span><span class="n">Order</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>• 删除订单的时候，级联删除客户</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="o">(</span><span class="n">Order</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
 <span class="n">session</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
-</code></pre></div> <h3 id="section-4">一对多中的孤儿删除</h3> <p class="notice">配置：<code class="highlighter-rouge">ascade="delete-orhpan"</code> 仅限于一对多，因为只有一对多时候，才有父子存在。其中一的一方是父亲，多的一方是子方。<br> 当一个客户与某个订单解除了关系。将外键置为null。订单没有了所属客户，相当于一个孩子没有了父亲，就会将这种记录就删除。</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//若不配置，默认情况下解除关系时把级联的订单外键设为null；配置则会把订单记录删除	</span>
+</code></pre>
+</div>
+
+<h3 id="section-4">一对多中的孤儿删除</h3>
+
+<p class="notice">配置：<code class="highlighter-rouge">ascade="delete-orhpan"</code>		
+仅限于一对多，因为只有一对多时候，才有父子存在。其中一的一方是父亲，多的一方是子方。<br>
+当一个客户与某个订单解除了关系。将外键置为null。订单没有了所属客户，相当于一个孩子没有了父亲，就会将这种记录就删除。</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="c1">//若不配置，默认情况下解除关系时把级联的订单外键设为null；配置则会把订单记录删除	</span>
 <span class="n">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="o">(</span><span class="n">Customer</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Customer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
 <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="o">(</span><span class="n">Order</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
 <span class="c1">// 让1号客户与1号订单解除关系:</span>
 <span class="n">customer</span><span class="o">.</span><span class="na">getOrders</span><span class="o">().</span><span class="na">remove</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
-</code></pre></div> <hr> <p><a name="3"></a></p> <h2 id="centerhibernatecenter"><center>Hibernate中的级联取值</center></h2> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: left">级联取值：</th> <th style="text-align: left"> </th> </tr> </thead> <tbody> <tr> <td style="text-align: left"><strong>none</strong></td> <td style="text-align: left">不使用级联</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>save-update</strong></td> <td style="text-align: left">保存或更新的时候级联</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>delete</strong></td> <td style="text-align: left">删除的时候级联</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>all</strong></td> <td style="text-align: left">除了孤儿删除以外的所有级联</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>delete-orphan</strong></td> <td style="text-align: left">孤儿删除(孤子删除)</td> </tr> </tbody> <tbody> <tr> <td style="text-align: left"><strong>all-delete-orphan</strong></td> <td style="text-align: left">包含了孤儿删除的所有的级联</td> </tr> </tbody> </table> <hr> <p><a name="4"></a></p> <h2 id="centersqlcenter"><center>一对多中双向维护产生多余的SQL</center></h2> <p class="notice">在一对多中，双方都有外键的维护能力。当自动更新数据库时，会产生多余的SQL，即产生两次update语句。<br> 配置<code class="highlighter-rouge">inverse=”true”</code>:在哪一端配置，哪一端就放弃了外键的维护权。<br> 一般情况下，一的一方放弃外键的维护，由多的一方来维护。</p> <h3 id="section-5">示例</h3> <p>假设数据库中两张表的内容如下：<br> <strong>customer:</strong></p> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: center">cid</th> <th style="text-align: center">cname</th> </tr> </thead> <tbody> <tr> <td style="text-align: center">1</td> <td style="text-align: center">tom</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">2</td> <td style="text-align: center">ann</td> </tr> </tbody> </table> <p><strong>order:</strong></p> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: center">oid</th> <th style="text-align: center">addr</th> <th style="text-align: center">cno</th> </tr> </thead> <tbody> <tr> <td style="text-align: center">1</td> <td style="text-align: center">Shanghai</td> <td style="text-align: center">2</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">2</td> <td style="text-align: center">Beijing</td> <td style="text-align: center">1</td> </tr> </tbody> </table> <p>现在想让oid为1的order不再与ann关联，而是与tom关联。</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<hr>
+
+<p><a name="3"></a></p>
+
+<h2 id="centerhibernatecenter"><center>Hibernate中的级联取值</center></h2>
+
+<table rules="groups" class="notice">
+  <thead>
+    <tr>
+      <th style="text-align: left">级联取值：</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>none</strong></td>
+      <td style="text-align: left">不使用级联</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>save-update</strong></td>
+      <td style="text-align: left">保存或更新的时候级联</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>delete</strong></td>
+      <td style="text-align: left">删除的时候级联</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>all</strong></td>
+      <td style="text-align: left">除了孤儿删除以外的所有级联</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>delete-orphan</strong></td>
+      <td style="text-align: left">孤儿删除(孤子删除)</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>all-delete-orphan</strong></td>
+      <td style="text-align: left">包含了孤儿删除的所有的级联</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<p><a name="4"></a></p>
+
+<h2 id="centersqlcenter"><center>一对多中双向维护产生多余的SQL</center></h2>
+
+<p class="notice">在一对多中，双方都有外键的维护能力。当自动更新数据库时，会产生多余的SQL，即产生两次update语句。<br>
+配置<code class="highlighter-rouge">inverse=”true”</code>:在哪一端配置，哪一端就放弃了外键的维护权。<br>
+一般情况下，一的一方放弃外键的维护，由多的一方来维护。</p>
+
+<h3 id="section-5">示例</h3>
+
+<p>假设数据库中两张表的内容如下：<br>
+<strong>customer:</strong></p>
+
+<table rules="groups" class="notice">
+  <thead>
+    <tr>
+      <th style="text-align: center">cid</th>
+      <th style="text-align: center">cname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">tom</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">ann</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>order:</strong></p>
+
+<table rules="groups" class="notice">
+  <thead>
+    <tr>
+      <th style="text-align: center">oid</th>
+      <th style="text-align: center">addr</th>
+      <th style="text-align: center">cno</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">Shanghai</td>
+      <td style="text-align: center">2</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">Beijing</td>
+      <td style="text-align: center">1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>现在想让oid为1的order不再与ann关联，而是与tom关联。</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 双向维护:</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">(){</span>
 	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
@@ -193,7 +441,21 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <p>此时会看到自动更新数据库后，控制台上打印出两个update语句。出现这种情况的原因：</p> <p><img src="http://wx4.sinaimg.cn/large/83e1667dgy1fcldv59tghj21o80hqafi.jpg" alt=""></p> <h3 id="cascadeinverse">区分cascade和inverse</h3> <p class="notice">casecade和inverse的区别:<br> cascade:操作关联对象<br> inverse:控制外键的维护</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<p>此时会看到自动更新数据库后，控制台上打印出两个update语句。出现这种情况的原因：</p>
+
+<p><img src="http://wx4.sinaimg.cn/large/83e1667dgy1fcldv59tghj21o80hqafi.jpg" alt=""></p>
+
+<h3 id="cascadeinverse">区分cascade和inverse</h3>
+
+<p class="notice">casecade和inverse的区别:<br>
+cascade:操作关联对象<br>
+inverse:控制外键的维护</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 区分cascade和inverse</span>
 <span class="c1">// 在Customer.hbm.xml中的&lt;set&gt;上配置 cascade="save-update" inverse="true"</span>
 	
@@ -210,7 +472,22 @@
 <span class="c1">// 客户是否存到数据库:存</span>
 <span class="c1">// 订单是否存到数据库:存 因为cascade="save-update"；</span>
 <span class="c1">// 但外键是null 因为inverse="true" 放弃维护外键的功能</span>
-</code></pre></div> <hr> <hr> <p><a name="5"></a></p> <h2 id="centercenter-2"><center>多对多的配置</center></h2> <p class="notice">第一步:创建实体类<br> 第二步:建立映射<br> 第三步:将映射文件加入到核心配置文件中</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//学生的实体:</span>
+</code></pre>
+</div>
+
+<hr>
+<hr>
+
+<p><a name="5"></a></p>
+
+<h2 id="centercenter-2"><center>多对多的配置</center></h2>
+
+<p class="notice">第一步:创建实体类<br>
+第二步:建立映射<br>
+第三步:将映射文件加入到核心配置文件中</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="c1">//学生的实体:</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">sid</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">sname</span><span class="o">;</span>
@@ -235,7 +512,11 @@
 		<span class="k">this</span><span class="o">.</span><span class="na">courses</span> <span class="o">=</span> <span class="n">courses</span><span class="o">;</span>
 	<span class="o">}</span>	
 <span class="o">}</span>
-</code></pre></div> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//课程的实体:</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="c1">//课程的实体:</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Course</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">cid</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">cname</span><span class="o">;</span>
@@ -261,7 +542,11 @@
 		<span class="k">this</span><span class="o">.</span><span class="na">students</span> <span class="o">=</span> <span class="n">students</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div> <div class="language-xml highlighter-rouge"><pre class="highlight"><code>//Student.hbm.xml
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge">
+<pre class="highlight"><code>//Student.hbm.xml
 <span class="nt">&lt;hibernate-mapping&gt;</span>
 	<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"cn.xsw.hibernate.Student"</span> <span class="na">table=</span><span class="s">"student"</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;id</span> <span class="na">name=</span><span class="s">"sid"</span> <span class="na">column=</span><span class="s">"sid"</span><span class="nt">&gt;</span>
@@ -277,7 +562,11 @@
 		<span class="nt">&lt;/set&gt;</span>
 	<span class="nt">&lt;/class&gt;</span>
 <span class="nt">&lt;/hibernate-mapping&gt;</span>
-</code></pre></div> <div class="language-xml highlighter-rouge"><pre class="highlight"><code>//Course.hbm.xml
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge">
+<pre class="highlight"><code>//Course.hbm.xml
 <span class="nt">&lt;hibernate-mapping&gt;</span>
 	<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"cn.xsw.hibernate3.Course"</span> <span class="na">table=</span><span class="s">"course"</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;id</span> <span class="na">name=</span><span class="s">"cid"</span> <span class="na">column=</span><span class="s">"cid"</span><span class="nt">&gt;</span>
@@ -293,7 +582,16 @@
 		<span class="nt">&lt;/set&gt;</span>
 	<span class="nt">&lt;/class&gt;</span>
 <span class="nt">&lt;/hibernate-mapping&gt;</span>
-</code></pre></div> <h3 id="section-6">多对多中的保存操作</h3> <p class="notice">若不配置inverse则会报错，因为双向会产生多余的sql语句，即都在中间表中插入同一值的外键。<br> 一般在被动方的xml中配置inverse=“false”，由主动方来维护外键。</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<h3 id="section-6">多对多中的保存操作</h3>
+
+<p class="notice">若不配置inverse则会报错，因为双向会产生多余的sql语句，即都在中间表中插入同一值的外键。<br>
+一般在被动方的xml中配置inverse=“false”，由主动方来维护外键。</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo1</span><span class="o">()</span> <span class="o">{</span>
 	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
 	<span class="n">Transaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
@@ -329,7 +627,13 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <h3 id="section-7">多对多级中的级联保存</h3> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<h3 id="section-7">多对多级中的级联保存</h3>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 级联保存:保存学生关联课程</span>
 <span class="c1">// 在Student.hbm.xml中配置&lt;set&gt;上 cascade="save-update"</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo</span><span class="o">()</span> <span class="o">{</span>
@@ -352,7 +656,15 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <h3 id="section-8">多对多级中的级联删除</h3> <p>级联删除在多对多中很少使用</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<h3 id="section-8">多对多级中的级联删除</h3>
+
+<p>级联删除在多对多中很少使用</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 删除:删除学生同时删除学生关联选课 cascade="delete"</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo3</span><span class="o">(){</span>
 	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
@@ -364,7 +676,13 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <p>适合的方式是退选remove：</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+</code></pre>
+</div>
+
+<p>适合的方式是退选remove：</p>
+
+<div class="language-java highlighter-rouge">
+<pre class="highlight"><code><span class="nd">@Test</span>
 <span class="c1">// 多对多的学生退选</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">demo4</span><span class="o">(){</span>
 	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HibernateUtils</span><span class="o">.</span><span class="na">openSession</span><span class="o">();</span>
@@ -378,4 +696,5 @@
 	<span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
 	<span class="n">session</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Java" title="Pages tagged Java" class="tag"><span class="term">Java</span></a><a href="http://127.0.0.1:4000//tags/#Hibernate" title="Pages tagged Hibernate" class="tag"><span class="term">Hibernate</span></a><a href="http://127.0.0.1:4000//tags/#%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84" title="Pages tagged 关联关系映射" class="tag"><span class="term">关联关系映射</span></a><a href="http://127.0.0.1:4000//tags/#SSH%E6%A1%86%E6%9E%B6" title="Pages tagged SSH框架" class="tag"><span class="term">SSH框架</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//Hibernate-%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//Hibernate-%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//Hibernate-%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>
+</code></pre>
+</div>

@@ -4,10 +4,7 @@ title:  "Hibernate-配置"
 date:   2017-02-08
 excerpt: "本篇介绍了Hibernate的配置，包括核心配置与映射配置"
 tag:
-- Java 
 - Hibernate
-- 配置
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---   

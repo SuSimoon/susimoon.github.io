@@ -4,10 +4,7 @@ title:  "Spring-Bean(Annotation)"
 date:   2017-02-16
 excerpt: "本篇介绍了Spring中基于注解配置方式的Bean"
 tag:
-- Java 
 - Spring
-- Bean
-- SSH框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  

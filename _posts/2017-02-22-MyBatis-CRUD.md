@@ -3,11 +3,8 @@ layout: post
 title:  "MyBatis-CRUD"
 date:   2017-02-22
 excerpt: "本篇介绍了MyBatis的增删改查操作"
-tag:
-- Java 
+tag: 
 - MyBatis
-- CRUD
-- SSM框架
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
