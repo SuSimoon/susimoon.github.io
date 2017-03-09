@@ -1,12 +1,122 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-06T15:02:26+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Algorithms-初级排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-初级排序" /><published>2017-03-06T00:00:00+08:00</published><updated>2017-03-06T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-初级排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;排序模板&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;resultMap实现一对一查询&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-09T17:14:30+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">MySQL-表操作</title><link href="http://127.0.0.1:4000//MySQL-%E8%A1%A8%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="MySQL-表操作" /><published>2017-03-09T00:00:00+08:00</published><updated>2017-03-09T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MySQL-表操作</id><content type="html" xml:base="http://127.0.0.1:4000//MySQL-%E8%A1%A8%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;C:创建表&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;R:查询表&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;U:修改表&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;D:删除表&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;参考：&lt;img src=&quot;http://blog.csdn.net/litong09282039/article/details/46332127&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;创建表&lt;/center&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;语法：&lt;/h3&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;表名&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;字段&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;类型&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;长度&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;约束&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;字段&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;类型&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;长度&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;约束&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;字段&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;类型&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;长度&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;约束&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;字段&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;类型&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;长度&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;约束&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;注意：&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;表名后是小括号，后面要有分号。&lt;br /&gt;
+每一行字段后面要有逗号，但是最后一行没有逗号。&lt;br /&gt;
+数据的类型后的长度，如果是字符串类型，长度必须加。&lt;br /&gt;
+其他类型可以不加，是默认长度。int 默认长度为11。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;约束（单表）：&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;1.主键约束&lt;/strong&gt;&lt;br /&gt;
+声明主键（默认唯一、非空）  &lt;code class=&quot;highlighter-rouge&quot;&gt;primary key&lt;/code&gt; &lt;br /&gt;
+数据库维护主键，自动增长	  &lt;code class=&quot;highlighter-rouge&quot;&gt;auto_increment&lt;/code&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;2.唯一约束&lt;/strong&gt;&lt;br /&gt;
+值是唯一的  &lt;code class=&quot;highlighter-rouge&quot;&gt;unique&lt;/code&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;3.非空约束&lt;/strong&gt;&lt;br /&gt;
+值不能为空  &lt;code class=&quot;highlighter-rouge&quot;&gt;not null&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;示例：&lt;/h3&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;employee&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto_increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unique&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;gender&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;birthday&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;entry_date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;job&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;resume&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;查询表&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;desc 表名;&lt;/code&gt;  查看表的信息	&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;show tables;&lt;/code&gt; 查看当前库内所有表名&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;show create table 表名;&lt;/code&gt;  查看建表语句和字符集&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;修改表&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;添加字段：&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;alter table 表名 add 字段 类型(长度) 约束;&lt;/code&gt;					
+&lt;strong&gt;修改类型或者约束：&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;alter table 表名 modify 字段 类型(长度) 约束;&lt;/code&gt;			
+&lt;strong&gt;修改字段的名称：&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;alter table 表名 change 旧字段 新字段 类型(长度) 约束;&lt;/code&gt;		
+&lt;strong&gt;删除字段：&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;alter table 表名 drop 字段;	&lt;/code&gt;							
+&lt;strong&gt;修改表名：&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;rename table 旧表名 to 新表名;&lt;/code&gt;							
+&lt;strong&gt;修改字符集：&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;alter table 表名 character set utf8;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;练习&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;在上面员工表的基本上增加一个image列。
+	alter table employee add image varchar(20);
+修改job列，使其长度为60。
+	alter table employee modify job varchar(60);
+删除gender列。
+	alter table employee drop gender;
+表名改为user。
+	rename table employee to user;
+修改表的字符集为utf8
+	alter table user character set utf8;
+列名name修改为username
+	alter table user change name username varchar(30);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h6 id=&quot;section-4&quot;&gt;删除表&lt;/h6&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;drop table employee2;&lt;/code&gt;&lt;/p&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中表的操作</summary></entry><entry><title type="html">Algorithms-归并排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-归并排序" /><published>2017-03-09T00:00:00+08:00</published><updated>2017-03-09T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-归并排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;原地归并的抽象方法&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;插入排序&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;希尔排序&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;原地归并的抽象方法&lt;/center&gt;&lt;/h2&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中的归并排序算法</summary></entry><entry><title type="html">Algorithms-初级排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-初级排序" /><published>2017-03-06T00:00:00+08:00</published><updated>2017-03-06T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-初级排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;选择排序&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;插入排序&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;希尔排序&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;排序模板&lt;/center&gt;&lt;/h2&gt;
 
@@ -98,12 +208,54 @@
 	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;                                 &lt;span class=&quot;c1&quot;&gt;//1.设置长度&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;	                      &lt;span class=&quot;c1&quot;&gt;//2.外循环：从第二个元素开始&lt;/span&gt;
 		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;less&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//3.内循环：索引&amp;gt;0且小于前一个元素&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;exch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;                                &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//交换    &lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;exch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;                                &lt;span class=&quot;c1&quot;&gt;//交换    &lt;/span&gt;
 		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中</summary></entry><entry><title type="html">Utils工具类</title><link href="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="alternate" type="text/html" title="Utils工具类" /><published>2017-03-03T00:00:00+08:00</published><updated>2017-03-03T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Utils工具类</id><content type="html" xml:base="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/">&lt;blockquote&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;特点：&lt;/h3&gt;
+&lt;p class=&quot;notice&quot;&gt;排序所需时间取决于输入中元素的初始顺序&lt;br /&gt;
+对于实际应用中某些类型的非随机素组很有效&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;复杂度：&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;平均情况：~N²/4次比较、~N²/4次交换&lt;br /&gt;
+最好情况：N-1次比较、0次交换&lt;br /&gt;
+最坏情况：~N²/2次比较、~N²/2次交换&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;希尔排序&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;希尔排序通过将待比较的元素划分为几个区域来提升插入排序的效率。&lt;br /&gt;
+让元素可以一次性的朝最终位置迈进一大步，然后算法再取越来越小的步长进行排序。&lt;br /&gt;
+最后一步就是步长为1的普通的插入排序的，但是这个时候，整个序列已经是近似排好序的，所以效率高。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;      
+	&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;//1.计算h的大小&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;//2.h步长递减&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//3.插入排序&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;less&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;exch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;希尔排序视频参考&lt;a href=&quot;https://www.youtube.com/watch?v=M9YCh-ZeC7Y&quot;&gt;https://www.youtube.com/watch?v=M9YCh-ZeC7Y&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;初级排序参考：&lt;a href=&quot;http://blog.csdn.net/litong09282039/article/details/46332127&quot;&gt;http://blog.csdn.net/litong09282039/article/details/46332127&lt;/a&gt;&lt;/p&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中的三个初级排序算法，包括选择排序、插入排序和希尔排序</summary></entry><entry><title type="html">Utils工具类</title><link href="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="alternate" type="text/html" title="Utils工具类" /><published>2017-03-03T00:00:00+08:00</published><updated>2017-03-03T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Utils工具类</id><content type="html" xml:base="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;UUIDUtils&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;MD5Utils&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;MailUtils&lt;/a&gt;&lt;/p&gt;
@@ -417,7 +569,8 @@ INURL 语法和基本搜索语法的 最大区别在于，前者通常能提供�
 结果中包含着“the importance of censorship”，也包含着与censorship相关的另外一个词汇“propaganda”——“the importance of propaganda”。&lt;/p&gt;</content></entry><entry><title type="html">MySQL-数据库操作</title><link href="http://127.0.0.1:4000//MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="MySQL-数据库操作" /><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MySQL-数据库操作</id><content type="html" xml:base="http://127.0.0.1:4000//MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;C:创建数据库&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;R:查询数据库&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;#3&quot;&gt;U:修改数据库&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;D:删除数据库&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
@@ -457,6 +610,9 @@ create database 数据库名称 character set 编码 collate 校对规则;&lt;/p
 &lt;p class=&quot;notice&quot;&gt;show databases;  查看数据库 &lt;br /&gt;
 show create database 数据库名称;  查询数据库的定义&lt;/p&gt;
 
+&lt;p class=&quot;notice&quot;&gt;select database();  查看当前使用的数据库&lt;br /&gt;
+use dbname;  切换数据库&lt;/p&gt;
+
 &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 查看当前数据库服务器中的所有数据库&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;show&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;databases&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;-- 查看前面创建的mydb2数据库的定义信息&lt;/span&gt;
@@ -466,32 +622,33 @@ show create database 数据库名称;  查询数据库的定义&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h6 id=&quot;section&quot;&gt;删除数据库&lt;/h6&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;drop database 数据库名称;&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;h6 id=&quot;section-1&quot;&gt;修改数据库&lt;/h6&gt;
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;语法&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;alter database 数据库 character set 编码 collate 校对规则;&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;练习：查看服务器中的数据库，并把其中某一个库的字符集修改为gbk&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;alter database mydb2 character set 'gbk';&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;修改数据库&lt;/center&gt;&lt;/h2&gt;
 
-&lt;h6 id=&quot;section-2&quot;&gt;其他的操作&lt;/h6&gt;
+&lt;p class=&quot;notice&quot;&gt;alter database 数据库 character set 编码 collate 校对规则;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看当前使用的数据库 &lt;code class=&quot;highlighter-rouge&quot;&gt;select database();&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;切换数据库（*****） &lt;code class=&quot;highlighter-rouge&quot;&gt;use dbname;&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中数据库的操作</summary></entry><entry><title type="html">MyBatis-一对多查询</title><link href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" rel="alternate" type="text/html" title="MyBatis-一对多查询" /><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-一对多查询</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/">&lt;blockquote&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 将mydb1数据库的字符集修改为gbk &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;alter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;database&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mydb1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;character&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'gbk'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;删除数据库&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;drop database 数据库名称;&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 删除mydb1数据库&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;drop&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;database&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mydb1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注：只有切换数据库不需要database字样&lt;/p&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中数据库的操作</summary></entry><entry><title type="html">MyBatis-一对多查询</title><link href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" rel="alternate" type="text/html" title="MyBatis-一对多查询" /><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-一对多查询</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;resultMap实现一对多查询&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;resultMap实现一对多复杂查询&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
@@ -857,491 +1014,4 @@ show create database 数据库名称;  查询数据库的定义&lt;/p&gt;
 	&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="MyBatis" /><summary type="html">本篇介绍了MyBatis中的</summary></entry><entry><title type="html">MyBatis-配置</title><link href="http://127.0.0.1:4000//MyBatis-%E9%85%8D%E7%BD%AE/" rel="alternate" type="text/html" title="MyBatis-配置" /><published>2017-02-24T00:00:00+08:00</published><updated>2017-02-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-配置</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E9%85%8D%E7%BD%AE/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;properties:属性定义&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;settings:全局参数配置&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;typeAliases:类型别名&lt;/a&gt;  &lt;br /&gt;
-&lt;a href=&quot;#4&quot;&gt;mappers:映射器&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#5&quot;&gt;resultType&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#6&quot;&gt;resultMap&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;centersqlmpaconfigxmlcenter&quot;&gt;&lt;center&gt;sqlMpaConfig.xml配置&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;SqlMapConfig.xml中配置的内容和顺序如下：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;properties（属性）&lt;br /&gt;
-settings（全局配置参数）&lt;br /&gt;
-typeAliases（类型别名）&lt;br /&gt;
-typeHandlers（类型处理器）&lt;br /&gt;
-objectFactory（对象工厂）&lt;br /&gt;
-plugins（插件）&lt;br /&gt;
-environments（环境集合属性对象）&lt;br /&gt;
-environment（环境子属性对象）&lt;br /&gt;
-transactionManager（事务管理）&lt;br /&gt;
-dataSource（数据源）&lt;br /&gt;
-mappers（映射器）&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;
-### &lt;center&gt;properties:属性定义&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;可以把一些通用的属性值配置在属性文件中，加载到mybatis运行环境内。
-比如：创建db.properties配置数据库连接参数。&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 属性定义 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resource=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;db.properties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;environments&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;development&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;environment&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;development&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用jdbc事务管理--&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;transactionManager&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JDBC&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 数据库连接池--&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;dataSource&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POOLED&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;driver&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.driver}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.url}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.username}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.password}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dataSource&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/environment&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/environments&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;jdbc.driver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;com.mysql.jdbc.Driver&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;jdbc.url&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jdbc:mysql:///mybatis&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;jdbc.username&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;jdbc.password&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;091821&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p class=&quot;notice&quot;&gt;注：MyBatis将按照下面的顺序来加载属性：&lt;br /&gt;
-• 在 properties 元素体内定义的属性首先被读取。 
-• 然后会读取properties元素中resource或url加载的属性，它会覆盖已读取的同名属性。 
-• 最后读取parameterType传递的属性，它会覆盖已读取的同名属性。&lt;br /&gt;
-(比如db.properties属性文件中有”name”，而在parameterType中也有”name”，则会发生覆盖)&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;建议在使用properties时，不要在properties中定义属性，只引用定义的properties文件中属性，并且properties文件中定义的key要有一些特殊的规则。(比如jdbc.username)&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;
-### &lt;center&gt;settings:全局参数配置&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;mybatis运行时可以调整一些全局参数，参考：mybatis-settings.xlsx根据使用需求进行参数配置。&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;注：ibatis的全局配置参数中包括很多的性能参数(最大线程数，最大待时间等)，&lt;br /&gt;
-通过调整这些性能参数使ibatis达到高性能的运行。  &lt;br /&gt;
-mybatis没有这些性能参数，由mybatis自动调节。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;
-### &lt;center&gt;typeAliases:类型别名&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;可以将parameterType、resultType中指定的类型通过别名引用。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;MyBaits提供的别名：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://wx1.sinaimg.cn/large/83e1667dgy1fd1i7qeo4ej20zi0fu448.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;自定义别名：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 单个别名的定义:--&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;typeAliases&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;typeAlias&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.po.User&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;alias=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/typeAliases&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 批量别名定义:--&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;typeAliases&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 指定包路径，自动扫描包下边的pojo，定义别名，别名默认为类名（首字母小写或大写）--&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.po&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/typeAliases&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- UserMapper.xml --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findUserById&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	select * from user where id= #{id}
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;
-### &lt;center&gt;mappers:映射器&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1.resource方式：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;resource方式是加载classpath下的文件。&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mappers&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 通过resource引用mapper的映射文件 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resource=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sqlmap/User.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;mappers&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;2.class方式：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;通过class引用mapper接口 &lt;br /&gt;
-class：配置mapper接口全限定名&lt;br /&gt;
-要求：mapper.xml和mapper.java同名并且在一包下&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mappers&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.mapper.UserMapper&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mappers&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;3.package方式：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;批量mapper配置，通过package进行自动扫描包下边的mapper接口&lt;br /&gt;
-要求：mapper.xml和mapper.java同名并且在一包下&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mappers&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.mapper&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;	
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mappers&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;centermapperxmlcenter&quot;&gt;&lt;center&gt;Mapper.xml配置&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;a name=&quot;5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;centerparametertypecenter&quot;&gt;&lt;center&gt;parameterType传递包装类型&lt;/center&gt;&lt;/h3&gt;
-
-&lt;p&gt;使用mapper代理的方式开发，mapper接口方法输入参数只有一个。&lt;br /&gt;
-但并不会影响其可扩展性，因为dao层是通用的，可以通过扩展pojo(定义pojo包装类型)将不同的参数(可以是pojo也可以简单类型)传入进去。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;程序示例：自定义查询条件查询用户信息&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;• user的扩展类型：&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 可添加扩展字段&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;• 包装类型：&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 用户信息&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 自定义user的扩展对象&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setUserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userCustomer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;• Mapper.java&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;• 测试类：&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;SqlSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;openSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 创建代理对象&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 构造查询条件&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	
-	&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;centerresulttypecenter&quot;&gt;&lt;center&gt;resultType&lt;/center&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;返回简单类型：自定义查询条件，返回查询记录个数&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;与上述自定义查询条件查询用户信息的示例类似。&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findUserCount&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userQueryVo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	select count(*) from user where name like '%${userCustomer.name}%' 
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;SqlSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;openSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 创建代理对象&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 构造查询条件&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	
-	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;6&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;centerresultmapcenter&quot;&gt;&lt;center&gt;resultMap&lt;/center&gt;&lt;/h3&gt;
-
-&lt;p&gt;resultMap与resultType的区别：&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;resultType：&lt;/strong&gt;指定输出结果的类型，将sql查询结果映射为java对象。&lt;br /&gt;
-使用resultType要注意：sql查询的列名要和resultType指定pojo的属性名相同，指定相同属性方可映射成功。&lt;br /&gt;
-如果sql查询的列名要和resultType指定pojo的属性名全部不相同，list中无法创建pojo对象。&lt;br /&gt;
-&lt;strong&gt;resultMap：&lt;/strong&gt;将sql查询结果映射为java对象。&lt;br /&gt;
-如果sql查询列名和最终要映射的pojo的属性名不一致，可使用resultMap将列名和pojo的属性名做一个对应关系(列名和属性名映射配置)。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;程序示例：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 定义resultMap，列名和属性名映射配置
- 	id：resultMap的唯一标识 
- 	type：最终要映射的pojo类型
---&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;resultMap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userListResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 列名
-		id：要映射结果集的唯一标识 ，称为主键
-		column：结果集的列名
-		property：type指定的哪个属性中
-	 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id_&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- result是普通列的映射配置 --&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name_&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address_&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resultMap&amp;gt;&lt;/span&gt;
-
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用resultMap作结果映射
-	resultMap：若引用resultMap的位置和resultMap的定义在同一个mapper.xml则直接使用resultMap的id，
-	若不在同一个mapper.xml中需要在resultMap的id前边加namespace
---&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findUserListResultMap&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userQueryVo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultMap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userListResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	select id id_,name name_,address address_ from user where name like '%${userCustomer.name}%'
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserListResultMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;SqlSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;openSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 创建代理对象&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 构造查询条件&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUserCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userCustomer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	
-	&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserListResultMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="MyBatis" /><summary type="html">本篇介绍了MyBatis中的sqlMapConfig.xml与map.xml配置的补充</summary></entry><entry><title type="html">MyBatis-mapper</title><link href="http://127.0.0.1:4000//MyBatis-mapper/" rel="alternate" type="text/html" title="MyBatis-mapper" /><published>2017-02-24T00:00:00+08:00</published><updated>2017-02-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-mapper</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-mapper/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;原始dao开发方式&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;创建mapper代理的方式&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;mapper接口返回单个对象和集合对象&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerdaocenter&quot;&gt;&lt;center&gt;原始dao开发方式&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;程序员需要写dao接口和dao的实现类。&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;程序示例：&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;接口：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;实现类：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDaoImpl&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 将SqlSessionFactory注入&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UserDaoImpl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sqlSessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;c1&quot;&gt;//创建SqlSession&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;SqlSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;openSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;c1&quot;&gt;// 根据id查询用户信息&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;selectOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.findUserById&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;测试类：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDaoImplTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Before&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setUp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;// 配置文件SqlMapConfig.xml&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SqlMapConfig.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
-		&lt;span class=&quot;c1&quot;&gt;// 加载配置文件到输入流&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;InputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getResourceAsStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;c1&quot;&gt;// 创建会话工厂&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testFindUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;UserDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserDaoImpl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;dao&quot;&gt;原始dao开发方式的问题：&lt;/h3&gt;
-
-&lt;p&gt;1.dao的实现类中存在重复代码，整个mybatis操作的过程代码模板重复（先创建sqlsession、调用sqlsession的方法、关闭sqlsession）&lt;br /&gt;
-2.dao的实现类中存在硬编码，调用sqlsession方法时将statement的id硬编码。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centermappercenter&quot;&gt;&lt;center&gt;创建mapper代理的方式&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;程序员只需要写dao接口，dao接口实现对象由mybatis自动生成代理对象。&lt;/p&gt;
-
-&lt;h3 id=&quot;mapper&quot;&gt;1.创建mapper接口：&lt;/h3&gt;
-
-&lt;p&gt;mybatis提出了mapper接口，相当于dao接口。&lt;/p&gt;
-
-&lt;p&gt;mapper接口的命名方式建议：表名Mapper(UserMapper)&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;				
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p class=&quot;notice&quot;&gt;1.mapper.xml中statement的id就是mapper.java中方法名。&lt;br /&gt;
-2.mapper.xml中statement的parameterType和mapper.java中方法输入参数类型一致。&lt;br /&gt;
-3.mapper.xml中statement的resultType和mapper.java中方法返回值类型一致。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://wx1.sinaimg.cn/large/83e1667dgy1fd1c7e5j52j212u0axq4c.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;mapperxmlnamespacemapper&quot;&gt;2.mapper.xml中namespace指定为mapper接口的全限定名：&lt;/h3&gt;
-
-&lt;p&gt;通过mapper.xml和mapper.java进行关联(通过xml找到接口)。&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.mybatis.mapper.UserMapper&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;mapperxmlsqlmapconfigxml&quot;&gt;3.将mapper.xml在SqlMapConfig.xml中加载&lt;/h3&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 通过resource引用mapper的映射文件 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resource=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mapper/UserMapper.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;4.测试类：&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserMapperTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Before&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SqlMapConfig.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
-		&lt;span class=&quot;n&quot;&gt;InputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getResourceAsStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;SqlSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;openSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;c1&quot;&gt;//创建代理对象&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centermappercenter-1&quot;&gt;&lt;center&gt;mapper接口返回单个对象和集合对象&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p class=&quot;notice&quot;&gt;不管查询记录是单条还是多条，在statement中resultType定义一致，都是单条记录映射的pojo类型。&lt;br /&gt;
-mapper接口方法返回值如果是单个对象，生成的代理对象内部通过selectOne获取记录；&lt;br /&gt;
-mapper接口方法返回值如果是集合对象，生成的代理对象内部通过selectList获取记录。&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findUserByName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserByName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 自定义查询：
-	parameterType：指定包装类型
-	userCustomer是userQueryVo中的属性，可通过ognl来获取属性值。
- --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findUserList&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userQueryVo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	select * from user where name like '%${userCustomer.name}%'
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="MyBatis" /><summary type="html">本篇介绍了MyBatis中的mapper接口</summary></entry></feed>
+&lt;/div&gt;</content><category term="MyBatis" /><summary type="html">本篇介绍了MyBatis中的</summary></entry></feed>

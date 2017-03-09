@@ -2,20 +2,19 @@
 layout: post
 title:  "Algorithms-初级排序"
 date:   2017-03-06
-excerpt: "本篇介绍了Algorithms中"
+excerpt: "本篇介绍了Algorithms中的三个初级排序算法，包括选择排序、插入排序和希尔排序"
 tag:
 - Algorithms 
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
 
-><a href="#1">排序模板</a>  
-><a href="#2">resultMap实现一对一查询</a>   
-><a href="#3">两种方式的比较</a>    
+><a href="#1">选择排序</a>  
+><a href="#2">插入排序</a>   
+><a href="#3">希尔排序</a>    
 
 ***
 
-参考：![](http://blog.csdn.net/litong09282039/article/details/46332127)
 
 ## <center>排序模板</center>  
 
@@ -165,8 +164,9 @@ public static void sort(Comparable[] a) {
 }
 ```
 
+希尔排序视频参考[https://www.youtube.com/watch?v=M9YCh-ZeC7Y](https://www.youtube.com/watch?v=M9YCh-ZeC7Y)
 
-
+初级排序参考：[http://blog.csdn.net/litong09282039/article/details/46332127](http://blog.csdn.net/litong09282039/article/details/46332127)
 
 
 
