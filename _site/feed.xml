@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-06T11:07:23+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Algorithms-初级排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-初级排序" /><published>2017-03-06T00:00:00+08:00</published><updated>2017-03-06T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-初级排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-06T15:02:26+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Algorithms-初级排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-初级排序" /><published>2017-03-06T00:00:00+08:00</published><updated>2017-03-06T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-初级排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;排序模板&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;resultMap实现一对一查询&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
@@ -6,7 +6,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;img src=&quot;http://blog.csdn.net/litong09282039/article/details/46332127&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;排序模板&lt;/center&gt;&lt;/h2&gt;
 
@@ -56,9 +56,9 @@
 
 &lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;选择排序&lt;/center&gt;&lt;/h2&gt;
 
-&lt;p class=&quot;notice&quot;&gt;找到数组中最小的元素，将它和第一个元素交换位置。&lt;br /&gt;
-在剩下的元素中找到最小的元素，将它与第二个元素交换位置。&lt;br /&gt;
-如此往复，直到将整个数组排序。&lt;/p&gt;
+&lt;p class=&quot;notice&quot;&gt;1.找到数组中最小的元素，将它和第一个元素交换位置。&lt;br /&gt;
+2.在剩下的元素中找到最小的元素，将它与第二个元素交换位置。&lt;br /&gt;
+3.如此往复，直到将整个数组排序。&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;//设置长度&lt;/span&gt;
@@ -77,18 +77,33 @@
 
 &lt;h3 id=&quot;section&quot;&gt;特点：&lt;/h3&gt;
 
-&lt;p&gt;1.运行时间和输入无关&lt;br /&gt;
+&lt;p class=&quot;notice&quot;&gt;1.运行时间和输入无关&lt;br /&gt;
 2.数据移动是最少的&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;复杂度：&lt;/h3&gt;
 
-&lt;p&gt;对于长度为N的数组，需要大约N²/2次比较和N次交换。&lt;/p&gt;
+&lt;p class=&quot;notice&quot;&gt;对于长度为N的数组，需要大约N²/2次比较和N次交换。&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;插入排序&lt;/center&gt;&lt;/h2&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中</summary></entry><entry><title type="html">Utils工具类</title><link href="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="alternate" type="text/html" title="Utils工具类" /><published>2017-03-03T00:00:00+08:00</published><updated>2017-03-03T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Utils工具类</id><content type="html" xml:base="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/">&lt;blockquote&gt;
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;插入排序&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;1.从第一个元素开始，该元素可以认为已经被排序。&lt;br /&gt;
+2.取出下一个元素，与已经排序的元素从后向前比较。小于则交换，大于则停止。&lt;br /&gt;
+3.如此往复，直到将整个数组排序。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;                                 &lt;span class=&quot;c1&quot;&gt;//1.设置长度&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;	                      &lt;span class=&quot;c1&quot;&gt;//2.外循环：从第二个元素开始&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;less&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//3.内循环：索引&amp;gt;0且小于前一个元素&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;exch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;                                &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//交换    &lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中</summary></entry><entry><title type="html">Utils工具类</title><link href="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="alternate" type="text/html" title="Utils工具类" /><published>2017-03-03T00:00:00+08:00</published><updated>2017-03-03T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Utils工具类</id><content type="html" xml:base="http://127.0.0.1:4000//Utils%E5%B7%A5%E5%85%B7%E7%B1%BB/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;UUIDUtils&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;MD5Utils&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;MailUtils&lt;/a&gt;&lt;/p&gt;
