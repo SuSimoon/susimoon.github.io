@@ -15,8 +15,6 @@
 <span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
 <span class="c1">-- 查看前面创建的mydb2数据库的定义信息</span>
 <span class="k">show</span> <span class="k">create</span> <span class="k">database</span> <span class="n">mydb2</span><span class="p">;</span>
-<span class="c1">-- 删除前面创建的mydb1数据库</span>
-<span class="k">drop</span> <span class="k">database</span> <span class="n">mydb1</span><span class="p">;</span>
 </code></pre></div> <hr> <p><a name="3"></a></p> <h2 id="centercenter-2"><center>修改数据库</center></h2> <p class="notice">alter database 数据库 character set 编码 collate 校对规则;</p> <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="c1">-- 将mydb1数据库的字符集修改为gbk </span>
 <span class="k">alter</span> <span class="k">database</span> <span class="n">mydb1</span> <span class="n">character</span> <span class="k">set</span> <span class="s1">'gbk'</span><span class="p">;</span>
 </code></pre></div> <hr> <p><a name="4"></a></p> <h2 id="centercenter-3"><center>删除数据库</center></h2> <p class="notice">drop database 数据库名称;</p> <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="c1">-- 删除mydb1数据库</span>

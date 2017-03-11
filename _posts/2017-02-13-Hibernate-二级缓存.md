@@ -1,4 +1,4 @@
-- Hibernate---
+---
 layout: post
 title:  "Hibernate-二级缓存"
 date:   2017-02-12

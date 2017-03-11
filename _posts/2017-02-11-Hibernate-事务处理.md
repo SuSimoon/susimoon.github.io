@@ -1,4 +1,4 @@
-- Hibernate---
+---
 layout: post
 title:  "Hibernate-事务处理"
 date:   2017-02-11

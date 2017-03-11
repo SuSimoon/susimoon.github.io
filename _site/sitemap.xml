@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/</loc>
+<lastmod>2017-03-11T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://127.0.0.1:4000//MySQL-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C/</loc>
+<lastmod>2017-03-10T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://127.0.0.1:4000//MySQL-%E8%A1%A8%E6%93%8D%E4%BD%9C/</loc>
 <lastmod>2017-03-09T00:00:00+08:00</lastmod>
 </url>
@@ -110,7 +118,7 @@
 </url>
 <url>
 <loc>http://127.0.0.1:4000//Hibernate-%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/</loc>
-<lastmod>2017-02-13T00:00:00+08:00</lastmod>
+<lastmod>2017-02-12T00:00:00+08:00</lastmod>
 </url>
 <url>
 <loc>http://127.0.0.1:4000//Hibernate-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/</loc>

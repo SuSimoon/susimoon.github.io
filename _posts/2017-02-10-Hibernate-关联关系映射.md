@@ -1,4 +1,4 @@
-- Hibernate---
+---
 layout: post
 title:  "Hibernate-关联关系映射"
 date:   2017-02-10
@@ -8,6 +8,7 @@ tag:
 feature: http://i.imgur.com/Ds6S7lJ.png
 comments: false
 ---  
+
 
 ><a href="#1">实体之间的关系</a>    
 ><a href="#2">一对多的配置</a>  
