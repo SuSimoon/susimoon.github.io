@@ -1,9 +1,504 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-11T16:37:05+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">MySQL-多表操作</title><link href="http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="MySQL-多表操作" /><published>2017-03-11T00:00:00+08:00</published><updated>2017-03-11T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MySQL-多表操作</id><content type="html" xml:base="http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;数据的类型&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;C:添加数据&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;R:查询数据&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#4&quot;&gt;D:删除数据&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#5&quot;&gt;U:修改数据&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-12T19:42:48+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">Linux-基本操作</title><link href="http://127.0.0.1:4000//Linux-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="Linux-基本操作" /><published>2017-03-12T00:00:00+08:00</published><updated>2017-03-12T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Linux-基本操作</id><content type="html" xml:base="http://127.0.0.1:4000//Linux-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;linux 操作系统概述&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;linux系统环境&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;希尔排序&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;
+## &lt;center&gt;linux 操作系统概述&lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;1.常见操作系统&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;服务端操作系统：linux、unix、windows server &lt;br /&gt;
+单机操作系统：windows、 MAC 、linux（ubuntu）&lt;br /&gt;
+移动操作系统：Android、IOS 、Windows phone&lt;/p&gt;
+
+&lt;h3 id=&quot;linux&quot;&gt;2.linux操作系统介绍&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• 特点：&lt;/strong&gt; &lt;br /&gt;
+1. 开放、开源、多用户的网络操作系统。&lt;br /&gt;
+2. 基于unix(unix–&amp;gt;minix–&amp;gt;linux)，可以定制内核。
+3. 加入了GNU组织（自由软件组织 ，copyLeft），通过GPL（通用公共许可）许可对外发布。&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• linux组成：&lt;/strong&gt;
+1. linux内核：linus 团队管理&lt;br /&gt;
+2. shell：用户与内核交互的接口 &lt;br /&gt;
+3. 文件系统：ext3、ext4等(windows有fat32、ntfs) &lt;br /&gt;
+4. 第三方应用软件&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• linux操作系统版本：&lt;/strong&gt; &lt;br /&gt;
+1. 内核版本 ：linus团队管理。
+2. 发行版本：一些软件公司以内核为基础，再添加一些软件和文档形成发行版本。
+- red hat：rhel ，centos&lt;br /&gt;
+- debian：debian，ubuntu（桌面）&lt;br /&gt;
+- android&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerlinuxcenter&quot;&gt;&lt;center&gt;linux系统环境&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;默认有6个命令交互通道和一个图形界面交互通道，默认进入到的是图形界面通道。&lt;br /&gt;
+命令交互模式切换：ctrl+alt+f1—f6&lt;br /&gt;
+图形交互界面：ctrl+alt+f7&lt;/p&gt;
+
+&lt;p&gt;###1.图形界面交互模式&lt;/p&gt;
+
+&lt;p&gt;terminal：图形界面的命令终端，它是图形界面交互通道的延伸，要依赖于图形界面。&lt;/p&gt;
+
+&lt;p&gt;###2.命令交互模式&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;命令提示符 simoon@ubuntu:~$ 
+- &lt;code class=&quot;highlighter-rouge&quot;&gt;simoon&lt;/code&gt;：用户名&lt;br /&gt;
+- &lt;code class=&quot;highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt;：主机名&lt;br /&gt;
+-&lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt;：路径。假如当前的路径正好是该用户存放数据的根目录，则显示~&lt;br /&gt;
+- &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;：用户的类型。$代表普通用户  #代表超级用户&lt;/p&gt;
+
+&lt;p&gt;###3.linux文件系统&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;目录结构：&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;http://wx3.sinaimg.cn/large/83e1667dly1fbjfve0ffqj21bg0pu0z8.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;文件权限：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;权限&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;w&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;可写&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;r&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;只读&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;可执行&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;无权限&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• 字符表示法&lt;/strong&gt;
+drwxr-xr-x
+第1个字符： 文件的类型(d：文件夹  -：普通文件  c：串口文件  l：连接文件)
+2-4字符： 该文件的属主用户的权限（创建该文件的用户） 
+5-7字符： 与属主用户同一组的其他用户的权限
+8-10字符： 不同组的其他用户的权限&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• 数字表示法&lt;/strong&gt;
+-rw-r–r–： 文件的默认权限。 110|100|100 644 
+drwxr-xr-x ： 目录的默认权限。 111|101|101 755&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerlinuxcenter-1&quot;&gt;&lt;center&gt;linux的常用命令&lt;/center&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;注销、关机、重启&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;1.注销：&lt;code class=&quot;highlighter-rouge&quot;&gt;logout&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;exit&lt;/code&gt; (图形界面是无法logout的)&lt;br /&gt;
+2.关机：&lt;code class=&quot;highlighter-rouge&quot;&gt;shutdown - h  时间&lt;/code&gt; (need to be root)&lt;br /&gt;
+  - h：关机&lt;br /&gt;
+  - 时间：now-马上、12.30-指定具体时间、3-几分钟以后&lt;br /&gt;
+3.重启：&lt;code class=&quot;highlighter-rouge&quot;&gt;shutdown -r 时间&lt;/code&gt;&lt;br /&gt;
+  -r ：restart&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;文件操作命令&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;ls     ：查看目录内容&lt;br /&gt;
+ls - l ：查看详细信息&lt;br /&gt;
+ls - a ：查看所有文件（隐藏）&lt;br /&gt;
+ls - la：查看所有文件详细信息&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;mkdir ：创建目录&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;cd  ：切换目录
+    &lt;ul&gt;
+      &lt;li&gt;cd ..      记得要加空格&lt;/li&gt;
+      &lt;li&gt;cd ./java  进入当前目录的子目录&lt;/li&gt;
+      &lt;li&gt;cd ../xxx  进入上一级目录的子目录
+tab ：自动补全&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;touch  ：创建一个空白的普通文件
+  touch aa.txt&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;echo ：把内容重定向到指定的文件中 ，有则打开，无则创建
+  echo “test”&amp;gt;a.txt&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;cat、more ：查看文件内容
+    &lt;ul&gt;
+      &lt;li&gt;cat  ：查看文件内容&lt;/li&gt;
+      &lt;li&gt;more ：分页查看文件内容，按空格键换页&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;cp、mv、rm
+    &lt;ul&gt;
+      &lt;li&gt;cp ：复制
+ 	cp bj.txt ./java/j2ee&lt;/li&gt;
+      &lt;li&gt;mv ：剪切、重命名
+剪切 ：mv aa.txt ../android/
+重命名 ：假如剪切的文件 存放在同一个目录中 ，则是重命名
+   mv bb.txt cc.txt&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;-rm：删除文件或者文件夹
+   -f ： 假如要删除的文件不存在，也不提示
+   -i ： 删除前提示，默认不删除，要删除，输入y
+   -d ： 删除空白目录 
+   -r ： 递归删除&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;wc ：word count ：统计字符数
+  命令： wc bj.txt
+  出现了三个数字154  233 3418 
+    - 154 ：行数
+    - 233 ：单词数
+    - 3418 ：字符数&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ln :创建连接文件
+    &lt;ul&gt;
+      &lt;li&gt;默认创建的是硬连接，类似复制，但是两个文件会同步 
+ 命令：ln ./java/android/aa.txt  aaa&lt;/li&gt;
+      &lt;li&gt;s ：创建的是软连接&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;pwd ：查看当前目录的绝对路径&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;管道命令 |
+  命令： ls -la | wc 
+  (ls -la这个命令作为wc的输入，也就是统计这个命令执行的结果的字数统计)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;重定向
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;blockquote&gt;
+          &lt;p&gt;：覆盖模式
+  命令：  echo “ww”&amp;gt;aaa&lt;/p&gt;
+        &lt;/blockquote&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;blockquote&gt;
+          &lt;blockquote&gt;
+            &lt;p&gt;：追加模式
+  命令： echo “ww”»aaa&lt;/p&gt;
+          &lt;/blockquote&gt;
+        &lt;/blockquote&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;passwd ：设置密码
+    ubuntu默认root账号是没有开启，只要设置root密码即可开启
+	设置 sudo passwd root&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;su  切换目录
+	su root 
+	root用户切换到其他账号不需要密码&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;man    ：(manual手工，帮助)帮助命令，好比windows help 
+   命令： man ls&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;linux 系统命令&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.stat ：查看文件的详细信息
+	stat bj.txt
+
+2.who与whoami
+	who ：查看在线的用户
+		simoon   tty4         2017-01-07 12:15（tty表示通道）
+		simoon   tty1         2017-01-07 12:12
+		simoon   tty7         2017-01-07 11:53 (:0)
+		simoon   pts/1        2017-01-07 12:49 (:0)(pts表示命令终端，可打开多个终端)
+	
+	whoami ：查看当前自己的用户
+
+3.hostname ： 显示主机名
+	hostname  --- ubuntu
+
+4.uname  ：显示系统信息  ---Linux
+    -a ：显示完整的系统信息
+    	Linux ubuntu 3.11.0-12-generic #19-Ubuntu SMP Wed Oct 9 16:12:00 UTC 2013 i686 i686 i686 GNU/Linux(CNU表示自由软件组织)
+
+5.top ：显示当前耗时的进行的信息，每3秒刷新一次 
+    cltr+c 中断 
+    (可根据pid来kill进程)
+
+6.ps ：显示当前进程的快照 
+     - axu
+
+7.du ：显示文件的大小信息 
+
+8.df ：磁盘使用情况  disk free
+
+9.ifconfig ：查看或者配置网卡信息，好比windows的ipconfig
+	ipv4：32位  2-32次方     ipv6  128位     是 ipv4  2-96次方倍数
+	
+	设置虚拟机ip地址：
+	1. 设置vmware的连接方式
+	 - NAT模式：共享宿主机的ip地址，在网上邻居找不到虚拟机，只能访问宿主机
+	 - 仅主机模式：在网上邻居中可以找不到虚拟机
+	 - 桥接模式：需要单独设置ip，可以在网上邻居查找
+	
+	2. 图形界面设置ip地址 
+	  edit connection --》ipv4--》manual（手工设置）--》add  （ip地址，子网掩码）
+	
+	3.命令方式设置ip地址
+	  静态设置ip：
+	     sudo ifconfig eth0 192.168.15.122 netmask 255.255.255.0 (第0块以太网卡)
+
+10.ping：测试与目标主机连接情况
+
+11.clear ：清除屏幕  windows： cls  
+
+12.man ：帮助命令
+	man 命令
+
+13.kill ：杀死进程
+	kill  pid 
+
+14.netstat ：网络连接详细信息
+
+15. useradd 
+	  - 查看用户信息
+		sudo cat /etc/passwd
+		itcast:x:1000:1000:UbuntuA,,,:/home/itcast:/bin/bash
+		- itcast:用户名
+		- x ：密码 ：已经加密 ，密码存放在  /etc/shadow 
+		- 1000: 账号id ，userId
+		- 1000： 组id ，group id
+		  - UbuntuA,,,  ：账号描述
+		  - /home/itcast ：该账号存放文件的默认位置  ~
+		- /bin/bash：该用户的shell脚本的解析方式  ，sh 、bash、rbash
+
+	  - 创建用户 
+		sudo useradd lijun -d  /home/lijun   -s /bin/bash 
+		- d  ：指定该用户的home路径 
+		- s  ：该用户的shell解析方式
+		
+		步骤：
+		1. 创建 /home/lijun 目录
+		2. 执行 useradd 命令
+		3. 用 passwd 设置密码
+		4. su 切换用户
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;打包、压缩文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;windows ： zip、rar    
+linux ：gz ，bzip，zip
+
+1.tar :打包、拆包命令 
+    tar - cxzjvf  &amp;lt;打包后的文件&amp;gt;  &amp;lt;欲打包的目录&amp;gt;
+	  - c ：创建的一个归档文件，即打包文件夹
+	  - x ：拆包
+	  - z ：以gzip格式压缩，默认压缩倍数 6倍（0-9）
+	  - j ：以bzip2格式压缩
+	  - v ：显示打包或者拆包的文件信息
+	  - f ：后面紧接一个归档文件
+
+   - 打包文件
+      tar -cvf news.tar  ./java   摘要  
+   - 拆包文件
+      tar -xvf news.tar
+
+2.gzip、bzip2 压缩与解压
+      1. 压缩文件
+        gzip news.tar
+      2. 解压文件
+  		gzip -d news.tar.gz
+        -d :解压
+
+3.打包及压缩 
+   - 打包及压缩
+      tar -czvf news.tar.gz ./java
+   - 拆包及压解缩
+      tar -xzvf  news.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;软件管理&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;windows ： .exe   
+   安装  ： mysql.exe  
+   卸载  ： 该软件唯一的标识，包名   alibaba
+android ： *.apk   卸载 包名
+red hat ： *.rpm 
+ubuntu  ： 对debian的升级  *.deb 格式
+
+
+1.安装软件
+    - dpkg ：debian  package 
+        离线安装：
+        安装 ： sudo dpkg - i  &amp;lt;文件名&amp;gt; 
+     	   -i ：install
+           命令：sudo dpkg -i ./tree_1.6.0-1_i386.deb
+        卸载 ： sudo dpkg - r  &amp;lt;包名&amp;gt; 
+           -r ：remove
+           命令：sudo dpkg -r tree
+   
+    - apt-get ：advance  package  tools 
+   　　  对dpkg命令的升级，在线安装
+	    安装 ： sudo apt-get -install  &amp;lt;包名&amp;gt;
+	    卸载 ： sudo apt-get -remove  &amp;lt;包名&amp;gt;
+
+2.vim 软件 ：好比记事本，但是比记事本要强大  
+    
+	1. 安装vim
+	2. 使用vim  
+	    命令：vim mm.txt
+	    操作模式：
+	    1. 一般模式 ，默认进入的一般模式，该模式不能编辑文档 ，只能查看
+	        按 i（insert）  进入 插入模式 
+	    2. 编辑模式、插入模式 
+	        该模式可以编辑文档，按esc 退出插入模式，进入到一般模式 
+	    3. 命令模式 ：在 一般模式中按：进入命令模式
+	        - q  ： 安全退出，当没有操作该文档，则直接按q退出vim 
+			- q! ：当修改了内容，但是不想保存，则q！强制退出
+			- wq ：保存退出
+			- set number ：显示行号
+			- set nonumber ：取消行号显示
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;javalinux&quot;&gt;搭建Java服务器，并且实现远程安全访问linux系统&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过ssh实现安全远程访问linux系统&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh ：secure shell
+	加密：
+1. 对称加密 （加密密钥与解密密钥相同）
+	des 、aes
+2. 非对称加密（加密密钥与解密密钥不同）
+	RSA ：公钥、私钥 
+	数字摘要：md5 \sha1 
+
+
+1. 查看是否安装了ssh服务端与客户端
+	sudo apt-cache policy openssh-client openssh-server
+
+2. 安装ssh服务端与客户端软件
+	sudo dpkg -i ./ssh/*
+   
+3. 通过windows ssh客户端来访问linux服务端
+	- putty ：远程登录
+	- winscp433setup.exe ：文件传输
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;安装jdk&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;进入 root用户
+	实现步骤：
+	1. jdk 存放在哪里  /opt
+	2. 把软件拷贝到/opt
+		su root
+		cp ./jdk-6u39-linux-i586.bin /opt
+	3. 绿色软件，解压 
+		./jdk-6u39-linux-i586.bin (此处要注意该文件是否有执行权限)
+	4. 设置环境变量
+		vim /etc/profile 
+		export JAVA_HOME=&quot;/opt/jdk1.6.0_39&quot;
+		export PATH=&quot;$JAVA_HOME/bin:$PATH&quot;
+	5. 刷新配置 ，让配置生效
+	   source /etc/profile
+
+	6. 编写Demo.java,测试 
+	   -javac Demo.java
+	       - java Demo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;安装tomcat&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;步骤：
+
+1. 安装在哪里 /opt
+2. 拷贝、解压
+   tar -xzvf  apache-tomcat.tar.gz
+3. 运行
+   - ./startup.sh
+   - ./shutdown.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装Eclipse&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;步骤：
+	1.安装在/opt
+	2. 拷贝、解压
+	   cp eclipse.tar.gz  /opt
+	   tar -xzvf  eclipse.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;重点&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.linux系统环境
+	命令交互通道
+	命名提示符
+2. linux 目录结构、文件权限
+drwxr-xr-x
+3. linux 命令
+	- 开关机
+	- 文件操作 
+	- 系统命令
+    	1. top 2. who 3. ifconfig 4. ping 5. kill 6. man 7.clear 8.netstat
+4. 软件管理
+	- dpkg ：离线  .deb  .rpm  .apk 
+	- apt-get ：在线 
+5. 压缩解压
+	tar -cxgzvf 打包后的文件 要打包的文件
+6. vim 的使用
+	三种模式
+7. ssh理解 secure shell
+8. java开发环境搭建
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><category term="Linux" /><summary type="html">本篇介绍了Linux中的基本操作</summary></entry><entry><title type="html">MySQL-多表操作</title><link href="http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="MySQL-多表操作" /><published>2017-03-11T00:00:00+08:00</published><updated>2017-03-11T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MySQL-多表操作</id><content type="html" xml:base="http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;外键约束&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;数据库的设计&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;多表查询&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;子查询&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
@@ -671,7 +1166,13 @@ select … from … where … group by… having… order by … ;&lt;/p&gt;</co
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;原地归并的抽象方法&lt;/center&gt;&lt;/h2&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中的归并排序算法</summary></entry><entry><title type="html">Algorithms-初级排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-初级排序" /><published>2017-03-06T00:00:00+08:00</published><updated>2017-03-06T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-初级排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;原地归并的抽象方法&lt;/center&gt;&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;原地归并的抽象方法&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;算法动态图：&lt;a href=&quot;https://www.youtube.com/watch?v=JSceec-wEyw&quot;&gt;https://www.youtube.com/watch?v=JSceec-wEyw&lt;/a&gt;&lt;/p&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中的归并排序算法</summary></entry><entry><title type="html">Algorithms-初级排序</title><link href="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/" rel="alternate" type="text/html" title="Algorithms-初级排序" /><published>2017-03-06T00:00:00+08:00</published><updated>2017-03-06T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Algorithms-初级排序</id><content type="html" xml:base="http://127.0.0.1:4000//Algorithms-%E5%88%9D%E7%BA%A7%E6%8E%92%E5%BA%8F/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;选择排序&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;插入排序&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;希尔排序&lt;/a&gt;&lt;/p&gt;
@@ -1207,70 +1708,4 @@ use dbname;  切换数据库&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p class=&quot;notice&quot;&gt;注：只有切换数据库不需要database字样&lt;/p&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中数据库的操作</summary></entry><entry><title type="html">MyBatis-一对多查询</title><link href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" rel="alternate" type="text/html" title="MyBatis-一对多查询" /><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MyBatis-一对多查询</id><content type="html" xml:base="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;resultMap实现一对多查询&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;resultMap实现一对多复杂查询&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;两种方式的比较&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerresultmapcenter&quot;&gt;&lt;center&gt;resultMap实现一对多查询&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Orders：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Orders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
-    &lt;span class=&quot;c1&quot;&gt;//关联用户信息&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
-    &lt;span class=&quot;c1&quot;&gt;//关联订单明细&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Orderdetail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderdetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// &amp;lt;------&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;//get、set方法 ...&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;map.xml：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;resultMap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orders&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ordersUserResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;createtime&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;createtime&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;note&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;note&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;association&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;javaType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;result&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/association&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resultMap&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;resultMap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orders&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderAndOrderDetails&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;extends=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ordersUserResultMap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--继承ordersUserResultMap--&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;collection&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderdetails&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ofType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderdetail&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;orderdetail_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;items_num&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;items_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsNum&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/collection&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resultMap&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;map.java：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Orders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findOrderAndOrderDetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerresultmapcenter-1&quot;&gt;&lt;center&gt;resultMap实现一对多复杂查询&lt;/center&gt;&lt;/h2&gt;</content><category term="Spring" /><summary type="html">本篇介绍了MyBatis中resultMap实现一对多查询的方式</summary></entry></feed>
+&lt;p class=&quot;notice&quot;&gt;注：只有切换数据库不需要database字样&lt;/p&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中数据库的操作</summary></entry></feed>

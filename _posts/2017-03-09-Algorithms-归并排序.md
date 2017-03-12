@@ -18,3 +18,10 @@ comments: false
 
 ## <center>原地归并的抽象方法</center>   
 
+***
+
+
+## <center>原地归并的抽象方法</center> 
+
+
+算法动态图：[https://www.youtube.com/watch?v=JSceec-wEyw](https://www.youtube.com/watch?v=JSceec-wEyw)
