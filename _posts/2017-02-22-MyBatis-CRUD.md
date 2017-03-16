@@ -100,10 +100,10 @@ sqlSession.commit(); //需要提交事务才能添加
 
 ```xml
 <!-- 主键返回
-selectKey：用于进行主键返回，定义了获取主键值的sql
-order：设置selectKey中sql执行的顺序，相对于insert语句来说
-keyProperty：将主键值设置到哪个属性
-resultType：select LAST_INSERT_ID()的结果类型
+	selectKey：用于进行主键返回，定义了获取主键值的sql
+	order：设置selectKey中sql执行的顺序，相对于insert语句来说
+	keyProperty：将主键值设置到哪个属性
+	resultType：select LAST_INSERT_ID()的结果类型
 -->
 <insert id="insertUser" parameterType="cn.xsw.mybatis.User">
 	<selectKey order="AFTER" keyProperty="id" resultType="int" >

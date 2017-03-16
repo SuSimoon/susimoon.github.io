@@ -81,7 +81,8 @@ public class UserDaoImplTest {
 
 ### 原始dao开发方式的问题：
 
-1.dao的实现类中存在重复代码，整个mybatis操作的过程代码模板重复（先创建sqlsession、调用sqlsession的方法、关闭sqlsession）  
+1.dao的实现类中存在重复代码，整个mybatis操作的过程代码模板重复  
+（先创建sqlsession、调用sqlsession的方法、关闭sqlsession）  
 2.dao的实现类中存在硬编码，调用sqlsession方法时将statement的id硬编码。  
 
 
@@ -91,13 +92,13 @@ public class UserDaoImplTest {
 
 ## <center>创建mapper代理的方式</center>  
 
-程序员只需要写dao接口，dao接口实现对象由mybatis自动生成代理对象。
+程序员只需要写dao接口，dao接口实现对象由MyBatis自动生成代理对象。
 
 ### 1.创建mapper接口：
 
-mybatis提出了mapper接口，相当于dao接口。
+MyBatis提出了mapper接口，相当于dao接口。
 
-mapper接口的命名方式建议：表名Mapper(UserMapper)
+mapper接口的命名方式建议：表名Mapper(UserMapper.java)
 
 ```java
 public interface UserMapper {	

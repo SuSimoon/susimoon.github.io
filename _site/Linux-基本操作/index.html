@@ -3,41 +3,7 @@
 <!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>Linux-基本操作 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Linux"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="Linux-基本操作"> <meta name="twitter:description" content="本篇介绍了Linux中的基本操作"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Linux-基本操作"> <meta property="og:description" content="本篇介绍了Linux中的基本操作"> <meta property="og:url" content="http://127.0.0.1:4000//Linux-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//Linux-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
 <!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
 <!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>Linux-基本操作</h1> <h4>12 Mar 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~4 minutes </p>
-<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">linux 操作系统概述</a><br> <a href="#2">linux系统环境</a> <br> <a href="#3">希尔排序</a></p> </blockquote> <hr> <p><a name="1"></a> ## </p>
-<center>linux 操作系统概述</center> <h3 id="section">1.常见操作系统</h3> <p class="notice">服务端操作系统：linux、unix、windows server <br> 单机操作系统：windows、 MAC 、linux（ubuntu）<br> 移动操作系统：Android、IOS 、Windows phone</p> <h3 id="linux">2.linux操作系统介绍</h3> <p class="notice"><strong>• 特点：</strong> <br> 1. 开放、开源、多用户的网络操作系统。<br> 2. 基于unix(unix–&gt;minix–&gt;linux)，可以定制内核。 3. 加入了GNU组织（自由软件组织 ，copyLeft），通过GPL（通用公共许可）许可对外发布。</p> <p class="notice"><strong>• linux组成：</strong> 1. linux内核：linus 团队管理<br> 2. shell：用户与内核交互的接口 <br> 3. 文件系统：ext3、ext4等(windows有fat32、ntfs) <br> 4. 第三方应用软件</p> <p class="notice"><strong>• linux操作系统版本：</strong> <br> 1. 内核版本 ：linus团队管理。 2. 发行版本：一些软件公司以内核为基础，再添加一些软件和文档形成发行版本。 - red hat：rhel ，centos<br> - debian：debian，ubuntu（桌面）<br> - android</p> <hr> <p><a name="2"></a></p> <h2 id="centerlinuxcenter"><center>linux系统环境</center></h2> <p class="notice">默认有6个命令交互通道和一个图形界面交互通道，默认进入到的是图形界面通道。<br> 命令交互模式切换：ctrl+alt+f1—f6<br> 图形交互界面：ctrl+alt+f7</p> <p>###1.图形界面交互模式</p> <p>terminal：图形界面的命令终端，它是图形界面交互通道的延伸，要依赖于图形界面。</p> <p>###2.命令交互模式</p> <p class="notice">命令提示符 simoon@ubuntu:~$ - <code class="highlighter-rouge">simoon</code>：用户名<br> - <code class="highlighter-rouge">ubuntu</code>：主机名<br> -<code class="highlighter-rouge">~</code>：路径。假如当前的路径正好是该用户存放数据的根目录，则显示~<br> - <code class="highlighter-rouge">$</code>：用户的类型。$代表普通用户 #代表超级用户</p> <p>###3.linux文件系统</p> <p><strong>目录结构：</strong><br> <img src="http://wx3.sinaimg.cn/large/83e1667dly1fbjfve0ffqj21bg0pu0z8.jpg" alt=""></p> <p><strong>文件权限：</strong></p> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: center">权限</th> <th style="text-align: center"> </th> </tr> </thead> <tbody> <tr> <td style="text-align: center">w</td> <td style="text-align: center">可写</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">r</td> <td style="text-align: center">只读</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">x</td> <td style="text-align: center">可执行</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">-</td> <td style="text-align: center">无权限</td> </tr> </tbody> </table> <p class="notice"><strong>• 字符表示法</strong> drwxr-xr-x 第1个字符： 文件的类型(d：文件夹 -：普通文件 c：串口文件 l：连接文件) 2-4字符： 该文件的属主用户的权限（创建该文件的用户） 5-7字符： 与属主用户同一组的其他用户的权限 8-10字符： 不同组的其他用户的权限</p> <p class="notice"><strong>• 数字表示法</strong> -rw-r–r–： 文件的默认权限。 110|100|100 644 drwxr-xr-x ： 目录的默认权限。 111|101|101 755</p> <hr> <p><a name="3"></a></p> <h2 id="centerlinuxcenter-1"><center>linux的常用命令</center></h2> <h3 id="section-1">注销、关机、重启</h3> <p class="notice">1.注销：<code class="highlighter-rouge">logout</code>、<code class="highlighter-rouge">exit</code> (图形界面是无法logout的)<br> 2.关机：<code class="highlighter-rouge">shutdown - h 时间</code> (need to be root)<br> - h：关机<br> - 时间：now-马上、12.30-指定具体时间、3-几分钟以后<br> 3.重启：<code class="highlighter-rouge">shutdown -r 时间</code><br> -r ：restart</p> <h3 id="section-2">文件操作命令</h3> <p class="notice">ls ：查看目录内容<br> ls - l ：查看详细信息<br> ls - a ：查看所有文件（隐藏）<br> ls - la：查看所有文件详细信息</p> <ol> <li> <p>mkdir ：创建目录</p> </li> <li>cd ：切换目录 <ul> <li>cd .. 记得要加空格</li> <li>cd ./java 进入当前目录的子目录</li> <li>cd ../xxx 进入上一级目录的子目录 tab ：自动补全</li> </ul> </li> <li> <p>touch ：创建一个空白的普通文件 touch aa.txt</p> </li> <li> <p>echo ：把内容重定向到指定的文件中 ，有则打开，无则创建 echo “test”&gt;a.txt</p> </li> <li>cat、more ：查看文件内容 <ul> <li>cat ：查看文件内容</li> <li>more ：分页查看文件内容，按空格键换页</li> </ul> </li> <li>cp、mv、rm <ul> <li>cp ：复制 cp bj.txt ./java/j2ee</li> <li>mv ：剪切、重命名 剪切 ：mv aa.txt ../android/ 重命名 ：假如剪切的文件 存放在同一个目录中 ，则是重命名 mv bb.txt cc.txt</li> </ul> <p>-rm：删除文件或者文件夹 -f ： 假如要删除的文件不存在，也不提示 -i ： 删除前提示，默认不删除，要删除，输入y -d ： 删除空白目录 -r ： 递归删除</p> </li> <li> <p>wc ：word count ：统计字符数 命令： wc bj.txt 出现了三个数字154 233 3418 - 154 ：行数 - 233 ：单词数 - 3418 ：字符数</p> </li> <li>ln :创建连接文件 <ul> <li>默认创建的是硬连接，类似复制，但是两个文件会同步 命令：ln ./java/android/aa.txt aaa</li> <li>s ：创建的是软连接</li> </ul> </li> <li> <p>pwd ：查看当前目录的绝对路径</p> </li> <li> <p>管道命令 | 命令： ls -la | wc (ls -la这个命令作为wc的输入，也就是统计这个命令执行的结果的字数统计)</p> </li> <li>重定向 <ul> <li> <blockquote> <p>：覆盖模式 命令： echo “ww”&gt;aaa</p> </blockquote> </li> <li> <blockquote> <blockquote> <p>：追加模式 命令： echo “ww”»aaa</p> </blockquote> </blockquote> </li> </ul> </li> <li> <p>passwd ：设置密码 ubuntu默认root账号是没有开启，只要设置root密码即可开启 设置 sudo passwd root</p> </li> <li>su 切换目录 su root root用户切换到其他账号不需要密码</li> </ol> <p>man ：(manual手工，帮助)帮助命令，好比windows help 命令： man ls</p> <ul> <li>linux 系统命令</li> </ul> <div class="highlighter-rouge"><pre class="highlight"><code>1.stat ：查看文件的详细信息
-	stat bj.txt
-
-2.who与whoami
-	who ：查看在线的用户
-		simoon   tty4         2017-01-07 12:15（tty表示通道）
-		simoon   tty1         2017-01-07 12:12
-		simoon   tty7         2017-01-07 11:53 (:0)
-		simoon   pts/1        2017-01-07 12:49 (:0)(pts表示命令终端，可打开多个终端)
-	
-	whoami ：查看当前自己的用户
-
-3.hostname ： 显示主机名
-	hostname  --- ubuntu
-
-4.uname  ：显示系统信息  ---Linux
-    -a ：显示完整的系统信息
-    	Linux ubuntu 3.11.0-12-generic #19-Ubuntu SMP Wed Oct 9 16:12:00 UTC 2013 i686 i686 i686 GNU/Linux(CNU表示自由软件组织)
-
-5.top ：显示当前耗时的进行的信息，每3秒刷新一次 
-    cltr+c 中断 
-    (可根据pid来kill进程)
-
-6.ps ：显示当前进程的快照 
-     - axu
-
-7.du ：显示文件的大小信息 
-
-8.df ：磁盘使用情况  disk free
-
-9.ifconfig ：查看或者配置网卡信息，好比windows的ipconfig
-	ipv4：32位  2-32次方     ipv6  128位     是 ipv4  2-96次方倍数
-	
-	设置虚拟机ip地址：
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">linux 操作系统概述</a><br> <a href="#2">linux系统环境</a> <br> <a href="#3">linux的常用命令</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerlinux-center"><center>linux 操作系统概述</center></h2> <h3 id="section">1.常见操作系统</h3> <p class="notice">服务端操作系统：linux、unix、windows server <br> 单机操作系统：windows、 MAC 、linux（ubuntu）<br> 移动操作系统：Android、IOS 、Windows phone</p> <h3 id="linux">2.linux操作系统介绍</h3> <p class="notice"><strong>• 特点：</strong> <br> 1. 开放、开源、多用户的网络操作系统。<br> 2. 基于unix(unix–&gt;minix–&gt;linux)，可以定制内核。 3. 加入了GNU组织（自由软件组织 ，copyLeft），通过GPL（通用公共许可）许可对外发布。</p> <p class="notice"><strong>• linux组成：</strong> 1. linux内核：linus 团队管理<br> 2. shell：用户与内核交互的接口 <br> 3. 文件系统：ext3、ext4等(windows有fat32、ntfs) <br> 4. 第三方应用软件</p> <p class="notice"><strong>• linux操作系统版本：</strong> <br> 1. 内核版本 ：linus团队管理。 2. 发行版本：一些软件公司以内核为基础，再添加一些软件和文档形成发行版本。 - red hat：rhel ，centos<br> - debian：debian，ubuntu（桌面）<br> - android</p> <hr> <p><a name="2"></a></p> <h2 id="centerlinuxcenter"><center>linux系统环境</center></h2> <p class="notice">默认有6个命令交互通道和一个图形界面交互通道，默认进入到的是图形界面通道。<br> 命令交互模式切换：ctrl+alt+f1—f6<br> 图形交互界面：ctrl+alt+f7</p> <p>###1.图形界面交互模式</p> <p>terminal：图形界面的命令终端，它是图形界面交互通道的延伸，要依赖于图形界面。</p> <p>###2.命令交互模式</p> <p class="notice">命令提示符 simoon@ubuntu:~$ - <code class="highlighter-rouge">simoon</code>：用户名<br> - <code class="highlighter-rouge">ubuntu</code>：主机名<br> -<code class="highlighter-rouge">~</code>：路径。假如当前的路径正好是该用户存放数据的根目录，则显示~<br> - <code class="highlighter-rouge">$</code>：用户的类型。$代表普通用户 #代表超级用户</p> <p>###3.linux文件系统</p> <p><strong>目录结构：</strong><br> <img src="http://wx3.sinaimg.cn/large/83e1667dly1fbjfve0ffqj21bg0pu0z8.jpg" alt=""></p> <p><strong>文件权限：</strong></p> <table rules="groups" class="notice"> <thead> <tr> <th style="text-align: center">权限</th> <th style="text-align: center"> </th> </tr> </thead> <tbody> <tr> <td style="text-align: center">w</td> <td style="text-align: center">可写</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">r</td> <td style="text-align: center">只读</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">x</td> <td style="text-align: center">可执行</td> </tr> </tbody> <tbody> <tr> <td style="text-align: center">-</td> <td style="text-align: center">无权限</td> </tr> </tbody> </table> <p class="notice"><strong>• 字符表示法</strong> drwxr-xr-x 第1个字符： 文件的类型(d：文件夹 -：普通文件 c：串口文件 l：连接文件) 2-4字符： 该文件的属主用户的权限（创建该文件的用户） 5-7字符： 与属主用户同一组的其他用户的权限 8-10字符： 不同组的其他用户的权限</p> <p class="notice"><strong>• 数字表示法</strong> -rw-r–r–： 文件的默认权限。 110|100|100 644 drwxr-xr-x ： 目录的默认权限。 111|101|101 755</p> <hr> <p><a name="3"></a></p> <h2 id="centerlinuxcenter-1"><center>linux的常用命令</center></h2> <h3 id="section-1">注销、关机、重启</h3> <p class="notice">1.注销：<code class="highlighter-rouge">logout</code>、<code class="highlighter-rouge">exit</code> (图形界面是无法logout的)<br> 2.关机：<code class="highlighter-rouge">shutdown - h 时间</code> (need to be root)<br> - h：关机<br> - 时间：now-马上、12.30-指定具体时间、3-几分钟以后<br> 3.重启：<code class="highlighter-rouge">shutdown -r 时间</code><br> -r ：restart</p> <h3 id="section-2">文件操作命令</h3> <p class="notice"><code class="highlighter-rouge">ls</code> ：查看目录内容<br> <code class="highlighter-rouge">ls - l</code> ：查看详细信息<br> <code class="highlighter-rouge">ls - a</code> ：查看所有文件（隐藏）<br> <code class="highlighter-rouge">ls - la</code>：查看所有文件详细信息</p> <p class="notice"><code class="highlighter-rouge">mkdir</code> xxx ：创建目录 <br> <code class="highlighter-rouge">cd</code> ：切换目录<br> - cd .. 记得要加空格<br> - cd ./java 进入当前目录的子目录<br> - cd ../xxx 进入上一级目录的子目录<br> <code class="highlighter-rouge">tab</code> ：自动补全</p> <p class="notice"><code class="highlighter-rouge">touch</code> ：创建一个空白的普通文件<br> touch aa.txt <br> <code class="highlighter-rouge">echo</code> ：把内容重定向到指定的文件中，有则打开，无则创建<br> echo “test”&gt;a.txt<br> <code class="highlighter-rouge">cat、more</code> ：查看文件内容<br> - cat ：查看文件内容<br> - more ：分页查看文件内容，按空格键换页</p> <p class="notice"><code class="highlighter-rouge">cp</code> ：复制<br> cp bj.txt ./java/j2ee<br> <code class="highlighter-rouge">mv</code> ：剪切、重命名<br> - 剪切 ：mv aa.txt ../android/<br> - 重命名 ：假如剪切的文件 存放在同一个目录中 ，则是重命名<br> mv bb.txt cc.txt<br> <code class="highlighter-rouge">rm</code>：删除文件或者文件夹<br> -f ： 假如要删除的文件不存在，也不提示<br> -i ： 删除前提示，默认不删除，要删除，输入y<br> -d ： 删除空白目录 <br> -r ： 递归删除</p> <p class="notice"><code class="highlighter-rouge">wc</code> ：word count ：统计字符数<br> 命令： wc bj.txt<br> 出现了三个数字154 233 3418 <br> - 154 ：行数<br> - 233 ：单词数<br> - 3418 ：字符数</p> <p class="notice"><code class="highlighter-rouge">ln</code> :创建连接文件<br> - 默认创建的是硬连接，类似复制，但是两个文件会同步 <br> 命令：ln ./java/android/aa.txt aaa<br> - s ：创建的是软连接</p> <p class="notice"><code class="highlighter-rouge">pwd</code> ：查看当前目录的绝对路径</p> <p class="notice"><code class="highlighter-rouge">|</code> ：管道命令 命令： ls -la | wc <br> (ls -la这个命令作为wc的输入，也就是统计这个命令执行的结果的字数统计)</p> <p class="notice">重定向<br> <code class="highlighter-rouge">- &gt;</code> ：覆盖模式<br> 命令： echo “ww”&gt;aaa<br> <code class="highlighter-rouge">- &gt;&gt;</code> ：追加模式<br> 命令： echo “ww”»aaa</p> <p class="notice"><code class="highlighter-rouge">passwd</code> ：设置密码<br> ubuntu默认root账号是没有开启，只要设置root密码即可开启<br> 设置 sudo passwd root</p> <p class="notice"><code class="highlighter-rouge">su</code> ：切换用户<br> su root <br> root用户切换到其他账号不需要密码</p> <hr> <p><a name="4"></a></p> <h2 id="centerlinuxcenter-2"><center>linux的系统命令</center></h2> <p>1.<code class="highlighter-rouge">stat</code> ：查看文件的详细信息<br> stat bj.txt<br> 2.<code class="highlighter-rouge">who与whoami</code><br> who ：查看在线的用户<br> simoon tty4 2017-01-07 12:15（tty表示通道）<br> simoon tty1 2017-01-07 12:12<br> simoon tty7 2017-01-07 11:53 (:0)<br> simoon pts/1 2017-01-07 12:49 (:0)(pts表示命令终端，可打开多个终端)<br> whoami ：查看当前自己的用户<br> 3.<code class="highlighter-rouge">hostname</code> ： 显示主机名<br> hostname — ubuntu<br> 4.<code class="highlighter-rouge">uname</code> ：显示系统信息 —Linux<br> -a ：显示完整的系统信息<br> Linux ubuntu 3.11.0-12-generic #19-Ubuntu SMP Wed Oct 9 16:12:00 UTC 2013 i686 i686 i686 GNU/Linux(CNU表示自由软件组织)<br> 5.<code class="highlighter-rouge">top</code> ：显示当前耗时的进行的信息，每3秒刷新一次 <br> cltr+c 中断 <br> (可根据pid来kill进程)<br> 6.<code class="highlighter-rouge">ps</code> ：显示当前进程的快照 <br> - axu<br> 7.<code class="highlighter-rouge">du</code> ：显示文件的大小信息 <br> 8.<code class="highlighter-rouge">df</code> ：磁盘使用情况 disk free<br> 9.<code class="highlighter-rouge">ifconfig</code> ：查看或者配置网卡信息，好比windows的ipconfig<br> ipv4：32位 2-32次方 ipv6 128位 是 ipv4 2-96次方倍数</p> <div class="highlighter-rouge"><pre class="highlight"><code>	设置虚拟机ip地址：
 	1. 设置vmware的连接方式
 	 - NAT模式：共享宿主机的ip地址，在网上邻居找不到虚拟机，只能访问宿主机
 	 - 仅主机模式：在网上邻居中可以找不到虚拟机
@@ -49,41 +15,16 @@
 	3.命令方式设置ip地址
 	  静态设置ip：
 	     sudo ifconfig eth0 192.168.15.122 netmask 255.255.255.0 (第0块以太网卡)
-
-10.ping：测试与目标主机连接情况
-
-11.clear ：清除屏幕  windows： cls  
-
-12.man ：帮助命令
-	man 命令
-
-13.kill ：杀死进程
-	kill  pid 
-
-14.netstat ：网络连接详细信息
-
-15. useradd 
-	  - 查看用户信息
-		sudo cat /etc/passwd
-		itcast:x:1000:1000:UbuntuA,,,:/home/itcast:/bin/bash
-		- itcast:用户名
-		- x ：密码 ：已经加密 ，密码存放在  /etc/shadow 
-		- 1000: 账号id ，userId
-		- 1000： 组id ，group id
-		  - UbuntuA,,,  ：账号描述
-		  - /home/itcast ：该账号存放文件的默认位置  ~
-		- /bin/bash：该用户的shell脚本的解析方式  ，sh 、bash、rbash
-
-	  - 创建用户 
-		sudo useradd lijun -d  /home/lijun   -s /bin/bash 
-		- d  ：指定该用户的home路径 
-		- s  ：该用户的shell解析方式
-		
-		步骤：
-		1. 创建 /home/lijun 目录
-		2. 执行 useradd 命令
-		3. 用 passwd 设置密码
-		4. su 切换用户
+</code></pre></div> <p>10.ping：测试与目标主机连接情况<br> 11.clear ：清除屏幕 windows： cls <br> 12.man ：帮助命令<br> man 命令 13.kill ：杀死进程 kill pid 14.netstat ：网络连接详细信息 15. useradd - 查看用户信息 sudo cat /etc/passwd itcast:x:1000:1000:UbuntuA,,,:/home/itcast:/bin/bash - itcast:用户名 - x ：密码 ：已经加密 ，密码存放在 /etc/shadow - 1000: 账号id ，userId - 1000： 组id ，group id - UbuntuA,,, ：账号描述 - /home/itcast ：该账号存放文件的默认位置 ~ - /bin/bash：该用户的shell脚本的解析方式 ，sh 、bash、rbash</p> <div class="highlighter-rouge"><pre class="highlight"><code>  - 创建用户 
+	sudo useradd lijun -d  /home/lijun   -s /bin/bash 
+	- d  ：指定该用户的home路径 
+	- s  ：该用户的shell解析方式
+	
+	步骤：
+	1. 创建 /home/lijun 目录
+	2. 执行 useradd 命令
+	3. 用 passwd 设置密码
+	4. su 切换用户 ```
 </code></pre></div> <ul> <li>打包、压缩文件</li> </ul> <div class="highlighter-rouge"><pre class="highlight"><code>windows ： zip、rar    
 linux ：gz ，bzip，zip
 
