@@ -2,8 +2,21 @@
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
 <!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>MyBatis-一对多查询 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="Spring"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="MyBatis-一对多查询"> <meta name="twitter:description" content="本篇介绍了MyBatis中resultMap实现一对多查询的方式"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="MyBatis-一对多查询"> <meta property="og:description" content="本篇介绍了MyBatis中resultMap实现一对多查询的方式"> <meta property="og:url" content="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
 <!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
-<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>MyBatis-一对多查询</h1> <h4>27 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~1 minute </p>
-<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">resultMap实现一对多查询</a><br> <a href="#2">resultMap实现一对多复杂查询</a> <br> <a href="#3">两种方式的比较</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerresultmapcenter"><center>resultMap实现一对多查询</center></h2> <p><strong>Orders：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Orders</span> <span class="o">{</span>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>MyBatis-一对多查询</h1> <h4>27 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~2 minutes </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">resultMap实现一对多查询</a><br> <a href="#2">resultMap实现一对多复杂查询</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerresultmapcenter"><center>resultMap实现一对多查询</center></h2> <p>需求：查询所有订单信息及订单下的订单明细信息。<br> 主查询表：订单表 关联查询表：订单明细</p> <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> 
+	<span class="n">orders</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+	<span class="k">user</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+	<span class="k">user</span><span class="p">.</span><span class="n">sex</span> <span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">.</span><span class="n">id</span> <span class="n">orderdetail_id</span><span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">.</span><span class="n">items_num</span><span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">.</span><span class="n">items_id</span>
+<span class="k">FROM</span>
+	<span class="n">orders</span><span class="p">,</span>
+	<span class="k">USER</span><span class="p">,</span>
+	<span class="n">orderdetail</span>
+<span class="k">WHERE</span> <span class="n">orders</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="k">user</span><span class="p">.</span><span class="n">id</span>  <span class="k">AND</span> <span class="n">orders</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">orderdetail</span><span class="p">.</span><span class="n">orders_id</span>
+
+</code></pre></div> <p><strong>Orders：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Orders</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="n">Integer</span> <span class="n">id</span><span class="o">;</span>
     <span class="kd">private</span> <span class="n">Integer</span> <span class="n">userId</span><span class="o">;</span>
     <span class="kd">private</span> <span class="n">String</span> <span class="n">number</span><span class="o">;</span>
@@ -16,26 +29,128 @@
 
     <span class="c1">//get、set方法 ...</span>
 <span class="o">}</span>
-</code></pre></div> <p><strong>map.xml：</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">"orders"</span> <span class="na">id=</span><span class="s">"ordersUserResultMap"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
-	<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"user_id"</span> <span class="na">property=</span><span class="s">"userId"</span><span class="nt">/&gt;</span>
-	<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"number"</span> <span class="na">property=</span><span class="s">"number"</span><span class="nt">/&gt;</span>
-	<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"createtime"</span> <span class="na">property=</span><span class="s">"createtime"</span><span class="nt">/&gt;</span>
-	<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"note"</span> <span class="na">property=</span><span class="s">"note"</span><span class="nt">/&gt;</span>
-	
-	<span class="nt">&lt;association</span> <span class="na">property=</span><span class="s">"user"</span> <span class="na">javaType=</span><span class="s">"user"</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
-		<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"username"</span> <span class="na">property=</span><span class="s">"username"</span><span class="nt">/&gt;</span>
-		<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"address"</span> <span class="na">property=</span><span class="s">"address"</span><span class="nt">/&gt;</span>
-	<span class="nt">&lt;/association&gt;</span>
+</code></pre></div> <p><strong>map.xml：</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- 一对一查询resultMap --&gt;</span>
+<span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">"orders"</span> <span class="na">id=</span><span class="s">"ordersUserResultMap"</span><span class="nt">&gt;</span>
+	...
 <span class="nt">&lt;/resultMap&gt;</span>
 
-<span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">"orders"</span> <span class="na">id=</span><span class="s">"orderAndOrderDetails"</span> <span class="na">extends=</span><span class="s">"ordersUserResultMap"</span><span class="nt">&gt;</span><span class="c">&lt;!--继承ordersUserResultMap--&gt;</span>
+<span class="c">&lt;!-- 一对多，查询订单及订单明细 --&gt;</span>
+<span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">"orders"</span> <span class="na">id=</span><span class="s">"orderAndOrderDetails"</span> <span class="na">extends=</span><span class="s">"ordersUserResultMap"</span><span class="nt">&gt;</span>
+	<span class="c">&lt;!--映射订单信息，和用户信息，继承ordersUserResultMap--&gt;</span>
+	
+	<span class="c">&lt;!-- 映射订单明细信息 
+		property：要将关联信息映射到orders的哪个属性中
+		ofType：集合中pojo的类型
+		--&gt;</span>
 	<span class="nt">&lt;collection</span> <span class="na">property=</span><span class="s">"orderdetails"</span> <span class="na">ofType=</span><span class="s">"orderdetail"</span><span class="nt">&gt;</span>
+		<span class="c">&lt;!-- id：关联信息订单明细的唯 一标识
+			 property：Orderdetail的属性名
+		--&gt;</span>
 		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"orderdetail_id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
-		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"items_num"</span> <span class="na">property=</span><span class="s">"itemsId"</span><span class="nt">/&gt;</span>
-		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"items_id"</span> <span class="na">property=</span><span class="s">"itemsNum"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"items_num"</span> <span class="na">property=</span><span class="s">"itemsNum"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"items_id"</span> <span class="na">property=</span><span class="s">"itemsId"</span><span class="nt">/&gt;</span>
 	<span class="nt">&lt;/collection&gt;</span>
 <span class="nt">&lt;/resultMap&gt;</span>
+
+<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"findOrderAndOrderDetails"</span> <span class="na">resultMap=</span><span class="s">"orderAndOrderDetails"</span><span class="nt">&gt;</span>
+		SELECT 
+			orders.*,
+			user.username,
+			user.sex ,
+			orderdetail.id orderdetail_id,
+			orderdetail.items_num,
+			orderdetail.items_id
+		FROM
+			orders,
+			USER,
+			orderdetail
+		WHERE orders.user_id = user.id  AND orders.id = orderdetail.orders_id
+	<span class="nt">&lt;/select&gt;</span>
 </code></pre></div> <p><strong>map.java：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Orders</span><span class="o">&gt;</span> <span class="nf">findOrderAndOrderDetails</span><span class="o">();</span>
-</code></pre></div> <hr> <p><a name="2"></a></p> <h2 id="centerresultmapcenter-1"><center>resultMap实现一对多复杂查询</center></h2> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Spring" title="Pages tagged Spring" class="tag"><span class="term">Spring</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>
+</code></pre></div> <hr> <p><a name="2"></a></p> <h2 id="centerresultmapcenter-1"><center>resultMap实现一对多复杂查询</center></h2> <p>需求：查询所有用户信息，关联查询订单及订单明细信息及商品信息，订单明细信息中关联查询商品信息。<br> 主查询表：用户信息 关联查询：订单、订单明细，商品信息</p> <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> 
+	<span class="n">orders</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+	<span class="k">user</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+	<span class="k">user</span><span class="p">.</span><span class="n">sex</span> <span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">.</span><span class="n">id</span> <span class="n">orderdetail_id</span><span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">.</span><span class="n">items_num</span><span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">.</span><span class="n">items_id</span><span class="p">,</span>
+	<span class="n">items</span><span class="p">.</span><span class="n">name</span> <span class="n">items_name</span><span class="p">,</span>
+	<span class="n">items</span><span class="p">.</span><span class="n">detail</span> <span class="n">items_detail</span>
+<span class="k">FROM</span>
+	<span class="n">orders</span><span class="p">,</span>
+	<span class="k">USER</span><span class="p">,</span>
+	<span class="n">orderdetail</span><span class="p">,</span>
+	<span class="n">items</span>
+<span class="k">WHERE</span> <span class="n">orders</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="k">user</span><span class="p">.</span><span class="n">id</span>  <span class="k">AND</span> <span class="n">orders</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">orderdetail</span><span class="p">.</span><span class="n">orders_id</span> <span class="k">AND</span> <span class="n">items</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">orderdetail</span><span class="p">.</span><span class="n">items_id</span>
+</code></pre></div> <h3 id="pojo">pojo：</h3> <p>在User中创建映射的属性：集合 List<orders> orderlist 在Orders中创建映射的属性：集合List<orderdetail> orderdetails 在Orderdetail中创建商品属性：pojo Items items</orderdetail></orders></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span><span class="c1">// 用户姓名</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">sex</span><span class="o">;</span><span class="c1">// 性别</span>
+	<span class="kd">private</span> <span class="n">Date</span> <span class="n">birthday</span><span class="o">;</span><span class="c1">// 生日</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">address</span><span class="o">;</span><span class="c1">// 地址</span>
+	<span class="c1">//订单集合</span>
+	<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Orders</span><span class="o">&gt;</span> <span class="n">orderlist</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Orders</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">userId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">number</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Date</span> <span class="n">createtime</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">note</span><span class="o">;</span>
+    <span class="c1">//订单明细集合</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Orderdetail</span><span class="o">&gt;</span> <span class="n">orderdetails</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Orderdetail</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">ordersId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">itemsId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">itemsNum</span><span class="o">;</span>
+    <span class="c1">//关联商品对象</span>
+    <span class="kd">private</span> <span class="n">Items</span> <span class="n">items</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div> <p><strong>map.xml：</strong></p> <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">"user"</span> <span class="na">id=</span><span class="s">"userOrderDetail"</span><span class="nt">&gt;</span>
+	<span class="c">&lt;!-- 用户信息映射 --&gt;</span>
+	<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"user_id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"username"</span> <span class="na">property=</span><span class="s">"username"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"address"</span> <span class="na">property=</span><span class="s">"address"</span><span class="nt">/&gt;</span>
+	<span class="c">&lt;!-- 订单信息映射 --&gt;</span>
+	<span class="nt">&lt;collection</span> <span class="na">property=</span><span class="s">"orderlist"</span> <span class="na">ofType=</span><span class="s">"orders"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"user_id"</span> <span class="na">property=</span><span class="s">"userId"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"number"</span> <span class="na">property=</span><span class="s">"number"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"createtime"</span> <span class="na">property=</span><span class="s">"createtime"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"note"</span> <span class="na">property=</span><span class="s">"note"</span><span class="nt">/&gt;</span>
+		<span class="c">&lt;!-- 订单明细信息映射 --&gt;</span>
+		<span class="nt">&lt;collection</span> <span class="na">property=</span><span class="s">"orderdetails"</span> <span class="na">ofType=</span><span class="s">"orderdetail"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"orderdetail_id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"items_num"</span> <span class="na">property=</span><span class="s">"itemsNum"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"items_id"</span> <span class="na">property=</span><span class="s">"itemsId"</span><span class="nt">/&gt;</span>
+			<span class="c">&lt;!-- 商品信息映射 --&gt;</span>
+			<span class="nt">&lt;association</span> <span class="na">property=</span><span class="s">"items"</span> <span class="na">javaType=</span><span class="s">"items"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"items_name"</span> <span class="na">property=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;result</span> <span class="na">column=</span><span class="s">"items_detail"</span> <span class="na">property=</span><span class="s">"detail"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;/association&gt;</span>
+		<span class="nt">&lt;/collection&gt;</span>
+	<span class="nt">&lt;/collection&gt;</span>
+<span class="nt">&lt;/resultMap&gt;</span>
+
+<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"findUserOrderDetail"</span> <span class="na">resultMap=</span><span class="s">"userOrderDetail"</span><span class="nt">&gt;</span>
+	SELECT 
+		orders.*,
+		user.username,
+		user.sex ,
+		orderdetail.id orderdetail_id,
+		orderdetail.items_num,
+		orderdetail.items_id,
+		items.name items_name,
+		items.detail items_detail
+	FROM
+		orders,
+		USER,
+		orderdetail,
+		items
+	WHERE orders.user_id = user.id  AND orders.id = orderdetail.orders_id AND items.id = orderdetail.items_id
+<span class="nt">&lt;/select&gt;</span>
+</code></pre></div> <p><strong>map.java：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">findUserOrderDetail</span><span class="o">();</span>
+</code></pre></div> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="http://127.0.0.1:4000//tags/#Spring" title="Pages tagged Spring" class="tag"><span class="term">Spring</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/jquery-1.12.0.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.dlmenu.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.goup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.magnific-popup.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/jquery.fitvid.min.js"></script> <script src="http://127.0.0.1:4000//assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>

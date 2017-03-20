@@ -3,14 +3,20 @@
 <!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>MyBatis-一对一查询 – Simoon</title> <meta name="description" content="Improving Java Skills"> <meta name="keywords" content="MyBatis"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="http://i.imgur.com/Ds6S7lJ.png"> <meta name="twitter:title" content="MyBatis-一对一查询"> <meta name="twitter:description" content="本篇介绍了MyBatis中一对一查询的两种方式"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="MyBatis-一对一查询"> <meta property="og:description" content="本篇介绍了MyBatis中一对一查询的两种方式"> <meta property="og:url" content="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2/"> <meta property="og:site_name" content="Simoon"> <meta property="og:image" content="http://127.0.0.1:4000//assets/img/logo.png"> <link rel="canonical" href="http://127.0.0.1:4000//MyBatis-%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2/"> <link href="http://127.0.0.1:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Simoon Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://127.0.0.1:4000//assets/css/main.css"> <!-- JS --> <script src="http://127.0.0.1:4000//assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://127.0.0.1:4000//assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://127.0.0.1:4000//favicon.png"> <link rel="shortcut icon" href="http://127.0.0.1:4000//favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://127.0.0.1:4000//assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(http://i.imgur.com/Ds6S7lJ.png);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://127.0.0.1:4000//">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://127.0.0.1:4000//assets/img/logo.png" alt="Simoon photo" class="author-photo"> <h4>Simoon</h4> <p>Improving Java Skills</p> </li> <li><a href="http://127.0.0.1:4000//about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="mailto:susimoon@163.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-envelope-square"></i> Email</a> </li> <li> <a href="http://facebook.com//profile.php?id=100009049525926" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://github.com/susimoon" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
 <!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://127.0.0.1:4000//posts/">All Posts</a></li> <li><a href="http://127.0.0.1:4000//tags/">All Tags</a></li> </ul> </li> <li><a href="http://127.0.0.1:4000//projects/">Projects</a></li> </ul>
 <!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>MyBatis-一对一查询</h1> <h4>27 Feb 2017</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~1 minute </p>
-<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">resultType实现一对一查询</a><br> <a href="#2">resultMap实现一对一查询</a> <br> <a href="#3">两种方式的比较</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerresulttypecenter"><center>resultType实现一对一查询</center></h2> <p><strong>User：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://127.0.0.1:4000//posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <blockquote> <p><a href="#1">resultType实现一对一查询</a><br> <a href="#2">resultMap实现一对一查询</a> <br> <a href="#3">两种方式的比较</a></p> </blockquote> <hr> <p><a name="1"></a></p> <h2 id="centerresulttypecenter"><center>resultType实现一对一查询</center></h2> <h3 id="section">需求：</h3> <p>主查询表：订单信息表<br> 关联查询表：用户信息<br> 需求：查询订单信息关联查询用户信息</p> <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> 
+  <span class="n">orders</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+  <span class="k">user</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+  <span class="k">user</span><span class="p">.</span><span class="n">sex</span> 
+<span class="k">FROM</span>
+  <span class="n">orders</span><span class="p">,</span>
+  <span class="k">USER</span> 
+<span class="k">WHERE</span> <span class="n">orders</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="k">user</span><span class="p">.</span><span class="n">id</span>
+</code></pre></div> <p><strong>User：</strong></p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span><span class="c1">// 用户姓名</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">sex</span><span class="o">;</span><span class="c1">// 性别</span>
 	<span class="kd">private</span> <span class="n">Date</span> <span class="n">birthday</span><span class="o">;</span><span class="c1">// 生日</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">address</span><span class="o">;</span><span class="c1">// 地址</span>
-	<span class="c1">//多个订单</span>
-	<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Orders</span><span class="o">&gt;</span> <span class="n">orderlist</span><span class="o">;</span>
 
 	<span class="c1">//get、set方法 ...</span>
 <span class="o">}</span>
@@ -23,29 +29,13 @@
    
     <span class="c1">//get、set方法 ...</span>
 <span class="o">}</span>
-</code></pre></div> <p>需求：查询订单信息关联查询用户信息</p> <p>由于该statement的返回值既有user的属性，也有order的属性，所以需要创建扩展类。<br> 即OrderCustom作为自定义pojo类，让它继承sql查询列较多的pojo类，也就是orders类。</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCustom</span> <span class="kd">extends</span> <span class="n">Orders</span> <span class="o">{</span>
+</code></pre></div> <p>由于该statement的返回值既有user的属性，也有order的属性，所以需要创建扩展类。<br> 即OrderCustom作为自定义pojo类，让它继承sql查询列较多的pojo类，也就是orders类。<br> 再添加另一个pojo类的属性。</p> <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCustom</span> <span class="kd">extends</span> <span class="n">Orders</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">sex</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">address</span><span class="o">;</span>
 	
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getUsername</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">username</span><span class="o">;</span>
-	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUsername</span><span class="o">(</span><span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
-	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSex</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">sex</span><span class="o">;</span>
-	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSex</span><span class="o">(</span><span class="n">String</span> <span class="n">sex</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">sex</span> <span class="o">=</span> <span class="n">sex</span><span class="o">;</span>
-	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">address</span><span class="o">;</span>
-	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="n">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
-	<span class="o">}</span>
+	<span class="c1">//get、set方法 ...</span>
+	
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="s">"OrderCustom [username="</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s">", sex="</span> <span class="o">+</span> <span class="n">sex</span>
@@ -85,7 +75,7 @@
 	javaType：关联信息映射到orders的属性的类型，是user的类型
 	 --&gt;</span>
 	<span class="nt">&lt;association</span> <span class="na">property=</span><span class="s">"user"</span> <span class="na">javaType=</span><span class="s">"user"</span><span class="nt">&gt;</span>
-		<span class="c">&lt;!-- id：关联信息的唯 一标识  --&gt;</span>
+		<span class="c">&lt;!-- id：关联信息的唯一标识(外键)  --&gt;</span>
 		<span class="c">&lt;!-- property： 要映射到user的哪个属性中--&gt;</span>
 		<span class="nt">&lt;id</span> <span class="na">column=</span><span class="s">"user_id"</span> <span class="na">property=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
 		<span class="c">&lt;!-- result就是普通列的映射 --&gt;</span>
