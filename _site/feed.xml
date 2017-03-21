@@ -1,11 +1,379 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-20T10:13:24+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">SpringMVC-非注解适配器</title><link href="http://127.0.0.1:4000//SpringMVC-4%E9%9D%9E%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-非注解适配器" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-4非注解处理器适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-4%E9%9D%9E%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;BeanNameUrlHandlerMapping&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;SimpleUrlHandlerMapping&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-20T18:45:22+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">SpringMVC-注解映射器与适配器</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-注解映射器与适配器" /><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-注解映射器与适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;注解映射器&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;注解适配器&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;注解映射器&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;spring3.1之前默认加载映射器是：&lt;br /&gt;
+org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping&lt;br /&gt;
+3.1之后要使用：&lt;br /&gt;
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;在springmvc.xml中配置RequestMappingHandlerMapping：&lt;/strong&gt;&lt;br /&gt;
+需要在Handler中使用&lt;code class=&quot;highlighter-rouge&quot;&gt;@controller&lt;/code&gt;标识此类是一个控制器。&lt;br /&gt;
+使用&lt;code class=&quot;highlighter-rouge&quot;&gt;@requestMapping&lt;/code&gt;指定Handler方法所对应的url。&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 注解处理器映射器 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;注解适配器&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;spring3.1之前默认加载映射器是：&lt;br /&gt;
+org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter&lt;br /&gt;
+3.1之后要使用：
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;RequestMappingHandlerAdapter不要求Handler实现任何接口。&lt;br /&gt;
+它需要和RequestMappingHandlerMapping注解映射器配对使用，主要解析Handler方法中的形参。&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 注解适配器 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;程序示例&lt;/center&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;hanlder&quot;&gt;注解开发Hanlder&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Controller&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemController3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	
+	&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/queryItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//@RequestMapping中url建议和方法名一致，方便开发维护&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;queryItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;items_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pen&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;items_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPrice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;items_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Paper&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;items_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPrice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//将数据填充到request域&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//指定转发的页面&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF/jsp/itemsList.jsp&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;hanlder-1&quot;&gt;配置Hanlder&lt;/h3&gt;
+
+&lt;p&gt;单个配置形式：&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置Handler --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.springmvc.controller.ItemController3&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;扫描形式：&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用spring组件扫描 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;context:component-scan&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base-package=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.springmvc.controller&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注：组件扫描可以扫描@Controller、@Service、@component、@Repsitory&lt;/p&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中的注解处理器适配器的配置</summary></entry><entry><title type="html">SpringMVC-整合MyBaits</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%95%B4%E5%90%88MyBaits/" rel="alternate" type="text/html" title="SpringMVC-整合MyBaits" /><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-整合MyBaits</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%95%B4%E5%90%88MyBaits/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;导入Jar包&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;创建配置文件&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;创建包结构&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerjarcenter&quot;&gt;&lt;center&gt;导入Jar包&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;MyBaits的jar包&lt;br /&gt;
+MyBaits和Spring整合包&lt;br /&gt;
+Spring的所有jar包(包括SpringMVC的包)&lt;br /&gt;
+数据库驱动包&lt;br /&gt;
+log4j日志&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;创建配置文件&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;Spring：&lt;/strong&gt;
+applicationContext-dao.xml—配置数据源、SqlSessionFactory、mapper扫描器&lt;br /&gt;
+applicationContext-service.xml—配置service接口&lt;br /&gt;
+applicationContext-transaction.xml–事务管理&lt;br /&gt;
+&lt;strong&gt;SpringMVC：&lt;/strong&gt;
+springmvc.xml—springmvc的配置，配置处理器映射器、适配器、视图解析器&lt;br /&gt;
+&lt;strong&gt;MyBaits：&lt;/strong&gt;
+SqlMapConfig.xml—MyBaits的配置文件，配置别名、settings、mapper&lt;/p&gt;
+
+&lt;h3 id=&quot;applicationcontext-daoxml&quot;&gt;applicationContext-dao.xml：&lt;/h3&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:mvc=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/mvc&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:aop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/aop&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:tx=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/tx&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/mvc&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context/spring-context-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/aop&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/aop/spring-aop-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/tx&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/tx/spring-tx-3.2.xsd&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 加载配置文件 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;context:property-placeholder&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;location=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:db.properties&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 数据库连接池 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.commons.dbcp.BasicDataSource&quot;&lt;/span&gt;
+		&lt;span class=&quot;na&quot;&gt;destroy-method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;close&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;driverClassName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.driver}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.url}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.username}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.password}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxActive&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;10&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxIdle&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;5&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+	
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!--  扫描器自动扫描mapper，生成代理对象 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;basePackage&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.ssm.mapper&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用sqlSessionFactoryBeanName --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sqlSessionFactoryBeanName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sqlSessionFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;	
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;applicationcontext-transactionxml&quot;&gt;applicationContext-transaction.xml：&lt;/h3&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:mvc=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/mvc&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:aop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/aop&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:tx=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/tx&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/mvc&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context/spring-context-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/aop&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/aop/spring-aop-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/tx&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/tx/spring-tx-3.2.xsd&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+	 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用声明式事务配置，可以有效规范代码 --&amp;gt;&lt;/span&gt;
+	 
+	 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 事务管理器 --&amp;gt;&lt;/span&gt;
+	 &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt; 
+	 		&lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+	 
+	 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 通知 --&amp;gt;&lt;/span&gt;
+	 &lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:advice&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;txAdvice&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transaction-manager=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:attributes&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;save*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;REQUIRED&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;insert*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;REQUIRED&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;update*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;REQUIRED&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;delete*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;REQUIRED&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;find*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SUPPORTS&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;read-only=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;select*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SUPPORTS&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;read-only=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:method&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;get*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propagation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SUPPORTS&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;read-only=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/tx:attributes&amp;gt;&lt;/span&gt;
+	 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tx:advice&amp;gt;&lt;/span&gt;
+	 
+	 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- aop --&amp;gt;&lt;/span&gt;
+	 &lt;span class=&quot;nt&quot;&gt;&amp;lt;aop:config&amp;gt;&lt;/span&gt;
+	 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;aop:advisor&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;advice-ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;txAdvice&quot;&lt;/span&gt;
+	 				 &lt;span class=&quot;na&quot;&gt;pointcut=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution(* cn.itcast.ssm.service.impl.*.*(..))&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/aop:config&amp;gt;&lt;/span&gt;
+	
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;springmvcxml&quot;&gt;springmvc.xml：&lt;/h3&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:mvc=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/mvc&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:aop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/aop&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:tx=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/tx&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/mvc&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context/spring-context-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/aop&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/aop/spring-aop-3.2.xsd&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/tx&lt;/span&gt; 
+		&lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/tx/spring-tx-3.2.xsd&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用spring组件扫描Controller --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;context:component-scan&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base-package=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.ssm.controller&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 通过annotation-driven可以替代下边的处理器映射器和适配器 --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;mvc:annotation-driven conversion-service=&quot;conversionService&quot;/&amp;gt; --&amp;gt;&lt;/span&gt;
+
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 注解处理器映射器 --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 注解适配器 --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 视图解析器: --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;prefix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF/jsp/&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;suffix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.jsp&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;sqlmapconfigxml&quot;&gt;SqlMapConfig.xml:&lt;/h3&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 别名 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;typeAliases&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.ssm.pojo&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/typeAliases&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 
+		由于使用spring和mybatis整合的mapper扫描器，不需要再配置mapper扫描器
+		&amp;lt;mappers&amp;gt;
+			&amp;lt;package name=&quot;cn.xsw.ssm.mapper&quot; /&amp;gt;
+		&amp;lt;/mappers&amp;gt;
+	 --&amp;gt;&lt;/span&gt;	
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;创建包结构&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;notice&quot;&gt;cn.xsw.ssm.po&lt;br /&gt;
+cn.xsw.ssm.mapper&lt;br /&gt;
+cn.xsw.ssm.controller&lt;br /&gt;
+cn.xsw.ssm.service&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;前端控制器&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;在web.xml中：&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 前端控制器 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-name&amp;gt;&lt;/span&gt;springmvc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-name&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-class&amp;gt;&lt;/span&gt;org.springframework.web.servlet.DispatcherServlet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-class&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 加载springmvc配置 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;init-param&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;param-name&amp;gt;&lt;/span&gt;contextConfigLocation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-name&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;param-value&amp;gt;&lt;/span&gt;classpath:spring/springmvc.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-value&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/init-param&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-mapping&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-name&amp;gt;&lt;/span&gt;springmvc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-name&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;url-pattern&amp;gt;&lt;/span&gt;*.action&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url-pattern&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-mapping&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;程序示例&lt;/center&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;mapper&quot;&gt;mapper：&lt;/h3&gt;
+
+&lt;h3 id=&quot;service&quot;&gt;service：&lt;/h3&gt;
+
+&lt;h3 id=&quot;controller&quot;&gt;controller：&lt;/h3&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC与MyBaits的整合</summary></entry><entry><title type="html">SpringMVC-非注解映射器与适配器</title><link href="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-非注解映射器与适配器" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-3非注解映射器与适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;BeanNameUrlHandlerMapping&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;SimpleUrlHandlerMapping&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;HttpRequestHandlerAdapter&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;HttpRequestHandlerAdapter&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerbeannameurlhandlermappingcenter&quot;&gt;&lt;center&gt;BeanNameUrlHandlerMapping&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;在springmvc.xml中配置：BeanNameUrlHandlerMapping&lt;br /&gt;
+根据请求url（XXXX.action）匹配spring容器bean的name，找到对应的bean（程序编写的Handler）。
+所有处理器映射器都实现HandlerMapping接口。&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置处理器映射器： springmvc框架根据HandlerMapping接口判断是否是处理器映射器 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 根据bean的name进行查找Handler 将action的url配置在bean的name中 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centersimpleurlhandlermappingcenter&quot;&gt;&lt;center&gt;SimpleUrlHandlerMapping&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;itemsTest1.action、itemsTest2.action和itemList.action都可以访问到jsp页面&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--简单url映射： 集中配置bean的id对应的url --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.handler.SimpleUrlHandlerMapping&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mappings&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemsTest1.action&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;itemController&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemsTest2.action&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;itemController&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置Handler： --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemController&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemList.action&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.springmvc.controller.ItemController&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;notice&quot;&gt;注：在springmvc.xml配置了多个处理器映射器，多个处理器映射器可以共存。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;centersimplecontrollerhandleradaptercenter&quot;&gt;&lt;center&gt;SimpleControllerHandlerAdapter&lt;/center&gt;&lt;/h2&gt;
 
@@ -18,7 +386,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;centerhttprequesthandleradaptercenter&quot;&gt;&lt;center&gt;HttpRequestHandlerAdapter&lt;/center&gt;&lt;/h2&gt;
 
@@ -62,61 +430,7 @@
 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置Handler --&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemList2.action&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.springmvc.controller.ItemController2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中的非注解处理器适配器的配置</summary></entry><entry><title type="html">SpringMVC-注解适配器</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-注解适配器" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-注解适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;BeanNameUrlHandlerMapping&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;SimpleUrlHandlerMapping&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centersimplecontrollerhandleradaptercenter&quot;&gt;&lt;center&gt;SimpleControllerHandlerAdapter&lt;/center&gt;&lt;/h2&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中的注解处理器适配器的配置</summary></entry><entry><title type="html">SpringMVC-非注解映射器</title><link href="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8%E6%98%A0%E5%B0%84%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-非注解映射器" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-3非注解处理器映射器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8%E6%98%A0%E5%B0%84%E5%99%A8/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;BeanNameUrlHandlerMapping&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;SimpleUrlHandlerMapping&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerbeannameurlhandlermappingcenter&quot;&gt;&lt;center&gt;BeanNameUrlHandlerMapping&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;在springmvc.xml中配置：BeanNameUrlHandlerMapping&lt;br /&gt;
-根据请求url（XXXX.action）匹配spring容器bean的name，找到对应的bean（程序编写的Handler）。
-所有处理器映射器都实现HandlerMapping接口。&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置处理器映射器： springmvc框架根据HandlerMapping接口判断是否是处理器映射器 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 根据bean的name进行查找Handler 将action的url配置在bean的name中 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centersimpleurlhandlermappingcenter&quot;&gt;&lt;center&gt;SimpleUrlHandlerMapping&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;itemsTest1.action、itemsTest2.action和itemList.action都可以访问到jsp页面&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--简单url映射： 集中配置bean的id对应的url --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.handler.SimpleUrlHandlerMapping&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mappings&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemsTest1.action&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;itemController&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemsTest2.action&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;itemController&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置Handler： --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemController&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/itemList.action&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.springmvc.controller.ItemController&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p class=&quot;notice&quot;&gt;注：在springmvc.xml配置了多个处理器映射器，多个处理器映射器可以共存。&lt;/p&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了SpringMVC中表的非注解处理器映射器的配置</summary></entry><entry><title type="html">SpringMVC-搭建</title><link href="http://127.0.0.1:4000//SpringMVC-2%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="SpringMVC-搭建" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-2搭建</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-2%E6%90%AD%E5%BB%BA/">&lt;hr /&gt;
+&lt;/div&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中表的非注解处理器映射器和适配器的配置</summary></entry><entry><title type="html">SpringMVC-搭建</title><link href="http://127.0.0.1:4000//SpringMVC-2%E6%90%AD%E5%BB%BA/" rel="alternate" type="text/html" title="SpringMVC-搭建" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-2搭建</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-2%E6%90%AD%E5%BB%BA/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;center1jarcenter&quot;&gt;&lt;center&gt;1.导入Jar包&lt;/center&gt;&lt;/h2&gt;
 
@@ -190,11 +504,18 @@ DispatcherServlet.class的Qualified Name复制到servlet-name中。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;配置视图解析器：&lt;/h3&gt;
 
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置视图解析器：
-	 要求将jstl的包加到classpath --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ViewResolver --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt;
-	&lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置视图解析器：ViewResolver
+	 要求将JSTL的包加到classpath --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;根据逻辑视图名解析成真正的视图，真正视图地址=前缀+逻辑视图名+后缀.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置视图解析器：ViewResolver --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;prefix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF/jsp/&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;suffix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.jsp&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -240,7 +561,8 @@ DispatcherServlet.class的Qualified Name复制到servlet-name中。&lt;/p&gt;
 		&lt;span class=&quot;c1&quot;&gt;//将数据填充到request域&lt;/span&gt;
 		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 		&lt;span class=&quot;c1&quot;&gt;//指定转发的页面&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Web-INF/jsp/itemsList.jsp&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//modelAndView.setViewName(&quot;/Web-INF/jsp/itemsList.jsp&quot;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 		
 		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;

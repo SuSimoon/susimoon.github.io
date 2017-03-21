@@ -18,7 +18,7 @@ comments: false
 
 ## <center>注解映射器</center>  
 
-spring3.1之前默认加载映射器是：
+spring3.1之前默认加载映射器是：  
 org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping  
 3.1之后要使用：  
 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping  
