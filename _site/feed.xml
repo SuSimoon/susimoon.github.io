@@ -1,4 +1,221 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-20T18:45:22+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">SpringMVC-注解映射器与适配器</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-注解映射器与适配器" /><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-注解映射器与适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-22T15:53:03+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">SpringMVC-参数绑定</title><link href="http://127.0.0.1:4000//SpringMVC-%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A/" rel="alternate" type="text/html" title="SpringMVC-参数绑定" /><published>2017-03-22T00:00:00+08:00</published><updated>2017-03-22T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-参数绑定</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;返回ModelAndView&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;返回字符串&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;返回void&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;默认支持的参数类型&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;处理器形参中添加如下类型的参数，处理适配器会默认识别并进行赋值。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;简单类型&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;可以绑定整型、字符串、单精/双精度、日期、布尔型。&lt;/p&gt;
+
+&lt;h3 id=&quot;httpservletrequest&quot;&gt;HttpServletRequest&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;通过request对象获取请求信息&lt;/p&gt;
+
+&lt;h3 id=&quot;httpservletresponse&quot;&gt;HttpServletResponse&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;通过response处理响应信息&lt;/p&gt;
+
+&lt;h3 id=&quot;httpsession&quot;&gt;HttpSession&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;通过session对象得到session中存放的对象&lt;/p&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;Model&lt;/h3&gt;
+
+&lt;p&gt;通过model向页面传递数据，例如：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//调用service查询商品信息&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Items&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerrequestparamcenter&quot;&gt;&lt;center&gt;`@RequestParam`&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;如果request请求的参数名和controller方法的形参数名称一致，适配器自动进行参数绑定。&lt;br /&gt;
+例如：在地址栏中输入参数是id=1，则editItems方法会接收到参数。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//&amp;lt;------&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;editItem&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果不一致，可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestParam&lt;/code&gt;指定request请求的参数名绑定到哪个方法形参上。&lt;br /&gt;
+例如：在地址栏中输入参数是item_id=2，则editItems方法也会接收到参数。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item_id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//&amp;lt;------&lt;/span&gt;
+	
+	&lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;notice&quot;&gt;对于必须要传的参数，通过属性required设置为true，如果不传此参数则报错。&lt;br /&gt;
+对于有些参数如果不传入，还需要设置默认值，使用属性defaultvalue设置默认值。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item_id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerpojocenter&quot;&gt;&lt;center&gt;简单pojo类型&lt;/center&gt;&lt;/h2&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中Controller方法的返回值</summary></entry><entry><title type="html">SpringMVC-Controller方法返回值</title><link href="http://127.0.0.1:4000//SpringMVC-Controller%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E5%80%BC/" rel="alternate" type="text/html" title="SpringMVC-Controller方法返回值" /><published>2017-03-22T00:00:00+08:00</published><updated>2017-03-22T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-Controller方法返回值</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-Controller%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E5%80%BC/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;返回ModelAndView&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;返回字符串&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;返回void&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centermodelandviewcenter&quot;&gt;&lt;center&gt;返回ModelAndView&lt;/center&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//指定逻辑视图名&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;editItem&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;返回字符串&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;如果controller方法返回jsp页面，可以简单将方法返回值类型定义为字符串，最终返回逻辑视图名。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//字符串是逻辑视图名，model作用是将数据填充到request域中并在页面展示&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//&amp;lt;-----&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;editItem&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//&amp;lt;-----&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;redirect&quot;&gt;redirect重定向&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;如果方法重定向到另一个url，方法返回值为&lt;code class=&quot;highlighter-rouge&quot;&gt;“redirect:url&lt;/code&gt;路径”。&lt;br /&gt;
+使用redirect进行重定向，request数据无法共享(例如传入id值无法接收)，url地址栏会发生变化。&lt;br /&gt;
+变为：http://localhost:8080/SpringMVC/items/queryItems.action&lt;/p&gt;
+
+&lt;h3 id=&quot;forward&quot;&gt;forward转发&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;使用forward进行请求转发，方法返回值为&lt;code class=&quot;highlighter-rouge&quot;&gt;“forward:url&lt;/code&gt;路径”。&lt;br /&gt;
+request数据可以共享，url地址栏不会。&lt;br /&gt;
+变为：http://localhost:8080/SpringMVC/items/editItemSubmit.action&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//商品修改提交&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItemSubmit&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItemSubmit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+	
+	&lt;span class=&quot;c1&quot;&gt;//return &quot;redirect:queryItems.action&quot;; // 不需要写根路径&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;forward:queryItems.action&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centervoidcenter&quot;&gt;&lt;center&gt;返回void&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;使用此方法，容易输出json、xml格式的数据，通过response指定响应结果。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//&amp;lt;-----&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//request转向页面，需要指定页面的完整路径&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRequestDispatcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF/jsp/editItem.jsp&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//&amp;lt;-----&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中Controller方法的返回值</summary></entry><entry><title type="html">SpringMVC-@RequestMapping</title><link href="http://127.0.0.1:4000//SpringMVC-@RequestMapping/" rel="alternate" type="text/html" title="SpringMVC-@RequestMapping" /><published>2017-03-21T00:00:00+08:00</published><updated>2017-03-21T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-@RequestMapping</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-@RequestMapping/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;设置方法对应的url&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;窄化请求映射&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;限制http请求的方法&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerurlcenter&quot;&gt;&lt;center&gt;设置方法对应的url&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;一个方法对应一个url。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/queryItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;---------&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;queryItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//调用service查询商品列表&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;窄化请求映射&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;在class上定义根路径。&lt;br /&gt;
+好处：更新规范系统的url，避免url冲突。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//定义url根路径，访问：根路径+方法的url&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/items&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemsController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;centerhttpcenter&quot;&gt;&lt;center&gt;限制http请求的方法&lt;/center&gt;&lt;/h2&gt;
+
+&lt;p&gt;通过requestMapping限制url请求的http方法，例如限制请求必须是post，如果get请求就抛出异常。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//限制使用get方法&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中@RequestMapping的用法</summary></entry><entry><title type="html">SpringMVC-注解映射器与适配器</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-注解映射器与适配器" /><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-注解映射器与适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;注解映射器&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;注解适配器&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -98,7 +315,9 @@ org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapt
 &lt;p class=&quot;notice&quot;&gt;注：组件扫描可以扫描@Controller、@Service、@component、@Repsitory&lt;/p&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中的注解处理器适配器的配置</summary></entry><entry><title type="html">SpringMVC-整合MyBaits</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%95%B4%E5%90%88MyBaits/" rel="alternate" type="text/html" title="SpringMVC-整合MyBaits" /><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-整合MyBaits</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%95%B4%E5%90%88MyBaits/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;导入Jar包&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;创建配置文件&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;创建包结构&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;#3&quot;&gt;创建包结构&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;前端控制器&lt;/a&gt; 
+&lt;a href=&quot;#3&quot;&gt;程序示例&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
@@ -156,6 +375,14 @@ SqlMapConfig.xml—MyBaits的配置文件，配置别名、settings、mapper&lt;
 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${jdbc.password}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxActive&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;10&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxIdle&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;5&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SqlsessionFactory --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sqlSessionFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 数据源 --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- mybatis配置文件 --&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;configLocation&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:mybatis/SqlMapConfig.xml&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
 	
 	&lt;span class=&quot;c&quot;&gt;&amp;lt;!--  扫描器自动扫描mapper，生成代理对象 --&amp;gt;&lt;/span&gt;
@@ -312,17 +539,121 @@ cn.xsw.ssm.service&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 配置spring容器监听器 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;context-param&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;param-name&amp;gt;&lt;/span&gt;contextConfigLocation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-name&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;param-value&amp;gt;&lt;/span&gt;/WEB-INF/classes/spring/applicationContext-*.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-value&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/context-param&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;listener&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;listener-class&amp;gt;&lt;/span&gt;org.springframework.web.context.ContextLoaderListener&lt;span class=&quot;nt&quot;&gt;&amp;lt;/listener-class&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/listener&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;a name=&quot;5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;程序示例&lt;/center&gt;&lt;/h2&gt;
 
+&lt;p&gt;需求：根据条件查询商品信息，返回商品列表。&lt;br /&gt;
+items等单表可通过逆向工程生成。&lt;/p&gt;
+
 &lt;h3 id=&quot;mapper&quot;&gt;mapper：&lt;/h3&gt;
+
+&lt;p&gt;包装类：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//商品包装类&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemsQueryVo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;//get、set...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;mapper.xml:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.ssm.mapper.ItemsMapperCustom&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- sql片段 --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;sql&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query_items_where&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;if&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsCustom!=null&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;if&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsCustom.name!=null and itemsCustom.name!=''&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+				and name like '%${itemsCustom.name}%'
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/if&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;if&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsCustom.id!=null&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+				and id = #{itemsCustom.id}
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/if&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/if&amp;gt;&lt;/span&gt;	
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/sql&amp;gt;&lt;/span&gt;
+	
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;findItemsList&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parameterType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.ssm.po.ItemsQueryVo&quot;&lt;/span&gt;
+			&lt;span class=&quot;na&quot;&gt;resultType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cn.xsw.ssm.po.ItemsCustom&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		select * from items 
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;where&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;refid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query_items_where&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/where&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mapper&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;mapper.java:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemsMapperCustom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findItemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+			&lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;service&quot;&gt;service：&lt;/h3&gt;
 
-&lt;h3 id=&quot;controller&quot;&gt;controller：&lt;/h3&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC与MyBaits的整合</summary></entry><entry><title type="html">SpringMVC-非注解映射器与适配器</title><link href="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-非注解映射器与适配器" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-3非注解映射器与适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemsService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findItemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+			&lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemsServiceImpl&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemsService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//注入mapper&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemsMapperCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsMapperCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findItemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsQueryVo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+			&lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsMapperCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemsQueryVo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;controller&quot;&gt;controller：&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Controller&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemsController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemsService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/queryItems&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;queryItems&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//调用service查询商品列表&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findItemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsList&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在applicationContext-dao.xml中不需要配置，因为已经设置了自动扫描器扫描mapper。&lt;/p&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC与MyBaits的整合</summary></entry><entry><title type="html">SpringMVC-非注解映射器与适配器</title><link href="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/" rel="alternate" type="text/html" title="SpringMVC-非注解映射器与适配器" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-3非注解映射器与适配器</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-3%E9%9D%9E%E6%B3%A8%E8%A7%A3%E6%98%A0%E5%B0%84%E5%99%A8%E4%B8%8E%E9%80%82%E9%85%8D%E5%99%A8/">&lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;BeanNameUrlHandlerMapping&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;#2&quot;&gt;SimpleUrlHandlerMapping&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;#3&quot;&gt;HttpRequestHandlerAdapter&lt;/a&gt;&lt;br /&gt;
@@ -793,1031 +1124,4 @@ MyBatis中resultMap提供延迟加载功能，通过resultMap配置延迟加载�
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中的堆排序</summary></entry><entry><title type="html">Linux-基本操作</title><link href="http://127.0.0.1:4000//Linux-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="Linux-基本操作" /><published>2017-03-12T00:00:00+08:00</published><updated>2017-03-12T00:00:00+08:00</updated><id>http://127.0.0.1:4000//Linux-基本操作</id><content type="html" xml:base="http://127.0.0.1:4000//Linux-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;linux 操作系统概述&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;linux系统环境&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;linux的常用命令&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerlinux-center&quot;&gt;&lt;center&gt;linux 操作系统概述&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;1.常见操作系统&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;服务端操作系统：linux、unix、windows server &lt;br /&gt;
-单机操作系统：windows、 MAC 、linux（ubuntu）&lt;br /&gt;
-移动操作系统：Android、IOS 、Windows phone&lt;/p&gt;
-
-&lt;h3 id=&quot;linux&quot;&gt;2.linux操作系统介绍&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• 特点：&lt;/strong&gt; &lt;br /&gt;
-1. 开放、开源、多用户的网络操作系统。&lt;br /&gt;
-2. 基于unix(unix–&amp;gt;minix–&amp;gt;linux)，可以定制内核。
-3. 加入了GNU组织（自由软件组织 ，copyLeft），通过GPL（通用公共许可）许可对外发布。&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• linux组成：&lt;/strong&gt;
-1. linux内核：linus 团队管理&lt;br /&gt;
-2. shell：用户与内核交互的接口 &lt;br /&gt;
-3. 文件系统：ext3、ext4等(windows有fat32、ntfs) &lt;br /&gt;
-4. 第三方应用软件&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• linux操作系统版本：&lt;/strong&gt; &lt;br /&gt;
-1. 内核版本 ：linus团队管理。
-2. 发行版本：一些软件公司以内核为基础，再添加一些软件和文档形成发行版本。
-- red hat：rhel ，centos&lt;br /&gt;
-- debian：debian，ubuntu（桌面）&lt;br /&gt;
-- android&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerlinuxcenter&quot;&gt;&lt;center&gt;linux系统环境&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p class=&quot;notice&quot;&gt;默认有6个命令交互通道和一个图形界面交互通道，默认进入到的是图形界面通道。&lt;br /&gt;
-命令交互模式切换：ctrl+alt+f1—f6&lt;br /&gt;
-图形交互界面：ctrl+alt+f7&lt;/p&gt;
-
-&lt;p&gt;###1.图形界面交互模式&lt;/p&gt;
-
-&lt;p&gt;terminal：图形界面的命令终端，它是图形界面交互通道的延伸，要依赖于图形界面。&lt;/p&gt;
-
-&lt;p&gt;###2.命令交互模式&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;命令提示符 simoon@ubuntu:~$ 
-- &lt;code class=&quot;highlighter-rouge&quot;&gt;simoon&lt;/code&gt;：用户名&lt;br /&gt;
-- &lt;code class=&quot;highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt;：主机名&lt;br /&gt;
--&lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt;：路径。假如当前的路径正好是该用户存放数据的根目录，则显示~&lt;br /&gt;
-- &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;：用户的类型。$代表普通用户  #代表超级用户&lt;/p&gt;
-
-&lt;p&gt;###3.linux文件系统&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;目录结构：&lt;/strong&gt;&lt;br /&gt;
-&lt;img src=&quot;http://wx3.sinaimg.cn/large/83e1667dly1fbjfve0ffqj21bg0pu0z8.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;文件权限：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;权限&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;w&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;可写&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;r&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;只读&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;可执行&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;无权限&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• 字符表示法&lt;/strong&gt;
-drwxr-xr-x
-第1个字符： 文件的类型(d：文件夹  -：普通文件  c：串口文件  l：连接文件)
-2-4字符： 该文件的属主用户的权限（创建该文件的用户） 
-5-7字符： 与属主用户同一组的其他用户的权限
-8-10字符： 不同组的其他用户的权限&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;• 数字表示法&lt;/strong&gt;
--rw-r–r–： 文件的默认权限。 110|100|100 644 
-drwxr-xr-x ： 目录的默认权限。 111|101|101 755&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerlinuxcenter-1&quot;&gt;&lt;center&gt;linux的常用命令&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;注销、关机、重启&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;1.注销：&lt;code class=&quot;highlighter-rouge&quot;&gt;logout&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;exit&lt;/code&gt; (图形界面是无法logout的)&lt;br /&gt;
-2.关机：&lt;code class=&quot;highlighter-rouge&quot;&gt;shutdown - h  时间&lt;/code&gt; (need to be root)&lt;br /&gt;
-  - h：关机&lt;br /&gt;
-  - 时间：now-马上、12.30-指定具体时间、3-几分钟以后&lt;br /&gt;
-3.重启：&lt;code class=&quot;highlighter-rouge&quot;&gt;shutdown -r 时间&lt;/code&gt;&lt;br /&gt;
-  -r ：restart&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;文件操作命令&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls&lt;/code&gt;     ：查看目录内容&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;ls - l&lt;/code&gt; ：查看详细信息&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;ls - a&lt;/code&gt; ：查看所有文件（隐藏）&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;ls - la&lt;/code&gt;：查看所有文件详细信息&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir&lt;/code&gt; xxx ：创建目录 &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt; ：切换目录&lt;br /&gt;
-	- cd ..      记得要加空格&lt;br /&gt;
-	- cd ./java  进入当前目录的子目录&lt;br /&gt;
-	- cd ../xxx  进入上一级目录的子目录&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;tab&lt;/code&gt; ：自动补全&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;touch&lt;/code&gt; ：创建一个空白的普通文件&lt;br /&gt;
-    touch aa.txt &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;echo&lt;/code&gt; ：把内容重定向到指定的文件中，有则打开，无则创建&lt;br /&gt;
-	echo “test”&amp;gt;a.txt&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cat、more&lt;/code&gt; ：查看文件内容&lt;br /&gt;
-     - cat  ：查看文件内容&lt;br /&gt;
-     - more ：分页查看文件内容，按空格键换页&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cp&lt;/code&gt; ：复制&lt;br /&gt;
-	cp bj.txt ./java/j2ee&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;mv&lt;/code&gt; ：剪切、重命名&lt;br /&gt;
-	- 剪切 ：mv aa.txt ../android/&lt;br /&gt;
-	- 重命名 ：假如剪切的文件 存放在同一个目录中 ，则是重命名&lt;br /&gt;
-     mv bb.txt cc.txt&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;rm&lt;/code&gt;：删除文件或者文件夹&lt;br /&gt;
-	-f ： 假如要删除的文件不存在，也不提示&lt;br /&gt;
-	-i ： 删除前提示，默认不删除，要删除，输入y&lt;br /&gt;
-	-d ： 删除空白目录 &lt;br /&gt;
-	-r ： 递归删除&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wc&lt;/code&gt; ：word count ：统计字符数&lt;br /&gt;
-	命令： wc bj.txt&lt;br /&gt;
-	出现了三个数字154  233 3418 &lt;br /&gt;
-		- 154 ：行数&lt;br /&gt;
-		- 233 ：单词数&lt;br /&gt;
-		- 3418 ：字符数&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ln&lt;/code&gt; :创建连接文件&lt;br /&gt;
-	- 默认创建的是硬连接，类似复制，但是两个文件会同步 &lt;br /&gt;
-	命令：ln ./java/android/aa.txt  aaa&lt;br /&gt;
-	- s ：创建的是软连接&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt; ：查看当前目录的绝对路径&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt; ：管道命令 
-    命令： ls -la | wc &lt;br /&gt;
-    (ls -la这个命令作为wc的输入，也就是统计这个命令执行的结果的字数统计)&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;重定向&lt;br /&gt;
-    &lt;code class=&quot;highlighter-rouge&quot;&gt;- &amp;gt;&lt;/code&gt; ：覆盖模式&lt;br /&gt;
-    	命令：  echo “ww”&amp;gt;aaa&lt;br /&gt;
-    &lt;code class=&quot;highlighter-rouge&quot;&gt;- &amp;gt;&amp;gt;&lt;/code&gt; ：追加模式&lt;br /&gt;
-		命令： echo “ww”»aaa&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;passwd&lt;/code&gt; ：设置密码&lt;br /&gt;
-	ubuntu默认root账号是没有开启，只要设置root密码即可开启&lt;br /&gt;
-	设置 sudo passwd root&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;su&lt;/code&gt; ：切换用户&lt;br /&gt;
-    su root &lt;br /&gt;
-    root用户切换到其他账号不需要密码&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerlinuxcenter-2&quot;&gt;&lt;center&gt;linux的系统命令&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;1.&lt;code class=&quot;highlighter-rouge&quot;&gt;stat&lt;/code&gt; ：查看文件的详细信息&lt;br /&gt;
-	stat bj.txt&lt;br /&gt;
-2.&lt;code class=&quot;highlighter-rouge&quot;&gt;who与whoami&lt;/code&gt;&lt;br /&gt;
-	who ：查看在线的用户&lt;br /&gt;
-		simoon   tty4         2017-01-07 12:15（tty表示通道）&lt;br /&gt;
-		simoon   tty1         2017-01-07 12:12&lt;br /&gt;
-		simoon   tty7         2017-01-07 11:53 (:0)&lt;br /&gt;
-		simoon   pts/1        2017-01-07 12:49 (:0)(pts表示命令终端，可打开多个终端)&lt;br /&gt;
-	whoami ：查看当前自己的用户&lt;br /&gt;
-3.&lt;code class=&quot;highlighter-rouge&quot;&gt;hostname&lt;/code&gt; ： 显示主机名&lt;br /&gt;
-	hostname  — ubuntu&lt;br /&gt;
-4.&lt;code class=&quot;highlighter-rouge&quot;&gt;uname&lt;/code&gt;  ：显示系统信息  —Linux&lt;br /&gt;
-    -a ：显示完整的系统信息&lt;br /&gt;
-    	Linux ubuntu 3.11.0-12-generic #19-Ubuntu SMP Wed Oct 9 16:12:00 UTC 2013 i686 i686 i686 GNU/Linux(CNU表示自由软件组织)&lt;br /&gt;
-5.&lt;code class=&quot;highlighter-rouge&quot;&gt;top&lt;/code&gt; ：显示当前耗时的进行的信息，每3秒刷新一次 &lt;br /&gt;
-    cltr+c 中断 &lt;br /&gt;
-    (可根据pid来kill进程)&lt;br /&gt;
-6.&lt;code class=&quot;highlighter-rouge&quot;&gt;ps&lt;/code&gt; ：显示当前进程的快照 &lt;br /&gt;
-    - axu&lt;br /&gt;
-7.&lt;code class=&quot;highlighter-rouge&quot;&gt;du&lt;/code&gt; ：显示文件的大小信息 &lt;br /&gt;
-8.&lt;code class=&quot;highlighter-rouge&quot;&gt;df&lt;/code&gt; ：磁盘使用情况  disk free&lt;br /&gt;
-9.&lt;code class=&quot;highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt; ：查看或者配置网卡信息，好比windows的ipconfig&lt;br /&gt;
-	ipv4：32位  2-32次方     ipv6  128位     是 ipv4  2-96次方倍数&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	设置虚拟机ip地址：
-	1. 设置vmware的连接方式
-	 - NAT模式：共享宿主机的ip地址，在网上邻居找不到虚拟机，只能访问宿主机
-	 - 仅主机模式：在网上邻居中可以找不到虚拟机
-	 - 桥接模式：需要单独设置ip，可以在网上邻居查找
-	
-	2. 图形界面设置ip地址 
-	  edit connection --》ipv4--》manual（手工设置）--》add  （ip地址，子网掩码）
-	
-	3.命令方式设置ip地址
-	  静态设置ip：
-	     sudo ifconfig eth0 192.168.15.122 netmask 255.255.255.0 (第0块以太网卡)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;10.ping：测试与目标主机连接情况&lt;br /&gt;
-11.clear ：清除屏幕  windows： cls  &lt;br /&gt;
-12.man ：帮助命令&lt;br /&gt;
-	man 命令
-13.kill ：杀死进程
-	kill  pid 
-14.netstat ：网络连接详细信息
-15. useradd 
-	  - 查看用户信息
-		sudo cat /etc/passwd
-		itcast:x:1000:1000:UbuntuA,,,:/home/itcast:/bin/bash
-		- itcast:用户名
-		- x ：密码 ：已经加密 ，密码存放在  /etc/shadow 
-		- 1000: 账号id ，userId
-		- 1000： 组id ，group id
-		  - UbuntuA,,,  ：账号描述
-		  - /home/itcast ：该账号存放文件的默认位置  ~
-		- /bin/bash：该用户的shell脚本的解析方式  ，sh 、bash、rbash&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  - 创建用户 
-	sudo useradd lijun -d  /home/lijun   -s /bin/bash 
-	- d  ：指定该用户的home路径 
-	- s  ：该用户的shell解析方式
-	
-	步骤：
-	1. 创建 /home/lijun 目录
-	2. 执行 useradd 命令
-	3. 用 passwd 设置密码
-	4. su 切换用户 ```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;打包、压缩文件&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;windows ： zip、rar    
-linux ：gz ，bzip，zip
-
-1.tar :打包、拆包命令 
-    tar - cxzjvf  &amp;lt;打包后的文件&amp;gt;  &amp;lt;欲打包的目录&amp;gt;
-	  - c ：创建的一个归档文件，即打包文件夹
-	  - x ：拆包
-	  - z ：以gzip格式压缩，默认压缩倍数 6倍（0-9）
-	  - j ：以bzip2格式压缩
-	  - v ：显示打包或者拆包的文件信息
-	  - f ：后面紧接一个归档文件
-
-   - 打包文件
-      tar -cvf news.tar  ./java   摘要  
-   - 拆包文件
-      tar -xvf news.tar
-
-2.gzip、bzip2 压缩与解压
-      1. 压缩文件
-        gzip news.tar
-      2. 解压文件
-  		gzip -d news.tar.gz
-        -d :解压
-
-3.打包及压缩 
-   - 打包及压缩
-      tar -czvf news.tar.gz ./java
-   - 拆包及压解缩
-      tar -xzvf  news.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;section-3&quot;&gt;软件管理&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;windows ： .exe   
-   安装  ： mysql.exe  
-   卸载  ： 该软件唯一的标识，包名   alibaba
-android ： *.apk   卸载 包名
-red hat ： *.rpm 
-ubuntu  ： 对debian的升级  *.deb 格式
-
-
-1.安装软件
-    - dpkg ：debian  package 
-        离线安装：
-        安装 ： sudo dpkg - i  &amp;lt;文件名&amp;gt; 
-     	   -i ：install
-           命令：sudo dpkg -i ./tree_1.6.0-1_i386.deb
-        卸载 ： sudo dpkg - r  &amp;lt;包名&amp;gt; 
-           -r ：remove
-           命令：sudo dpkg -r tree
-   
-    - apt-get ：advance  package  tools 
-   　　  对dpkg命令的升级，在线安装
-	    安装 ： sudo apt-get -install  &amp;lt;包名&amp;gt;
-	    卸载 ： sudo apt-get -remove  &amp;lt;包名&amp;gt;
-
-2.vim 软件 ：好比记事本，但是比记事本要强大  
-    
-	1. 安装vim
-	2. 使用vim  
-	    命令：vim mm.txt
-	    操作模式：
-	    1. 一般模式 ，默认进入的一般模式，该模式不能编辑文档 ，只能查看
-	        按 i（insert）  进入 插入模式 
-	    2. 编辑模式、插入模式 
-	        该模式可以编辑文档，按esc 退出插入模式，进入到一般模式 
-	    3. 命令模式 ：在 一般模式中按：进入命令模式
-	        - q  ： 安全退出，当没有操作该文档，则直接按q退出vim 
-			- q! ：当修改了内容，但是不想保存，则q！强制退出
-			- wq ：保存退出
-			- set number ：显示行号
-			- set nonumber ：取消行号显示
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;javalinux&quot;&gt;搭建Java服务器，并且实现远程安全访问linux系统&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过ssh实现安全远程访问linux系统&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh ：secure shell
-	加密：
-1. 对称加密 （加密密钥与解密密钥相同）
-	des 、aes
-2. 非对称加密（加密密钥与解密密钥不同）
-	RSA ：公钥、私钥 
-	数字摘要：md5 \sha1 
-
-
-1. 查看是否安装了ssh服务端与客户端
-	sudo apt-cache policy openssh-client openssh-server
-
-2. 安装ssh服务端与客户端软件
-	sudo dpkg -i ./ssh/*
-   
-3. 通过windows ssh客户端来访问linux服务端
-	- putty ：远程登录
-	- winscp433setup.exe ：文件传输
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;安装jdk&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;进入 root用户
-	实现步骤：
-	1. jdk 存放在哪里  /opt
-	2. 把软件拷贝到/opt
-		su root
-		cp ./jdk-6u39-linux-i586.bin /opt
-	3. 绿色软件，解压 
-		./jdk-6u39-linux-i586.bin (此处要注意该文件是否有执行权限)
-	4. 设置环境变量
-		vim /etc/profile 
-		export JAVA_HOME=&quot;/opt/jdk1.6.0_39&quot;
-		export PATH=&quot;$JAVA_HOME/bin:$PATH&quot;
-	5. 刷新配置 ，让配置生效
-	   source /etc/profile
-
-	6. 编写Demo.java,测试 
-	   -javac Demo.java
-	       - java Demo
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;安装tomcat&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;步骤：
-
-1. 安装在哪里 /opt
-2. 拷贝、解压
-   tar -xzvf  apache-tomcat.tar.gz
-3. 运行
-   - ./startup.sh
-   - ./shutdown.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;安装Eclipse&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;步骤：
-	1.安装在/opt
-	2. 拷贝、解压
-	   cp eclipse.tar.gz  /opt
-	   tar -xzvf  eclipse.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;section-4&quot;&gt;重点&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.linux系统环境
-	命令交互通道
-	命名提示符
-2. linux 目录结构、文件权限
-drwxr-xr-x
-3. linux 命令
-	- 开关机
-	- 文件操作 
-	- 系统命令
-    	1. top 2. who 3. ifconfig 4. ping 5. kill 6. man 7.clear 8.netstat
-4. 软件管理
-	- dpkg ：离线  .deb  .rpm  .apk 
-	- apt-get ：在线 
-5. 压缩解压
-	tar -cxgzvf 打包后的文件 要打包的文件
-6. vim 的使用
-	三种模式
-7. ssh理解 secure shell
-8. java开发环境搭建
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Linux" /><summary type="html">本篇介绍了Linux中的基本操作</summary></entry><entry><title type="html">MySQL-多表操作</title><link href="http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="MySQL-多表操作" /><published>2017-03-11T00:00:00+08:00</published><updated>2017-03-11T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MySQL-多表操作</id><content type="html" xml:base="http://127.0.0.1:4000//MySQL-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;外键约束&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;数据库的设计&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;多表查询&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#4&quot;&gt;子查询&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;外键约束&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;示例：&lt;/h3&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto_increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;eid&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto_increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;ename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;salaly&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;dno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;现在需要把研发部删除，但研发部有人员的操作不合理。
-引入外键约束的作用：保证数据的完整性。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;添加外键：&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;alter table 表名 add foreign key 当前表名(dno) references 关联的表(did);&lt;/code&gt; &lt;br /&gt;
-eg:alter table emp add foreign key emp(dno) references dept(did);&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;数据库的设计&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;一对多：&lt;/h3&gt;
-
-&lt;p&gt;在多方需要添加一个字段，并且和一所放的主键的类型必须是相同的。
-把该字段作为外键指向一方的主键。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/83e1667djw1f4y22uccl9j21c60s0q8k.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;多对多：&lt;/h3&gt;
-
-&lt;p&gt;拆成两个一对多的关系，中间创建一个中间表，至少有两个字段，作为外键指向两个多对多关系表的主键。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/83e1667djw1f4y22sh6wqj218o0t8tcx.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;一对一：&lt;/h3&gt;
-
-&lt;p&gt;建表原则：主键对应/唯一外键对应&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;多表查询&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;笛卡尔积的概念：&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;表A：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;aid&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;aname&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;a1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;a2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;表B：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;bid&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;bname&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;aid&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;b1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;b2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;b3&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;select * from a,b;返回的结果就是笛卡尔积。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://wx4.sinaimg.cn/large/83e1667dly1fdizfgfyj0j20eo090t96.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;内连接：&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;1.普通内连接&lt;/strong&gt;&lt;br /&gt;
-前提条件：需要有外键&lt;br /&gt;
-关键字：&lt;code class=&quot;highlighter-rouge&quot;&gt;inner join ... on&lt;/code&gt;  	&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from dept inner join emp on dept.did = emp.dno;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;1.隐式内连接(用的最多)&lt;/strong&gt;
-可以不使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;inner join ... on&lt;/code&gt; 关键字&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from dept,emp where dept.did = emp.dno;&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;外连接：&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;1.左外链接（看左表，把左表所有的数据全部查询出来）&lt;/strong&gt;&lt;br /&gt;
-前提条件：需要有外键&lt;br /&gt;
-关键字：	&lt;code class=&quot;highlighter-rouge&quot;&gt;left [outer] join ... on&lt;/code&gt;  &lt;br /&gt;
-eg：&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from dept left outer join emp on dept.did = emp.dno;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;2.右外链接（看右表，把右表所有的数据全部查询出来）&lt;/strong&gt;&lt;br /&gt;
-前提条件：需要有外键&lt;br /&gt;
-关键字：	&lt;code class=&quot;highlighter-rouge&quot;&gt;right [outer] join ... on&lt;/code&gt;  &lt;br /&gt;
-eg：&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from dept right join emp on dept.did = emp.dno;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/83e1667djw1f4y88dsgp8j21eq0rcn4s.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;子查询&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;查询的内容需要另一个查询的结果。&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from emp where ename &amp;gt; (select * from emp where 条件);&lt;/code&gt;&lt;/p&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;any&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;任意&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;all&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;全部&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&amp;gt;any&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;大于结果的最小值&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&amp;gt;all&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;大于结果的最大值&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;##练习&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--查看所有人所属的部门名称和员工名称&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ename&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ename&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计每个部门的人数(按照部门名称统计，分组group by  count)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dno&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计部门的平均工资（按部门名称统计 ，分组group by  avg）&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salaly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dno&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计部门的平均工资大于公司平均工资的部门（子查询）&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--公司的平均工资&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salaly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;--部门的平均工资&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salaly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sa&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dno&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dname&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;having&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salaly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中多表的操作</summary></entry><entry><title type="html">MySQL-数据操作</title><link href="http://127.0.0.1:4000//MySQL-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C/" rel="alternate" type="text/html" title="MySQL-数据操作" /><published>2017-03-10T00:00:00+08:00</published><updated>2017-03-10T00:00:00+08:00</updated><id>http://127.0.0.1:4000//MySQL-数据操作</id><content type="html" xml:base="http://127.0.0.1:4000//MySQL-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;#1&quot;&gt;数据的类型&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;C:添加数据&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;U:修改数据&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#4&quot;&gt;D:删除数据&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#5&quot;&gt;R:查询数据&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#6&quot;&gt;聚集函数&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter&quot;&gt;&lt;center&gt;数据的类型&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;字符串型：&lt;/h3&gt;
-
-&lt;p&gt;VARCHAR、CHAR&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;varchar和char区别：&lt;/strong&gt;&lt;br /&gt;
-1.&lt;code class=&quot;highlighter-rouge&quot;&gt;varchar&lt;/code&gt;(常用): 长度是可变的。&lt;br /&gt;
-eg:name varchar(8) 存入数据hello可行，但是存入helloworld报错。&lt;br /&gt;
-2.&lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt;: 长度是不可变的，效率高，char的效果。 &lt;br /&gt;
-eg:name char(8) 存入数据hello，如果不够用空格补全。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;大数据类型（一般不用）：&lt;/h3&gt;
-
-&lt;p&gt;BLOB、TEXT&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;BLOB：二进制文件&lt;br /&gt;
-TEXT：字符&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;数值型：&lt;/h3&gt;
-
-&lt;p&gt;TINYINT、SMALLINT、INT、BIGINT、FLOAT、DOUBLE&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;逻辑型：&lt;/h3&gt;
-
-&lt;p&gt;BIT(0/1)&lt;br /&gt;
-对应boolean&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;日期型：&lt;/h3&gt;
-
-&lt;p&gt;DATE、TIME、DATETIME、TIMESTAMP&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;date和time:&lt;/strong&gt;
-date 只包含日期
-time 只包含时分秒&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;datetime和timestamp区别:&lt;/strong&gt;&lt;br /&gt;
-(都包含日期和时分秒)&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;datetime&lt;/code&gt;: 需要手动录入时间。
-&lt;code class=&quot;highlighter-rouge&quot;&gt;timestamp&lt;/code&gt;: 不传入数据，默认选择当前系统时间。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-1&quot;&gt;&lt;center&gt;添加数据&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p class=&quot;notice&quot;&gt;insert into 表名 (字段1,字段2,字段3..) values (值1,值2,值3…);	有几列就插入多少的值&lt;br /&gt;
-insert into 表名 values(值1,值2,值3…);	插入所有的列&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;注意：&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;1.数据与字段的类型相同。&lt;br /&gt;
-2.字段长度需要控制。&lt;br /&gt;
-3.字符串或者日期类型需要使用’‘。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-2&quot;&gt;&lt;center&gt;修改数据&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;语法:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;update 表名 set 字段=值,字段=值... [ where ]&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;注意:&lt;/h3&gt;
-
-&lt;p&gt;如果没有where条件，默认更新所有的记录。
-有where提交，选择某一条记录。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;示例：&lt;/h3&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--将所有员工薪水修改为5000元。&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--将姓名为’tom’的薪水修改为3000元。&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--将姓名为’tom’的薪水修改为4000元，job改为BOSS。&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;job&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'BOSS'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--将tom的薪水在原有基础上增加1000元。	&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-3&quot;&gt;&lt;center&gt;删除数据&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;语法:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;delete from 表名 [ where ];&lt;/code&gt; 删除数据 &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;truncate 表名;&lt;/code&gt; 删除所有的数据&lt;/p&gt;
-
-&lt;h3 id=&quot;truncatedelete&quot;&gt;truncate和delete的区别:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;truncate&lt;/code&gt; 先删除整个表，再创建一个新的空的表。(效率高)&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;delete&lt;/code&gt; 删除数据时一条一条删除。&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--删除表中名称为’tom’的记录&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;--删除表中所有记录&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;truncate&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-4&quot;&gt;&lt;center&gt;查询数据&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;语法:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;select * from 表名;&lt;/code&gt; 查询所有（字段）&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;select 字段名1,字段名2,字段名3 from 表名;&lt;/code&gt; 显示查询字段名&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;select DISTINCT 字段名 from 表名;&lt;/code&gt; 去除重复的数据&lt;/p&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;示例：&lt;/h3&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto_increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;eglish&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;insert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;into&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'kate'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;62&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;insert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;into&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;查询表中所有学生的信息&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;查询表中所有学生的姓名和对应的英语成绩。&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;过滤表中重复数据&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;distinct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;查询的列可以运算:&lt;/h3&gt;
-
-&lt;p&gt;可以使用别名：使用as别名，并且as可以省略。&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--在所有学生分数上加10分特长分&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计每个学生的总分&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--使用别名表示学生分数&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;where&quot;&gt;使用where条件过滤:&lt;/h3&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--查询姓名为班长的学生成绩&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'班长'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--查询英语成绩大于90分的同学&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--查询总分大于200分的所有同学&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-13&quot;&gt;常用的符号:&lt;/h3&gt;
-
-&lt;table rules=&quot;groups&quot; class=&quot;notice&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;符号&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;作用&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&amp;gt;  &amp;lt;  &amp;lt;=  &amp;gt;=  =&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&amp;lt;&amp;gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;不等于&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;in&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;范围内取内容&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;is null&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;判断是否为null&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;and&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;并且&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;or&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;或者&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;not&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;不成立&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--查询英语分数在80－90之间的同学。&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;between&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	
-&lt;span class=&quot;c1&quot;&gt;--查询数学分数为18,78,46的同学。&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;78&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;46&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--查询数学分&amp;gt;80，语文分&amp;gt;80的同学。&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-14&quot;&gt;模糊查询:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;_和%区别：&lt;/strong&gt;&lt;br /&gt;
-_表示只有一个占位符&lt;br /&gt;
-%可以有多个占位符&lt;/p&gt;
-
-&lt;p class=&quot;notice&quot;&gt;like ‘%张’;	结果XXX张&lt;br /&gt;
-like ‘张%’;	结果张XXX&lt;br /&gt;
-like ‘%张%’;	只要有张就行&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--查询所有姓张的学生成绩&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'张%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-15&quot;&gt;排序:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;默认为升序(asc)，降序为(desc)  &lt;br /&gt;
-出现select的语句末尾&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--对数学成绩排序后输出&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--对总分排序按从高到低的顺序输出&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--对学生成绩按照英语进行降序排序，英语相同学员按照数学降序&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--对姓美的学生成绩排序输出&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'美%'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;english&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;6&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centercenter-5&quot;&gt;&lt;center&gt;聚集函数&lt;/center&gt;&lt;/h2&gt;
-
-&lt;h3 id=&quot;count&quot;&gt;count&lt;/h3&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--统计一个班级共有多少学生&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计数学成绩大于90的学生有多少个&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计总分大于150的人数有多少&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;sum&quot;&gt;sum&lt;/h3&gt;
-
-&lt;p&gt;sum会忽略null值，但相加不可以。&lt;br /&gt;
-可以同ifnull(xxx,0)共同使用。&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--统计一个班级数学总成绩&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计一个班级语文、英语、数学各科的总成绩&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计一个班级语文、英语、数学的成绩总和&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ifnull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--统计一个班级语文成绩平均分&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;avg&quot;&gt;avg&lt;/h3&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--求一个班级数学平均分&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--求一个班级总分平均分&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ifnull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;english&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chinese&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-16&quot;&gt;最大最小值&lt;/h3&gt;
-
-&lt;p&gt;max:&lt;code class=&quot;highlighter-rouge&quot;&gt;select max(math) from stu;&lt;/code&gt;&lt;br /&gt;
-min: &lt;code class=&quot;highlighter-rouge&quot;&gt;select min(math) from stu;&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;group-by&quot;&gt;group by&lt;/h3&gt;
-
-&lt;p&gt;条件过滤需要是having，不能使用where。&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;--对订单表中商品归类后，显示每一类商品的总价&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orders&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;--查询购买了几类商品，并且每类总价大于100的商品	&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orders&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;having&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;select&quot;&gt;select语句小结:&lt;/h3&gt;
-
-&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;S-F-W-G-H-O 组合:&lt;/strong&gt; (顺序不能改变) &lt;br /&gt;
-select … from … where … group by… having… order by … ;&lt;/p&gt;</content><category term="MySQL" /><summary type="html">本篇介绍了MySQL中数据的操作</summary></entry></feed>
+&lt;/div&gt;</content><category term="Algorithms" /><summary type="html">本篇介绍了Algorithms中的堆排序</summary></entry></feed>

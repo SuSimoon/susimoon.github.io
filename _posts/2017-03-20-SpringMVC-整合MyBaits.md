@@ -11,7 +11,9 @@ comments: false
 
 ><a href="#1">导入Jar包</a>  
 ><a href="#2">创建配置文件</a>  
-><a href="#3">创建包结构</a>     
+><a href="#3">创建包结构</a>   
+><a href="#4">前端控制器</a> 
+><a href="#3">程序示例</a>   
 
 ***
 
@@ -72,6 +74,14 @@ SqlMapConfig.xml---MyBaits的配置文件，配置别名、settings、mapper
 		<property name="password" value="${jdbc.password}" />
 		<property name="maxActive" value="10" />
 		<property name="maxIdle" value="5" />
+	</bean>
+
+	<!-- SqlsessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- mybatis配置文件 -->
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"/>
 	</bean>
 	
 	<!--  扫描器自动扫描mapper，生成代理对象 -->
@@ -228,6 +238,17 @@ cn.xsw.ssm.service
 </servlet-mapping>
 ```
 
+```xml
+<!-- 配置spring容器监听器 -->
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/classes/spring/applicationContext-*.xml</param-value>
+</context-param>
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+```
+
 
 ***
 
@@ -235,7 +256,8 @@ cn.xsw.ssm.service
 
 ## <center>程序示例</center> 
 
-需求：根据条件查询商品信息，返回商品列表
+需求：根据条件查询商品信息，返回商品列表。  
+items等单表可通过逆向工程生成。  
 
 ### mapper：
 
@@ -258,7 +280,7 @@ public class ItemsQueryVo {
 <mapper namespace="cn.xsw.ssm.mapper.ItemsMapperCustom">
 	
 	<!-- sql片段 -->
-	<select id="query_items_where">
+	<sql id="query_items_where">
 		<if test="itemsCustom!=null">
 			<if test="itemsCustom.name!=null and itemsCustom.name!=''" >
 				and name like '%${itemsCustom.name}%'
@@ -266,13 +288,12 @@ public class ItemsQueryVo {
 			<if test="itemsCustom.id!=null" >
 				and id = #{itemsCustom.id}
 			</if>
-		</if>
-		
-	</select>
+		</if>	
+	</sql>
 	
 	<select id="findItemsList" parameterType="cn.xsw.ssm.po.ItemsQueryVo"
 			resultType="cn.xsw.ssm.po.ItemsCustom">
-		select * from items
+		select * from items 
 		<where>
 			<include refid="query_items_where"/>
 		</where>
@@ -298,15 +319,40 @@ public interface ItemsService {
 }
 ```
 
+```java
+public class ItemsServiceImpl implements ItemsService {
+	//注入mapper
+	@Autowired
+	private ItemsMapperCustom itemsMapperCustom;
+	
+	@Override
+	public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo)
+			throws Exception {
+		
+		return itemsMapperCustom.findItemsList(itemsQueryVo);
+	}
+}
+```
+
 ### controller：
 
+```java
+@Controller
+public class ItemsController {
+	@Autowired
+	private ItemsService itemsService;
+	@RequestMapping("/queryItems")
+	public ModelAndView queryItems() throws Exception {
+		//调用service查询商品列表
+		List<ItemsCustom> itemsList = itemsService.findItemsList(null);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("itemsList",itemsList);
+		modelAndView.setViewName("itemsList");
+		return modelAndView;
+	}
+}
+```
 
-
-
-
-
-
-
-
+在applicationContext-dao.xml中不需要配置，因为已经设置了自动扫描器扫描mapper。  
 
 
