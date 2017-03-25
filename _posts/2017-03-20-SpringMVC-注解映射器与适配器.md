@@ -52,6 +52,9 @@ RequestMappingHandlerAdapter不要求Handler实现任何接口。
 <!-- 注解适配器 -->
 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 ```
+ 
+注：<mvc:annotation-driven/>可以代替上边的处理器映射器和适配器的配置。
+{: .notice} 
 
 ***
 
