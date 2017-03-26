@@ -1,4 +1,9 @@
-### Intersection of Two Arrays II
+### 350. Intersection of Two Arrays II
+
+Given two arrays, write a function to compute their intersection.
+
+Example:
+Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2].
 
 思路：
 1.将两个数组进行排序。  
@@ -79,7 +84,14 @@ public class Solution {
 }
 ```
 
-### Intersection of Two Arrays
+***
+
+### 349. Intersection of Two Arrays
+
+Given two arrays, write a function to compute their intersection.
+
+Example:
+Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].
 
 ```java
 public class Solution {
@@ -131,7 +143,9 @@ public class Solution {
 }
 ```
 
-### Valid Anagram
+***
+
+### 242. Valid Anagram
 
 Given two strings s and t, write a function to determine if t is an anagram of s.
 
@@ -152,7 +166,7 @@ public class Solution {
 ```
 
 ```java
-//麻烦的方法
+//我的麻烦方法
 public class Solution {
     public boolean isAnagram(String s, String t) {
         Map<Character,Integer> map = new HashMap<Character,Integer>();
@@ -180,6 +194,123 @@ public class Solution {
          }
          
        return true; 
+    }
+}
+```
+
+***
+
+### 345. Reverse Vowels of a String
+
+Write a function that takes a string as input and reverse only the vowels of a string.
+
+Example 1:
+Given s = "hello", return "holle".
+
+Example 2:
+Given s = "leetcode", return "leotcede".
+
+思路：
+1.两个指针分别指向字符串的首和尾。  
+两个指针分别向中间移动，遇到元音就进行交换，直到两个指针相遇。
+
+```java
+public class Solution {
+    public String reverseVowels(String s) {
+        if(s == null || s.length()==0) return s;
+        String vowels = "aeiouAEIOU";
+        char[] chars = s.toCharArray();
+        int start = 0;
+        int end = s.length()-1;
+        while(start<end){
+            
+            while(start<end && !vowels.contains(chars[start]+"")){
+                start++;
+            }
+            
+            while(start<end && !vowels.contains(chars[end]+"")){
+                end--;
+            }
+            
+            char temp = chars[start];
+            chars[start] = chars[end];
+            chars[end] = temp;
+            
+            start++;
+            end--;
+        }
+        return new String(chars);
+    }
+}
+```
+
+
+### 125. Valid Palindrome
+
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+For example,
+"A man, a plan, a canal: Panama" is a palindrome.
+"race a car" is not a palindrome.
+
+内循环要注意：若是while则要有start<end条件，否则会无限循环。  
+若是if则不需要写此条件。
+{: .notice} 
+
+
+```java
+//我的方法
+public class Solution {
+    public boolean isPalindrome(String s) {
+        if(s.isEmpty())  return true;
+        char[] chars = s.toCharArray();
+        int start = 0;
+        int end = s.length() - 1;
+        
+        while(start<end) {
+            while(start<end && !Character.isLetterOrDigit(chars[start])) {
+                start ++;
+            }
+            while(start<end && !Character.isLetterOrDigit(chars[end])) {
+                end --;
+            }
+            
+            if(Character.toLowerCase(chars[start]) != Character.toLowerCase(chars[end])) {
+                return false;
+            } else {
+                start ++;
+                end --;
+            }
+        }
+        return true;
+    }   
+}
+```
+
+```java
+public class Solution {
+    public boolean isPalindrome(String s) {
+        if (s.isEmpty()) {
+            return true;
+        }
+        int head = 0, tail = s.length() - 1;
+        char cHead, cTail;
+        while(head <= tail) {
+            cHead = s.charAt(head);
+            cTail = s.charAt(tail);
+            if (!Character.isLetterOrDigit(cHead)) {
+                head++;
+            } else if(!Character.isLetterOrDigit(cTail)) {
+                tail--;
+            } else {
+                if (Character.toLowerCase(cHead) != Character.toLowerCase(cTail)) {
+                    return false;
+                }
+                head++;
+                tail--;
+            }
+        }       
+        return true;
     }
 }
 ```
