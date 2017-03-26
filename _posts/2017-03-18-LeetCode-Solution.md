@@ -1,3 +1,13 @@
+---
+layout: post
+title:  "LeetCode-Solution"
+date:   2017-03-18
+excerpt: ""
+project: true
+tag:
+
+comments: false
+---
 ### 350. Intersection of Two Arrays II
 
 Given two arrays, write a function to compute their intersection.
