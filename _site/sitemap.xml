@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://127.0.0.1:4000//SpringMVC-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</loc>
+<lastmod>2017-03-26T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://127.0.0.1:4000//SpringMVC-%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/</loc>
 <lastmod>2017-03-24T00:00:00+08:00</lastmod>
 </url>

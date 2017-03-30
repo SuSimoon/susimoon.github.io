@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-26T13:29:42+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">SpringMVC-@ModelAttribute</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/" rel="alternate" type="text/html" title="SpringMVC-@ModelAttribute" /><published>2017-03-24T00:00:00+08:00</published><updated>2017-03-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-数据回显</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://127.0.0.1:4000//feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://127.0.0.1:4000//feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000//" rel="alternate" type="text/html" /><updated>2017-03-27T11:25:41+08:00</updated><id>http://127.0.0.1:4000//</id><title type="html">Simoon</title><subtitle>Improving Java Skills</subtitle><entry><title type="html">SpringMVC-图片上传</title><link href="http://127.0.0.1:4000//SpringMVC-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/" rel="alternate" type="text/html" title="SpringMVC-图片上传" /><published>2017-03-26T00:00:00+08:00</published><updated>2017-03-26T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-图片上传</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;图片存储目录设置&lt;/h3&gt;
+
+&lt;p class=&quot;notice&quot;&gt;把图片上传到工程目录不利于进行工程维护。&lt;br /&gt;
+一般使用专门的图片服务器(http，比如apache、tomcat)。&lt;br /&gt;
+下例使用图片虚拟目录，通过虚拟目录访问硬盘上存储的图片目录 。&lt;/p&gt;
+
+&lt;p&gt;双击Servers里的Tomcat：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://wx4.sinaimg.cn/large/83e1667dly1fe0d9iqn00j20ty0a3ac9.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;配置图片上传解析器&lt;/h3&gt;
+
+&lt;p&gt;SpringMVC使用commons-fileupload进行图片上传。&lt;/p&gt;
+
+&lt;p&gt;1.导入commons-fileupload的jar包：&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;commons-fileupload-1.2.2.jar&lt;br /&gt;
+commons-io-2.4.jar&lt;/p&gt;
+
+&lt;p&gt;2.在springmvc.xml中配置commons-fileupload对应的SpringMVC的图片上传解析器：&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 文件上传 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;multipartResolver&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 设置上传文件的最大尺寸为5MB --&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxUploadSize&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;5242880&lt;span class=&quot;nt&quot;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;jsp&quot;&gt;在jsp页面中：&lt;/h3&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemForm&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;post&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;enctype=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;multipart/form-data&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;商品图片&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;c:if&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${itemsCustom.pic !=null}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/pic/${itemsCustom.pic}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;100/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/c:if&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pictureFile&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt; 
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;controller&quot;&gt;在Controller中：&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/editItemSubmit&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;editItemSubmit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;nd&quot;&gt;@ModelAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;itemsCustom&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemsCustom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//上传图片&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;MultipartFile&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pictureFile&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	
+	&lt;span class=&quot;c1&quot;&gt;//进行图片上传&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pictureFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//图片上传成功后，将图片的地址写到数据库&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;F:\\develop\\upload\\temp\\&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//上传文件原始名称&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;originalFilename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pictureFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getOriginalFilename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//新的图片名称&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;randomUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;originalFilename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;originalFilename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastIndexOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//新文件&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newFileName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//将内存中的文件写入磁盘&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;pictureFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;transferTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;//图片上传成功，将新图片地址写入数据库&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;itemsCustom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newFileName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC中用@ ModelAttribute来进行数据回显</summary></entry><entry><title type="html">SpringMVC-@ModelAttribute</title><link href="http://127.0.0.1:4000//SpringMVC-%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/" rel="alternate" type="text/html" title="SpringMVC-@ModelAttribute" /><published>2017-03-24T00:00:00+08:00</published><updated>2017-03-24T00:00:00+08:00</updated><id>http://127.0.0.1:4000//SpringMVC-数据回显</id><content type="html" xml:base="http://127.0.0.1:4000//SpringMVC-%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;center-modelattributecenter&quot;&gt;&lt;center&gt;@ ModelAttribute数据回显&lt;/center&gt;&lt;/h2&gt;
 
@@ -1170,29 +1248,4 @@ DispatcherServlet.class的Qualified Name复制到servlet-name中。&lt;/p&gt;
 
 &lt;h2 id=&quot;center5center&quot;&gt;&lt;center&gt;5.工程部署&lt;/center&gt;&lt;/h2&gt;
 
-&lt;p&gt;访问：http://localhost:8080/SpringMVC/itemList.action&lt;/p&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC的环境搭建</summary></entry><entry><title type="html">SpringMVC-架构</title><link href="http://127.0.0.1:4000//1SpringMVC-1%E6%9E%B6%E6%9E%84/" rel="alternate" type="text/html" title="SpringMVC-架构" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://127.0.0.1:4000//1SpringMVC-1架构</id><content type="html" xml:base="http://127.0.0.1:4000//1SpringMVC-1%E6%9E%B6%E6%9E%84/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centerspringmvccenter&quot;&gt;&lt;center&gt;SpringMVC的架构图&lt;/center&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://wx3.sinaimg.cn/large/83e1667dly1fds667tvmfj21tc0zkdou.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;第一步：用户发起request请求，请求至DispatcherServlet前端控制器&lt;br /&gt;
-第二步：DispatcherServlet前端控制器请求HandlerMapping处理器映射器查找Handler&lt;br /&gt;
-DispatcherServlet：前端控制器，相当于中央调度器，各各组件都和前端控制器进行交互，降低了各个组件之间耦合度。&lt;br /&gt;
-第三步：HandlerMapping处理器映射器，根据url及一些配置规则（xml配置、注解配置）查找Handler，将Handler返回给DispatcherServlet前端控制器&lt;br /&gt;
-第四步：DispatcherServlet前端控制器调用适配器执行Handler，有了适配器通过适配器去扩展对不同Handler执行方式（比如：原始servlet开发，注解开发）&lt;br /&gt;
-第五步：适配器执行Handler  &lt;br /&gt;
-Handler是后端控制器，当成模型。&lt;br /&gt;
-第六步：Handler执行完成返回ModelAndView  &lt;br /&gt;
-ModelAndView：springmvc的一个对象，对Model和view进行封装。&lt;br /&gt;
-第七步：适配器将ModelAndView返回给DispatcherServlet&lt;br /&gt;
-第八步：DispatcherServlet调用视图解析器进行视图解析，解析后生成view&lt;br /&gt;
-		视图解析器根据逻辑视图名解析出真正的视图。&lt;br /&gt;
-		View：springmvc视图封装对象，提供了很多view，jsp、freemarker、pdf、excel…&lt;br /&gt;
-第九步：ViewResolver视图解析器给前端控制器返回view  &lt;br /&gt;
-第十步：DispatcherServlet调用view的渲染视图的方法，将模型数据填充到request域。&lt;br /&gt;
-第十一步：DispatcherServlet向用户响应结果(jsp页面、json数据…)&lt;/p&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC的整体架构</summary></entry></feed>
+&lt;p&gt;访问：http://localhost:8080/SpringMVC/itemList.action&lt;/p&gt;</content><category term="SpringMVC" /><summary type="html">本篇介绍了SpringMVC的环境搭建</summary></entry></feed>

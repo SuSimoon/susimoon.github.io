@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "LeetCode-Solution"
+title:  "LeetCode-Two Star"
 date:   2017-03-18
 excerpt: ""
 project: true
@@ -8,6 +8,8 @@ tag:
 
 comments: false
 ---
+
+
 ### 350. Intersection of Two Arrays II
 
 Given two arrays, write a function to compute their intersection.
@@ -15,12 +17,15 @@ Given two arrays, write a function to compute their intersection.
 Example:
 Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2].
 
-思路：
+思路：  
 1.将两个数组进行排序。  
 2.设置两个指向数组第一个元素的指针i、j。  
 3.若两个元素相等则临时放入arrayList中，更不相等，更小的元素所在数组指针右移。  
 4.将list临时存放的数放入一个新的数组里。
 {: .notice} 
+
+> 第一种方法忘记写 i++与j++  
+> 第二种方法通过
 
 ```java
 public class Solution {
@@ -31,8 +36,8 @@ public class Solution {
         for(int i=0,j=0; i<nums1.length && j<nums2.length;) {
            if(nums1[i] == nums2[j]) {
                res.add(nums1[i]);
-               i++;
-               j++;
+               i++; // <---
+               j++; // <---
            } else if(nums1[i] < nums2[j]) {
                i++;
            } else {
@@ -55,7 +60,8 @@ for(Integer num : res) {
     result[i++] = num;
 }
 ```
-思路：
+
+思路：  
 1.遍历nums1数组并存入map中，key为元素值，value为出现该元素的个数。  
 2.遍历nums2数组，若有map中的元素，就加入list里，map中该元素个数减一。  
 {: .notice} 
@@ -102,6 +108,9 @@ Given two arrays, write a function to compute their intersection.
 
 Example:
 Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].
+
+> 第一种方法注意不能写成set.get(i)
+> 第二种方法开始时依旧按照map形式写，但应该用set，因为无关乎数量。
 
 ```java
 public class Solution {
@@ -163,6 +172,8 @@ For example,
 s = "anagram", t = "nagaram", return true.
 s = "rat", t = "car", return false.
 
+> 想到了自己的方法，但没有想到第一种哈希表方法
+
 ```java
 public class Solution {
     public boolean isAnagram(String s, String t) {
@@ -190,7 +201,7 @@ public class Solution {
         }
         
          for(int i=0; i<t.length(); i++) {
-             if(map.containsKey(t.charAt(i)) && map.get(t.charAt(i))>0) {
+             if(map.containsKey(t.charAt(i))) {
                 map.put(t.charAt(i), map.get(t.charAt(i))-1);
              } else {
                 return false;
@@ -204,123 +215,6 @@ public class Solution {
          }
          
        return true; 
-    }
-}
-```
-
-***
-
-### 345. Reverse Vowels of a String
-
-Write a function that takes a string as input and reverse only the vowels of a string.
-
-Example 1:
-Given s = "hello", return "holle".
-
-Example 2:
-Given s = "leetcode", return "leotcede".
-
-思路：
-1.两个指针分别指向字符串的首和尾。  
-两个指针分别向中间移动，遇到元音就进行交换，直到两个指针相遇。
-
-```java
-public class Solution {
-    public String reverseVowels(String s) {
-        if(s == null || s.length()==0) return s;
-        String vowels = "aeiouAEIOU";
-        char[] chars = s.toCharArray();
-        int start = 0;
-        int end = s.length()-1;
-        while(start<end){
-            
-            while(start<end && !vowels.contains(chars[start]+"")){
-                start++;
-            }
-            
-            while(start<end && !vowels.contains(chars[end]+"")){
-                end--;
-            }
-            
-            char temp = chars[start];
-            chars[start] = chars[end];
-            chars[end] = temp;
-            
-            start++;
-            end--;
-        }
-        return new String(chars);
-    }
-}
-```
-
-
-### 125. Valid Palindrome
-
-Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
-
-For example,
-"A man, a plan, a canal: Panama" is a palindrome.
-"race a car" is not a palindrome.
-
-内循环要注意：若是while则要有start<end条件，否则会无限循环。  
-若是if则不需要写此条件。
-{: .notice} 
-
-
-```java
-//我的方法
-public class Solution {
-    public boolean isPalindrome(String s) {
-        if(s.isEmpty())  return true;
-        char[] chars = s.toCharArray();
-        int start = 0;
-        int end = s.length() - 1;
-        
-        while(start<end) {
-            while(start<end && !Character.isLetterOrDigit(chars[start])) {
-                start ++;
-            }
-            while(start<end && !Character.isLetterOrDigit(chars[end])) {
-                end --;
-            }
-            
-            if(Character.toLowerCase(chars[start]) != Character.toLowerCase(chars[end])) {
-                return false;
-            } else {
-                start ++;
-                end --;
-            }
-        }
-        return true;
-    }   
-}
-```
-
-```java
-public class Solution {
-    public boolean isPalindrome(String s) {
-        if (s.isEmpty()) {
-            return true;
-        }
-        int head = 0, tail = s.length() - 1;
-        char cHead, cTail;
-        while(head <= tail) {
-            cHead = s.charAt(head);
-            cTail = s.charAt(tail);
-            if (!Character.isLetterOrDigit(cHead)) {
-                head++;
-            } else if(!Character.isLetterOrDigit(cTail)) {
-                tail--;
-            } else {
-                if (Character.toLowerCase(cHead) != Character.toLowerCase(cTail)) {
-                    return false;
-                }
-                head++;
-                tail--;
-            }
-        }       
-        return true;
     }
 }
 ```

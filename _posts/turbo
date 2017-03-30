@@ -1,0 +1,110 @@
+clc;
+clear;
+load('data2.mat');
+flag=0;                                       %选择交织器
+L_total = 1024;                               %Turbo交织长度、信息组长度
+g = [1 1 1; 1 0 1];                           %RSC码生成矩阵
+puncture = 0;                                 %是否进行删余
+iter = 7;                                     %迭代次数
+ 
+alphabet=[1+i  1-i  -1+i  -1-i];              %格雷编码 
+bps=log2(length(alphabet));                   %每个码对应的比特数
+rate = 1 / (2 + puncture);                    %码率
+a = 1;                                        %衰落幅度？
+nfr = 1;                                      %测试帧的数目/码组上限
+
+Ns = L_total / bps / rate;
+ 
+[n,K] = size(g); 
+m = K - 1;
+nstates = 2^m;
+EbN0db = 1:1:6;                               %信道信噪比
+ber = zeros(1,length(EbN0db));                %不同信噪比下计算误码率
+
+x1 = x;
+
+
+
+%%%%%%
+
+for nEN = 1:length(EbN0db)
+   en = 10^(EbN0db(nEN) / 10);                 %信噪比（以功率表示） 
+   L_c = 4*a*en*rate;                          %信道置信度
+   nframe = 0;                                 %每一个信噪比下帧序
+   errs = zeros(1,nfr);                        %用于存放每一帧的误码率
+   
+   while nframe < nfr                          %若小于码组数上限5
+      nframe = nframe + 1;                     %帧数累加
+      
+       
+      weight = sum(x1(:));
+        if weight < (L_total-m)/3
+             x2=~x1;
+        end
+%      x2=x1;
+      if flag == 0                             %随机交织器
+          
+         [temp, alpha] = sort(rand(1,L_total));   
+         
+         
+      else 
+         alpha = block_interleaver(20, 10);    %分组交织器
+      end
+      
+     
+      %Turbo编码
+      en_output = encoderm(x2, g, alpha, puncture);
+      for i = 1:length(en_output)
+          if en_output(i) == -1
+              en_output(i) = 0;
+          end
+      end
+      
+      
+      r = modulation(en_output,Ns,EbN0db(nEN),rate);            %进行QPSK调制、升余弦滤波、高斯信道、匹配滤波以及
+                                                                 
+      r = reshape(r,1, L_total / rate);                         %QPSK解调  
+      for i = 1:length(r)
+         if r(i) == 0
+             r(i) = -1;
+          end
+     end   
+      yk = demultiplex(r,alpha,puncture);                       %解复用     
+      rec_s = 0.5 * L_c * yk;
+      %% 对Turbo解码     
+      L_e(1:L_total) = zeros(1,L_total);
+      err = zeros(1,iter);                                      %存储每一次迭代的误码率
+      
+      for niter = 1:iter
+         % 对RSC1解码
+         L_a(alpha) = L_e; 
+         L_all = logmapo(rec_s(1,:), g, L_a, 1);                %LOG_MAP解码
+         L_e = L_all - 2 * rec_s(1,1:2:2 * L_total) - L_a; 
+        
+         % 对RSC2解码
+         L_a = L_e(alpha);  
+         L_all = logmapo(rec_s(2,:), g, L_a, 2);                %LOG_MAP解码
+         L_e = L_all - 2 * rec_s(2,1:2:2 * L_total) - L_a;  
+        
+         xhat(alpha) = (sign(L_all) + 1) / 2;
+         err(niter) = length(find(xhat(1:L_total - m) ~= x2));   %此次迭代的误比特数
+      end      
+   errs(nframe) = sum(err) / iter;                              %迭代iter次后计算平均的错误比特数 
+   end
+    ber(nEN) = sum(errs) / nfr / (L_total-m);                   %计算误比特数
+end     %while
+
+load('BER.mat');
+% semilogy(EbN0db, ber,'b'); %nEN
+% semilogy(EbN0db, berpre,'b'); %nEN
+% plot(EbN0db, berpre,'s'); %不取反的
+% plot(EbN0db, ber,'^'); %取反的
+semilogy(EbN0db,berpre,'-s',EbN0db,ber,'-*');
+xlabel('Eb/N0(dN)');
+ylabel('BER');
+legend('传统Turbo码','新型Turbo码');
+hold on;
+grid on;
+
+%%%%%%
+
