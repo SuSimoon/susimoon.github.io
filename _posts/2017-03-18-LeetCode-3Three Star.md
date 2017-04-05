@@ -200,3 +200,83 @@ public class Solution {
     }
 }
 ```
+
+***
+
+
+## 374. Guess Number Higher or Lower
+
+注：  
+题中有陷阱。  
+java boolean 只有true、false，没有1，2。   
+二分查找最后找到的数不是和要找的数相等，就是比要找的数大。  
+遇到平方问题要考虑溢出，要设为long。  
+{: .notice} 
+
+```java
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+        int low = 1, high = n;
+        int mid = 0;
+        while (low <= high) {
+            mid = (low + high) >>> 1;
+            if (guess(mid)==-1) {
+                high = mid - 1;
+            } else if (guess(mid)==1) {
+                low = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return mid;
+    }
+}
+```
+
+***
+
+## 69. Sqrt(x)  
+
+Implement int sqrt(int x).  
+
+```java
+public class Solution {
+    public int mySqrt(int x) {
+        int low = 0, high = x;
+        while (low <= high) {
+            long mid = (low + high) >>> 1;
+            if (mid*mid == x) {
+                return (int)mid;
+            } else if (mid*mid < x) {
+                low = (int)mid + 1;
+            } else {
+                high = (int)mid - 1;
+            }
+        }
+        return low - 1;
+    }
+}
+```
+
+```java
+long r = x;
+    while (r*r > x)
+        r = (r + x/r) / 2;
+    return (int) r;
+```
+
+***
+
+## 
+
+```java
+
+```
+
+***
+
+## 
+
+```java
+
+```
