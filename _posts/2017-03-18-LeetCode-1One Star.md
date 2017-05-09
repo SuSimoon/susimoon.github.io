@@ -11,1221 +11,44 @@ comments: false
 
 
 
-***
-
-### 27. Remove Element
 
-Given an array and a value, remove all instances of that value in place and return the new length.
-
-Do not allocate extra space for another array, you must do this in place with constant memory.
-
-The order of elements can be changed. It doesn't matter what you leave beyond the new length.
-
-Example:
-Given input array nums = [3,2,2,3], val = 3
-
-Your function should return length = 2, with the first two elements of nums being 2.
-
-
-```java
-public class Solution {
-    public int removeElement(int[] nums, int val) {
-        int m = 0;
-        for (int i=0; i<nums.length; i++) {
-            if (nums[i] != val) {
-                nums[m++] = nums[i];
-            }
-        }
-        return m;
-    }
-}
-```
-
-
-***
-
-## 26. Remove Duplicates from Sorted Array  
-
-Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
-
-Do not allocate extra space for another array, you must do this in place with constant memory.
-
-For example,
-Given input array nums = [1,1,2],
-
-Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
-
-```java
-public class Solution {
-    public int removeDuplicates(int[] nums) {
-        int k = 1;
-        for (int i=1; i<nums.length; i++) {
-            if (nums[i] != nums[i-1]) {
-                nums[k++] = nums[i];
-            } 
-        }
-        return k;
-    }
-}
-```
-
-```java
-public int removeDuplicates(int[] nums) {
-    int i = 0;
-    for (int n : nums)
-        if (i == 0 || n > nums[i-1])
-            nums[i++] = n;
-    return i;
-}
-```
-
-***
-
-## 141. Linked List Cycle
-
-Given a linked list, determine if it has a cycle in it.
-
-```java
-public class Solution {
-    public boolean hasCycle(ListNode head) {
-        if(head == null) return false;
-        ListNode fast = head;
-        ListNode slow = head;
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-            if(fast == slow)    return true;
-        }
-        return false;
-    }
-}
-```
-
-***
-
-## 532. K-diff Pairs in an Array  
-
-Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j), where i and j are both numbers in the array and their absolute difference is k.
-
-Example 1:
-Input: [3, 1, 4, 1, 5], k = 2
-Output: 2
-Explanation: There are two 2-diff pairs in the array, (1, 3) and (3, 5).
-Although we have two 1s in the input, we should only return the number of unique pairs.
-
-```java
-//my solution
-public class Solution {
-    public int findPairs(int[] nums, int k) {
-        Arrays.sort(nums);
-        Set<Integer> set = new HashSet<Integer>();
-        int pairs = 0;
-        
-        if (nums == null || nums.length == 0 || k < 0)   return 0;
-        
-        if (k == 0) {
-            int temp;
-            if (nums[0] == 0) 
-                temp = nums[0] + 1;
-            else  
-                temp = nums[0] * (-1);
-                
-            for (int i=0; i< nums.length-1; i++) {
-                if (nums[i] == nums[i+1] && nums[i] != temp) {
-                    pairs ++;
-                    temp = nums[i];
-                }
-            }
-        } else {
-            for (int i=0; i<nums.length; i++) {
-                if (set.contains(nums[i]-k)) {
-                    set.remove(nums[i]-k);
-                    pairs++;
-                } 
-                set.add(nums[i]);
-            }
-        }
-        
-        return pairs;
-    }
-}
-```
-
-```java
-public class Solution {
-    public int findPairs(int[] nums, int k) {
-        if (nums == null || nums.length == 0 || k < 0)   return 0;
-        
-        Map<Integer, Integer> map = new HashMap<>();
-        int count = 0;
-        for (int i : nums) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
-        }
-        
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (k == 0) {
-                //count how many elements in the array that appear more than twice.
-                if (entry.getValue() >= 2) {
-                    count++;
-                } 
-            } else {
-                if (map.containsKey(entry.getKey() + k)) {
-                    count++;
-                }
-            }
-        }
-        
-        return count;
-    }
-}
-```
-
-```java
-public int findPairs(int[] nums, int k) {
-    int ans = 0;
-    Arrays.sort(nums);
-    for (int i = 0, j = 0; i < nums.length; i++) {
-        for (j = Math.max(j, i + 1); j < nums.length && (long) nums[j] - nums[i] < k; j++) ;
-        if (j < nums.length && (long) nums[j] - nums[i] == k) 
-            ans++;
-        while (i + 1 < nums.length && nums[i] == nums[i + 1]) 
-            i++;
-    }
-    return ans;
-}
-```
-
-***
-
-## 237. Delete Node in a Linked List
-
-Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
-
-Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
-
-```java
-public class Solution {
-    public void deleteNode(ListNode node) {
-        node.val = node.next.val;
-        node.next = node.next.next;
-    }
-}
-```
-
-***
-
-## 83. Remove Duplicates from Sorted List
-
-Given a sorted linked list, delete all duplicates such that each element appear only once.
-
-For example,
-Given 1->1->2, return 1->2.
-Given 1->1->2->3->3, return 1->2->3.
-
-```java
-//my solution
-public class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        ListNode node = head;
-        while (node!=null && node.next!=null) {
-            if (node.val == node.next.val) {
-                node.next = node.next.next;
-            } else {
-                node = node.next;
-            }
-        }
-        return head;
-    }
-}
-```
-
-```java
-//??
-public ListNode deleteDuplicates(ListNode head) {
-    if(head == null || head.next == null)   return head;
-    head.next = deleteDuplicates(head.next);
-    return head.val == head.next.val ? head.next : head;
-}
-```
-
-***
-
-
-## 160. Intersection of Two Linked Lists
-
-Write a program to find the node at which the intersection of two singly linked lists begins.  
-For example, the following two linked lists:
-
-A:          a1 → a2
-                   ↘
-                     c1 → c2 → c3
-                   ↗            
-B:     b1 → b2 → b3
-
-the two iterations will both run for listA.length + listB.length and will reach the intersection point at the same time after switching the pointer.
-
-
-```java
-public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-    //boundary check
-    if(headA == null || headB == null) return null;
-    
-    ListNode a = headA;
-    ListNode b = headB;
-    
-    //if a & b have different len, then we will stop the loop after second iteration
-    while( a != b){
-        //for the end of first iteration, we just reset the pointer to the head of another linkedlist
-        a = a == null? headB : a.next;
-        b = b == null? headA : b.next;    
-    }
-    
-    return a;
-}
-```
-
-***
-***
-
-## 21. Merge Two Sorted Lists
-
-Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
-
-```java
-class Solution {
-public:
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        if(l1 == NULL) return l2;
-        if(l2 == NULL) return l1;
-        
-        if(l1->val < l2->val) {
-            l1->next = mergeTwoLists(l1->next, l2);
-            return l1;
-        } else {
-            l2->next = mergeTwoLists(l2->next, l1);
-            return l2;
-        }
-    }
-};
-```
-
-```java
-public class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1 == null){
-            return l2;
-        }
-        if(l2 == null){
-            return l1;
-        }
-        
-        ListNode mergeHead;
-        if(l1.val < l2.val){
-            mergeHead = l1;
-            mergeHead.next = mergeTwoLists(l1.next, l2);
-        }
-        else{
-            mergeHead = l2;
-            mergeHead.next = mergeTwoLists(l1, l2.next);
-        }
-        return mergeHead;
-    }
-}
-```
-
-***
-
-## 203. Remove Linked List Elements
-
-Remove all elements from a linked list of integers that have value val.
-
-Example
-Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
-Return: 1 --> 2 --> 3 --> 4 --> 5
-
-思路：递归  
-可以用1->2->null来演示递归过程。  
-1.判断此时所指向的结点是否为空。  
-2.若此时指向的节点不为空，则得到下一个结点的指向。  
-3.判断是否需要删除该结点，删除则返回下一个结点，不删除就返回此节点。  
-{: .notice} 
-
-```java
-public ListNode removeElements(ListNode head, int val) {
-    if (head == null)   return null;  //判断该结点是否为空(递归结束标志)
-    head.next = removeElements(head.next, val); //得到下一个结点的指向
-    return head.val == val ? head.next : head; //判断是否需要删除该结点
-}
-```
-
-***
-
-## 206. Reverse Linked List
-
-
-```java
-//my solution
-public class Solution {
-    public ListNode reverseList(ListNode head) {
-        ListNode pre = null;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = pre;
-            pre = head;
-            head = next;
-        }
-        return pre;
-    }
-}
-```
-
-```java
-//recursive solution
-public ListNode reverseList(ListNode head) {
-    return reverseListInt(head, null);
-}
-
-private ListNode reverseListInt(ListNode head, ListNode newHead) {
-    if (head == null) return newHead; //当余下未反转的链为空时，返回反转后的链的头结点
-    ListNode next = head.next; //保存下一个结点位置
-    head.next = newHead; //head指向新建的revers链
-    return reverseListInt(next, head); //余下的进行reverse，并传把余下链的头结点和反转后链的头结点位置传过去
-}
-```
-
-***
-
-## 136. Single Number
-
-Given an array of integers, every element appears twice except for one. Find that single one.
-
-```java
-//my solution
-public class Solution {
-    public int singleNumber(int[] nums) {
-        Arrays.sort(nums);
-        if (nums.length == 1) 
-            return nums[0];
-        int i;
-        for (i=1; i<nums.length; i=i+2) {
-            if (nums[i] != nums[i-1])
-                return nums[i-1];
-        }
-        
-        return nums[nums.length-1];
-    }
-}
-```
-
-思路：  
-亦或运算：两个操作数的位中，相同则结果为0，不同则结果为1。  
-所以数和0亦或运算为这个数的本身。  
-{: .notice}  
-
-
-```java
-int singleNumber(int A[], int n) {
-    int result = 0;
-    for (int i = 0; i<n; i++)
-    {
-        result ^= A[i];
-    }
-    return result;
-}
-```
-
-***
-
-## 1. Two Sum
-
-Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
-Example:
-Given nums = [2, 7, 11, 15], target = 9,
-
-Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].
-
-
-```java
-public class Solution {
-    public int[] twoSum(int[] nums, int target) {
-       int[] res = new int[2];
-       Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-       
-       for (int i=0; i<nums.length; i++) {
-           if (map.containsKey(target-nums[i])) {
-               res[0] = map.get(target-nums[i]);
-               res[1] = i;
-           } 
-           map.put(nums[i], i);
-       }
-       return res;
-    }
-}
-```
-
-***
-
-## 463. Island Perimeter
-
-
-```java
-//my solution 浪费空间，舍弃
-public class Solution {
-    public int islandPerimeter(int[][] grid) {
-        int count = 0;
-        int col = grid[0].length;
-        int row = grid.length;
-        int[][] temp = new int[row+1][col+1];
-        
-        for (int i=0; i<row; i++) {
-            for (int j=0; j<col; j++) {
-                temp[i][j] = grid[i][j];
-            }
-        }
-        
-        for (int i=0; i<row; i++) {
-            for (int j=0; j<col; j++) {
-                if (temp[i][j] == 1) {
-                    count += 4;
-                    if (temp[i+1][j] == 1) {
-                        count -= 2;
-                    }
-                    if (temp[i][j+1] == 1) {
-                        count -= 2;
-                    }
-                }
-            }
-        }
-        
-        return count;
-    }
-}
-```
-
-思路：  
-把所有有1的格子都赋值为4。(一个格子有4条边)  
-检测每个格子左边和上边的格子是否为1，若是则-2(有一个相邻的格子就减少2个边)。  
-长方形最上边的行和最左边的列不进行检测  
-i=0则不进行上检测，j=0则不进行左检测  
-{: .notice} 
-
-```java
-//和我的思路相同，但不浪费空间
-public static int islandPerimeter(int[][] grid) {
-    if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
-    int result = 0;
-    for (int i = 0; i < grid.length; i++) {
-        for (int j = 0; j < grid[0].length; j++) {
-            if (grid[i][j] == 1) {
-                result += 4;
-                if (i > 0 && grid[i-1][j] == 1) result -= 2; //i=0则不进行上检测
-                if (j > 0 && grid[i][j-1] == 1) result -= 2; //j=0则不进行左检测
-            }
-        }
-    }
-    return result;
-}
-```
-
-```java
-//另一种类似思路
-public class Solution {
-    public int islandPerimeter(int[][] grid) {
-        int islands = 0, neighbours = 0;
-
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == 1) {
-                    islands++; // count islands
-                    if (i < grid.length - 1 && grid[i + 1][j] == 1) neighbours++; // count down neighbours
-                    if (j < grid[i].length - 1 && grid[i][j + 1] == 1) neighbours++; // count right neighbours
-                }
-            }
-        }
-
-        return islands * 4 - neighbours * 2;
-    }
-}
-```
-
-***
-
-## 447. Number of Boomerangs
-
-Given n points in the plane that are all pairwise distinct, a "boomerang" is a tuple of points (i, j, k) such that the distance between i and j equals the distance between i and k (the order of the tuple matters).
-
-Find the number of boomerangs. You may assume that n will be at most 500 and coordinates of points are all in the range [-10000, 10000](inclusive).
-
-Example:
-Input:
-[[0,0],[1,0],[2,0]]
-
-Output:
-2
-
-Explanation:
-The two boomerangs are [[1,0],[0,0],[2,0]] and [[1,0],[2,0],[0,0]]
-
-思路：  
-每一个点都和其它点进行比较，计算距离放入map中。  
-根据map的value值对数量进行计算。n*(n-1)即是角个数公式。  
-{: .notice} 
-
-```java
-public class Solution {
-    public int numberOfBoomerangs(int[][] points) {
-        Map<Integer, Integer> map = new HashMap<>();
-        int count = 0;
-        for (int i=0; i<points.length; i++) {
-            for (int j=0; j<points.length; j++) {
-                if (i == j)    continue;
-                int d = getDistance(points[i], points[j]);
-                map.put(d, map.getOrDefault(d, 0)+1);
-            }
-            for (int n : map.values()) {
-                count += n*(n-1);
-            }
-            map.clear();
-        }
-        return count;
-    }
-    public int getDistance(int[] a, int[] b) {
-        int dx = a[0] - b[0];
-        int dy = a[1] - b[1];
-        return dx*dx + dy*dy;
-    }
-}
-```
-
-```java
-if (map.containsKey(d)) {
-    map.put(d, map.get(d)+1);
-} else 
-    map.put(d, 1);
-//可以简化成：
-map.put(d, map.getOrDefault(d, 0) + 1);
-```
-
-***
-***
-
-## 438. Find All Anagrams in a String
-
-Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
-
-Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
-
-The order of output does not matter.
-
-Example 1:
-
-```
-Input:
-s: "cbaebabacd" p: "abc"
-
-Output:
-[0, 6]
-
-Explanation:
-The substring with start index = 0 is "cba", which is an anagram of "abc".
-The substring with start index = 6 is "bac", which is an anagram of "abc".
-```
-
-思路：  
-1.将p子串的字母放入Hash表中，设count值为p子串长度。  
-2.设置左右两个指针，表示滑窗的左右边界。每一次循环left固定而right右移。  
-3.如果Hash表包含right指向的元素，就将Hash表内对应的字母数量-1，然后right右移。 
-4.若滑窗里的所有字母都和Hash表吻合，即count=0时，将left指针位置记录在ArrayList中。  
-5.如果滑窗的宽度达到了p的长度，判断left指向的元素是否在Hash表中，若在将Hash表中该元素数量恢复。  
-{: .notice} 
-
-
-```java
-public class Solution {
-    public List<Integer> findAnagrams(String s, String p) {
-    
-    if (s == null || s.length() == 0 || p == null || p.length() == 0) return list;
- 
-    List<Integer> list = new ArrayList<>();
-    int[] hash = new int[256]; //ASCII码前128个字符包含小写字母
-    
-    // 将p字符放入hash表中
-    for (char c : p.toCharArray()) { 
-        hash[c]++;
-    }
-
-    int left = 0, right = 0, count = p.length();
-    
-    while (right < s.length()) {
-      
-        if (hash[s.charAt(right)] >= 1) {
-            count--;
-        }
-        hash[s.charAt(right)]--; //这里不可以挪到上边的if里，因为下边要进行第5步的判断，left是hash中元素就不会为负数
-        right++;
-        
-        if (count == 0) {
-            list.add(left);
-        }
-
-        if (right - left == p.length() ) {
-            if (hash[s.charAt(left)] >= 0) {
-                count++;
-            }
-            hash[s.charAt(left)]++; //这里不可以挪到上边的if里，因为若窗口里有重复的属于p的元素，就会被多减一次
-            left++;
-        }
-    }
-    return list;
-    }
-}
-```
-
-***
-
-## 88. Merge Sorted Array
-
-Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
-
-Note:
-You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. The number of elements initialized in nums1 and nums2 are m and n respectively.
-
-思路：  
-i，j指针指向两个数组的最后一个元素，k指向合并后数组的尾部。  
-比较i，j指向两个元素的大小，大的就放在k所指向的位置。  
-若i先达到了-1，j元素还有剩余，则将nums2剩余的元素都移入nums1中；  
-若j先达到了-1，i元素还有剩余，则不需要移动，因为nums1的元素本身就已经排好了。
-
-> 没有思路
-
-```java
-public class Solution {
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int i = m-1;
-        int j = n-1;
-        int k = m+n-1;
-        
-        while(i>=0 && j>=0) {
-            if(nums1[i] > nums2[j])  
-                nums1[k--] = nums1[i--];
-            else                     
-                nums1[k--] = nums2[j--];
-        }
-        while(j>=0) {
-            nums1[k--] = nums2[j--];
-        }
-    }
-}
-```
-***
-
-***
-
-## 167. Two Sum II - Input array is sorted
-
-Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
-
-The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
-
-You may assume that each input would have exactly one solution and you may not use the same element twice.
-
-Input: numbers={2, 7, 11, 15}, target=9
-Output: index1=1, index2=2
-
-
-思路：(注意数组已经排好序了)  
-1.i，j指针分别指向数组的首尾两个元素。  
-2.计算i和j指向的元素的和。  
-3.若和sum比target小，则j左移；若大则i右移。  
-{: .notice} 
-
-> 没有想到第一种方法
-> 容易分不清sum > target时究竟i、j哪个要移动
-
-```java
-public class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        int[] res = new int[2];
-        int i = 0;
-        int j = nums.length - 1;
-       
-        while (i<j) {
-            int sum = nums[i] + nums[j];
-            if (sum == target) {
-                res[0] = i+1;
-                res[1] = j+1;
-                break;
-            } else if (sum > target) {
-                j--;
-            } else
-                i++;
-        } 
-        return res;
-    }
-}
-```
-
-```java
-//可用和1.Two Sum一样的方法
-public class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
-        int[] res = new int[2];
-        
-        for (int i=0; i<nums.length; i++) {
-            if (map.containsKey(target-nums[i])) {
-                res[0] = map.get(target-nums[i])+1;
-                res[1] = i+1;
-                return res;
-            } 
-            map.put(nums[i], i);
-        }
-        return res;
-    }
-}
-```
-
-
-
-***
-
-## Implement strStr()  
-
-Implement strStr().
-
-Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-
-思路：  
-1.i，j两个指针分别指向字符串和子串的首字母。  
-2.当找到两个字符串首字母相同的位置时，对子串进行循环遍历。  
-{: .notice} 
-
-> 没有思路
-> 3个if的顺序不能变
-
-```java
-public int strStr(String haystack, String needle) {
-  for (int i = 0; ; i++) {
-    for (int j = 0; ; j++) {
-        if (j == needle.length()) 
-            return i; //子串遍历完
-        if (i + j == haystack.length()) //不能放在第一行，若匹配在最后，则直接返回了-1
-            return -1; //字符串遍历完
-        if (needle.charAt(j) != haystack.charAt(i + j)) //不能放在第一行，因为要先判断结束条件
-            break; //两个字符串比较的首字母不相等则跳出循环
-    }
-  }
-}
-```
-
-***
-
-## 409. Longest Palindrome
-
-Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
-
-This is case sensitive, for example "Aa" is not considered a palindrome here.
-
-```java
-//my solution
-public class Solution {
-    public int longestPalindrome(String s) {
-        if (s == null || s.length()==0)  return 0;
-        
-        int[] hash = new int[128];
-        for (char c : s.toCharArray()) {
-            hash[c] ++;
-        }
-        int count = 0; 
-        int odd = 0;
-        
-        for (int i=65; i<123; i++) {
-            if (hash[i] > 0) {
-                if(hash[i]%2 == 1)
-                    odd ++;
-                count += hash[i]/2*2;
-            }  
-        }
-        
-        if (odd>0) {
-            return count+1;
-        }
-        return count;
-    }
-}
-```
-
-```java
-public int longestPalindrome(String s) {
-        if(s==null || s.length()==0) return 0;
-        HashSet<Character> hs = new HashSet<Character>();
-        int count = 0;
-        for(int i=0; i<s.length(); i++){
-            if(hs.contains(s.charAt(i))){
-                hs.remove(s.charAt(i));
-                count++;
-            }else{
-                hs.add(s.charAt(i));
-            }
-        }
-        if(!hs.isEmpty()) return count*2+1;
-        return count*2;
-}
-```
-
-```java
-public int longestPalindrome(String s) {
-    int[] lowercase = new int[26];
-    int[] uppercase = new int[26];
-    int res = 0;
-    for (int i = 0; i < s.length(); i++){
-        char temp = s.charAt(i);
-        if (temp >= 97) lowercase[temp-'a']++;
-        else uppercase[temp-'A']++;
-    }
-    for (int i = 0; i < 26; i++){
-        res+=(lowercase[i]/2)*2;
-        res+=(uppercase[i]/2)*2;
-    }
-    return res == s.length() ? res : res+1;
-        
-}
-```
-
-***
-
-## 389. Find the Difference
-
-Given two strings s and t which consist of only lowercase letters.
-
-String t is generated by random shuffling string s and then add one more letter at a random position.
-
-Find the letter that was added in t.
-
-```java
-public char findTheDifference(String s, String t) {
-    char c = 0; // char初试化为0
-    for (int i = 0; i < s.length(); ++i) {
-        c ^= s.charAt(i); // 0和数亦或为那个数
-    }
-    for (int i = 0; i < t.length(); ++i) {
-        c ^= t.charAt(i);
-    }
-    return c;
-}
-```
-
-```java
-public char findTheDifference(String s, String t) {
-    int n = t.length();
-    char c = t.charAt(n - 1);
-    for (int i = 0; i < n - 1; i++) {
-        c ^= s.charAt(i);
-        c ^= t.charAt(i);
-    }
-    return c;
-}
-```
-
-```java
-public char findTheDifference(String s, String t) {
-    int charCode = t.charAt(s.length());
-    for (int i = 0; i < s.length(); ++i) {
-          charCode -= (int)s.charAt(i);
-          charCode += (int)t.charAt(i); 
-    }
-    return (char)charCode;
-}
-```
-***
-
-## 
-
-```java
-//my solution
-public class Solution {
-    public String[] findWords(String[] words) {
-        List<String> list = new ArrayList<>();
-        int[] hash = new int[26];
-        String[] rows = {"qwertyuiop","asdfghjkl","zxcvbnm"};
-        
-        for (int i=0; i<rows.length; i++) {
-            for (char c : rows[i].toCharArray()) {
-                hash[c-'a'] += i;
-            }
-        }
-        
-        for (String word : words) {
-            char first = Character.toLowerCase(word.charAt(0));
-            for (int i=1; i<=word.length(); i++) {
-                if (i==word.length()) {
-                   list.add(word);
-                   break;
-                }
-                char c = Character.toLowerCase(word.charAt(i));
-                if( hash[c-'a'] != hash[first-'a'])
-                    break;
-            }
-            
-        }
-        String[] res = new String[list.size()];
-        for (int i=0; i<list.size(); i++) {
-            res[i] = list.get(i);
-        }
-        return res;
-    }
-}
-```
-
-***
-
-## 202. Happy Number
-
-Write an algorithm to determine if a number is "happy".
-
-A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
-
-思路：  
-检测链表是否有环  
-{: .notice}   
-
-```java
-public class Solution {
-    public boolean isHappy(int n) {
-        int fast=n, slow=n;
-        do {
-            slow = squareSum(slow);
-            fast = squareSum(fast);
-            fast = squareSum(fast);
-        } while (slow != fast);
-        
-        if (slow == 1)  return true;
-        return false;
-    }
-    public int squareSum(int n) {
-        int sum =0, temp;
-        while (n > 0) {
-            temp = n % 10;
-            sum += temp * temp;
-            n /= 10;
-        }
-        return sum;
-    }
-}
-```
-
-思路：  
-Set不能放重复的元素  
-{: .notice} 
-
-```java
-public boolean isHappy(int n) {
-    Set<Integer> inLoop = new HashSet<Integer>();
-    int squareSum,remain;
-    while (inLoop.add(n)) {
-        squareSum = 0;
-        while (n > 0) {
-            remain = n%10;
-            squareSum += remain*remain;
-            n /= 10;
-        }
-        if (squareSum == 1)
-            return true;
-        else
-            n = squareSum;
-
-    }
-    return false;
-
-}
-```
-
-***
-
-## 219. Contains Duplicate II
-
-Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
-
-
-```java
-//???
-public boolean containsNearbyDuplicate(int[] nums, int k) {
-    Set<Integer> set = new HashSet<Integer>();
-    for(int i = 0; i < nums.length; i++) {
-        if(i > k) set.remove(nums[i-k-1]);
-        if(!set.add(nums[i])) return true;
-    }
-    return false;
-}
-```
-
-```java
-//my solution
-public class Solution {
-    public boolean containsNearbyDuplicate(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
-        
-        for (int i=0; i<nums.length; i++) {
-            if (map.containsKey(nums[i])) {
-                int d = i - map.get(nums[i]);
-                if (d <= k)  return true;
-            }
-            map.put(nums[i], i);
-        }
-        return false;
-    }
-}
-```
-
-***
-
-## 290. Word Pattern
-
-Given a pattern and a string str, find if str follows the same pattern.
-
-思路：  
-map.put返回的是上一次put的value。若是第一次put则返回null。  
-{: .notice} 
-
-注：  
-split方法中，若“ ”在最前面，则含有长度为1的字符串；  
-若“ ”在最后面，则可忽略。  
-{: .notice} 
-
-
-```java
-public boolean wordPattern(String pattern, String str) {
-    String[] words = str.split(" ");
-    if (words.length != pattern.length())
-        return false;
-    Map index = new HashMap();
-   
-    for (Integer i=0; i<words.length; ++i)
-        if (index.put(pattern.charAt(i), i) != index.put(words[i], i))
-            return false;
-    return true;
-}
-```
-
-```java
-//my wrong slolution
-public class Solution {
-    public boolean wordPattern(String pattern, String str) {
-        Map<Character, String> map = new HashMap<>();
-        String[] strs = str.split(" ");
-        
-        if (strs.length != pattern.length())  return false;
-        
-        for (int i=0; i<strs.length; i++) {
-            char c = pattern.charAt(i);
-            if (!map.containsKey(c)) {
-                map.put(c, strs[i]);
-            } else {
-                if (!map.get(c).equals(strs[i]))
-                    return false;
-            }
-        }
-        return true;
-    }
-}
-```
-
-```
-"abba"
-"dog dog dog dog"
-会出错
-```
-
-```java
-//correct my solution
-public class Solution {
-    public boolean wordPattern(String pattern, String str) {
-        Map<Character, String> map = new HashMap<>();
-        String[] strs = str.split(" ");
-        
-        if (strs.length != pattern.length())  return false;
-        
-        for (int i=0; i<strs.length; i++) {
-            char c = pattern.charAt(i);
-            if (!map.containsKey(c)) {
-                if(map.containsValue(strs[i])) // <-----
-                    return false;
-                map.put(c, strs[i]);
-            } else {
-                if (!map.get(c).equals(strs[i])) //equals而不是==
-                    return false;
-            }
-        }
-        return true;
-    }
-}
-```
-
-## 205. Isomorphic Strings
-不能用第一种方法了，因为会出现 a a的情况
-
-***
-
-## 496. Next Greater Element I
-
-思路：  
-将nums遍历加入栈中。若栈为空或者栈顶元素小于nums[i]，就将nums[i]入栈。  
-若栈顶元素大于nums[i]，就把所有小于它的元素都出栈并记录在map中。  
-map中记录的就是比元素大的下个元素。  
-{: .notice} 
-
-```java
-public int[] nextGreaterElement(int[] findNums, int[] nums) {
-    Map<Integer, Integer> map = new HashMap<>(); // map from x to next greater element of x
-    Stack<Integer> stack = new Stack<>();
-    for (int num : nums) {
-        while (!stack.isEmpty() && stack.peek() < num)
-            map.put(stack.pop(), num);
-        stack.push(num);
-    }   
-    for (int i = 0; i < findNums.length; i++)
-        findNums[i] = map.getOrDefault(findNums[i], -1);
-    return findNums;
-}
-```
-
-***
-
-## 58. Length of Last Word
-
-Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
-
-If the last word does not exist, return 0.
-
-Note: A word is defined as a character sequence consists of non-space characters only.
-
-For example, 
-Given s = "Hello World",
-return 5.
-
-
-```java
-public class Solution {
-    public int lengthOfLastWord(String s) {      
-        String[] strs = s.split(" ");
-        if (strs.length == 0) return 0;  // strs若都是由“ ”组成，则split后length为0
-        String end = strs[strs.length-1];
-        return end == " " ? 0 : end.length();
-    }
-}
-```
-
-```java
-public int lengthOfLastWord(String s) {
-    s = s.trim();
-    int lastIndex = s.lastIndexOf(' ') + 1;
-    return s.length() - lastIndex;        
-}
-```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ***
 
@@ -1238,11 +61,9 @@ public class Solution {
        Stack<Character> stack = new Stack<>();
        
        for (char c : s.toCharArray()) {
-            if (c == '[')  stack.push(']');
-            else if (c == '(')  
-                stack.push(')');
-            else if (c == '{')  
-                stack.push('}');
+            if (c == '[')       stack.push(']');
+            else if (c == '(')  stack.push(')');
+            else if (c == '{')  stack.push('}');
             else if (stack.isEmpty() || stack.pop()!=c)  
                 return false;
        }
@@ -1858,7 +679,6 @@ public class Solution {
 
 ***
 
-## 
 
 ```
 [1] 搜索值不是数组元素，且在数组范围内，从1开始计数，得“ - 插入点索引值”；
@@ -1867,245 +687,6 @@ public class Solution {
 [4] 搜索值不是数组元素，且小于数组内元素，索引值为 – 1。
 ```
 
-```java
-
-```
-
-***
-
-## 111. Minimum Depth of Binary Tree  
-
-思路：  
-计算一个节点的左子树最小深度和右子树最小深度分别有多少个。  
-若没有左子树或者右子树，就让存在的那个子树深度+1；  
-若左右子数都存在，就选择最小的那棵+1。  
-{: .notice} 
-
-```java
-public class Solution {
-    public int minDepth(TreeNode root) {
-        if(root == null) return 0;
-        int left = minDepth(root.left);
-        int right = minDepth(root.right);
-        return (left == 0 || right == 0) ? left + right + 1: Math.min(left,right) + 1;
-       
-    }
-}
-```
-
-
-## 104. Maximum Depth of Binary Tree
-
-```java
-public class Solution {
-    public int maxDepth(TreeNode root) {
-        if(root == null) return 0;
-        int left = maxDepth(root.left);
-        int right = maxDepth(root.right);
-        return (left == 0 || right == 0) ? left + right + 1: Math.max(left,right) + 1;     
-    }
-}
-```
-
-```java
-public int maxDepth(TreeNode root) {
-    if(root==null)  return 0;  
-    return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
-}
-```
-
-***
-***
-
-## 110. Balanced Binary Tree  
-
-思路：  
-需要满足三个条件：  
-1.左右子树深度差值<=1；  
-2.左子树是平衡二叉树；  
-3.右子树是平衡二叉树。  
-{: .notice} 
-
-```java
-//比较深度
-public class Solution {
-    public boolean isBalanced(TreeNode root) {
-        if (root == null)  return true;
-        int left = depth(root.left);
-        int right = depth(root.right);
-        return Math.abs(left-right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
-        
-    }
-    public int depth(TreeNode root) {
-        if (root == null)  return 0;
-        return Math.max(depth(root.left), depth(root.right))+1;
-    }
-}
-```
-
-
-```java
-//比较高度
-public class Solution {
-    public boolean isBalanced(TreeNode root) {
-        
-        return dfsHeight(root) != -1;
-    }
-    public int dfsHeight(TreeNode root) {
-        if (root == null)  return 0;
-        
-        int leftHight = dfsHeight(root.left);
-        if (leftHight == -1)  return -1;
-        
-        int rightHight = dfsHeight(root.right);
-        if (rightHight == -1)  return -1;
-        
-        if (Math.abs(leftHight-rightHight)>1)  return -1;
-        
-        return Math.max(leftHight, rightHight)+1;
-    }
-}
-```
-
-***
-
-## 404. Sum of Left Leaves
-
-思路：  
-检测左子树是否是个叶子，是就求和，不是就计算左子树叶子和。    
-计算右子树的左叶子和。  
-{: .notice} 
-
-```java
-public class Solution {
-    public int sumOfLeftLeaves(TreeNode root) {
-        if (root == null)  return 0;
-        int sum = 0;
-        if (root.left != null) {
-            if (root.left.left==null && root.left.right==null)
-               sum += root.left.val;
-            else 
-               sum += sumOfLeftLeaves(root.left);
-        }
-        sum += sumOfLeftLeaves(root.right);
-        
-        return sum;
-    }
-}
-```
-
-思路：  
-检测左子树是否是个叶子，是就求和，不是就让左子树入栈。 
-检测右子树是否是个叶子，不是就入栈。  
-
-
-```java
-public int sumOfLeftLeaves(TreeNode root) {
-    if(root == null) return 0;
-    int ans = 0;
-    Stack<TreeNode> stack = new Stack<TreeNode>();
-    stack.push(root);
-    
-    while(!stack.empty()) {
-        TreeNode node = stack.pop();
-        if(node.left != null) {
-            if (node.left.left == null && node.left.right == null)
-                ans += node.left.val;
-            else
-                stack.push(node.left);
-        }
-        if(node.right != null) {
-            if (node.right.left != null || node.right.right != null)
-                stack.push(node.right);
-        }
-    }
-    return ans;
-}
-```
-
-***
-
-## 257. Binary Tree Paths  
-
-思路：  
-若一个节点有左结点，就将自己的路径和值传给左结点。  
-若一个节点有右结点，就将自己的路径和值传给右结点。  
-若没有左右节点，说明已经遍历到了叶子，就把完整的路径加入到answer中。  
-{: .notice} 
-
-```java
-public class Solution {
-    public List<String> binaryTreePaths(TreeNode root) {
-        List<String> answer = new ArrayList<>();
-        if (root != null)  SearchBT(root, "", answer);
-        return answer;
-    }
-    public void SearchBT(TreeNode node, String path, List<String> answer) {
-        if (node.left == null && node.right == null)  answer.add(path + node.val);
-        if (node.left != null)  SearchBT(node.left, path+node.val+"->", answer);
-        if (node.right != null)  SearchBT(node.right, path+node.val+"->", answer);
-    }
-}
-```
-
-思路：  
-第一种方法中在path中使用了String，耗费空间。更好的方式是使用StringBuffer。
-
-```
-String是不可变的字符序列。当s1 += s2时，不是将s1序列后面添加了s2序列，而是重新生成一块内存，将两个序列复制进去。
-StringBuilder是可变的字符序列，可以避免这样的问题。
-```
-
-
-```java
-//上述方法的优化
-public List<String> binaryTreePaths(TreeNode root) {
-    List<String> res = new ArrayList<>();
-    StringBuilder sb = new StringBuilder();
-    SearchBT(res, root, sb);
-    return res;
-}
-
-private void SearchBT(List<String> res, TreeNode root, StringBuilder sb) {
-    if(root == null)  return;
-    
-    sb.append(root.val);
-    if(root.left == null && root.right == null) {
-        res.add(sb.toString());
-    } else {
-        sb.append("->");
-        SearchBT(res, root.left, sb);
-        SearchBT(res, root.right, sb);
-    }
-    sb.setLength(sb.length());
-}
-```
-
-
-```java
-public List<String> binaryTreePaths(TreeNode root) {
-        
-    List<String> paths = new LinkedList<>();
-
-    if(root == null)  return paths;
-    
-    if(root.left == null && root.right == null){
-        paths.add(root.val+"");
-        return paths;
-    }
-
-     for (String path : binaryTreePaths(root.left)) {
-         paths.add(root.val + "->" + path);
-     }
-
-     for (String path : binaryTreePaths(root.right)) {
-         paths.add(root.val + "->" + path);
-     }
-
-     return paths;
-    
-}
-```
 
 ***
 
@@ -2119,53 +700,694 @@ public class Solution {
         if (root == null)  return false;
         if (root.left==null && root.right==null && sum-root.val==0)  return true;
         //if(root.left == null && root.right == null) return sum == root.val;
-        return hasPathSum(root.left,sum-root.val) || hasPathSum(root.right,sum-root.val);
+        return hasPathSum(root.left, sum-root.val) || hasPathSum(root.right, sum-root.val);
     }
 }
 ```
 
 ***
 
-## 100. Same Tree  
+## 231. Power of Two
+
+Given an integer, write a function to determine if it is a power of two.
 
 思路：  
-若两个节点的值相等，就去比较它们的左子树和右子树是否也相等。  
-若两个节点值不等，return false。  
+若该数是2的次方，则这个数换成二进制时只有一个比特是1。  
+将只有一个bit是1的数-1后，相与是0。  
 {: .notice} 
 
 ```java
 public class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p==null || q==null)  return p==q;
-        if (p.val == q.val) 
-            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-        return false;
+    public boolean isPowerOfTwo(int n) {
+        return ((n & (n-1))==0 && n>0);
     }
 }
 ```
 
 ***
 
-## 
+## 268. Missing Number
+
+```java
+public class Solution {
+    public int missingNumber(int[] nums) {
+        int sum = nums.length;
+        for (int i=0; i<nums.length; i++) {
+            sum += i - nums[i];
+        }
+        return sum;
+    }
+}
+```
+
+
+```java
+public int missingNumber(int[] nums) {
+    int xor = 0, i = 0;
+    for (i = 0; i < nums.length; i++) {
+        xor = xor ^ i ^ nums[i];
+    }
+    return xor ^ i;
+}
+```
+
+***
+
+## 507. Perfect Number
+
+```java
+public class Solution {
+    public boolean checkPerfectNumber(int num) {
+        if (num == 1)  return false;
+        int sum = 0;
+        for (int i=2; i<Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                sum += i;
+                if (i != num/i)
+                    sum += num/i;
+            }
+        }
+        return ++sum == num;
+    }
+}
+```
+
+***
+
+## 9. Palindrome Number
+
+```java
+public boolean isPalindrome(int x) {
+    if (x<0 || (x!=0 && x%10==0)) return false;
+    int rev = 0;
+    while (x>rev){
+        rev = rev*10 + x%10;
+        x = x/10;
+    }
+    return (x==rev || x==rev/10);
+}
+```
+
+
+
+***
+
+## 437. Path Sum III
+
+```java
+public int pathSum(TreeNode root, int sum) {
+    HashMap<Integer, Integer> preSum = new HashMap();
+    preSum.put(0,1);
+    return helper(root, 0, sum, preSum);
+}
+
+public int helper(TreeNode root, int currSum, int target, HashMap<Integer, Integer> preSum) {
+    if (root == null) {
+        return 0;
+    }
+    
+    currSum += root.val; //当前的和
+    int res = preSum.getOrDefault(currSum - target, 0); //res等于map取出当前和与所给值的
+    preSum.put(currSum, preSum.getOrDefault(currSum, 0) + 1); //
+    
+    res += helper(root.left, currSum, target, preSum) + helper(root.right, currSum, target, preSum);
+    //
+    preSum.put(currSum, preSum.get(currSum) - 1); //
+    return res;
+}
+```
+
+***
+
+## 226. Invert Binary Tree
+
+思路：  
+将左子树和右子树翻转后交换。  
+{: .notice} 
+
+```java
+//DFS
+public TreeNode invertTree(TreeNode root) {
+    if (root == null) return null;
+    TreeNode tempRight = root.right;
+    root.right = invertTree(root.left);
+    root.left = invertTree(tempRight);
+    return root;
+}
+```
+
+```java
+//BFS
+public class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        
+        if (root == null) {
+            return null;
+        }
+
+        final Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while(!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            TreeNode left = node.left;
+            node.left = node.right;
+            node.right = left;
+
+            if(node.left != null) {
+                queue.offer(node.left);
+            }
+            if(node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+        return root;
+    }
+}
+```
+
+***
+
+## 108. Convert Sorted Array to Binary Search Tree
+
+思路：  
+二叉搜索树的根结点的值正好是所有节点值的中间值。  
+{: .notice} 
+
+```java
+public class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums.length == 0)  return null;
+        TreeNode head = helper(nums, 0, nums.length-1);
+        return head;
+    }
+    public TreeNode helper(int[] nums, int low, int high) {
+        if (low > high) return null;
+        int mid = (low+high)/2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = helper(nums, low, mid-1);
+        node.right = helper(nums, mid+1, high);
+        return node;
+    }
+}
+```
+
+***
+
+## 543. Diameter of Binary Tree  
+
+思路：  
+最大的直径一定是某个节点左子树最大高度与右子树最大高度之和+1。  
+设置全局变量max来记录当前节点最大直径
+
+```java
+public class Solution {
+    int max = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        maxDepth(root);
+        return max;
+    }
+    public int maxDepth(TreeNode root) {
+        if (root == null)  return 0;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        max = Math.max(max, left+right);
+        return Math.max(left, right)+1;
+    }
+}
+```
+***
+
+## 438. Find All Anagrams in a String
+
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+
+The order of output does not matter.
+
+Example 1:
+
+```
+Input:
+s: "cbaebabacd" p: "abc"
+
+Output:
+[0, 6]
+
+Explanation:
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+```
+
+思路：  
+1.将p子串的字母放入Hash表中，设count值为p子串长度。  
+2.设置左右两个指针，表示滑窗的**左右边界**。每一次循环left固定而right右移。  
+3.如果Hash表包含right指向的元素，就将Hash表内对应的字母数量-1，然后right右移。 
+4.若滑窗里的所有字母都和Hash表吻合，即count=0时，将left指针位置记录在ArrayList中。  
+5.如果滑窗的宽度达到了p的长度，判断left指向的元素是否在Hash表中，若在将Hash表中该元素数量恢复。  
+{: .notice} 
+
+
+```java
+public class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        
+        if (s == null || s.length() == 0 || p == null || p.length() == 0) return list;
+     
+        List<Integer> list = new ArrayList<>();
+        int[] hash = new int[256]; //ASCII码前128个字符包含小写字母
+        
+        for (char c : p.toCharArray()) 
+            hash[c]++;
+
+        int left = 0, right = 0, count = p.length();
+        
+        while (right < s.length()) {
+          
+            if (hash[s.charAt(right)] >= 1) {
+                count--;
+            }
+            hash[s.charAt(right)]--; //这里不可以挪到上边的if里，因为下边要进行第5步的判断，left是hash中元素就不会为负数
+            right++;
+            
+            if (count == 0) {
+                list.add(left);
+            }
+
+            if (right-left == p.length() ) {
+                if (hash[s.charAt(left)] >= 0) {
+                    count++;
+                }
+                hash[s.charAt(left)]++; //这里不可以挪到上边的if里，因为若窗口里有重复的属于p的元素，就会被多减一次
+                left++;
+            }
+        }
+        return list;
+    }
+}
+```
+
+***
+
+## 401. Binary Watch  
+
+思路：  
+为了不使小时与分混合，将h左移6位，所以有h*64。  
+计算所有时间的bit个数，若符合num，则加入到list中。  
+{: .notice} 
+
+```java
+public List<String> readBinaryWatch(int num) {
+    List<String> list = new ArrayList<>();
+    for (int h=0; h<12; h++)
+        for (int m=0; m<60; m++)
+            if (Integer.bitCount(h * 64 + m) == num) 
+            //Integer.bitCount(m) + Integer.bitCount(h)
+                list.add(String.format("%d:%02d", h, m)); //%02d输出2位，不足在前面补零
+    return list;        
+}
+```
+
+***
+
+## 453. Minimum Moves to Equal Array Elements
+
+思路：  
+将其中一个数-1等同于将其它所有值+1。 
+解决方案是找到最小的那个值，其它的值都减到这个最小值。  
+{: .notice}  
+
+```java
+public class Solution {
+    public int minMoves(int[] nums) {
+        if (nums.length == 0) return 0;
+        int min = nums[0];
+        for (int n : nums) min = Math.min(min, n);
+        int res = 0;
+        for (int n : nums) res += n - min;
+        return res;
+    }
+}
+```
+
+***
+
+## 415. Add Strings
+
+思路：  
+当需要进行数相加计算时，要设置进位carry以及从高位到低位循环。  
+注意循环终止条件i >= 0 || j >= 0 || carry == 1
+{: .notice} 
+
+```java
+public class Solution {
+    public String addStrings(String num1, String num2) {
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        for(int i = num1.length()-1, j = num2.length()-1; i>=0 || j>=0 || carry== 1; i--, j--){
+            int x = i < 0 ? 0 : num1.charAt(i) - '0';
+            int y = j < 0 ? 0 : num2.charAt(j) - '0';
+            sb.append((x + y + carry) % 10);
+            carry = (x + y + carry) / 10;
+        }
+        return sb.reverse().toString();
+    }
+}
+```
+
+***
+
+## 400. Nth Digit
+
+思路：  
+将数列分为1-9，10-99，100-999 ...  
+每组数的个数分别为9*1、90*2、90*3 ...  
+先判断所给数n在哪个组，其次判断在该组的那个数，再其次判断在这个数的哪一位上。  
+{: .notice} 
+
+```java
+public int findNthDigit(int n) {
+    int len = 1;
+    long count = 9; //不能写成int
+    int start = 1;
+
+    while (n > len * count) {
+        n -= len * count;
+        len += 1;
+        count *= 10;
+        start *= 10;
+    }
+
+    start += (n - 1) / len;
+    String s = Integer.toString(start);
+    return Character.getNumericValue(s.charAt((n-1) % len));
+}
+```
+
+***
+
+## 66. Plus One
+
+思路：  
+进位的方式。  
+{: .notice} 
+
+```java
+//my solution
+public class Solution {
+    public int[] plusOne(int[] digits) {
+        int[] res = new int[digits.length];
+        int carry = 0;
+        for (int i=digits.length-1; i>=0 || carry==1; i--) {
+            if (i<0 && carry==1) {
+                int[] r = new int[digits.length+1]; 
+                r[0] = 1;
+                for (int j=1; j<res.length; j++) {
+                    r[j] = res[j];
+                }
+                return r;
+            }
+            int x = (i < 0 ? 0 : digits[i]);
+            if (i==digits.length-1) {
+                res[i] = (x+1+carry) % 10;
+                carry = (x+1+carry) / 10;
+            } else {
+                res[i] = (x+carry) % 10;
+                carry = (x+carry) / 10;
+            }
+        }
+        
+        return res;
+    }
+}
+```
+
+思路：  
+由于数组的数字只能是1-9，所以若该数字小于9，则不需要进位，直接+1后返回该数组。  
+若该数字是9，该位需要进位，也就是>9，要置为0。  
+若整个循环结束没有返回，说明该数是1000...，需要创建一个比原始数组长度多一位的新数组，并将首个元素置为1.  
+{: .notice} 
+
+```java
+public int[] plusOne(int[] digits) {
+        
+    int n = digits.length;
+    for(int i=n-1; i>=0; i--) {
+        if(digits[i] < 9) {
+            digits[i]++;
+            return digits; //若该位不需要进位，直接+1后返回该数组
+        }
+        
+        digits[i] = 0; //若该位需要进位，也就是>9，要置为0
+    }
+    
+    int[] newNumber = new int [n+1]; //运行到这步说明是1000...
+    newNumber[0] = 1;
+    
+    return newNumber;
+}
+```
+
+***
+
+## 7. Reverse Integer
+
+```
+Integer.MAX_VALUE:2^31 -1 即：2147483647
+Integer.MIN_VALUE -2147483648
+```
+
+```java
+// 不懂
+public int reverse(int x)
+{
+    int result = 0;
+
+    while (x != 0)
+    {
+        int tail = x % 10;
+        int newResult = result * 10 + tail;
+        if ((newResult - tail) / 10 != result)
+        { return 0; }
+        result = newResult;
+        x = x / 10;
+    }
+
+    return result;
+}
+```
+
+```java
+public int reverse(int x) {
+    long rev = 0;
+    while (x != 0) {
+        rev = rev*10 + x%10;
+        x = x/10;
+        if( rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE)
+            return 0;
+    }
+    return (int) rev;
+}
+```
+
+***
+
+## 172. Factorial Trailing Zeroes
+
+思路：  
+检测有多少对2和5。由于2是充足的，所以只需要检测有多少个5。  
+其中，每5个数增加1个5，每25个数增加两个5，每125个数增加3个5...  
+即：n/5 + n/25 + n/125 + n/625
+{: .notice} 
+
+```java
+return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+```
+
+```java
+public class Solution {
+    public int trailingZeroes(int n) {
+        int cnt = 0;
+        while(n>0){
+            cnt += n/5;
+            n/=5;
+        }
+        return cnt;
+    }
+}
+```
+
+***
+
+## 204. Count Primes
+
+```java
+public class Solution {
+    public int countPrimes(int n) {
+       boolean[] isPrime = new boolean[n];
+       for (int i = 2; i < n; i++) {
+          isPrime[i] = true;
+       }
+       for (int i = 2; i * i < n; i++) {
+          if (!isPrime[i]) continue;
+          for (int j = i * i; j < n; j += i) {
+             isPrime[j] = false;
+          }
+       }
+       
+       int count = 0;
+       for (int i = 2; i < n; i++) {
+          if (isPrime[i]) count++;
+       }
+       return count;
+    }
+}
+```
+
+
+```java
+public class Solution {
+    public int countPrimes(int n) {
+        boolean[] notPrime = new boolean[n];
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (notPrime[i] == false) {
+                count++;
+                for (int j = 2; i*j < n; j++) {
+                    notPrime[i*j] = true;
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+```
+
+***
+
+## 168. Excel Sheet Column Title
+
+```java
+//my wrong solution
+public class Solution {
+    public String convertToTitle(int n) {
+        StringBuilder sb = new StringBuilder();
+        while (n > 0) {
+            int x = n % 26;
+            char c = (char)((char)x-1+'A');
+            sb.append(c);
+            n = n / 26;
+        }
+        
+        return sb.reverse().toString();
+    }
+}
+```
+
+```java
+public class Solution {
+    public String convertToTitle(int n) {
+        StringBuilder sb = new StringBuilder();
+        while (n > 0) {
+            n--;
+            int x = n % 26;
+            char c = (char)(x+'A');
+            sb.append(c); //可用insert(0, c)，这样就不用最后再reverse
+            n = n / 26;
+        }
+        
+        return sb.reverse().toString();
+    }
+}
+```
+
+```java
+return n == 0 ? "" : convertToTitle(--n / 26) + (char)('A' + (n % 26));
+```
+
+***
+
+## 263. Ugly Number
+
+思路：  
+把3、2、5都除尽，若剩余的不是1就是false。  
+{: .notice} 
+
+```java
+public boolean isUgly(int num) {
+    if(num==1) return true;
+    if(num==0) return false;
+    while(num%2==0) num=num/2;
+    while(num%3==0) num=num/3;
+    while(num%5==0) num=num/5;
+    return num==1;
+}
+```
+
+***
+
+## 258. Add Digits
 
 ```java
 
 ```
 
+
 ***
 
-## 
+## 461. Hamming Distance
 
 ```java
+public class Solution {
+    public int hammingDistance(int x, int y) {
+        return Integer.bitCount(x^y);
+    }
+}
+```
 
+```java
+public int hammingDistance(int x, int y) {
+    int xor = x ^ y, count = 0;
+    for (int i=0;i<32;i++) count += (xor >> i) & 1;
+    return count;
+}
+```
+
+
+***
+
+## 476. Number Complement
+
+```java
+public class Solution {
+    public int findComplement(int num) {
+        int mask = 1;
+        while (mask < num)
+            mask = (mask << 1) | 1; // 1，11，111，1111...
+        return ~num & mask;
+    }
+}
 ```
 
 ***
 
-## 
+## 557. Reverse Words in a String III
 
 ```java
-
+public class Solution {
+    public String reverseWords(String s) {
+        String[] strs = s.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<strs.length; i++) {
+            sb.append(new StringBuilder(strs[i]).reverse());
+            if (i != strs.length-1)  sb.append(" ");
+        }
+            
+        return sb.toString();
+    }
+}
 ```
 
 ***
