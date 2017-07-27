@@ -1,0 +1,419 @@
+
+## 28.Implement strStr()  
+
+Implement strStr()
+
+Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+
+> 1.先判断子串是否已遍历完  
+> 2.再判断字符串是否已遍历完  
+> 3.最后检测两个指针所指字符是否相同  
+
+```java
+public int strStr(String haystack, String needle) {
+  for (int i = 0; ; i++) {
+    for (int j = 0; ; j++) {
+        if (j == needle.length()) 
+            return i; //子串遍历完
+        if (i + j == haystack.length()) //不能放在第一行，若匹配在最后，则直接返回了-1
+            return -1; //字符串遍历完
+        if (needle.charAt(j) != haystack.charAt(i + j)) //不能放在第一行，因为要先判断结束条件
+            break; 
+    }
+  }
+}
+```
+
+***
+
+## 67. Add Binary
+
+Given two binary strings, return their sum (also a binary string).
+
+For example,
+a = "11"
+b = "1"
+Return "100".
+  
+> 从两个数的最右端开始计算，遇到进位就存入carry中  
+> 将结果顺序翻转  
+
+```java
+public class Solution {
+    public String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length() - 1, j = b.length() -1, carry = 0; //carry是进位
+        while (i >= 0 || j >= 0) {
+            int sum = carry; //sum是每一位相加的和
+            if (j >= 0) sum += b.charAt(j--) - '0';
+            if (i >= 0) sum += a.charAt(i--) - '0';
+            sb.append(sum % 2);
+            carry = sum / 2;
+        }
+        if (carry != 0) sb.append(carry);
+        return sb.reverse().toString();
+    }
+}
+```
+
+***
+
+## 541. Reverse String II
+
+Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.
+Example:
+Input: s = "abcdefg", k = 2
+Output: "bacdfeg"
+
+> 注意j = Math.min(j, ch.length)-1; 要-1
+
+```java
+public class Solution {
+    public String reverseStr(String s, int k) {
+        char[] ch = s.toCharArray();
+        
+        for (int i=0; i<s.length(); i+=2*k) {
+            swap(ch, i, i+k); 
+        }
+        return new String(ch);
+        //return String.valueOf(ch);
+    }
+    
+    public void swap(char[] ch, int i, int j) {
+        j = Math.min(j, ch.length)-1; //防止i+k>length
+        for (;i<j; i++,j--) {
+            char temp = ch[i];
+            ch[i] = ch[j];
+            ch[j] = temp;
+        }
+    }
+}
+```
+
+***
+
+## 14. Longest Common Prefix
+
+> 字符数组的最长公共前缀  
+> 思路：把第一个字符串作为pre，不断的缩小其长度  
+> substring的S小写
+
+```java
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) return "";
+        String pre = strs[0];
+        for (int i=1; i<strs.length; i++) {
+            while (strs[i].indexOf(pre) != 0) 
+                pre = pre.substring(0, pre.length()-1);
+        }
+        return pre;
+    }
+}
+```
+
+***
+
+## 383. Ransom Note
+
+Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
+
+Each letter in the magazine string can only be used once in your ransom note.
+
+Note:
+You may assume that both strings contain only lowercase letters.
+
+canConstruct("a", "b") -> false
+canConstruct("aa", "ab") -> false
+canConstruct("aa", "aab") -> true
+(第一个字符串是否可以由第二个字符串构成)
+
+```java
+public class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] hash = new int[26];
+        for(char c : magazine.toCharArray()) {
+            hash[c-'a']++;
+        }
+        for(char c : ransomNote.toCharArray()) {
+            if(--hash[c-'a']<0)  return false;
+        }
+        return true;
+    }
+}
+```
+
+```java
+//my solution
+public class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        Map<Character, Integer> map = new HashMap<>();
+        
+        for (char c : magazine.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0)+1);
+        }
+        
+        for (char c : ransomNote.toCharArray()) {
+            if (map.containsKey(c) && map.get(c)>0) {
+                map.put(c, map.get(c)-1);
+            } else
+                return false;
+        }
+        return true;
+    }
+}
+```
+
+***
+
+### 345. Reverse Vowels of a String
+
+Write a function that takes a string as input and reverse only the vowels of a string.
+
+Example 1:
+Given s = "hello", return "holle".
+
+Example 2:
+Given s = "leetcode", return "leotcede".
+
+思路：  
+1.两个指针分别指向字符串的首和尾。  
+2.左指针右移，直到遇到元音停止；右指针左移，直到遇到元音停止。  
+3.将两个指针所指元素进行交换。  
+
+> 没有把chars[start]转换成String，即+“”就可以转换成String
+> 元音没有考虑大写字母
+> 内循环中start<end，而不是<=，因为在i和j相等时不能再继续移动指针了
+
+```java
+public class Solution {
+    public String reverseVowels(String s) {
+        if(s == null || s.length()==0) return s;
+        String vowels = "aeiouAEIOU";
+        char[] chars = s.toCharArray();
+        int start = 0, end = s.length()-1;
+        while(start<end){           
+            while (start<end && !vowels.contains(chars[start]+"")) {
+                start++;
+            }      
+            while (start<end && !vowels.contains(chars[end]+"")) {
+                end--;
+            } 
+            char temp = chars[start];
+            chars[start] = chars[end];
+            chars[end] = temp;
+            
+            start++;
+            end--;
+        }
+        return new String(chars);
+    }
+}
+```
+
+***
+
+## 58. Length of Last Word
+
+Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+
+If the last word does not exist, return 0.
+
+Note: A word is defined as a character sequence consists of non-space characters only.
+
+For example, 
+Given s = "Hello World",
+return 5.
+
+
+```java
+public class Solution {
+    public int lengthOfLastWord(String s) {      
+        String[] strs = s.split(" ");
+        if (strs.length == 0) return 0;  // strs若都是由“ ”组成，则split后length为0
+        String end = strs[strs.length-1];
+        return end == " " ? 0 : end.length();
+    }
+}
+```
+
+```java
+public int lengthOfLastWord(String s) {
+    s = s.trim();
+    int lastIndex = s.lastIndexOf(' ') + 1;
+    return s.length() - lastIndex;        
+}
+```
+
+***
+
+## 203. Remove Linked List Elements
+
+Remove all elements from a linked list of integers that have value val.
+
+Example
+Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
+Return: 1 --> 2 --> 3 --> 4 --> 5
+
+思路：递归  
+可以用1->2->null来演示递归过程。  
+1.判断此时所指向的结点是否为空。  
+2.若此时指向的节点不为空，则得到下一个结点的指向。  
+3.判断是否需要删除该结点，删除则返回下一个结点，不删除就返回此节点。  
+{: .notice} 
+
+```java
+public ListNode removeElements(ListNode head, int val) {
+    if (head == null)   return null;  //判断该结点是否为空(递归结束标志)
+    head.next = removeElements(head.next, val); //得到下一个结点的指向
+    return head.val == val ? head.next : head; //判断是否需要删除该结点
+}
+```
+
+思路：  
+先排除头结点为val的情况。  
+再检测下一个结点是否为val。  
+{: .notice} 
+
+```java
+//my solution 
+public class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+        if (head == null)  return null;
+        ListNode node = head;
+        
+        while (node.next != null) {
+            if (node.next.val == val) {
+                node.next = node.next.next;
+            } else {
+                node = node.next;
+            } 
+        }
+        return head;
+    }
+}
+```
+
+
+## 206. Reverse Linked List
+
+```java
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+}
+```
+
+```java
+//recursive solution 看不懂
+public ListNode reverseList(ListNode head) {
+    return reverseListInt(head, null);
+}
+
+private ListNode reverseListInt(ListNode head, ListNode newHead) {
+    if (head == null) 
+        return newHead; 
+    ListNode next = head.next; 
+    head.next = newHead;
+    return reverseListInt(next, head); 
+}
+```
+
+```java
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null || head.next==null)
+            return head;
+        ListNode nextNode = head.next;
+        ListNode newHead = reverseList(nextNode);
+        nextNode.next = head;
+        head.next = null;
+        return newHead;
+    }
+}
+```
+
+
+***
+
+
+## 160. Intersection of Two Linked Lists
+
+Write a program to find the node at which the intersection of two singly linked lists begins.  
+For example, the following two linked lists:
+
+A:          a1 → a2
+                   ↘
+                     c1 → c2 → c3
+                   ↗            
+B:     b1 → b2 → b3
+
+the two iterations will both run for listA.length + listB.length and will reach the intersection point at the same time after switching the pointer.
+
+> while循环有两种停止情况：1.相遇在同一个结点；2.都指向了null
+
+```java
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+    if(headA == null || headB == null) 
+        return null;
+    
+    ListNode a = headA;
+    ListNode b = headB;
+    
+    while( a != b) {
+        a = (a==null ? headB : a.next);
+        b = (b==null ? headA : b.next);   
+    }   
+    return a;
+}
+```
+
+***
+
+## 21. Merge Two Sorted Lists
+
+Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+
+思路：  
+设置一个合并的头结点。  
+头结点指向那个值小的结点，并将余下的进行合并。  
+{: .notice} 
+
+```java
+public class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == NULL) return l2;
+        if(l2 == NULL) return l1;
+        
+        ListNode mergeHead = null; //ListNode head = new ListNode();错误
+        
+        if (l1.val < l2.val) {
+            mergeHead = l1;
+            mergeHead.next = mergeTwoLists(l1.next, l2);
+        } else {
+            mergeHead = l2;
+            mergeHead.next = mergeTwoLists(l1, l2.next);
+        }
+        return mergeHead;
+    }
+}
+```
+
+
+
+
+

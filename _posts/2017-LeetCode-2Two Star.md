@@ -130,16 +130,17 @@ For example,
 "A man, a plan, a canal: Panama" is a palindrome.
 "race a car" is not a palindrome.
 
-内循环要注意：若是while则要有start<end条件，否则会无限循环。  
-若是if则不需要写此条件。
-{: .notice} 
+> 两个指针分别指向首和末字符  
+> 首末指针向中间扫描，直到停在字母处  
+> 判断两个字符是否相等，不等则返回false
+> 相等则继续扫描
 
 > Character.isLetterOrDigit没有记住
 > Character.toLowerCase没有考虑到
-> 第二种方法没有想到
+> 第二种方法没有想到 
 
 ```java
-//我的方法
+//while形式
 public class Solution {
     public boolean isPalindrome(String s) {
         if(s.isEmpty())  return true;
@@ -168,29 +169,23 @@ public class Solution {
 ```
 
 ```java
+//if形式
 public class Solution {
     public boolean isPalindrome(String s) {
-        if (s.isEmpty()) {
-            return true;
+        if (s.isEmpty())  return true;
+        int start = 0, end = s.length()-1;
+        char[] chars = s.toCharArray();
+        
+        while (start < end) {
+                if (!Character.isLetterOrDigit(chars[start]))  start ++;
+                else if (!Character.isLetterOrDigit(chars[end]))  end --;
+                else {
+                    if (Character.toLowerCase(chars[start]) != Character.toLowerCase(chars[end]))
+                        return false;        
+                        start ++;
+                        end --;
+                } 
         }
-        int head = 0, tail = s.length() - 1;
-        char cHead, cTail;
-
-        while(head <= tail) {
-            cHead = s.charAt(head);
-            cTail = s.charAt(tail);
-            if (!Character.isLetterOrDigit(cHead)) {
-                head++;
-            } else if(!Character.isLetterOrDigit(cTail)) {
-                tail--;
-            } else {
-                if (Character.toLowerCase(cHead) != Character.toLowerCase(cTail)) {
-                    return false;
-                }
-                head++;
-                tail--;
-            }
-        }       
         return true;
     }
 }
@@ -472,7 +467,6 @@ public class Solution {
 若没有左右节点，说明已经遍历到了叶子，就把完整的路径加入到answer中。  
 {: .notice} 
 
-> 没写出优化方法
 
 ```java
 public class Solution {
@@ -523,30 +517,6 @@ private void helper(List<String> res, TreeNode root, StringBuilder sb) {
 }
 ```
 
-```java
-public List<String> binaryTreePaths(TreeNode root) {
-        
-    List<String> paths = new LinkedList<>();
-
-    if(root == null)  return paths;
-    
-    if(root.left == null && root.right == null){
-        paths.add(root.val+"");
-        return paths;
-    }
-
-     for (String path : binaryTreePaths(root.left)) {
-         paths.add(root.val + "->" + path);
-     }
-
-     for (String path : binaryTreePaths(root.right)) {
-         paths.add(root.val + "->" + path);
-     }
-
-     return paths;
-    
-}
-```
 ***
 
 ## 101. Symmetric Tree
@@ -608,7 +578,7 @@ public class Solution {
         int left = depth(root.left);
         int right = depth(root.right);
         return Math.abs(left-right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
-        //Math.abs(left-right) <= 1不能方法最后，因为此时root指向已经变了
+        //Math.abs(left-right) <= 1不能放在最后，因为此时root指向已经变了
     }
     public int depth(TreeNode root) {
         if (root == null)  return 0;
@@ -977,34 +947,7 @@ public class Solution {
     }
 }
 ```
-***
 
-## 28.Implement strStr()  
-
-Implement strStr().
-
-Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-
-
-> 没有思路
-> 3个if的顺序不能变
-
-> 要有两层循环
-
-```java
-public int strStr(String haystack, String needle) {
-  for (int i = 0; ; i++) {
-    for (int j = 0; ; j++) {
-        if (j == needle.length()) 
-            return i; //子串遍历完
-        if (i + j == haystack.length()) //不能放在第一行，若匹配在最后，则直接返回了-1
-            return -1; //字符串遍历完
-        if (needle.charAt(j) != haystack.charAt(i + j)) //不能放在第一行，因为要先判断结束条件
-            break; 
-    }
-  }
-}
-```
 
 ***
 

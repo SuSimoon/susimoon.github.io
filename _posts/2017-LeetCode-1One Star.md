@@ -9,47 +9,6 @@ tag:
 comments: false
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ***
 
 ## 20. Valid Parentheses
@@ -433,7 +392,9 @@ public int countSegments(String s) {
 
 ## 14. Longest Common Prefix
 
-最长公共前缀
+> 字符数组的最长公共前缀  
+> 思路：把第一个字符串作为pre，不断的缩小其长度  
+> substring的S小写
 
 ```java
 public class Solution {
@@ -530,73 +491,9 @@ public class Solution {
 }
 ```
 
-***
-
-## 541. Reverse String II
-
-Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.
-Example:
-Input: s = "abcdefg", k = 2
-Output: "bacdfeg"
 
 
-```java
-public class Solution {
-    public String reverseStr(String s, int k) {
-        int len = s.length();
-        char[] ch = s.toCharArray();
-        
-        for (int i=0; i<len; i+=2*k) {
-            swap(ch, i, i+k);
-        }
-        return new String(ch);
-        //return String.valueOf(ch);
-    }
-    
-    public void swap(char[] ch, int i, int j) {
-        j = Math.min(j, ch.length)-1;
-        for (;i<j; i++,j--) {
-            char temp = ch[i];
-            ch[i] = ch[j];
-            ch[j] = temp;
-        }
-    }
-}
-```
 
-***
-
-## 67. Add Binary
-
-Given two binary strings, return their sum (also a binary string).
-
-For example,
-a = "11"
-b = "1"
-Return "100".
-
-思路：  
-从两个数的最右端开始计算，遇到进位就存入carry中。  
-将结果顺序翻转。  
-{: .notice} 
-
-```java
-public class Solution {
-    public String addBinary(String a, String b) {
-        StringBuilder sb = new StringBuilder();
-        int i = a.length() - 1, j = b.length() -1, carry = 0; //carry是进位
-        while (i >= 0 || j >= 0) {
-            int sum = carry; //sum是每一位相加的和
-            if (j >= 0) sum += b.charAt(j--) - '0';
-            if (i >= 0) sum += a.charAt(i--) - '0';
-            sb.append(sum % 2);
-            carry = sum / 2;
-        }
-        if (carry != 0) sb.append(carry);
-        return sb.reverse().toString();
-    }
-}
-```
 
 ***
 
