@@ -1,0 +1,174 @@
+---
+layout: post
+title:  "Spring-IoC容器"
+date:   2019-08-03
+excerpt: "本篇介绍了IoC的概念"
+tag:
+
+- Spring
+feature: http://i.imgur.com/Ds6S7lJ.png
+comments: false
+---
+
+***
+
+## <center>一个果汁店的故事</center>
+
+为了理解什么到底什么是IoC（控制反转），我们先来讲一个果汁店的故事吧：
+
+从前有一家果汁店，店主为了销售橙汁，专门买了一个橙子专用榨汁机。于是，每个顾客来买果汁，果汁店售卖橙汁的模式如下：
+
+```java
+public class JuiceOrder {
+    public void produceJucie() {
+        // 启动橙汁机
+        OringeMachine machine = new OringeMachine();
+        
+        // 榨橙汁
+        machine.produce();
+    }
+}
+```
+
+后来店里生意逐渐红火起来，店主决定扩大规模，开始销售苹果汁。正当他打算再买来一个苹果榨汁机时，店员对他说：老板，要是咱们往后打算再卖西瓜汁，石榴汁，也不能一直不停的买专用榨汁机啊，要不然，我们买个通用的机器，具有换挡功能，什么水果都能榨，岂不是节约成本？
+
+老板觉得店员说的十分在理，于是就买来个万能榨汁机（接口），这一回，橙汁的生产销售模式变为：
+
+```java
+public class JuiceOrder {
+    public void produceJucie() {
+        // 启动万能榨汁机，切换橙汁档
+        Machine machine = new OringeMachine();
+       
+        // 榨橙汁
+        machine.produce();
+    }
+}
+```
+
+
+店员的这个提议为果汁店降低了成本，顾客越来越多，榨汁机的维护也越来越困难，因为针对不同的水果，要切换不同的档位与刀片，影响了果汁售卖的效率。
+
+这时候，聪明的店员又一次跑来和老板说：老板，你何必苦恼怎么维护榨汁机呢，要不然，咱们把维护榨汁机的活承包出去，每次我们只给承包商一个清单，告诉他们需要什么种类的榨汁机，从此只专心的买果汁，这多好啊！
+
+老板觉得这个店员就是一个天才，于是立即把榨汁机的购买与维护承包出去，自己只专注于销售果汁，这一回，橙汁的生产模式变为：  
+
+```java
+public class JuiceOrder {
+
+    private Machine machine;
+    
+    // 构造方法注入 - 为订单注入相应的榨汁机
+    public JuiceOrder(Machine machine) {
+        this.machine = machine;
+    }
+    
+    // 榨汁
+    public void produceJucie() {
+        machine.produce();
+    }
+}
+```
+
+```xml
+<!-- 订单 -->
+<bean id="juiceOrder" class="...JuiceOrder">
+    <constructor-arg ref="oringeMachine">
+<bean/>
+
+<bean id="oringeMachine" class="...OringeMachine">
+``` 
+
+承包商拿到订单后，按照订单中详细的依赖关系，为果汁店匹配对应的榨汁机，于是销售模式变为：
+	
+```java
+public class JuiceAgent {
+   
+    // 指定是橙汁榨汁机
+    Machine machine = new OringeMachine();
+    
+    // 为订单注入榨汁机
+    JuiceOrder order = new JuiceOrder(machine);
+    
+    // 榨汁
+    order.produceJucie();
+}
+```
+
+采取了承包模式后，老板再也不用关心怎么去维护一个榨汁机（new 对象），配置榨汁机的工作不再需要亲力亲为，而是转交给承包商（控制反转），承包商通过订单（xml）的信息，来配置相应所需的榨汁机（注入）
+销售效率得到了得到了明显的提高。
+
+但是某一天，果汁店老板又觉得，每一次给承包商提供一个订单，他们就立即配好了榨汁机，可有的时候他们还没想榨果汁呢。于是，老板有时候会改变订单的样式，在真正需要配置榨汁机时，再让承包商配好。另一个承包销售模式变为：
+
+```java
+public class JuiceOrder {
+
+    private Machine machine;
+    
+    // setter方法注入
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+    
+    // 榨汁
+    public void produceJucie() {
+        machine.produce();
+    }
+}
+```
+
+```xml
+<!-- 订单 -->
+<bean id="juiceOrder" class="...JuiceOrder">
+    <property ref="oringeMachine">
+<bean/>
+
+<bean id="oringeMachine" class="...OringeMachine">
+``` 
+
+```java
+public class JuiceAgent {
+   
+    // 指定是橙汁榨汁机
+    Machine machine = new OringeMachine();
+    
+    JuiceOrder order = new JuiceOrder();
+    // 为订单注入榨汁机
+    order.setMachine(machine);
+    
+    // 榨汁
+    order.produceJucie();
+}
+```
+
+***
+
+## <center>IoC的作用与注入方式</center>
+
+### IoC的作用
+
+通过上面果汁店销售的发展故事，我们可以知道，IoC容器的作用，正如同故事中承包商的角色：
+
+它可以帮助完成类的初始化与装配工作，让开发者从这些底层实现类的实例化、依赖关系装配等工作解脱出来，专注于更有意义的业务逻辑开发工作。
+{: .notice}
+
+### 注入的方式
+
+**1.构造方法注入**
+被注入对象通过在其构造方法中声明依赖对象的参数列表，让外部知道它需要哪些依赖的对象。
+IoC容器会检查被注入对象的构造方法，取得它所需要的依赖对象列表，进而为其注入相应的对象。
+
+**2.setter方法注入**
+当前对象只要为其依赖对象所对应的属性添加setter方法，就可以通过setter方法将相应的依赖对象设置到被注入对象中。
+
+**两种方法的比较**
+{% highlight html %}
+构造方法注入：
+优点 - 对象在构造完成之后，即已进入就绪状态，可以马上使用；
+缺点 - 当依赖对象比较多的时候，构造方法的参数列表会比较长。而通过反 射构造对象的时候，对相同类型的参数的处理会比较困难，维护和使用上也比较麻烦。而且 在Java中，构造方法无法被继承，无法设置默认值。对于非必须的依赖处理，可能需要引入多 个构造方法，而参数数量的变动可能造成维护上的不便
+
+setter方法注入：
+优点 - 因为方法可以命名，所以setter方法注入在描述性上要比构造方法注入好一些。
+另外，setter方法可以被继承，允许设置默认值，而且有良好的IDE支持。
+缺点 - 对象无法在构造完成后马上进入就绪状态
+{% endhighlight %}
